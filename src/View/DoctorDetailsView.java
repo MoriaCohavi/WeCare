@@ -26,7 +26,7 @@ public class DoctorDetailsView {
 
     public DoctorDetailsView()
     {
-        // Frame Initialization
+        // Frame Initialization 
         frame = new JFrame("Doctor Details");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(new BorderLayout());
