@@ -29,7 +29,7 @@ public class PatientDetails {
 
     public PatientDetails()
     {
-           // Frame Initialization
+           // Frame Initializati
            frame = new JFrame("Patient details");
            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
            frame.getContentPane().setLayout(new BorderLayout());
