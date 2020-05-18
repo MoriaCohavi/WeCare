@@ -2,7 +2,7 @@ import View.*;
 
 public class Hello {
     public static void main(String[] args) {
-        System.out.println("asdd");
+        System.out.println("Hello world");
         DoctorDetailsView dv = new DoctorDetailsView();
         LoginView lv = new LoginView();
         AddDoctorView ad = new AddDoctorView();
