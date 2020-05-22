@@ -1,6 +1,6 @@
 package Model;
 
-public class medicalIndices {
+public class MedicalIndices {
 	private int weight, height, heartRate, temperature, systolicBP,diastolicBP;
 	
 	

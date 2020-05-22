@@ -1,6 +1,6 @@
 package Model;
 
-public class lab {
+public class Lab {
 	
 	private String labType;
 	private String patientId;
