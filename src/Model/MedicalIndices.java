@@ -1,31 +1,31 @@
 package Model;
 
 public class MedicalIndices {
-	private int weight, height, heartRate, temperature, systolicBP,diastolicBP;
+	private int weight = 0, height =0, heartRate =0, temperature =37, systolicBP =0,diastolicBP=0;
 	
 	
-	public void setWeight(int wParmeter) {
+	private void setWeight(int wParmeter) {
 		this.weight = wParmeter;
 			
 	}
 		
-	public void setHeight(int hrParmeter) {
+	private void setHeight(int hrParmeter) {
 		this.height = hrParmeter;
 	}
 	
-	public void setHeartRate(int hParmeter) {
+	private void setHeartRate(int hParmeter) {
 		this.heartRate = hParmeter;
 	}
 		
-	public void setTemperature (int tParmeter) {
+	private void setTemperature (int tParmeter) {
 		this.temperature = tParmeter;
 	}
 	
-	public void setSystolicBP (int sbpParmeter) {
+	private void setSystolicBP (int sbpParmeter) {
 		this.systolicBP = sbpParmeter;
 	}
 	
-	public void setDiastolicBP (int dbpParmeter) {
+	private void setDiastolicBP (int dbpParmeter) {
 		this.diastolicBP = dbpParmeter;
 	}
 
@@ -55,5 +55,19 @@ public class MedicalIndices {
 		return this.diastolicBP;
 	}
 	
+	public void setMedicalIndices (int w, int h, int hr, int t, int sysBP, int diaBP)
+	{
+		this.setWeight(w);
+		this.setHeight(h);
+		this.setHeartRate(hr);
+		this.setTemperature(t);
+		this.setSystolicBP(sysBP);
+		this.setDiastolicBP(diaBP);
+	}
+	
+	public MedicalIndices getMedicalIndices ()
+	{
+		return this;
+	}
 
 }
