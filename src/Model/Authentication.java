@@ -23,7 +23,7 @@ public class Authentication {
 	}
 	
 	
-	public boolean signIn(String id, String password)
+	public static String signIn(String id, String password)
 	{
 	
 		if (!users.isEmpty())
@@ -35,38 +35,43 @@ public class Authentication {
 			{
 				if(user.getPassword() == SHA1(password))
 					{
-						generateToken(id);
-						return true;
+						return generateToken(id);
+						
 					}
 			}
 		}
 		
+		return "User name and password does not match";
+	}
+	
+	public boolean signOut(String token)
+	{
+		if(users.get(token) != null)
+		{
+			users.get(token).revokeToken();
+			return true;
+		}
 		return false;
 	}
 	
-	public void signOut(String id)
+	public static boolean validateUser(String token,String typeNeed)
 	{
-		users.get(id).revokeToken();
+		if(!(users.get(token) == null || typeNeed != users.get(token).getUser_type()) // type need has to come from authentication controller.
+			return false;
+		else
+			return true;
 	}
 	
-	public boolean validateUser(String id,String typeNeed)
+	public static boolean resetPassword(String token, String cPassword, String newPassword)
 	{
-		if(users.get(id).getToken() == 0 || typeNeed != users.get(id).getUser_type()) // type need has to come from authentication controller.
+		if(SHA1(cPassword) != users.get(token).getPassword())
 			return false;
 		
+		users.get(token).setPassword(newPassword);
 		return true;
 	}
 	
-	public boolean resetPassword(String id, String cPassword, String newPassword)
-	{
-		if(SHA1(cPassword) != users.get(id).getPassword())
-			return false;
-		
-		users.get(id).setPassword(newPassword);
-		return true;
-	}
-	
-	public void generateToken(String id) 
+	public String generateToken(String id) 
 	{
 		long leftLimit = 1000000000L;
 		long rightLimit = 9999999999L;
@@ -76,6 +81,7 @@ public class Authentication {
 				token = leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
 			}
 			users.get(id).SetToken(token);
+			return token;
 	}
 	
 	private boolean checkToken(long token)

@@ -42,4 +42,12 @@ public class AuthenticationController{
         return "Wrong current password, password did not changed";
     }
 
+    public String logOut(String token)
+    {
+        if (Authentication.signOut(token))
+            return "Singed out";
+        else
+            return "user not found";
+    }
+
 }
