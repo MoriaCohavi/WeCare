@@ -86,6 +86,6 @@ public class StatisticalReportView {
     	return this.btn_export;
     }
     public void setBtn_export(JButton btn_export) {
-    	this.btn_export = btn_export;
+    	this.btn_export = btn_export; 
     }
 }
