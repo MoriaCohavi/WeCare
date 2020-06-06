@@ -7,6 +7,7 @@ import java.util.HashMap;
 public class Authentication {
 	
 	private static HashMap<String,User> users = new HashMap<String,User>(); // we need to understand how we create this list. 
+	private static HashMap<Long,User> loggedinusers = new HashMap<Long,User>();
 	
 	public static String SHA1(String password) // this function take a clear password and change it to SHA1 hash.
 	{
@@ -35,7 +36,9 @@ public class Authentication {
 			{
 				if(user.getPassword() == SHA1(password))
 					{
-						return generateToken(id);
+						long token = generateToken(id);
+						loggedinusers.put(token, user);
+						return token;
 						
 					}
 			}
@@ -44,30 +47,30 @@ public class Authentication {
 		return -1;
 	}
 	
-	public static boolean signOut(String token)
+	public static boolean signOut(long token)
 	{
-		if(users.get(token) != null)
+		if(loggedinusers.get(token) != null)
 		{
-			users.get(token).revokeToken();
+			loggedinusers.get(token).revokeToken();
 			return true;
 		}
 		return false;
 	}
 	
-	public static boolean validateUser(String token,String typeNeed)
+	public static boolean validateUser(long token,String typeNeed)
 	{
-		if(!(users.get(token) == null || typeNeed != users.get(token).getUser_type())) // type need has to come from authentication controller.
+		if(!(loggedinusers.get(token) == null || typeNeed != loggedinusers.get(token).getUser_type())) // type need has to come from authentication controller.
 			return false;
 		else
 			return true;
 	}
 	
-	public static boolean resetPassword(String token, String cPassword, String newPassword)
+	public static boolean resetPassword(long token, String cPassword, String newPassword)
 	{
-		if(SHA1(cPassword) != users.get(token).getPassword())
+		if(SHA1(cPassword) != loggedinusers.get(token).getPassword())
 			return false;
 		
-		users.get(token).setPassword(newPassword);
+		loggedinusers.get(token).setPassword(newPassword);
 		return true;
 	}
 	
@@ -86,9 +89,9 @@ public class Authentication {
 	
 	private static boolean checkToken(long token)
 	{
-		for(String key:users.keySet())
+		for(Long key:loggedinusers.keySet())
 		{
-			if(users.get(key).getToken() == token)
+			if(loggedinusers.get(key).getToken() == token)
 				return false;
 		}
 		
