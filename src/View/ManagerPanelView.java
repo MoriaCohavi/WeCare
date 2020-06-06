@@ -1,129 +1,122 @@
 package View;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JTextField;
 
 public class ManagerPanelView {
-    JFrame frame;
 
-    JPanel pnl_left;
-    JPanel pnl_right;
-    JPanel pnl_table;
-    JPanel pnl_search;
+	private JFrame frame;
+	private JTable table;
+	private JLabel lbl_id;
+	private JLabel lbl_name;
+	private JLabel lbl_phone;
+	private JLabel lbl_address;
+	private JLabel lbl_email;
+	private JButton btn_statistical;
+	private JLabel lbl_search;
+	private JTextField txtf_doctor;
+	private JButton btn_find;
+	private JButton btn_addDoctor;
 
-    JTable tbl_doctor;
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					ManagerPanelView window = new ManagerPanelView();
+//					
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
-    JTextField tf_doctor;
+	/**
+	 * Create the application.
+	 */
+	public ManagerPanelView() {
+		initialize();
+	}
 
-    JButton btn_find;
-    JButton btn_addDoctor;
-    JButton btn_viewStats;
-
-    public ManagerPanelView() {
-        // Frame Initialization
-        frame = new JFrame("Manager panel");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(new BorderLayout());
-        frame.setSize(500, 500);
-
-        /************* Left side *************/
-
-        // Table and its panel initialization
-        String[] columnNames = { "ID", "Doctor name", "Specialization" };
-        Object[][] data = { { 4, "Smith", "Gastro", 5, false }, { 113, "Doe", "Neurology" } };
-        JTable table = new JTable(data, columnNames);
-
-        pnl_table = new JPanel(new BorderLayout());
-        pnl_table.add(table.getTableHeader(), BorderLayout.PAGE_START);
-        pnl_table.add(table, BorderLayout.CENTER);
-
-        // Doctor search panel init
-        JLabel lbl_search = new JLabel("Search doctor: ");
-        tf_doctor = new JTextField(12);
-
-        btn_find = new JButton("Find");
-        btn_addDoctor = new JButton("Add Doctor");
-
-        GridLayout lyt_left = new GridLayout(2, 2);
-        lyt_left.setHgap(10);
-        lyt_left.setVgap(10);
-        pnl_search = new JPanel(lyt_left);
-        pnl_search.add(lbl_search);
-        pnl_search.add(tf_doctor);
-        pnl_search.add(btn_find);
-        pnl_search.add(btn_addDoctor);
-
-        pnl_left = new JPanel(new BorderLayout());
-        pnl_left.add(pnl_table, BorderLayout.NORTH);
-        pnl_left.add(pnl_search, BorderLayout.SOUTH);
-
-        /************* Right side *************/
-
-        JLabel lbl_clinicId = new JLabel("ID: 123");
-        JLabel lbl_clinicName = new JLabel("Name: SMileClinic");
-        JLabel lbl_clinicPhone = new JLabel("Phone: +972-5442312");
-        JLabel lbl_clinicAddress = new JLabel("Address: Gaza");
-        JLabel lbl_clinicEmail = new JLabel("Email: Wallak@gaza.com");
-
-        btn_viewStats = new JButton("View statistical reports");
-
-        pnl_right = new JPanel();
-        pnl_right.setLayout(new BoxLayout(pnl_right, BoxLayout.PAGE_AXIS));
-        pnl_right.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-
-        pnl_right.add(lbl_clinicId);
-        pnl_right.add(lbl_clinicName);
-        pnl_right.add(lbl_clinicPhone);
-        pnl_right.add(lbl_clinicAddress);
-        pnl_right.add(lbl_clinicEmail);
-        pnl_right.add(btn_viewStats);
-
-        /************* Frame *************/
-
-        // Add pnls to frame
-        frame.getContentPane().add(pnl_left, BorderLayout.WEST);
-        frame.getContentPane().add(pnl_right, BorderLayout.EAST);
-        frame.setVisible(true);
-    }
-    
-    public JTable getTbl_doctor() {
-    	return this.tbl_doctor;
-    }
-    public void setTbl_doctor(JTable tbl_doctor) {
-    	this.tbl_doctor = tbl_doctor;
-    }
-
-
-    public JTextField getTf_doctor() {
-    	return this.tf_doctor;
-    }
-    public void setTf_doctor(JTextField tf_doctor) {
-    	this.tf_doctor = tf_doctor;
-    }
-
-
-    public JButton getBtn_find() {
-    	return this.btn_find;
-    }
-    public void setBtn_find(JButton btn_find) {
-    	this.btn_find = btn_find;
-    }
-
-
-    public JButton getBtn_addDoctor() {
-    	return this.btn_addDoctor;
-    }
-    public void setBtn_addDoctor(JButton btn_addDoctor) {
-    	this.btn_addDoctor = btn_addDoctor;
-    }
-
-
-    public JButton getBtn_viewStats() {
-    	return this.btn_viewStats;
-    }
-    public void setBtn_viewStats(JButton btn_viewStats) {
-    	this.btn_viewStats = btn_viewStats;
-    }
-
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(100, 100, 593, 495);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 664, 10);
+		frame.getContentPane().add(panel);
+		
+		table = new JTable();
+		table.setBorder(null);
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"a", "a", "a"},
+			},
+			new String[] {
+				"Doctor name", "Id", "Specialization"
+			}
+		));
+		table.setBounds(0, 10, 322, 305);
+		frame.getContentPane().add(table);
+		
+		lbl_id = new JLabel("Id:");
+		lbl_id.setBounds(350, 20, 45, 13);
+		frame.getContentPane().add(lbl_id);
+		
+		lbl_name = new JLabel("Name:");
+		lbl_name.setBounds(350, 43, 45, 13);
+		frame.getContentPane().add(lbl_name);
+		
+		lbl_phone = new JLabel("Phone:");
+		lbl_phone.setBounds(350, 66, 45, 13);
+		frame.getContentPane().add(lbl_phone);
+		
+		lbl_address = new JLabel("Address:");
+		lbl_address.setBounds(350, 89, 45, 13);
+		frame.getContentPane().add(lbl_address);
+		
+		lbl_email = new JLabel("Email:");
+		lbl_email.setBounds(350, 112, 45, 13);
+		frame.getContentPane().add(lbl_email);
+		
+		btn_statistical = new JButton("View statistical report");
+		btn_statistical.setBounds(350, 147, 178, 21);
+		frame.getContentPane().add(btn_statistical);
+		
+		lbl_search = new JLabel("Search doctor:");
+		lbl_search.setBounds(10, 344, 91, 13);
+		frame.getContentPane().add(lbl_search);
+		
+		txtf_doctor = new JTextField();
+		txtf_doctor.setBounds(131, 341, 96, 19);
+		frame.getContentPane().add(txtf_doctor);
+		txtf_doctor.setColumns(10);
+		
+		btn_find = new JButton("Find");
+		btn_find.setBounds(10, 380, 85, 21);
+		frame.getContentPane().add(btn_find);
+		
+		btn_addDoctor = new JButton("Add Doctor");
+		btn_addDoctor.setBounds(131, 380, 96, 21);
+		frame.getContentPane().add(btn_addDoctor);
+		frame.setVisible(true);
+	}
 }

@@ -1,7 +1,7 @@
 package Model;
+import java.io.*;
 
-
-public class User extends Person{
+public class User extends Person implements java.io.Serializable {
 	
 	private String password;
 	private String user_type;
@@ -45,6 +45,37 @@ public class User extends Person{
 		this.token = 0;
 	}
 	
-
-
+	public boolean serialize()
+	{
+	      try {
+	          FileOutputStream fileOut =
+	          new FileOutputStream("/files/user.ser");
+	          ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	          out.writeObject(this);
+	          out.close();
+	          fileOut.close();
+	          return true;
+	       } catch (IOException i) {
+	          i.printStackTrace();
+	          return false;
+	       }
+	}
+	
+	public User deserialize()
+	{
+	      try {
+	          FileInputStream fileIn = new FileInputStream("/files/user.ser");
+	          ObjectInputStream in = new ObjectInputStream(fileIn);
+	          User e = (User) in.readObject();
+	          in.close();
+	          fileIn.close();
+	          return e;
+	       } catch (IOException i) {
+	          i.printStackTrace();
+	          return null;
+	       } catch (ClassNotFoundException c) {
+	          c.printStackTrace();
+	          return null;
+	       }
+	}
 }
