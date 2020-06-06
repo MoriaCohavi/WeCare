@@ -1,10 +1,15 @@
 package Model;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.util.HashMap;
 
 
-public class Authentication {
+public class Authentication implements java.io.Serializable{
 	
 	private static HashMap<String,User> users = new HashMap<String,User>(); // we need to understand how we create this list. 
 	private static HashMap<Long,User> loggedinusers = new HashMap<Long,User>();
@@ -23,10 +28,6 @@ public class Authentication {
 		return sha1;
 	}
 	
-	public static String getType(long token)
-	{
-		return loggedinusers.get(token).getUser_type();
-	}
 	
 	public static long signIn(String id, String password)
 	{
@@ -102,6 +103,64 @@ public class Authentication {
 		return true;
 	}
 	
+	public static String getType(long token)
+	{
+		return loggedinusers.get(token).getUser_type();
+	}
 	
+	public static boolean serialize()
+	{
+		try {
+		FileOutputStream fileOut = new FileOutputStream("/files/authentication.ser");
+		ObjectOutputStream oos = new ObjectOutputStream(fileOut);
+		oos.writeObject(users);
+		oos.writeObject(loggedinusers);
+		oos.close();
+		fileOut.close();
+		return true;
+		}
+		catch (IOException i)
+		{
+			i.printStackTrace();
+			return false;
+		}
+		
+	}
 	
+	public Authentication deserialize()
+	{
+		try {
+			FileInputStream fileIn = new FileInputStream("/files/authentication.ser");
+			ObjectInputStream ois = new ObjectInputStream(fileIn);
+			Authentication auth = new Authentication();
+			try {
+					auth.users = (HashMap<String, User>) ois.readObject();
+				}
+			catch (ClassNotFoundException e) {
+				ois.close();
+				fileIn.close();
+				e.printStackTrace();
+				return null;
+			}
+			try {
+				auth.loggedinusers = (HashMap<Long, User>) ois.readObject();
+				}
+			catch (ClassNotFoundException e)
+			{
+				ois.close();
+				fileIn.close();
+				e.printStackTrace();
+				return null;
+			}
+			ois.close();
+			fileIn.close();
+			return auth;
+		}
+		catch (IOException i)
+		{
+			i.printStackTrace();
+			return null;
+		}
+		
+	}
 }

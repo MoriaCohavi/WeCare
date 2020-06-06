@@ -5,7 +5,7 @@ public class clinicController {
 	Clinic clinic;
 	
 	public clinicController() {
-		clinic = new Clinic();
+		clinic  = Clinic.getInstance();
 	}
 	
 	public Clinic getClinic() {

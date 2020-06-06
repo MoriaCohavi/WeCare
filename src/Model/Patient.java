@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Patient extends Person implements java.io.Serializable {
+public class Patient extends Person implements java.io.Serializable{
 
 	private int age, weight, height, recordCount;
 	private String gender, allergies, Chronic_diseases, subscriptions;
@@ -137,6 +137,44 @@ public class Patient extends Person implements java.io.Serializable {
 	public String medicalSummary() { 
 		
 		return null;
+		
+	}
+	public boolean serialize()
+	{
+		try {
+		FileOutputStream fileOut = new FileOutputStream("/files/patient.ser");
+		ObjectOutputStream oos = new ObjectOutputStream(fileOut);
+		oos.writeObject(this);
+		oos.close();
+		fileOut.close();
+		return true;
+		}
+		catch (IOException i)
+		{
+			i.printStackTrace();
+			return false;
+		}
+		
+	}
+	
+	public Patient deserialize()
+	{
+		try {
+			FileInputStream fileIn = new FileInputStream("/files/patient.ser");
+			ObjectInputStream ois = new ObjectInputStream(fileIn);
+			Patient patient = (Patient) ois.readObject();
+			ois.close();
+			fileIn.close();
+			return patient;
+		}
+		catch (IOException i)
+		{
+			i.printStackTrace();
+			return null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
 		
 	}
 }
