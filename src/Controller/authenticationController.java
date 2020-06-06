@@ -31,7 +31,7 @@ public class authenticationController{
         return false;
     } */
 
-    public String changePassword(String token,String cPassword,String nPassword )
+    public String changePassword(long token,String cPassword,String nPassword )
     {
       if(Authentication.resetPassword(token,cPassword,nPassword))
         return "Password changed successfuly";
@@ -40,7 +40,7 @@ public class authenticationController{
         return "Wrong current password, password did not changed";
     }
 
-    public String logOut(String token)
+    public String logOut(long token)
     {
         if (Authentication.signOut(token))
             return "Singed out";
