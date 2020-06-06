@@ -1,5 +1,10 @@
 package Model;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -134,5 +139,42 @@ public class Patient extends Person {
 		return null;
 		
 	}
+	public boolean serialize()
+	{
+		try {
+		FileOutputStream fileOut = new FileOutputStream("/files/patient.ser");
+		ObjectOutputStream oos = new ObjectOutputStream(fileOut);
+		oos.writeObject(this);
+		oos.close();
+		fileOut.close();
+		return true;
+		}
+		catch (IOException i)
+		{
+			i.printStackTrace();
+			return false;
+		}
+		
+	}
 	
+	public Patient deserialize()
+	{
+		try {
+			FileInputStream fileIn = new FileInputStream("/files/patient.ser");
+			ObjectInputStream ois = new ObjectInputStream(fileIn);
+			Patient patient = (Patient) ois.readObject();
+			ois.close();
+			fileIn.close();
+			return patient;
+		}
+		catch (IOException i)
+		{
+			i.printStackTrace();
+			return null;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
 }
