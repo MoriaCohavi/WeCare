@@ -9,7 +9,7 @@ import java.security.MessageDigest;
 import java.util.HashMap;
 
 
-public class Authentication {
+public class Authentication implements java.io.Serializable{
 	
 	private static HashMap<String,User> users = new HashMap<String,User>(); // we need to understand how we create this list. 
 	private static HashMap<Long,User> loggedinusers = new HashMap<Long,User>();
@@ -101,6 +101,11 @@ public class Authentication {
 		}
 		
 		return true;
+	}
+	
+	public static String getType(long token)
+	{
+		return loggedinusers.get(token).getUser_type();
 	}
 	
 	public static boolean serialize()

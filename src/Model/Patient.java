@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Patient extends Person {
+public class Patient extends Person implements java.io.Serializable{
 
 	private int age, weight, height, recordCount;
 	private String gender, allergies, Chronic_diseases, subscriptions;

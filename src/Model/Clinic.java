@@ -7,12 +7,13 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class Clinic implements java.io.Serializable {
-	String city;
-	long id;
-	Manager manager;
+	private static Clinic instance;
 	
-	public Clinic() {
+	private String city;
+	private long id;
+	private Manager manager;
 	
+	private Clinic() {
 	}
 	
 	public String getCity() {
@@ -71,5 +72,11 @@ public class Clinic implements java.io.Serializable {
 	          c.printStackTrace();
 	          return null;
 	       }
+	}
+
+	public static Clinic getInstance() {
+		if(instance == null)
+			instance = new Clinic();
+		return instance;
 	}
 }
