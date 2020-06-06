@@ -8,12 +8,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
-public class Manager extends Person implements java.io.Serializable {
+public class Manager extends User implements java.io.Serializable {
 	
 	private HashMap<String, Doctor> doctors;
 
-	public Manager(String id, int phone, String name, String email) {
-		super(id, phone, name, email);
+	public Manager(String id, int phone, String name, String email,String password,String user_type) {
+		super(id,phone,name, email, password, user_type);
 		
 		doctors  = new HashMap <String, Doctor>();
 	}
