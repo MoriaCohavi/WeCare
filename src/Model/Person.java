@@ -64,12 +64,12 @@ public class Person implements java.io.Serializable {
 	       }
 	}
 	
-	public User deserialize()
+	public Person deserialize()
 	{
 	      try {
 	          FileInputStream fileIn = new FileInputStream("/files/person.ser");
 	          ObjectInputStream in = new ObjectInputStream(fileIn);
-	          User e = (User) in.readObject();
+	          Person e = (Person) in.readObject();
 	          in.close();
 	          fileIn.close();
 	          return e;

@@ -142,12 +142,12 @@ public class Doctor extends Person implements java.io.Serializable {
 	       }
 	}
 	
-	public User deserialize()
+	public Doctor deserialize()
 	{
 	      try {
 	          FileInputStream fileIn = new FileInputStream("/files/doctor.ser");
 	          ObjectInputStream in = new ObjectInputStream(fileIn);
-	          User e = (User) in.readObject();
+	          Doctor e = (Doctor) in.readObject();
 	          in.close();
 	          fileIn.close();
 	          return e;

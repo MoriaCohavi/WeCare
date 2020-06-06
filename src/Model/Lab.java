@@ -84,12 +84,12 @@ public class Lab implements java.io.Serializable {
 	       }
 	}
 	
-	public User deserialize()
+	public Lab deserialize()
 	{
 	      try {
 	          FileInputStream fileIn = new FileInputStream("/files/lab.ser");
 	          ObjectInputStream in = new ObjectInputStream(fileIn);
-	          User e = (User) in.readObject();
+	          Lab e = (Lab) in.readObject();
 	          in.close();
 	          fileIn.close();
 	          return e;
