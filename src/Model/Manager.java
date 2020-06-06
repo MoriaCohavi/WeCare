@@ -92,12 +92,12 @@ public class Manager extends Person implements java.io.Serializable {
 	       }
 	}
 	
-	public User deserialize()
+	public Manager deserialize()
 	{
 	      try {
 	          FileInputStream fileIn = new FileInputStream("/files/manager.ser");
 	          ObjectInputStream in = new ObjectInputStream(fileIn);
-	          User e = (User) in.readObject();
+	          Manager e = (Manager) in.readObject();
 	          in.close();
 	          fileIn.close();
 	          return e;

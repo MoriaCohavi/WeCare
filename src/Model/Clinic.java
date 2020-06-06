@@ -55,12 +55,12 @@ public class Clinic implements java.io.Serializable {
 	       }
 	}
 	
-	public User deserialize()
+	public Clinic deserialize()
 	{
 	      try {
 	          FileInputStream fileIn = new FileInputStream("/files/clinic.ser");
 	          ObjectInputStream in = new ObjectInputStream(fileIn);
-	          User e = (User) in.readObject();
+	          Clinic e = (Clinic) in.readObject();
 	          in.close();
 	          fileIn.close();
 	          return e;

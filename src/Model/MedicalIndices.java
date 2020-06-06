@@ -68,12 +68,12 @@ public class MedicalIndices implements java.io.Serializable {
 	       }
 	}
 	
-	public User deserialize()
+	public MedicalIndices deserialize()
 	{
 	      try {
 	          FileInputStream fileIn = new FileInputStream("/files/medicalIndices.ser");
 	          ObjectInputStream in = new ObjectInputStream(fileIn);
-	          User e = (User) in.readObject();
+	          MedicalIndices e = (MedicalIndices) in.readObject();
 	          in.close();
 	          fileIn.close();
 	          return e;

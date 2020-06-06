@@ -121,12 +121,12 @@ public class MedicalRecord implements java.io.Serializable {
 	       }
 	}
 	
-	public User deserialize()
+	public MedicalRecord deserialize()
 	{
 	      try {
 	          FileInputStream fileIn = new FileInputStream("/files/medicalRecord.ser");
 	          ObjectInputStream in = new ObjectInputStream(fileIn);
-	          User e = (User) in.readObject();
+	          MedicalRecord e = (MedicalRecord) in.readObject();
 	          in.close();
 	          fileIn.close();
 	          return e;
