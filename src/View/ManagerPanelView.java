@@ -15,8 +15,8 @@ import javax.swing.JTextField;
 
 public class ManagerPanelView {
 
-	private JFrame frame;
-	private JTable table;
+	private JFrame frmManager;
+	private JTable tbl_managers;
 	private JLabel lbl_id;
 	private JLabel lbl_name;
 	private JLabel lbl_phone;
@@ -55,18 +55,19 @@ public class ManagerPanelView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 593, 495);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmManager = new JFrame();
+		frmManager.setTitle("Manager");
+		frmManager.setBounds(100, 100, 593, 495);
+		frmManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmManager.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 664, 10);
-		frame.getContentPane().add(panel);
+		frmManager.getContentPane().add(panel);
 		
-		table = new JTable();
-		table.setBorder(null);
-		table.setModel(new DefaultTableModel(
+		tbl_managers = new JTable();
+		tbl_managers.setBorder(null);
+		tbl_managers.setModel(new DefaultTableModel(
 			new Object[][] {
 				{"a", "a", "a"},
 			},
@@ -74,49 +75,49 @@ public class ManagerPanelView {
 				"Doctor name", "Id", "Specialization"
 			}
 		));
-		table.setBounds(0, 10, 322, 305);
-		frame.getContentPane().add(table);
+		tbl_managers.setBounds(0, 10, 322, 305);
+		frmManager.getContentPane().add(tbl_managers);
 		
 		lbl_id = new JLabel("Id:");
 		lbl_id.setBounds(350, 20, 45, 13);
-		frame.getContentPane().add(lbl_id);
+		frmManager.getContentPane().add(lbl_id);
 		
 		lbl_name = new JLabel("Name:");
 		lbl_name.setBounds(350, 43, 45, 13);
-		frame.getContentPane().add(lbl_name);
+		frmManager.getContentPane().add(lbl_name);
 		
 		lbl_phone = new JLabel("Phone:");
 		lbl_phone.setBounds(350, 66, 45, 13);
-		frame.getContentPane().add(lbl_phone);
+		frmManager.getContentPane().add(lbl_phone);
 		
 		lbl_address = new JLabel("Address:");
 		lbl_address.setBounds(350, 89, 45, 13);
-		frame.getContentPane().add(lbl_address);
+		frmManager.getContentPane().add(lbl_address);
 		
 		lbl_email = new JLabel("Email:");
 		lbl_email.setBounds(350, 112, 45, 13);
-		frame.getContentPane().add(lbl_email);
+		frmManager.getContentPane().add(lbl_email);
 		
 		btn_statistical = new JButton("View statistical report");
 		btn_statistical.setBounds(350, 147, 178, 21);
-		frame.getContentPane().add(btn_statistical);
+		frmManager.getContentPane().add(btn_statistical);
 		
 		lbl_search = new JLabel("Search doctor:");
 		lbl_search.setBounds(10, 344, 91, 13);
-		frame.getContentPane().add(lbl_search);
+		frmManager.getContentPane().add(lbl_search);
 		
 		txtf_doctor = new JTextField();
 		txtf_doctor.setBounds(131, 341, 96, 19);
-		frame.getContentPane().add(txtf_doctor);
+		frmManager.getContentPane().add(txtf_doctor);
 		txtf_doctor.setColumns(10);
 		
 		btn_find = new JButton("Find");
 		btn_find.setBounds(10, 380, 85, 21);
-		frame.getContentPane().add(btn_find);
+		frmManager.getContentPane().add(btn_find);
 		
 		btn_addDoctor = new JButton("Add Doctor");
 		btn_addDoctor.setBounds(131, 380, 96, 21);
-		frame.getContentPane().add(btn_addDoctor);
-		frame.setVisible(true);
+		frmManager.getContentPane().add(btn_addDoctor);
+		frmManager.setVisible(true);
 	}
 }
