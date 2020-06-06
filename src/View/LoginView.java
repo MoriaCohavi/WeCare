@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import Controller.*;
 
 public class LoginView {
 
@@ -71,11 +72,26 @@ public class LoginView {
 		panel.add(txtf_passwd);
 		txtf_passwd.setColumns(10);
 		
+		JLabel lbl_message = new JLabel("");
+		lbl_message.setBounds(47, 204, 45, 13);
+		panel.add(lbl_message);
+		
 		JButton btn_login = new JButton("Login");
 		btn_login.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				authenticationController authCont = new authenticationController();
+				long returnCode = authCont.login(txtf_uname.getText(), txtf_passwd.getText());
+				if (returnCode == -1)
+					lbl_message.setText("Wrong username or password");
+				else if (returnCode == -2)
+					lbl_message.setText("Invalid ID");
+				else
+				{
+					
+				}
+					
+					
 			}
 		});
 		btn_login.setBounds(47, 232, 85, 21);
