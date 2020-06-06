@@ -23,14 +23,14 @@ public class Authentication {
 	}
 	
 	
-	public static String signIn(String id, String password)
+	public static long signIn(String id, String password)
 	{
 	
 		if (!users.isEmpty())
 		{
 			User user = users.get(id);
 			if(user == null)
-				return false;
+				return -1;
 			else
 			{
 				if(user.getPassword() == SHA1(password))
@@ -41,10 +41,10 @@ public class Authentication {
 			}
 		}
 		
-		return "User name and password does not match";
+		return -1;
 	}
 	
-	public boolean signOut(String token)
+	public static boolean signOut(String token)
 	{
 		if(users.get(token) != null)
 		{
@@ -56,7 +56,7 @@ public class Authentication {
 	
 	public static boolean validateUser(String token,String typeNeed)
 	{
-		if(!(users.get(token) == null || typeNeed != users.get(token).getUser_type()) // type need has to come from authentication controller.
+		if(!(users.get(token) == null || typeNeed != users.get(token).getUser_type())) // type need has to come from authentication controller.
 			return false;
 		else
 			return true;
@@ -71,7 +71,7 @@ public class Authentication {
 		return true;
 	}
 	
-	public String generateToken(String id) 
+	public static long generateToken(String id) 
 	{
 		long leftLimit = 1000000000L;
 		long rightLimit = 9999999999L;
@@ -84,7 +84,7 @@ public class Authentication {
 			return token;
 	}
 	
-	private boolean checkToken(long token)
+	private static boolean checkToken(long token)
 	{
 		for(String key:users.keySet())
 		{
