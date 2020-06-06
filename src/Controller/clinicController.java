@@ -8,6 +8,14 @@ public class clinicController {
 		clinic  = Clinic.getInstance(city, cId, mId, phone, name, email, password, user_type);
 	}
 	
+	public static boolean clinicControllerCheck()
+	{
+		Clinic clinic = Clinic.deserialize();
+		if (clinic == null)
+			return false;
+		return true;
+	}
+	
 	public Clinic getClinic() {
 		return clinic;
 	}

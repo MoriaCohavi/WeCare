@@ -52,7 +52,7 @@ public class Clinic implements java.io.Serializable {
 	       }
 	}
 	
-	public Clinic deserialize()
+	public static Clinic deserialize()
 	{
 	      try {
 	          FileInputStream fileIn = new FileInputStream("/files/clinic.ser");

@@ -23,21 +23,21 @@ public class InitializeClinicView {
 	private JTextField txtf_uname;
 	private JTextField txtf_passwd;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InitializeClinicView window = new InitializeClinicView();
-					window.frmCreateClinic.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					InitializeClinicView window = new InitializeClinicView();
+//					window.frmCreateClinic.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
@@ -61,7 +61,7 @@ public class InitializeClinicView {
 		frmCreateClinic.getContentPane().add(panel);
 		
 		JLabel lbl_id = new JLabel("Clinic id:");
-		lbl_id.setBounds(38, 57, 45, 13);
+		lbl_id.setBounds(38, 57, 78, 13);
 		frmCreateClinic.getContentPane().add(lbl_id);
 		
 		JLabel lbl_city = new JLabel("City:");
@@ -139,5 +139,6 @@ public class InitializeClinicView {
 		txtf_passwd.setColumns(10);
 		txtf_passwd.setBounds(145, 397, 96, 19);
 		frmCreateClinic.getContentPane().add(txtf_passwd);
+		frmCreateClinic.setVisible(true);
 	}
 }
