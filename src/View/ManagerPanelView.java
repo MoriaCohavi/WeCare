@@ -28,21 +28,21 @@ public class ManagerPanelView {
 	private JButton btn_find;
 	private JButton btn_addDoctor;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ManagerPanelView window = new ManagerPanelView();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					ManagerPanelView window = new ManagerPanelView();
+//					window.frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.

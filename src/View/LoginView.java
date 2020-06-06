@@ -8,6 +8,8 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class LoginView {
 
@@ -70,6 +72,12 @@ public class LoginView {
 		txtf_passwd.setColumns(10);
 		
 		JButton btn_login = new JButton("Login");
+		btn_login.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
 		btn_login.setBounds(47, 232, 85, 21);
 		panel.add(btn_login);
 		

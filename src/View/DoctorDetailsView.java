@@ -22,21 +22,21 @@ public class DoctorDetailsView {
 	private JTextField txtf_specialization;
 	private JTextField txtf_visitTime;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					DoctorDetailsView window = new DoctorDetailsView();
-					window.frmDoctorDetails.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					DoctorDetailsView window = new DoctorDetailsView();
+//					window.frmDoctorDetails.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.

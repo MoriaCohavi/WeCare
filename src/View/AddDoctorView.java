@@ -25,21 +25,21 @@ public class AddDoctorView {
 	private JTextField txtf_passwd;
 	private JTextField txtf_userType;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AddDoctorView window = new AddDoctorView();
-					window.frmAddDoctor.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					AddDoctorView window = new AddDoctorView();
+//					window.frmAddDoctor.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
