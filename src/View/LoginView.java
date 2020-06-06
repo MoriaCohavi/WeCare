@@ -18,21 +18,20 @@ public class LoginView {
 	private JTextField txtf_uname;
 	private JTextField txtf_passwd;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					LoginView window = new LoginView();
-					window.frmLogin.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					LoginView window = new LoginView();
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the application.
@@ -73,22 +72,35 @@ public class LoginView {
 		txtf_passwd.setColumns(10);
 		
 		JLabel lbl_message = new JLabel("");
-		lbl_message.setBounds(47, 204, 45, 13);
+		lbl_message.setBounds(47, 204, 164, 13);
 		panel.add(lbl_message);
 		
 		JButton btn_login = new JButton("Login");
 		btn_login.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+
+				
 				authenticationController authCont = new authenticationController();
 				long returnCode = authCont.login(txtf_uname.getText(), txtf_passwd.getText());
 				if (returnCode == -1)
 					lbl_message.setText("Wrong username or password");
 				else if (returnCode == -2)
+				{
 					lbl_message.setText("Invalid ID");
+					
+				}
 				else
 				{
-					
+					String type = authCont.fetchUserType(returnCode);
+					if (type.equals("Manager"))
+					{
+						ManagerPanelView managerPanel = new ManagerPanelView();
+					}
+					//else
+						//DoctorPanelView doctorPanel = new 
+					//If manager:
+					//Manager
 				}
 					
 					
@@ -100,5 +112,6 @@ public class LoginView {
 		JButton btn_forgotpass = new JButton("Forgot Password");
 		btn_forgotpass.setBounds(149, 232, 157, 21);
 		panel.add(btn_forgotpass);
+		frmLogin.setVisible(true);
 	}
 }

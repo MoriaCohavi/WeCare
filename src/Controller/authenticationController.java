@@ -48,4 +48,8 @@ public class authenticationController{
             return "user not found";
     }
 
+    public String fetchUserType(long token)
+    {
+    	return Authentication.getType(token);
+    }
 }

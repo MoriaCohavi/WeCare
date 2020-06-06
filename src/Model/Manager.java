@@ -1,9 +1,14 @@
 package Model;
 
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
-public class Manager extends Person{
+public class Manager extends Person implements java.io.Serializable {
 	
 	private HashMap<String, Doctor> doctors;
 
@@ -71,5 +76,38 @@ public class Manager extends Person{
 			
 	}
 	
+	public boolean serialize()
+	{
+	      try {
+	          FileOutputStream fileOut =
+	          new FileOutputStream("/files/manager.ser");
+	          ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	          out.writeObject(this);
+	          out.close();
+	          fileOut.close();
+	          return true;
+	       } catch (IOException i) {
+	          i.printStackTrace();
+	          return false;
+	       }
+	}
+	
+	public User deserialize()
+	{
+	      try {
+	          FileInputStream fileIn = new FileInputStream("/files/manager.ser");
+	          ObjectInputStream in = new ObjectInputStream(fileIn);
+	          User e = (User) in.readObject();
+	          in.close();
+	          fileIn.close();
+	          return e;
+	       } catch (IOException i) {
+	          i.printStackTrace();
+	          return null;
+	       } catch (ClassNotFoundException c) {
+	          c.printStackTrace();
+	          return null;
+	       }
+	}
 
 }

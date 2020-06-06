@@ -23,6 +23,10 @@ public class Authentication {
 		return sha1;
 	}
 	
+	public static String getType(long token)
+	{
+		return loggedinusers.get(token).getUser_type();
+	}
 	
 	public static long signIn(String id, String password)
 	{
@@ -97,5 +101,7 @@ public class Authentication {
 		
 		return true;
 	}
+	
+	
 	
 }

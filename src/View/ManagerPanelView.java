@@ -36,7 +36,7 @@ public class ManagerPanelView {
 //			public void run() {
 //				try {
 //					ManagerPanelView window = new ManagerPanelView();
-//					window.frame.setVisible(true);
+//					
 //				} catch (Exception e) {
 //					e.printStackTrace();
 //				}
@@ -117,5 +117,6 @@ public class ManagerPanelView {
 		btn_addDoctor = new JButton("Add Doctor");
 		btn_addDoctor.setBounds(131, 380, 96, 21);
 		frame.getContentPane().add(btn_addDoctor);
+		frame.setVisible(true);
 	}
 }
