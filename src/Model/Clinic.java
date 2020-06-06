@@ -9,11 +9,15 @@ import java.io.ObjectOutputStream;
 public class Clinic implements java.io.Serializable {
 	private static Clinic instance;
 	
-	private String city;
-	private long id;
+	private final String city;
+	private final long id;
 	private Manager manager;
 	
-	private Clinic() {
+	private Clinic(String city, long cId, String mId, int phone, String name, String email,String password,String user_type) {
+		this.city = city;
+		this.id = cId;
+		this.manager = new Manager(mId, phone, name, email, password, user_type);
+		
 	}
 	
 	public String getCity() {
@@ -26,14 +30,6 @@ public class Clinic implements java.io.Serializable {
 	
 	public Manager getManager() {
 		return manager;
-	}
-	
-	public void setCity(String city) {
-		this.city = city;
-	}
-	
-	public void setId(long id) {
-		this.id = id;
 	}
 	
 	public void setManager(Manager manager) {
@@ -74,9 +70,9 @@ public class Clinic implements java.io.Serializable {
 	       }
 	}
 
-	public static Clinic getInstance() {
+	public static Clinic getInstance(String city, long cId, String mId, int phone, String name, String email,String password,String user_type) {
 		if(instance == null)
-			instance = new Clinic();
+			instance = new Clinic(city, cId, mId, phone, name, email, password, user_type);
 		return instance;
 	}
 }

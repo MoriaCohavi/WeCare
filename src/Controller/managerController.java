@@ -10,9 +10,9 @@ public class managerController {
 	//private manager view implementation
 	
 	
-	public managerController(String id, int phone, String name, String email) { //needs to include manger view object
+	public managerController(String id, int phone, String name, String email, String password,String user_type) { //needs to include manger view object
 		
-		clinicManager = new Manager(id, phone, name, email);
+		clinicManager = new Manager(id, phone, name, email,password, user_type);
 		
 	}
 	

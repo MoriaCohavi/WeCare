@@ -11,13 +11,13 @@ public class doctorController {
 	private Doctor currentModelDoctor;
 	//private doctor view implementation
 	
-	public doctorController(String id, int phone, String name, String email, String special) { // needs to include doctorview obj
-			this.currentModelDoctor = new Doctor (id, phone, name, email, special);
+	public doctorController(String id, int phone, String name, String email, String special,String password,String user_type) { // needs to include doctorview obj
+			this.currentModelDoctor = new Doctor (id, phone, name, email, special,password,user_type);
 	}
 	
-	public boolean addNewPatient (String patientId) {
+	public boolean addNewPatient (String id, int phone, String name, String email, int weight, int height, String gender, String allergies, String subscriptions) {
 		
-		Patient newPatient = new Patient(patientId);
+		Patient newPatient = new Patient(id, phone, name, email, weight, height, gender, allergies, subscriptions);
 		if (currentModelDoctor.addPatient(newPatient))
 			return true;
 
@@ -34,10 +34,10 @@ public class doctorController {
 	
 	
 	
-	public String viewPatientInfo (String patientId) {
+	/*public String viewPatientInfo (String patientId) {
 		
 		return currentModelDoctor.getPatient(patientId).getPatientInfo();
-	}
+	}*/
 	
 	
 	public MedicalRecord viewMedicalRecord (String patientId, int recordId) {
@@ -70,8 +70,7 @@ public class doctorController {
 		else return false;
 		
 	}
-
-	public 
+ 
 
 
 

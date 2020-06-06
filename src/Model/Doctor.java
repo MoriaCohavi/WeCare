@@ -8,15 +8,15 @@ import java.io.ObjectOutputStream;
 //import java.time.*;
 import java.util.HashMap;
 
-public class Doctor extends Person implements java.io.Serializable {
+public class Doctor extends User implements java.io.Serializable {
 	
 	//private HashMap <LocalDate, StatisticalData> stats = new HashMap<LocalDate, StatisticalData>();
 	private String specialization;
 	private HashMap <String, Patient> patients;
 	
 	//constructor
-	public Doctor(String id, int phone, String name, String email, String special) {
-		super(id, phone, name, email);
+	public Doctor(String id, int phone, String name, String email, String special,String password,String user_type) {
+		super(id, phone, name, email, password, user_type);
 		this.specialization = special;
 		this.patients = new HashMap <String, Patient>();
 	}
