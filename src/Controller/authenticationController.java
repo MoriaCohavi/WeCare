@@ -1,28 +1,26 @@
 package Controller;
 
-import Model.Authentication
-import java.util.*
-public class AuthenticationController{
+import Model.Authentication;
+
+public class authenticationController{
 
 
     private static boolean isNumeric(String strNum) {
         if (strNum == null) {
             return false;
         }
-        try {
-            double d = Double.parseDouble(strNum);
-        } catch (NumberFormatException nfe) {
+            if(strNum.matches("[0-9]+"))
+                return true;
+            
             return false;
-        }
-        return true;
     }
 
-    public String login(String id, String password)
+    public long login(String id, String password)
     {
         if (isNumeric(id) && id.length() == 9)
             return Authentication.signIn(id,password);
         else
-            return "ID can contain 9 digits only";
+            return -2; //ID can contain 9 digits only
     }
 
     /*public String isAuthorized(String token, String typeNeed) // we need to figure where the typeNeed comes from / maybe this function can be deleted.
