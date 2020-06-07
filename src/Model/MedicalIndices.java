@@ -1,32 +1,24 @@
 package Model;
 
-public class MedicalIndices {
-	private int weight = 0, height =0, heartRate =0, temperature =37, systolicBP =0,diastolicBP=0;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+public class MedicalIndices implements java.io.Serializable {
+	private final int weight, height, heartRate, temperature, systolicBP,diastolicBP;
+
 	
-	
-	private void setWeight(int wParmeter) {
-		this.weight = wParmeter;
-			
-	}
+	public MedicalIndices (int w, int h, int hR, int t, int sBP, int dBP) {
 		
-	private void setHeight(int hrParmeter) {
-		this.height = hrParmeter;
-	}
-	
-	private void setHeartRate(int hParmeter) {
-		this.heartRate = hParmeter;
-	}
+		this.weight = w;
+		this.height = h;
+		this.heartRate = hR;
+		this.temperature = t;
+		this.systolicBP =sBP;
+		this.diastolicBP = dBP;
 		
-	private void setTemperature (int tParmeter) {
-		this.temperature = tParmeter;
-	}
-	
-	private void setSystolicBP (int sbpParmeter) {
-		this.systolicBP = sbpParmeter;
-	}
-	
-	private void setDiastolicBP (int dbpParmeter) {
-		this.diastolicBP = dbpParmeter;
 	}
 
 	
@@ -54,20 +46,43 @@ public class MedicalIndices {
 	public int getDiastolicBP () {
 		return this.diastolicBP;
 	}
-	
-	public void setMedicalIndices (int w, int h, int hr, int t, int sysBP, int diaBP)
-	{
-		this.setWeight(w);
-		this.setHeight(h);
-		this.setHeartRate(hr);
-		this.setTemperature(t);
-		this.setSystolicBP(sysBP);
-		this.setDiastolicBP(diaBP);
-	}
+
 	
 	public MedicalIndices getMedicalIndices ()
 	{
 		return this;
 	}
-
+	public boolean serialize()
+	{
+	      try {
+	          FileOutputStream fileOut =
+	          new FileOutputStream("/files/medicalIndices.ser");
+	          ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	          out.writeObject(this);
+	          out.close();
+	          fileOut.close();
+	          return true;
+	       } catch (IOException i) {
+	          i.printStackTrace();
+	          return false;
+	       }
+	}
+	
+	public MedicalIndices deserialize()
+	{
+	      try {
+	          FileInputStream fileIn = new FileInputStream("/files/medicalIndices.ser");
+	          ObjectInputStream in = new ObjectInputStream(fileIn);
+	          MedicalIndices e = (MedicalIndices) in.readObject();
+	          in.close();
+	          fileIn.close();
+	          return e;
+	       } catch (IOException i) {
+	          i.printStackTrace();
+	          return null;
+	       } catch (ClassNotFoundException c) {
+	          c.printStackTrace();
+	          return null;
+	       }
+	}
 }

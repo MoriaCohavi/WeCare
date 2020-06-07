@@ -1,61 +1,52 @@
 package Model;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.*;
 
-public class MedicalRecord {
+public class MedicalRecord implements java.io.Serializable {
 	
-	private LocalDate currentDate;
-	private LocalTime sTime, eTime;
-	private int recordId, daysOfIllnessApproval;
-	private String doctorId, visitPurpose, visitDescription, diagnoseDiscription, visitSummary, subscriptions;
-	private MedicalIndices pateintIndices;
+	private final LocalDate currentDate;
+	private final LocalTime sTime, eTime; // when opening page needs to save time & while saving needs to send time 
+	private final String doctorId, visitPurpose, visitDescription, diagnoseDiscription, visitSummary;
+	private final int recordId;
+	private final MedicalIndices pateintIndices;
+	private int daysOfIllnessApproval;
+	private String subscriptions;
+	
+	
+	public MedicalRecord(String doctor,int numDays, int record, String purpose, String description, String summary, String sub,
+			String diagnose, LocalTime sT, LocalTime eT, int w, int h, int hr, int t, int sysBP, int diaBP ) {
+		
+		this.currentDate = LocalDate.now();
+		this.doctorId = doctor;
+		this.recordId = record;
+		this.sTime = sT;
+		this.eTime = eT;
+		this.pateintIndices = new MedicalIndices (w,h,hr,t,sysBP, diaBP);
+		this.visitDescription = description;
+		this.visitPurpose= purpose;
+		this.diagnoseDiscription  = diagnose;
+		this.subscriptions = sub;
+		this.daysOfIllnessApproval = numDays;
+		this.visitSummary = summary;
+	}
 	
 	//setters
-	private void set_Date() {
-		this.currentDate = LocalDate.now();
-	}
-	
-	private void set_STime() {
-		this.sTime = LocalTime.now();
-	}
-	
-	private void set_ETime() {
-		this.eTime = LocalTime.now();
-	}
-	
-	public void set_RecordId(int recordId) {
-		this.recordId = recordId;
-	}
 	
 	public void set_DaysOfIllnessApproval(int numDays) {
 		this.daysOfIllnessApproval = numDays;
 	}
 	
-	public void set_DoctorId(String doctorId) {
-		this.doctorId = doctorId;
-	}
-	
-	public void set_VisitPurpose(String purpose) {
-		this.visitPurpose = purpose;
-	}
-	
-	public void set_VisitDescription(String description) {
-		this.visitDescription = description;
-	}
-	
-	public void set_DiagnoseDiscription(String description) {
-		this.diagnoseDiscription = description;
-	}
-	
-	public void set_VisitSummary(String summary) {
-		this.visitSummary = summary;
-	}
 	
 	public void set_subscriptions(String sub) {
 		this.subscriptions = sub;
 	}
-	public void set_pateintIndices(int w, int h, int hr, int t, int sysBP, int diaBP) {
-		this.pateintIndices.setMedicalIndices(w, h, hr, t, sysBP, diaBP);
-	}
+	
+	
 	
 	//getters
 	public LocalDate get_Date() {
@@ -107,36 +98,6 @@ public class MedicalRecord {
 	}
 	
 	//other methods
-		
-	public void addMedicalRecord(String doctorId,int numDays, int recordId, String purpose, String description, String summary, String sub,
-			int w, int h, int hr, int t, int sysBP, int diaBP ) {
-		
-		this.set_DoctorId(doctorId);
-		this.set_RecordId(recordId);
-		this.set_Date();
-		this.set_STime();
-		this.set_pateintIndices(w, h, hr, t, sysBP, diaBP);
-		this.set_VisitPurpose(purpose);
-		this.set_VisitDescription(description);
-		this.set_DiagnoseDiscription(description);
-		this.set_VisitSummary(summary);
-		this.set_subscriptions(sub);
-		this.set_DaysOfIllnessApproval(numDays);
-	}
-	
-	public void saveMedicalRecord() {
-		this.set_ETime();
-	}
-	
-	public MedicalRecord get_MedicalRecord(int record) {
-		
-		if (this.get_RecordId() == record)
-			return this;
-		else 
-			return null;
-		
-	}
-	
 	
 	public String exportVisitSummary() {
 		String export = "";
@@ -144,5 +105,38 @@ public class MedicalRecord {
 			
 		return export;
 	}
-
+	public boolean serialize()
+	{
+	      try {
+	          FileOutputStream fileOut =
+	          new FileOutputStream("/files/medicalRecord.ser");
+	          ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	          out.writeObject(this);
+	          out.close();
+	          fileOut.close();
+	          return true;
+	       } catch (IOException i) {
+	          i.printStackTrace();
+	          return false;
+	       }
+	}
+	
+	public MedicalRecord deserialize()
+	{
+	      try {
+	          FileInputStream fileIn = new FileInputStream("/files/medicalRecord.ser");
+	          ObjectInputStream in = new ObjectInputStream(fileIn);
+	          MedicalRecord e = (MedicalRecord) in.readObject();
+	          in.close();
+	          fileIn.close();
+	          return e;
+	       } catch (IOException i) {
+	          i.printStackTrace();
+	          return null;
+	       } catch (ClassNotFoundException c) {
+	          c.printStackTrace();
+	          return null;
+	       }
+	}
 }
+
