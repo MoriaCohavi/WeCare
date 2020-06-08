@@ -14,9 +14,6 @@ public class Authentication implements java.io.Serializable{
 	private static HashMap<String,User> users = new HashMap<String,User>(); // we need to understand how we create this list. 
 	private static HashMap<Long,User> loggedinusers = new HashMap<Long,User>();
 	
-	public Authentication() {
-	}
-	
 	public static String SHA1(String password) // this function take a clear password and change it to SHA1 hash.
 	{
 		String sha1 = "";

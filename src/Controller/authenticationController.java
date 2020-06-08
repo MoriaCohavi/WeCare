@@ -1,9 +1,18 @@
 package Controller;
 
 import Model.Authentication;
+import Model.Manager;
 import View.LoginView;
+
 public class authenticationController{
+	public static String serPath = "src\\Model\\files\\authentication.ser";
+	private Authentication authentication;
+	
 	public authenticationController() {
+		
+		// init users hashmap
+		// add manager specificly
+		authentication = new Authentication();
 		LoginView login_view = new LoginView();
 	}
 
@@ -54,4 +63,14 @@ public class authenticationController{
     {
     	return Authentication.getType(token);
     }
+    
+	public void serialize(serHandlerController handler)
+	{
+		handler.WriteObjectToFile(authentication, serPath);
+	}
+	
+	public void deserialize(serHandlerController handler)
+	{
+		authentication = (Authentication)handler.ReadObjectFromFile(serPath);
+	}
 }

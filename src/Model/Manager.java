@@ -46,9 +46,9 @@ public class Manager extends User implements java.io.Serializable {
 	
 	
 	
-	public boolean searchDoctor(String doctodID) {
+	public boolean searchDoctor(String doctorID) {
 		
-		if(doctors.containsKey(doctodID)) return true;
+		if(doctors.containsKey(doctorID)) return true;
 		
 		return false;
 			
