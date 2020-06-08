@@ -8,11 +8,11 @@ import java.io.ObjectOutputStream;
 
 public class Person implements java.io.Serializable {
 	private final String id;
-	private int phone;
+	private long phone;
 	private final String name;
 	private String email;
 
-	public Person(String id, int phone, String name, String email) {
+	public Person(String id, long phone, String name, String email) {
 		
 		this.id = id;
 		this.phone = phone;
@@ -26,7 +26,7 @@ public class Person implements java.io.Serializable {
 		
 	}
 	
-	public int getPhone() {
+	public long getPhone() {
 		return this.phone;
 	}
 	
@@ -52,7 +52,7 @@ public class Person implements java.io.Serializable {
 	{
 	      try {
 	          FileOutputStream fileOut =
-	          new FileOutputStream("/files/person.ser");
+	          new FileOutputStream("src\\Model\\files\\person.ser");
 	          ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	          out.writeObject(this);
 	          out.close();
@@ -67,7 +67,7 @@ public class Person implements java.io.Serializable {
 	public Person deserialize()
 	{
 	      try {
-	          FileInputStream fileIn = new FileInputStream("/files/person.ser");
+	          FileInputStream fileIn = new FileInputStream("src\\Model\\files\\person.ser");
 	          ObjectInputStream in = new ObjectInputStream(fileIn);
 	          Person e = (Person) in.readObject();
 	          in.close();

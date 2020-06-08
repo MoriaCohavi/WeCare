@@ -72,7 +72,7 @@ public class Lab implements java.io.Serializable {
 	{
 	      try {
 	          FileOutputStream fileOut =
-	          new FileOutputStream("/files/lab.ser");
+	          new FileOutputStream("src\\Model\\files\\lab.ser");
 	          ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	          out.writeObject(this);
 	          out.close();
@@ -87,7 +87,7 @@ public class Lab implements java.io.Serializable {
 	public Lab deserialize()
 	{
 	      try {
-	          FileInputStream fileIn = new FileInputStream("/files/lab.ser");
+	          FileInputStream fileIn = new FileInputStream("src\\Model\\files\\lab.ser");
 	          ObjectInputStream in = new ObjectInputStream(fileIn);
 	          Lab e = (Lab) in.readObject();
 	          in.close();

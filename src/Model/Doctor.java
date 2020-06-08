@@ -15,7 +15,7 @@ public class Doctor extends User implements java.io.Serializable {
 	private HashMap <String, Patient> patients;
 	
 	//constructor
-	public Doctor(String id, int phone, String name, String email, String special,String password,String user_type) {
+	public Doctor(String id, long phone, String name, String email, String special,String password,String user_type) {
 		super(id, phone, name, email, password, user_type);
 		this.specialization = special;
 		this.patients = new HashMap <String, Patient>();
@@ -34,7 +34,7 @@ public class Doctor extends User implements java.io.Serializable {
 		return this.getName();
 	}
 	
-	public int getDoctorPhone() {
+	public long getDoctorPhone() {
 		return this.getPhone();
 	}
 	
@@ -124,42 +124,6 @@ public class Doctor extends User implements java.io.Serializable {
 		}
 		
 		return null;
-	}
-	
-	public boolean serialize()
-	{
-	      try {
-	          FileOutputStream fileOut =
-	          new FileOutputStream("/files/doctor.ser");
-	          ObjectOutputStream out = new ObjectOutputStream(fileOut);
-	          out.writeObject(this);
-	          out.close();
-	          fileOut.close();
-	          return true;
-	       } catch (IOException i) {
-	          i.printStackTrace();
-	          return false;
-	       }
-	}
-	
-	public Doctor deserialize()
-	{
-	      try {
-	          FileInputStream fileIn = new FileInputStream("/files/doctor.ser");
-	          ObjectInputStream in = new ObjectInputStream(fileIn);
-	          Doctor e = (Doctor) in.readObject();
-	          in.close();
-	          fileIn.close();
-	          return e;
-	       } catch (IOException i) {
-	          i.printStackTrace();
-	          return null;
-	       } catch (ClassNotFoundException c) {
-	          c.printStackTrace();
-	          return null;
-	       }
-	}
-	
-			
+	}			
 }
 

@@ -1,9 +1,11 @@
 package Controller;
 
 import Model.Authentication;
-
+import View.LoginView;
 public class authenticationController{
-
+	public authenticationController() {
+		LoginView login_view = new LoginView();
+	}
 
     private static boolean isNumeric(String strNum) {
         if (strNum == null) {

@@ -109,7 +109,7 @@ public class MedicalRecord implements java.io.Serializable {
 	{
 	      try {
 	          FileOutputStream fileOut =
-	          new FileOutputStream("/files/medicalRecord.ser");
+	          new FileOutputStream("src\\Model\\files\\medicalRecord.ser");
 	          ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	          out.writeObject(this);
 	          out.close();
@@ -124,7 +124,7 @@ public class MedicalRecord implements java.io.Serializable {
 	public MedicalRecord deserialize()
 	{
 	      try {
-	          FileInputStream fileIn = new FileInputStream("/files/medicalRecord.ser");
+	          FileInputStream fileIn = new FileInputStream("src\\Model\\files\\medicalRecord.ser");
 	          ObjectInputStream in = new ObjectInputStream(fileIn);
 	          MedicalRecord e = (MedicalRecord) in.readObject();
 	          in.close();

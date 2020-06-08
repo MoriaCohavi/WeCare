@@ -14,6 +14,9 @@ public class Authentication implements java.io.Serializable{
 	private static HashMap<String,User> users = new HashMap<String,User>(); // we need to understand how we create this list. 
 	private static HashMap<Long,User> loggedinusers = new HashMap<Long,User>();
 	
+	public Authentication() {
+	}
+	
 	public static String SHA1(String password) // this function take a clear password and change it to SHA1 hash.
 	{
 		String sha1 = "";
@@ -111,7 +114,7 @@ public class Authentication implements java.io.Serializable{
 	public static boolean serialize()
 	{
 		try {
-		FileOutputStream fileOut = new FileOutputStream("/files/authentication.ser");
+		FileOutputStream fileOut = new FileOutputStream("src\\Model\\files\\authentication.ser");
 		ObjectOutputStream oos = new ObjectOutputStream(fileOut);
 		oos.writeObject(users);
 		oos.writeObject(loggedinusers);
@@ -130,7 +133,7 @@ public class Authentication implements java.io.Serializable{
 	public Authentication deserialize()
 	{
 		try {
-			FileInputStream fileIn = new FileInputStream("/files/authentication.ser");
+			FileInputStream fileIn = new FileInputStream("src\\Model\\files\\authentication.ser");
 			ObjectInputStream ois = new ObjectInputStream(fileIn);
 			Authentication auth = new Authentication();
 			try {

@@ -6,16 +6,14 @@ import Model.*;
 
 public class MVCDriver {
 	public static void main(String[] args) {
-		authenticationController auth_cont = new authenticationController();
-		clinicController clinic_cont;
-		if (clinicController.clinicControllerCheck())
-			clinic_cont = new clinicController();
+		serHandlerController handler = new serHandlerController();
+		//authenticationController auth_controller = new authenticationController();
+		clinicController clinic_controller = new clinicController("", 0);
+		clinic_controller.deserialize(handler);
+		managerController manager_controller = new managerController();
+		manager_controller.deserialize(handler);
 		
-		
-		
-		
-		
-		LoginView frm_login = new LoginView();
+		authenticationController auth_controller = new authenticationController();
 	}
 }
 
