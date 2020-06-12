@@ -1,7 +1,6 @@
 package View;
 
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -36,18 +35,18 @@ public class LoginView {
 	/**
 	 * Create the application.
 	 */
-	public LoginView() {
-		initialize();
+	public LoginView(authenticationController authController) {
+		initialize(authController);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(authenticationController authController) {
 		frmLogin = new JFrame();
 		frmLogin.setTitle("Login");
 		frmLogin.setBounds(100, 100, 367, 395);
-		frmLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmLogin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
 		frmLogin.getContentPane().add(panel, BorderLayout.CENTER);
@@ -76,13 +75,19 @@ public class LoginView {
 		panel.add(lbl_message);
 		
 		JButton btn_login = new JButton("Login");
+
+		btn_login.setBounds(47, 232, 85, 21);
+		panel.add(btn_login);
+		
+		JButton btn_forgotpass = new JButton("Forgot Password");
+		btn_forgotpass.setBounds(149, 232, 157, 21);
+		panel.add(btn_forgotpass);
+		frmLogin.setVisible(true);
+		
 		btn_login.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
-				
-				authenticationController authCont = new authenticationController();
-				long returnCode = authCont.login(txtf_uname.getText(), txtf_passwd.getText());
+				long returnCode = authController.login(txtf_uname.getText(), txtf_passwd.getText());
 				if (returnCode == -1)
 					lbl_message.setText("Wrong username or password");
 				else if (returnCode == -2)
@@ -92,26 +97,19 @@ public class LoginView {
 				}
 				else
 				{
-					String type = authCont.fetchUserType(returnCode);
+					String type = authController.fetchUserType(returnCode);
 					if (type.equals("Manager"))
 					{
 						ManagerPanelView managerPanel = new ManagerPanelView();
 					}
-					//else
-						//DoctorPanelView doctorPanel = new 
-					//If manager:
-					//Manager
-				}
-					
-					
+					else if (type.equals("Doctor"))
+					{
+						DoctorView doctorPanel = new DoctorView();
+					}
+					frmLogin.dispose(); // destroy the frame object
+
+				}	
 			}
 		});
-		btn_login.setBounds(47, 232, 85, 21);
-		panel.add(btn_login);
-		
-		JButton btn_forgotpass = new JButton("Forgot Password");
-		btn_forgotpass.setBounds(149, 232, 157, 21);
-		panel.add(btn_forgotpass);
-		frmLogin.setVisible(true);
 	}
 }
