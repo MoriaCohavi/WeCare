@@ -28,10 +28,9 @@ public class Authentication implements java.io.Serializable{
 		return sha1;
 	}
 	
-	public static long signUp(String id, User user)
+	public static int signUp(String id, User user)
 	{
-		User temp = users.get(id);
-		if  (temp != null && temp.getId() != user.getId())
+		if  (users.containsKey(id))
 			return -1;
 		users.put(id, user);
 		return 1;
@@ -62,9 +61,10 @@ public class Authentication implements java.io.Serializable{
 	
 	public static boolean signOut(long token)
 	{
-		if(loggedinusers.get(token) != null)
+		if(loggedinusers.containsKey(token))
 		{
 			loggedinusers.get(token).revokeToken();
+			loggedinusers.remove(token, loggedinusers.get(token));
 			return true;
 		}
 		return false;
@@ -72,20 +72,20 @@ public class Authentication implements java.io.Serializable{
 	
 	public static boolean validateUser(long token,String typeNeed)
 	{
-		if(!(loggedinusers.get(token) == null || typeNeed != loggedinusers.get(token).getUser_type())) // type need has to come from authentication controller.
+		if(!(loggedinusers.containsKey(token)) || (typeNeed != loggedinusers.get(token).getUser_type()))
 			return false;
 		else
 			return true;
 	}
 	
-	public static boolean resetPassword(long token, String cPassword, String newPassword)
+/*	public static boolean resetPassword(long token, String cPassword, String newPassword)
 	{
 		if(SHA1(cPassword) != loggedinusers.get(token).getPassword())
 			return false;
 		
 		loggedinusers.get(token).setPassword(newPassword);
 		return true;
-	}
+	} */
 	
 	public static long generateToken(String id) 
 	{
