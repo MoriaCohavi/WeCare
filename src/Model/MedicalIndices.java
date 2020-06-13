@@ -56,7 +56,7 @@ public class MedicalIndices implements java.io.Serializable {
 	{
 	      try {
 	          FileOutputStream fileOut =
-	          new FileOutputStream("/files/medicalIndices.ser");
+	          new FileOutputStream("src\\Model\\files\\medicalIndices.ser");
 	          ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	          out.writeObject(this);
 	          out.close();
@@ -71,7 +71,7 @@ public class MedicalIndices implements java.io.Serializable {
 	public MedicalIndices deserialize()
 	{
 	      try {
-	          FileInputStream fileIn = new FileInputStream("/files/medicalIndices.ser");
+	          FileInputStream fileIn = new FileInputStream("src\\Model\\files\\medicalIndices.ser");
 	          ObjectInputStream in = new ObjectInputStream(fileIn);
 	          MedicalIndices e = (MedicalIndices) in.readObject();
 	          in.close();

@@ -139,10 +139,11 @@ public class Patient extends Person implements java.io.Serializable{
 		return null;
 		
 	}
+	
 	public boolean serialize()
 	{
 		try {
-		FileOutputStream fileOut = new FileOutputStream("/files/patient.ser");
+		FileOutputStream fileOut = new FileOutputStream("src\\Model\\files\\patient.ser");
 		ObjectOutputStream oos = new ObjectOutputStream(fileOut);
 		oos.writeObject(this);
 		oos.close();
@@ -160,7 +161,7 @@ public class Patient extends Person implements java.io.Serializable{
 	public Patient deserialize()
 	{
 		try {
-			FileInputStream fileIn = new FileInputStream("/files/patient.ser");
+			FileInputStream fileIn = new FileInputStream("src\\Model\\files\\patient.ser");
 			ObjectInputStream ois = new ObjectInputStream(fileIn);
 			Patient patient = (Patient) ois.readObject();
 			ois.close();

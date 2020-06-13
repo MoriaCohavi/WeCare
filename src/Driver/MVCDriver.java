@@ -5,17 +5,37 @@ import Controller.*;
 import Model.*;
 
 public class MVCDriver {
+	
 	public static void main(String[] args) {
-		authenticationController auth_cont = new authenticationController();
-		clinicController clinic_cont;
-		if (clinicController.clinicControllerCheck())
-			clinic_cont = new clinicController();
+		//serHandlerController handler = new serHandlerController();
+		clinicController clinic_controller = new clinicController("", 0, "111111111", 548798888, "Moshe Bar Siman Tov", "moshe@maccabi.org", "admin", "Manager");
+		//clinic_controller.deserialize(handler);
+		
+		authenticationController auth_controller = new authenticationController();
+		auth_controller.register(clinic_controller.getClinicManager().getID(),clinic_controller.getClinicManager());
+		auth_controller.openLoginForm();
+		
+		if (true)//manager logged in){
+		{
+			managerController manager_controller = new managerController();
+			manager_controller.setClinicManager(clinic_controller.getClinicManager());
+			
+			
+		}
+		
+				
 		
 		
 		
 		
 		
-		LoginView frm_login = new LoginView();
 	}
 }
 
+
+//authenticationController auth_controller = new authenticationController();
+
+
+/* Before finish, do serialize to manager */
+//managerController manager_controller = new managerController();
+//manager_controller.deserialize(handler); // Id = 111111111, password = admin

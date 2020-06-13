@@ -7,14 +7,22 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import Controller.managerController;
+
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 
 public class ManagerPanelView {
 
+	private managerController mgmtController;
+	private long token;
 	private JFrame frmManager;
 	private JTable tbl_managers;
 	private JLabel lbl_id;
@@ -47,14 +55,14 @@ public class ManagerPanelView {
 	/**
 	 * Create the application.
 	 */
-	public ManagerPanelView() {
-		initialize();
+	public ManagerPanelView(long token) {
+		initialize(token);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(long token) {
 		frmManager = new JFrame();
 		frmManager.setTitle("Manager");
 		frmManager.setBounds(100, 100, 593, 495);
@@ -72,7 +80,7 @@ public class ManagerPanelView {
 				{"a", "a", "a"},
 			},
 			new String[] {
-				"Doctor name", "Id", "Specialization"
+				"Doctor name", "Id", "Specialization "
 			}
 		));
 		tbl_managers.setBounds(0, 10, 322, 305);
@@ -99,6 +107,13 @@ public class ManagerPanelView {
 		frmManager.getContentPane().add(lbl_email);
 		
 		btn_statistical = new JButton("View statistical report");
+		btn_statistical.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				mgmtController = new managerController();
+				mgmtController.updateStats();
+			}
+		});
 		btn_statistical.setBounds(350, 147, 178, 21);
 		frmManager.getContentPane().add(btn_statistical);
 		
@@ -116,6 +131,13 @@ public class ManagerPanelView {
 		frmManager.getContentPane().add(btn_find);
 		
 		btn_addDoctor = new JButton("Add Doctor");
+		btn_addDoctor.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				AddDoctorView addDoctorView = new AddDoctorView(token);
+				frmManager.dispose();
+			}
+		});
 		btn_addDoctor.setBounds(131, 380, 96, 21);
 		frmManager.getContentPane().add(btn_addDoctor);
 		frmManager.setVisible(true);

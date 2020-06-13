@@ -6,16 +6,23 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 
-public class Manager extends User implements java.io.Serializable {
+public class Manager extends User implements java.io.Serializable, CommandInterface {
 	
 	private HashMap<String, Doctor> doctors;
+	private LocalDateTime statsFlag;
+	private StatisitcalData stats;
 
-	public Manager(String id, int phone, String name, String email,String password,String user_type) {
+	public Manager(String id, long phone, String name, String email,String password,String user_type) {
 		super(id,phone,name, email, password, user_type);
-		
 		doctors  = new HashMap <String, Doctor>();
+		stats = new StatisitcalData();
+		statsFlag = null;
 	}
 	
 	public String getID() {
@@ -23,7 +30,7 @@ public class Manager extends User implements java.io.Serializable {
 		
 	}
 	
-	public int getPhone() {
+	public long getPhone() {
 		return this.getPhone();
 	}
 	
@@ -42,21 +49,53 @@ public class Manager extends User implements java.io.Serializable {
 	public void updateEmail(String newEmail){
 		this.setEmail(newEmail);
 	}
+	public double getAvgVisitTime() {
+		return stats.getTotalVisitTime();
+	}
+
+	public double getAvgDailyPatients() {
+		return stats.getTotalDailyPatients();
+	}
+
+	public double getAvgDailylabs() {
+		return stats.getTotalDailylabs();
+	}
+
+
+	public double getAvgDailySubs() {
+		return stats.getTotalDailySubs();
+	}
+
 	
+	public LocalDateTime getStatsFlag() {
+		return statsFlag;
+	}
+
+	public void setStatsFlag(LocalDateTime currnet) {
+		this.statsFlag = currnet;
 	
+	}
 	
+	public StatisitcalData getStats() {
+		return stats;
+	}
+
+	public void setStats(StatisitcalData stats) {
+		this.stats = stats;
+	}
 	
-	public boolean searchDoctor(String doctodID) {
+	public boolean search(String id) {
 		
-		if(doctors.containsKey(doctodID)) return true;
-		
+		if(doctors.containsKey(id)) 
+			return true;
 		return false;
 			
 	}
 	
-	public boolean addDoctor(Doctor newDoc) {
+	public boolean add(Object obj) {
 		
-		if (!searchDoctor(newDoc.getDoctorID()))
+		Doctor newDoc = (Doctor)obj;
+		if (!search(newDoc.getName()))
 		{
 			doctors.put(newDoc.getDoctorID(), newDoc);
 			return true;
@@ -65,10 +104,10 @@ public class Manager extends User implements java.io.Serializable {
 		
 	}
 	
-	public boolean removeDoctor(String docID) {
+	public boolean remove(String id) {
 			
-			if (searchDoctor(docID)) {
-				doctors.remove(docID);
+			if (search(id)) {
+				doctors.remove(id);
 				return true;
 			}
 			
@@ -76,38 +115,35 @@ public class Manager extends User implements java.io.Serializable {
 			
 	}
 	
-	public boolean serialize()
-	{
-	      try {
-	          FileOutputStream fileOut =
-	          new FileOutputStream("/files/manager.ser");
-	          ObjectOutputStream out = new ObjectOutputStream(fileOut);
-	          out.writeObject(this);
-	          out.close();
-	          fileOut.close();
-	          return true;
-	       } catch (IOException i) {
-	          i.printStackTrace();
-	          return false;
-	       }
+	public void deleteOldStats() {
+		for(String Key : this.doctors.keySet()) {
+			if( doctors.get(Key).getFirstRecord().isBefore(LocalDate.now().minusMonths(1)))
+				doctors.remove(Key);
+		}
+	
 	}
 	
-	public Manager deserialize()
-	{
-	      try {
-	          FileInputStream fileIn = new FileInputStream("/files/manager.ser");
-	          ObjectInputStream in = new ObjectInputStream(fileIn);
-	          Manager e = (Manager) in.readObject();
-	          in.close();
-	          fileIn.close();
-	          return e;
-	       } catch (IOException i) {
-	          i.printStackTrace();
-	          return null;
-	       } catch (ClassNotFoundException c) {
-	          c.printStackTrace();
-	          return null;
-	       }
+	public void calcStats() {
+		
+		deleteOldStats();
+		int doctorsCount;
+		if (doctors.size() == 0)
+			doctorsCount =1;
+		else doctorsCount =  doctors.size();
+		double tTime = 0, tSub =0, tPatient = 0, tLabs = 0;
+		StatisitcalData current = new StatisitcalData();
+		for (String Key : this.doctors.keySet()) {
+			current = doctors.get(Key).getAvgRecords();
+			tTime += current.getTotalVisitTime();
+			tSub += current.getTotalDailySubs();
+			tPatient += current.getTotalDailyPatients();
+			tLabs += current.getTotalDailylabs();
+		}
+		
+		this.stats.setTotalDailylabs(tLabs/doctorsCount);
+		this.stats.setTotalDailyPatients(tPatient/doctorsCount);
+		this.stats.setTotalDailySubs(tSub/doctorsCount);
+		this.stats.setTotalVisitTime(tTime / doctorsCount);
+		
 	}
-
 }

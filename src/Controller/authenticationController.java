@@ -1,9 +1,19 @@
 package Controller;
 
-import Model.Authentication;
+import Model.*;
+import View.*;
 
 public class authenticationController{
-
+	public static String serPath = "src\\Model\\files\\authentication.ser";
+	private Authentication authentication;
+	private LoginView login_view;
+	
+	public authenticationController() {
+		
+		// init users hashmap
+		// add manager specificly
+		authentication = new Authentication();
+	}
 
     private static boolean isNumeric(String strNum) {
         if (strNum == null) {
@@ -22,6 +32,14 @@ public class authenticationController{
         else
             return -2; //ID can contain 9 digits only
     }
+    
+    public static long register(String id, User user)
+    {
+        if (isNumeric(id) && id.length() == 9)
+            return Authentication.signUp(id,user);
+        else
+            return -2; //ID can contain 9 digits only
+    }
 
     /*public String isAuthorized(String token, String typeNeed) // we need to figure where the typeNeed comes from / maybe this function can be deleted.
     {
@@ -31,7 +49,7 @@ public class authenticationController{
         return false;
     } */
 
-    public String changePassword(long token,String cPassword,String nPassword )
+    public static String changePassword(long token,String cPassword,String nPassword )
     {
       if(Authentication.resetPassword(token,cPassword,nPassword))
         return "Password changed successfuly";
@@ -40,7 +58,7 @@ public class authenticationController{
         return "Wrong current password, password did not changed";
     }
 
-    public String logOut(long token)
+    public static String logOut(long token)
     {
         if (Authentication.signOut(token))
             return "Singed out";
@@ -52,4 +70,34 @@ public class authenticationController{
     {
     	return Authentication.getType(token);
     }
+    
+	public void serialize(serHandlerController handler)
+	{
+		handler.serialize(authentication, serPath);
+	}
+	
+	public void deserialize(serHandlerController handler)
+	{
+		authentication = (Authentication)handler.deserialize(serPath);
+	}
+	
+	public void openLoginForm()
+	{
+		login_view = new LoginView();
+	}
+	
+	public void nextPage(long token)
+	{
+		String type = this.fetchUserType(token);
+		if (type.equals("Manager"))
+		{
+//			ManagerPanelView managerPanel = new ManagerPanelView(token);
+			ManagerPanelView managerPanel = new ManagerPanelView(token);
+		}
+		else if (type.equals("Doctor"))
+		{
+			DoctorView doctorPanel = new DoctorView();
+		}
+	}
+	
 }

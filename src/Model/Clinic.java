@@ -8,16 +8,14 @@ import java.io.ObjectOutputStream;
 
 public class Clinic implements java.io.Serializable {
 	private static Clinic instance;
-	
-	private final String city;
-	private final long id;
+	private String city;
+	private long id;
 	private Manager manager;
-	
-	private Clinic(String city, long cId, String mId, int phone, String name, String email,String password,String user_type) {
+		
+	private Clinic(String city, long cId, String mId, long phone, String mName, String email, String password, String user_type) {
 		this.city = city;
 		this.id = cId;
-		this.manager = new Manager(mId, phone, name, email, password, user_type);
-		
+		this.setManager(new Manager(mId, phone, mName, email, password, user_type));
 	}
 	
 	public String getCity() {
@@ -27,52 +25,20 @@ public class Clinic implements java.io.Serializable {
 	public long getId() {
 		return id;
 	}
-	
+
+	public static Clinic getInstance(String city, long cId, String mId, long phone, String mName, String email, String password, String user_type) {
+		if(instance == null)
+		{
+			instance = new Clinic(city, cId, mId, phone, mName, email, password, user_type);
+		}
+		return instance;
+	}
+
 	public Manager getManager() {
 		return manager;
 	}
-	
-	public void setManager(Manager manager) {
-		this.manager = manager;
-	}
-	
-	public boolean serialize()
-	{
-	      try {
-	          FileOutputStream fileOut =
-	          new FileOutputStream("/files/clinic.ser");
-	          ObjectOutputStream out = new ObjectOutputStream(fileOut);
-	          out.writeObject(this);
-	          out.close();
-	          fileOut.close();
-	          return true;
-	       } catch (IOException i) {
-	          i.printStackTrace();
-	          return false;
-	       }
-	}
-	
-	public static Clinic deserialize()
-	{
-	      try {
-	          FileInputStream fileIn = new FileInputStream("/files/clinic.ser");
-	          ObjectInputStream in = new ObjectInputStream(fileIn);
-	          Clinic e = (Clinic) in.readObject();
-	          in.close();
-	          fileIn.close();
-	          return e;
-	       } catch (IOException i) {
-	          i.printStackTrace();
-	          return null;
-	       } catch (ClassNotFoundException c) {
-	          c.printStackTrace();
-	          return null;
-	       }
-	}
 
-	public static Clinic getInstance(String city, long cId, String mId, int phone, String name, String email,String password,String user_type) {
-		if(instance == null)
-			instance = new Clinic(city, cId, mId, phone, name, email, password, user_type);
-		return instance;
+	public void setManager(Manager clinicManager) {
+		this.manager = clinicManager;
 	}
 }
