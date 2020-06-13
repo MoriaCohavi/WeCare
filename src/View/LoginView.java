@@ -99,7 +99,7 @@ public class LoginView {
 					String type = authenticationController.fetchUserType(returnCode);
 					if (type.equals("Manager"))
 					{
-						ManagerPanelView managerPanel = new ManagerPanelView(returnCode);
+						ManagerView managerPanel = new ManagerView();
 					}
 					else if (type.equals("Doctor"))
 					{

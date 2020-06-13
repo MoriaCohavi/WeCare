@@ -17,6 +17,10 @@ import javax.swing.AbstractListModel;
 import java.awt.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import Controller.*;
+import Model.Doctor;
+
 import java.awt.Dimension;
 import javax.swing.DebugGraphics;
 import java.awt.Component;
@@ -25,6 +29,7 @@ import javax.swing.JButton;
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.JTextPane;
+import java.awt.TextField;
 
 public class DoctorView {
 
@@ -41,13 +46,15 @@ public class DoctorView {
 	private JLabel lblEmail;
 	private JLabel lblClinicName;
 	private JSeparator separator;
-	private JButton btnNewButton_1;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
+	private JButton btnGetDailyTestsReports;
+	private JTextField txtName;
+	private JTextField txtId;
+	private JTextField txtPhone;
+	private JTextField txtAddress;
+	private JTextField txtEmail;
+	private JTextField txtClinicName;
+	private doctorController docCtrl;
+	private Doctor details;
 
 //	/**
 //	 * Launch the application.
@@ -76,6 +83,7 @@ public class DoctorView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		details = docCtrl.getDetails();
 		frmDoctor = new JFrame();
 		frmDoctor.setTitle("Doctor");
 		frmDoctor.setBounds(100, 100, 1058, 571);
@@ -150,11 +158,6 @@ public class DoctorView {
 		lblNewLabel.setBounds(693, 136, 119, 20);
 		frmDoctor.getContentPane().add(lblNewLabel);
 		
-		lblName = new JLabel("ID");
-		lblName.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblName.setBounds(693, 172, 119, 20);
-		frmDoctor.getContentPane().add(lblName);
-		
 		lblPhone = new JLabel("Phone");
 		lblPhone.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblPhone.setBounds(693, 208, 119, 20);
@@ -181,39 +184,56 @@ public class DoctorView {
 		separator.setBounds(670, 127, 351, 379);
 		frmDoctor.getContentPane().add(separator);
 		
-		btnNewButton_1 = new JButton("Get Daily Tests Reports");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnNewButton_1.setBounds(693, 475, 244, 29);
-		frmDoctor.getContentPane().add(btnNewButton_1);
+		btnGetDailyTestsReports = new JButton("Get Daily Tests Reports");
+		btnGetDailyTestsReports.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btnGetDailyTestsReports.setBounds(693, 475, 244, 29);
+		frmDoctor.getContentPane().add(btnGetDailyTestsReports);
 		
-		textField = new JTextField();
-		textField.setBounds(821, 133, 146, 26);
-		frmDoctor.getContentPane().add(textField);
-		textField.setColumns(10);
+		txtName = new JTextField();
+		txtName.setText(details.getDoctorName());
+		txtName.setEnabled(false);
+		txtName.setBounds(821, 133, 146, 26);
+		frmDoctor.getContentPane().add(txtName);
+		txtName.setColumns(10);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(821, 170, 146, 26);
-		frmDoctor.getContentPane().add(textField_1);
+		txtId = new JTextField();
+		txtId.setText(details.getDoctorID());
+		txtId.setEnabled(false);
+		txtId.setColumns(10);
+		txtId.setBounds(821, 170, 146, 26);
+		frmDoctor.getContentPane().add(txtId);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(821, 206, 146, 26);
-		frmDoctor.getContentPane().add(textField_2);
+		txtPhone = new JTextField();
+//		txtPhone.setText(details.getPhone().toString());
+		txtPhone.setEnabled(false);
+		txtPhone.setColumns(10);
+		txtPhone.setBounds(821, 206, 146, 26);
+		frmDoctor.getContentPane().add(txtPhone);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(821, 242, 146, 26);
-		frmDoctor.getContentPane().add(textField_3);
+		txtAddress = new JTextField();
+//		txtAddress.setText(details.getAddress());
+		txtAddress.setEnabled(false);
+		txtAddress.setColumns(10);
+		txtAddress.setBounds(821, 242, 146, 26);
+		frmDoctor.getContentPane().add(txtAddress);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(821, 278, 146, 26);
-		frmDoctor.getContentPane().add(textField_4);
+		txtEmail = new JTextField();
+		txtEmail.setText(details.getDoctorEmail());
+		txtEmail.setEnabled(false);
+		txtEmail.setColumns(10);
+		txtEmail.setBounds(821, 278, 146, 26);
+		frmDoctor.getContentPane().add(txtEmail);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(821, 314, 146, 26);
-		frmDoctor.getContentPane().add(textField_5);
+		txtClinicName = new JTextField();
+//		txtClinicName.setText(details.getClinicName());
+		txtClinicName.setEnabled(false);
+		txtClinicName.setColumns(10);
+		txtClinicName.setBounds(821, 314, 146, 26);
+		frmDoctor.getContentPane().add(txtClinicName);
+		
+		lblName = new JLabel("ID");
+		lblName.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblName.setBounds(693, 172, 119, 20);
+		frmDoctor.getContentPane().add(lblName);
 	}
 }

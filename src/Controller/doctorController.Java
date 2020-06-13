@@ -11,6 +11,10 @@ public class doctorController {
 	private Doctor currentModelDoctor;
 	//private doctor view implementation
 	
+	public Doctor getDetails() {
+		return this.currentModelDoctor;
+	}
+	
 	public doctorController(String id, int phone, String name, String email, String special,String password,String user_type) { // needs to include doctorview obj
 			this.currentModelDoctor = new Doctor (id, phone, name, email, special,password,user_type);
 	}
@@ -18,7 +22,7 @@ public class doctorController {
 	public boolean addNewPatient (String id, int phone, String name, String email, int weight, int height, String gender, String allergies, String subscriptions) {
 		
 		Patient newPatient = new Patient(id, phone, name, email, weight, height, gender, allergies, subscriptions);
-		if (currentModelDoctor.addPatient(newPatient))
+		if (currentModelDoctor.add(newPatient))
 			return true;
 
 		return false;	
@@ -26,7 +30,7 @@ public class doctorController {
 	
 	public boolean deletePatient (String patientId) {
 		
-		if (currentModelDoctor.removePatient(patientId))
+		if (currentModelDoctor.remove(patientId))
 			return true;
 		
 		return false;	
@@ -57,7 +61,7 @@ public class doctorController {
 	public boolean openNewMedicalRecord (String patientId, int days, String purpose, String description, String summary,
 			String sub, String diagnose, LocalTime sT, LocalTime eT, int w, int h, int hr, int t, int sysBP, int diaBP) {
 		
-		if (currentModelDoctor.searchForPatient(patientId)){
+		if (currentModelDoctor.search(patientId)){
 			
 			int record = currentModelDoctor.getPatient(patientId).getRecordCounter() + 1;
 			
@@ -73,12 +77,12 @@ public class doctorController {
  
 	public void serialize(serHandlerController handler)
 	{
-		handler.WriteObjectToFile(currentModelDoctor, serPath);
+//		handler.WriteObjectToFile(currentModelDoctor, serPath);
 	}
 	
 	public void deserialize(serHandlerController handler)
 	{
-		currentModelDoctor = (Doctor)handler.ReadObjectFromFile(serPath);
+//		currentModelDoctor = (Doctor)handler.ReadObjectFromFile(serPath);
 	}
 
 
