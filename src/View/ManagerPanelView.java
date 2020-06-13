@@ -86,7 +86,6 @@ public class ManagerPanelView {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				authController.serialize();
-				//mgmtController.serialize();
 				System.exit(0);
 			}
 		});

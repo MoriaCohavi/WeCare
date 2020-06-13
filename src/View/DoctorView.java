@@ -32,6 +32,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextPane;
 import java.awt.TextField;
 import java.util.HashMap;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class DoctorView {
 
@@ -150,11 +152,20 @@ public class DoctorView {
 		txtSearchPatient.setColumns(10);
 		
 		btnNewButton = new JButton("Search");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnNewButton.setBounds(405, 477, 96, 29);
 		frmDoctor.getContentPane().add(btnNewButton);
 		
 		btnAddPatient = new JButton("Add Patient");
+		btnAddPatient.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				docCtrl.openAddPatient(doctorToken);
+			}
+		});
 		btnAddPatient.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnAddPatient.setBounds(516, 477, 139, 29);
 		frmDoctor.getContentPane().add(btnAddPatient);

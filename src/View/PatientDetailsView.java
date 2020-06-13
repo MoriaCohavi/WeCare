@@ -7,9 +7,20 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+
+import Controller.authenticationController;
+import Controller.doctorController;
+import Model.Doctor;
+
 import javax.swing.JRadioButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class PatientDetailsView {
 
@@ -24,6 +35,9 @@ public class PatientDetailsView {
 	private JTextField txtf_allergies;
 	private JTextField txtf_chronicDiseases;
 	private JTextField txtf_subscriptions;
+	private authenticationController authCtrl;
+	private doctorController docCtrl;
+	private JTextField txtf_email;
 
 //	/**
 //	 * Launch the application.
@@ -44,18 +58,28 @@ public class PatientDetailsView {
 	/**
 	 * Create the application.
 	 */
-	public PatientDetailsView() {
-		initialize();
+	public PatientDetailsView(long doctorToken) {
+		initialize(doctorToken);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(long doctorToken) {
+		authCtrl = new authenticationController();
+		docCtrl = new doctorController((Doctor)authCtrl.getLoggedinUser(doctorToken));
+		
 		frmPatientDetails = new JFrame();
 		frmPatientDetails.setTitle("Patient details");
 		frmPatientDetails.setBounds(100, 100, 1058, 571);
-		frmPatientDetails.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmPatientDetails.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		frmPatientDetails.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				docCtrl.openDoctorView(doctorToken);
+			}
+		});
 		
 		JPanel panel = new JPanel();
 		frmPatientDetails.getContentPane().add(panel, BorderLayout.CENTER);
@@ -63,22 +87,22 @@ public class PatientDetailsView {
 		
 		JLabel lblPatientDetails = new JLabel("Patient Details");
 		lblPatientDetails.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lblPatientDetails.setBounds(98, 88, 282, 20);
+		lblPatientDetails.setBounds(98, 42, 282, 20);
 		panel.add(lblPatientDetails);
 		
 		JLabel lblNewLabel = new JLabel("Name");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblNewLabel.setBounds(98, 136, 69, 20);
+		lblNewLabel.setBounds(98, 88, 69, 20);
 		panel.add(lblNewLabel);
 		
 		JLabel lblId = new JLabel("ID");
 		lblId.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblId.setBounds(98, 167, 69, 20);
+		lblId.setBounds(98, 119, 69, 20);
 		panel.add(lblId);
 		
 		JLabel lblPhone = new JLabel("Phone");
 		lblPhone.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblPhone.setBounds(98, 200, 69, 20);
+		lblPhone.setBounds(98, 152, 69, 20);
 		panel.add(lblPhone);
 		
 		JLabel lblAddress = new JLabel("Address");
@@ -127,23 +151,24 @@ public class PatientDetailsView {
 		panel.add(btn_cancel);
 		
 		JButton btn_save = new JButton("Save");
+		
 		btn_save.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btn_save.setBounds(736, 455, 115, 29);
 		panel.add(btn_save);
 		
 		txtf_name = new JTextField();
-		txtf_name.setBounds(323, 133, 257, 26);
+		txtf_name.setBounds(323, 85, 257, 26);
 		panel.add(txtf_name);
 		txtf_name.setColumns(10);
 		
 		txtf_id = new JTextField();
 		txtf_id.setColumns(10);
-		txtf_id.setBounds(323, 164, 257, 26);
+		txtf_id.setBounds(323, 116, 257, 26);
 		panel.add(txtf_id);
 		
 		txtf_phone = new JTextField();
 		txtf_phone.setColumns(10);
-		txtf_phone.setBounds(323, 197, 257, 26);
+		txtf_phone.setBounds(323, 149, 257, 26);
 		panel.add(txtf_phone);
 		
 		txtf_address = new JTextField();
@@ -190,5 +215,45 @@ public class PatientDetailsView {
 		radio_female.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		radio_female.setBounds(488, 455, 155, 29);
 		panel.add(radio_female);
+		
+		ButtonGroup btn_group = new ButtonGroup();
+		btn_group.add(radio_male);
+		btn_group.add(radio_female);
+		
+		JLabel lbl_warning = new JLabel("");
+		lbl_warning.setBounds(732, 398, 282, 15);
+		panel.add(lbl_warning);
+		
+		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblEmail.setBounds(98, 186, 69, 20);
+		panel.add(lblEmail);
+		
+		txtf_email = new JTextField();
+		txtf_email.setColumns(10);
+		txtf_email.setBounds(323, 186, 257, 26);
+		panel.add(txtf_email);
+		frmPatientDetails.setVisible(true);
+		
+		btn_save.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if ((txtf_id.getText() != null && txtf_id.getText().length() != 9) || txtf_name.getText() == null)
+					lbl_warning.setText("Please! Put valid ID of 9 digits, name and password");
+				else
+				{
+					String gender;
+					if (radio_male.isSelected())
+						gender = "Male";
+					else
+						gender = "Female";
+					
+					if (!(docCtrl.addNewPatient(txtf_id.getText(), Long.parseLong(txtf_phone.getText()), txtf_name.getText(), txtf_email.getText(), Integer.parseInt(txtf_weight.getText()),  Integer.parseInt(txtf_height.getText()), gender, txtf_allergies.getText(), txtf_subscriptions.getText())))
+						lbl_warning.setText("User exists");
+					else
+						frmPatientDetails.dispose();
+				}
+			}
+		});
 	}
 }
