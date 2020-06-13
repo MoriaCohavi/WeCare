@@ -30,8 +30,10 @@ public class managerController {
 	
 	}
 	
-	public boolean addNewDoctor(Doctor newDoctor) {
+	public boolean addNewDoctor(String id, int phone, String name, String email, String special, String password,String user_type) 
+	{
 		
+		Doctor newDoctor = new Doctor(id, phone, name, email, special, password, user_type);
 		if(clinicManager.addDoctor(newDoctor))
 			return true;
 		

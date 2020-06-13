@@ -8,7 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
-public class Manager extends User implements java.io.Serializable {
+public class Manager extends User implements java.io.Serializable, CommandInterface {
 	
 	private HashMap<String, Doctor> doctors;
 	private double avgVisitTime;
@@ -82,17 +82,18 @@ public class Manager extends User implements java.io.Serializable {
 	
 	}
 	
-	public boolean searchDoctor(String doctorID) {
+	public boolean search(String id) {
 		
-		if(doctors.containsKey(doctorID)) return true;
-		
+		if(doctors.containsKey(id)) 
+			return true;
 		return false;
 			
 	}
 	
-	public boolean addDoctor(Doctor newDoc) {
+	public boolean add(Object obj) {
 		
-		if (!searchDoctor(newDoc.getDoctorID()))
+		Doctor newDoc = (Doctor)obj;
+		if (!search(newDoc.getName()))
 		{
 			doctors.put(newDoc.getDoctorID(), newDoc);
 			return true;
@@ -101,10 +102,10 @@ public class Manager extends User implements java.io.Serializable {
 		
 	}
 	
-	public boolean removeDoctor(String docID) {
+	public boolean remove(String id) {
 			
-			if (searchDoctor(docID)) {
-				doctors.remove(docID);
+			if (search(id)) {
+				doctors.remove(id);
 				return true;
 			}
 			
@@ -116,5 +117,4 @@ public class Manager extends User implements java.io.Serializable {
 		
 		
 	}
-
 }
