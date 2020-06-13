@@ -35,14 +35,14 @@ public class LoginView {
 	/**
 	 * Create the application.
 	 */
-	public LoginView(authenticationController authController) {
-		initialize(authController);
+	public LoginView() {
+		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(authenticationController authController) {
+	private void initialize() {
 		frmLogin = new JFrame();
 		frmLogin.setTitle("Login");
 		frmLogin.setBounds(100, 100, 367, 395);
@@ -87,17 +87,16 @@ public class LoginView {
 		btn_login.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				long returnCode = authController.login(txtf_uname.getText(), txtf_passwd.getText());
+				long returnCode = authenticationController.login(txtf_uname.getText(), txtf_passwd.getText());
 				if (returnCode == -1)
 					lbl_message.setText("Wrong username or password");
 				else if (returnCode == -2)
 				{
 					lbl_message.setText("Invalid ID");
-					
 				}
 				else
 				{
-					String type = authController.fetchUserType(returnCode);
+					String type = authenticationController.fetchUserType(returnCode);
 					if (type.equals("Manager"))
 					{
 						ManagerPanelView managerPanel = new ManagerPanelView();
@@ -107,7 +106,6 @@ public class LoginView {
 						DoctorView doctorPanel = new DoctorView();
 					}
 					frmLogin.dispose(); // destroy the frame object
-
 				}	
 			}
 		});

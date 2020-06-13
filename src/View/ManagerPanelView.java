@@ -12,6 +12,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 
 public class ManagerPanelView {
 
@@ -116,6 +119,13 @@ public class ManagerPanelView {
 		frmManager.getContentPane().add(btn_find);
 		
 		btn_addDoctor = new JButton("Add Doctor");
+		btn_addDoctor.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				AddDoctorView addDoctorView = new AddDoctorView();
+				frmManager.dispose();
+			}
+		});
 		btn_addDoctor.setBounds(131, 380, 96, 21);
 		frmManager.getContentPane().add(btn_addDoctor);
 		frmManager.setVisible(true);

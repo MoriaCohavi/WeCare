@@ -51,11 +51,11 @@ public class managerController {
 	
 	public void serialize(serHandlerController handler)
 	{
-		handler.WriteObjectToFile(clinicManager, serPath);
+		handler.serialize(clinicManager, serPath);
 	}
 	
 	public void deserialize(serHandlerController handler)
 	{
-		clinicManager = (Manager)handler.ReadObjectFromFile(serPath);
+		clinicManager = (Manager)handler.deserialize(serPath);
 	}
 }

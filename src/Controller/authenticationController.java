@@ -14,7 +14,7 @@ public class authenticationController{
 		// init users hashmap
 		// add manager specificly
 		authentication = new Authentication();
-		LoginView login_view = new LoginView(this);
+		LoginView login_view = new LoginView();
 	}
 
     private static boolean isNumeric(String strNum) {
@@ -75,11 +75,12 @@ public class authenticationController{
     
 	public void serialize(serHandlerController handler)
 	{
-		handler.WriteObjectToFile(authentication, serPath);
+		handler.serialize(authentication, serPath);
 	}
 	
 	public void deserialize(serHandlerController handler)
 	{
-		authentication = (Authentication)handler.ReadObjectFromFile(serPath);
+		authentication = (Authentication)handler.deserialize(serPath);
 	}
+	
 }

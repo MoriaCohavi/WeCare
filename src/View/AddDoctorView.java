@@ -1,12 +1,17 @@
 package View;
 
 import java.awt.EventQueue;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import Controller.authenticationController;
+
 import javax.swing.JButton;
 
 public class AddDoctorView {
@@ -173,6 +178,14 @@ public class AddDoctorView {
 		JButton btn_addDoctor = new JButton("Add Doctor");
 		btn_addDoctor.setBounds(157, 651, 109, 21);
 		frmAddDoctor.getContentPane().add(btn_addDoctor);
+		frmAddDoctor.setVisible(true);
+		
+		btn_addDoctor.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
 	}
 
 }
