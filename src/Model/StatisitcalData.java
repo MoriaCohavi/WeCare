@@ -24,7 +24,7 @@ public class StatisitcalData implements java.io.Serializable {
 		this.totalDailyPatients +=num;
 	}
 	
-		public void addtotalDailylabs(double num) {
+	public void addtotalDailylabs(double num) {
 		this.totalDailylabs +=num;
 	}
 	
