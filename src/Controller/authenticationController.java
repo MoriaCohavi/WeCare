@@ -1,20 +1,18 @@
 package Controller;
 
-import Model.Authentication;
-import Model.User;
-import Model.Manager;
-import View.LoginView;
+import Model.*;
+import View.*;
 
 public class authenticationController{
 	public static String serPath = "src\\Model\\files\\authentication.ser";
 	private Authentication authentication;
+	private LoginView login_view;
 	
 	public authenticationController() {
 		
 		// init users hashmap
 		// add manager specificly
 		authentication = new Authentication();
-		LoginView login_view = new LoginView();
 	}
 
     private static boolean isNumeric(String strNum) {
@@ -27,7 +25,7 @@ public class authenticationController{
             return false;
     }
 
-    public static long login(String id, String password)
+    public long login(String id, String password)
     {
         if (isNumeric(id) && id.length() == 9)
             return Authentication.signIn(id,password);
@@ -68,7 +66,7 @@ public class authenticationController{
             return "user not found";
     }
 
-    public static String fetchUserType(long token)
+    public String fetchUserType(long token)
     {
     	return Authentication.getType(token);
     }
@@ -81,6 +79,25 @@ public class authenticationController{
 	public void deserialize(serHandlerController handler)
 	{
 		authentication = (Authentication)handler.deserialize(serPath);
+	}
+	
+	public void openLoginForm()
+	{
+		login_view = new LoginView();
+	}
+	
+	public void nextPage(long token)
+	{
+		String type = this.fetchUserType(token);
+		if (type.equals("Manager"))
+		{
+//			ManagerPanelView managerPanel = new ManagerPanelView(token);
+			ManagerPanelView managerPanel = new ManagerPanelView(token);
+		}
+		else if (type.equals("Doctor"))
+		{
+			DoctorView doctorPanel = new DoctorView();
+		}
 	}
 	
 }

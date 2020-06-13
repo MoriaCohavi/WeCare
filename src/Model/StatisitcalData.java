@@ -3,16 +3,16 @@ package Model;
 public class StatisitcalData {
 	
 	private double totalVisitTime;
-	private int totalDailyPatients;
-	private int totalDailylabs;
-	private int totalDailySubs;
+	private double totalDailyPatients;
+	private double totalDailylabs;
+	private double totalDailySubs;
 	
 	
 	public StatisitcalData() {
-		this.totalVisitTime = 0;
-		this.totalDailyPatients = 0;
-		this.totalDailylabs = 0;
-		this.totalDailySubs = 0;
+		this.totalVisitTime = 0.0;
+		this.totalDailyPatients = 0.0;
+		this.totalDailylabs = 0.0;
+		this.totalDailySubs = 0.0;
 	}
 	
 	
@@ -20,15 +20,15 @@ public class StatisitcalData {
 		this.totalVisitTime +=num;
 	}
 	
-	public void addtotalDailyPatients(int num) {
+	public void addtotalDailyPatients(double num) {
 		this.totalDailyPatients +=num;
 	}
 	
-		public void addtotalDailylabs(int num) {
+		public void addtotalDailylabs(double num) {
 		this.totalDailylabs +=num;
 	}
 	
-	public void addtotalDailySubs(int num) {
+	public void addtotalDailySubs(double num) {
 		this.totalDailySubs +=num;
 	}
 	
@@ -44,32 +44,32 @@ public class StatisitcalData {
 	}
 
 
-	public int getTotalDailyPatients() {
+	public double getTotalDailyPatients() {
 		return totalDailyPatients;
 	}
 
 
-	public void setTotalDailyPatients(int totalDailyPatients) {
+	public void setTotalDailyPatients(double totalDailyPatients) {
 		this.totalDailyPatients = totalDailyPatients;
 	}
 
 
-	public int getTotalDailylabs() {
+	public double getTotalDailylabs() {
 		return totalDailylabs;
 	}
 
 
-	public void setTotalDailylabs(int totalDailylabs) {
+	public void setTotalDailylabs(double totalDailylabs) {
 		this.totalDailylabs = totalDailylabs;
 	}
 
 
-	public int getTotalDailySubs() {
+	public double getTotalDailySubs() {
 		return totalDailySubs;
 	}
 
 
-	public void setTotalDailySubs(int totalDailySubs) {
+	public void setTotalDailySubs(double totalDailySubs) {
 		this.totalDailySubs = totalDailySubs;
 	}
 
