@@ -8,21 +8,16 @@ import java.io.ObjectOutputStream;
 
 public class Lab implements java.io.Serializable {
 	
-	private String labType;
-	private String patientId;
+	private final String labType;
 	private String result;
 	private boolean attentionRequired = false;
 	
-	
-	private void setLabType(String lab){
-		this.labType = lab;
-		
+	public Lab (String type, String result, boolean attentionRequired) {
+		this.labType = type;
+		this.result = result;
+		this.attentionRequired = false;
 	}
 	
-	private void setPatientId(String ID){
-		this.patientId = ID;
-		
-	}
 	
 	private void setResult(String resultUpdate){
 		this.result = resultUpdate;
@@ -38,10 +33,6 @@ public class Lab implements java.io.Serializable {
 		
 	}
 	
-	public String getPatientId(){
-		return this.patientId;
-		
-	}
 	
 	public String getResult(String resultUpdate){
 		return this.result;
@@ -54,9 +45,7 @@ public class Lab implements java.io.Serializable {
 	
 	
 	
-	public void updateResults(String lab, String id, String result2, boolean attention) {
-		this.setLabType(lab);
-		this.setPatientId(id);
+	public void updateResults(String result, boolean attention) {
 		this.setResult(result);
 		this.setAttentionRequired(attention);
 		if (this.attentionRequired)

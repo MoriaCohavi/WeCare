@@ -47,8 +47,6 @@ public class MedicalRecord implements java.io.Serializable {
 	}
 	
 	
-	
-	//getters
 	public LocalDate get_Date() {
 		return currentDate;
 	}
@@ -97,6 +95,7 @@ public class MedicalRecord implements java.io.Serializable {
 		return pateintIndices.getMedicalIndices();
 	}
 	
+	
 	//other methods
 	
 	public String exportVisitSummary() {
@@ -105,6 +104,8 @@ public class MedicalRecord implements java.io.Serializable {
 			
 		return export;
 	}
+	
+	
 	public boolean serialize()
 	{
 	      try {
