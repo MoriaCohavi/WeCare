@@ -11,7 +11,7 @@ import org.junit.runner.notification.Failure;
 public class MVCDriver {
 	
 	public static void main(String[] args) {
-		//serHandlerController handler = new serHandlerController();
+		/* //serHandlerController handler = new serHandlerController();
 		clinicController clinic_controller = new clinicController("", 0, "111111111", 548798888, "Moshe Bar Siman Tov", "moshe@maccabi.org", "admin", "Manager");
 		//clinic_controller.deserialize(handler);
 		
@@ -25,15 +25,10 @@ public class MVCDriver {
 			manager_controller.setClinicManager(clinic_controller.getClinicManager());
 			
 			
-		}
+		} */
 		
-				
-		
-		
-		
-		
-		
-		Result result = JUnitCore.runClasses(AuthenticationTest.class);
+						
+		Result result = JUnitCore.runClasses(StatisticalDataTest.class);
 	    for (Failure failure : result.getFailures()) {
 	      System.out.println(failure.toString());
 	    }

@@ -11,17 +11,19 @@ import java.util.HashMap;
 public class Patient extends Person implements java.io.Serializable{
 
 	private int age, weight, height, recordCount;
-	private String gender, allergies, Chronic_diseases, subscriptions;
+	private String gender, allergies, chronic_diseases, subscriptions;
 	private HashMap<Integer, MedicalRecord> medicalRecords;
 	private ArrayList<Lab> labs;
 	
-	public Patient(String id, int phone, String name, String email, int weight, int height, String gender, String allergies, String subscriptions) {
+	public Patient(String id,int age, int phone, String name, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases) {
 		super(id, phone, name, email);
 		this.weight = weight;
 		this.height = height;
+		this.age = age;
 		this.gender = gender;
 		this.allergies = allergies;
 		this.subscriptions = subscriptions;
+		this.chronic_diseases = chronic_diseases;
 		this.recordCount = 0;
 		this.medicalRecords = new HashMap<Integer, MedicalRecord>();
 		this.labs = new ArrayList<Lab>();
@@ -45,7 +47,7 @@ public class Patient extends Person implements java.io.Serializable{
 	}
 
 	public void setChronic_diseases(String chronic_diseases) {
-		Chronic_diseases = chronic_diseases;
+		this.chronic_diseases = chronic_diseases;
 	}
 
 	public void setGender(String gender) {
@@ -85,7 +87,7 @@ public class Patient extends Person implements java.io.Serializable{
 	}
 
 	public String getChronic_diseases() {
-		return Chronic_diseases;
+		return chronic_diseases;
 	}
 
 	public String getGender() {
@@ -96,7 +98,7 @@ public class Patient extends Person implements java.io.Serializable{
 		return subscriptions;
 	}
 
-	public void updatePatientInfo(int phone, String email, int weight, int height, String gender, String allergies, String subscriptions)
+	public void updatePatientInfo(int phone,int age, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases)
 	{
 		if(this.getPhone() != phone)
 			this.setPhone(phone);
@@ -118,13 +120,19 @@ public class Patient extends Person implements java.io.Serializable{
 		
 		if(this.subscriptions != subscriptions)
 			this.subscriptions=subscriptions;
+		
+		if(this.age != age)
+			this.age = age;
+		
+		if(this.chronic_diseases != chronic_diseases)
+			this.chronic_diseases = chronic_diseases;
 				
 	}
 		
 
-	public void addLab(Lab newLab) {
+	public boolean addLab(Lab newLab) {
 
-		this.labs.add(newLab);
+		return this.labs.add(newLab);
 		
 	}
 	
