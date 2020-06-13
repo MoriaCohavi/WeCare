@@ -6,7 +6,7 @@ import Model.*;
 
 public class MVCDriver {
 	public static void main(String[] args) {
-		static serHandlerController handler = new serHandlerController();
+		serHandlerController handler = new serHandlerController();
 		//authenticationController auth_controller = new authenticationController();
 		clinicController clinic_controller = new clinicController("", 0);
 		clinic_controller.deserialize(handler);

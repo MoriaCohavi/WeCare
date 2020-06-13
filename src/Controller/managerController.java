@@ -34,7 +34,7 @@ public class managerController {
 	{
 		
 		Doctor newDoctor = new Doctor(id, phone, name, email, special, password, user_type);
-		if(clinicManager.addDoctor(newDoctor))
+		if(clinicManager.add(newDoctor))
 			return true;
 		
 		return false;
@@ -49,7 +49,7 @@ public class managerController {
 	
 	public boolean deleteDoctor(String docID) {
 		
-		if(clinicManager.removeDoctor(docID))
+		if(clinicManager.remove(docID))
 			return true;
 		
 		return false;
