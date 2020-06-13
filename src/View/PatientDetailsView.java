@@ -251,9 +251,15 @@ public class PatientDetailsView {
 					{
 						Long.parseLong(txtf_phone.getText());
 						Integer.parseInt(txtf_age.getText());
-						
+						Integer.parseInt(txtf_weight.getText());
+						Integer.parseInt(txtf_height.getText());
 					}
-					if (!(docCtrl.addNewPatient(txtf_id.getText(), Long.parseLong(txtf_phone.getText()), txtf_name.getText(), txtf_email.getText(), Integer.parseInt(txtf_weight.getText()),  Integer.parseInt(txtf_height.getText()), gender, txtf_allergies.getText(), txtf_subscriptions.getText())))
+					catch (Exception e)
+					{
+						lbl_warning.setText("Age, phone, weight and height should include digits only !");
+					}
+					if (!(docCtrl.addNewPatient(txtf_id.getText(), Integer.parseInt(txtf_age.getText()), Long.parseLong(txtf_phone.getText()), txtf_name.getText(), txtf_email.getText(), Integer.parseInt(txtf_weight.getText()), 
+							Integer.parseInt(txtf_height.getText()), gender, txtf_allergies.getText(), txtf_subscriptions.getText(), txtf_chronicDiseases.getText())))
 						lbl_warning.setText("User exists");
 					else
 						frmPatientDetails.dispose();

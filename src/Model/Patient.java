@@ -15,7 +15,7 @@ public class Patient extends Person implements java.io.Serializable{
 	private HashMap<Integer, MedicalRecord> medicalRecords;
 	private ArrayList<Lab> labs;
 	
-	public Patient(String id,int age, int phone, String name, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases) {
+	public Patient(String id,int age, long phone, String name, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases) {
 		super(id, phone, name, email);
 		this.weight = weight;
 		this.height = height;
