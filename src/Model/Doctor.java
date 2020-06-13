@@ -129,9 +129,9 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	
 	
 	
-	public void updatePatientInfo(String patientId, int phone, String email, int weight, int height, String gender, String allergies, String subscriptions) {
+	public void updatePatientInfo(String patientId, int phone,int age, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases) {
 		if (this.patients.containsKey(patientId)) {
-			patients.get(patientId).updatePatientInfo(phone, email, weight, height, gender,allergies,subscriptions);
+			patients.get(patientId).updatePatientInfo(phone, age, email, weight, height, gender,allergies,subscriptions, chronic_diseases);
 		}
 	
 	}
