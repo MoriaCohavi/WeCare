@@ -73,6 +73,11 @@ public class managerController {
 			
 	}
 	
+	public void openManagerPanel(long token)
+	{
+		ManagerPanelView managerView = new ManagerPanelView(token);
+	}
+	
 	public Manager getManager()
 	{
 		return clinicManager;
