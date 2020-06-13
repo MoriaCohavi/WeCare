@@ -2,12 +2,12 @@ package Controller;
 
 
 import java.time.*;
-
 import Model.*;
+import View.*;
 
 public class managerController {
 	public static String serPath = "src\\Model\\files\\manager.ser";
-	private Manager clinicManager;
+	private static Manager clinicManager;
 	
 	
 	public managerController()
@@ -15,10 +15,8 @@ public class managerController {
 		
 	}
 	
-	public managerController(String id, int phone, String name, String email, String password,String user_type) { //needs to include manger view object
-		
-		clinicManager = new Manager(id, phone, name, email,password, user_type);
-		
+	public void setClinicManager (Manager clinicM) {
+		this.clinicManager = clinicM;
 	}
 	
 	public void viewManagerInfo() { // implement when creating view in UI
@@ -26,15 +24,20 @@ public class managerController {
 	
 	}
 	
-	public boolean addNewDoctor(String id, int phone, String name, String email, String special, String password,String user_type) 
+	public boolean addNewDoctor(String id, long phone, String name, String email, String special, String password,String user_type, long managerToken) 
 	{
 		
 		Doctor newDoctor = new Doctor(id, phone, name, email, special, password, user_type);
 		if(clinicManager.add(newDoctor))
+		{
+			authenticationController.register(newDoctor.getId(), newDoctor);
+			ManagerPanelView panelView = new ManagerPanelView(managerToken);
 			return true;
-		
+			
+		}
 		return false;
 	}
+	
 	
 //	public boolean registerManager() {
 //		
@@ -57,6 +60,7 @@ public class managerController {
 			clinicManager.setStatsFlag(LocalDateTime.now());
 			clinicManager.calcStats();
 		}
+		StatisticalReportView statisticalView = new StatisticalReportView();
 			
 	}
 	

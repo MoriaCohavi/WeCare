@@ -10,14 +10,13 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import Controller.authenticationController;
-import Controller.doctorController;
+import Controller.*;
 
 import javax.swing.JButton;
 
 public class AddDoctorView {
 
-	private doctorController doctorController;
+	private managerController managerController;
 	private long token;
 	private JFrame frmAddDoctor;
 	private JTextField txtf_name;
@@ -137,6 +136,9 @@ public class AddDoctorView {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				
+				managerController = new managerController();
+				managerController.addNewDoctor(txtf_id.getText(), Long.parseLong(txtf_phone.getText()), txtf_name.getText(), txtf_email.getText(), txtf_specialization.getText(), txtf_passwd.getText(), "Doctor", token);
+				frmAddDoctor.dispose();
 			}
 		});
 	}

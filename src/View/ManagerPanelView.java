@@ -7,6 +7,9 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import Controller.managerController;
+
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
@@ -18,6 +21,7 @@ import java.awt.event.MouseEvent;
 
 public class ManagerPanelView {
 
+	private managerController mgmtController;
 	private long token;
 	private JFrame frmManager;
 	private JTable tbl_managers;
@@ -103,6 +107,13 @@ public class ManagerPanelView {
 		frmManager.getContentPane().add(lbl_email);
 		
 		btn_statistical = new JButton("View statistical report");
+		btn_statistical.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				mgmtController = new managerController();
+				mgmtController.updateStats();
+			}
+		});
 		btn_statistical.setBounds(350, 147, 178, 21);
 		frmManager.getContentPane().add(btn_statistical);
 		

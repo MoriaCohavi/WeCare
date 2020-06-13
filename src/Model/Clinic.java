@@ -8,13 +8,14 @@ import java.io.ObjectOutputStream;
 
 public class Clinic implements java.io.Serializable {
 	private static Clinic instance;
-	
 	private String city;
 	private long id;
+	private Manager manager;
 		
-	private Clinic(String city, long cId) {
+	private Clinic(String city, long cId, String mId, long phone, String mName, String email, String password, String user_type) {
 		this.city = city;
-		this.id = cId;		
+		this.id = cId;
+		this.setManager(new Manager(mId, phone, mName, email, password, user_type));
 	}
 	
 	public String getCity() {
@@ -25,11 +26,19 @@ public class Clinic implements java.io.Serializable {
 		return id;
 	}
 
-	public static Clinic getInstance(String city, long cId) {
+	public static Clinic getInstance(String city, long cId, String mId, long phone, String mName, String email, String password, String user_type) {
 		if(instance == null)
 		{
-			instance = new Clinic(city, cId);
+			instance = new Clinic(city, cId, mId, phone, mName, email, password, user_type);
 		}
 		return instance;
+	}
+
+	public Manager getManager() {
+		return manager;
+	}
+
+	public void setManager(Manager clinicManager) {
+		this.manager = clinicManager;
 	}
 }

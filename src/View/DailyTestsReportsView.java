@@ -45,7 +45,7 @@ public class DailyTestsReportsView {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 1058, 571);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblDailyTestsReports = new JLabel("Daily Tests Reports");

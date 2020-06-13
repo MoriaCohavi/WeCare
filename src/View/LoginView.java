@@ -126,16 +126,8 @@ public class LoginView {
 				}
 				else
 				{
-					String type = authController.fetchUserType(returnCode);
-					if (type.equals("Manager"))
-					{
-						ManagerPanelView managerPanel = new ManagerPanelView(returnCode);
-					}
-					else if (type.equals("Doctor"))
-					{
-						DoctorView doctorPanel = new DoctorView();
-					}
-					frmLogin.dispose(); // destroy the frame object
+					authController.nextPage(returnCode);
+					frmLogin.dispose();
 				}	
 			}
 		});
