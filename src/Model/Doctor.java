@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 
-public class Doctor extends User implements java.io.Serializable {
+public class Doctor extends User implements java.io.Serializable, CommandInterface {
 	
 	private LinkedHashMap <LocalDate, StatisitcalData> stats = new LinkedHashMap<LocalDate, StatisitcalData>();
 	private String specialization;
@@ -62,36 +62,39 @@ public class Doctor extends User implements java.io.Serializable {
 		this.specialization = this.specialization.concat("and" + newSpecial);
 	}
 	
-	public boolean addPatient(Patient firstTimePatient){
+	public boolean add(Object obj) {
 		
-		if (!patients.containsKey(firstTimePatient.getId())){
-			this.patients.put(firstTimePatient.getId(), firstTimePatient);
+		Patient newPatient = (Patient)obj;
+		if (patients.containsValue(newPatient.getName()))
+		{
+			patients.put(newPatient.getId(), newPatient);
 			return true;
 		}
 		return false;
+		
 	}
 	
-	public boolean removePatient (String patientId) {
+	public boolean remove(String id) {
 		
-		if (this.patients.containsKey(patientId)) {
-			patients.remove(patientId);
+		if (this.patients.containsKey(id)) {
+			patients.remove(id);
 			return true;
 		}
 		else
 				return false;
 		}
 	
-	public boolean searchForPatient(String patientId) {
+	public boolean search(String id) {
 		
-		if (this.patients.containsKey(patientId))
+		if(patients.containsKey(id)) 
 			return true;
 		return false;
-		
+			
 	}
 	
 	public Patient getPatient(String patientId) {
 			
-			if (searchForPatient(patientId))
+			if (search(patientId))
 				return this.patients.get(patientId);
 				
 			else return null;

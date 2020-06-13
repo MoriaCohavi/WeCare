@@ -14,6 +14,10 @@ public class managerController {
 	private Manager clinicManager;
 	
 	
+	public managerController()
+	{
+		
+	}
 	
 	public managerController(String id, int phone, String name, String email, String password,String user_type) { //needs to include manger view object
 		
@@ -26,17 +30,26 @@ public class managerController {
 	
 	}
 	
-	public boolean addNewDoctor(Doctor newDoctor) {
+	public boolean addNewDoctor(String id, int phone, String name, String email, String special, String password,String user_type) 
+	{
 		
-		if(clinicManager.addDoctor(newDoctor))
+		Doctor newDoctor = new Doctor(id, phone, name, email, special, password, user_type);
+		if(clinicManager.add(newDoctor))
 			return true;
 		
 		return false;
 	}
 	
+	public boolean registerManager() {
+		
+		if(authenticationController.register(this.clinicManager.getID(), this.clinicManager) > 0)
+			return true;
+		return false;
+	}
+	
 	public boolean deleteDoctor(String docID) {
 		
-		if(clinicManager.removeDoctor(docID))
+		if(clinicManager.remove(docID))
 			return true;
 		
 		return false;
@@ -59,11 +72,11 @@ public class managerController {
 	
 	public void serialize(serHandlerController handler)
 	{
-		handler.WriteObjectToFile(clinicManager, serPath);
+		handler.serialize(clinicManager, serPath);
 	}
 	
 	public void deserialize(serHandlerController handler)
 	{
-		clinicManager = (Manager)handler.ReadObjectFromFile(serPath);
+		clinicManager = (Manager)handler.deserialize(serPath);
 	}
 }

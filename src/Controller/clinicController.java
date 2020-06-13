@@ -11,12 +11,12 @@ public class clinicController {
 	
 	public void serialize(serHandlerController handler)
 	{
-		handler.WriteObjectToFile(clinic, serPath);
+		handler.serialize(clinic, serPath);
 	}
 	
 	public void deserialize(serHandlerController handler)
 	{
-		clinic = (Clinic)handler.ReadObjectFromFile(serPath);
+		clinic = (Clinic)handler.deserialize(serPath);
 	}
 	
 	public Clinic getClinic() {
