@@ -139,6 +139,7 @@ public class Patient extends Person implements java.io.Serializable{
 		return null;
 		
 	}
+	
 	public boolean serialize()
 	{
 		try {
