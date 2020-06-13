@@ -16,6 +16,7 @@ import javax.swing.JButton;
 
 public class AddDoctorView {
 
+	private long token;
 	private JFrame frmAddDoctor;
 	private JTextField txtf_name;
 	private JTextField txtf_id;
@@ -49,14 +50,14 @@ public class AddDoctorView {
 	/**
 	 * Create the application.
 	 */
-	public AddDoctorView() {
-		initialize();
+	public AddDoctorView(long token) {
+		initialize(token);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(long token) {
 		frmAddDoctor = new JFrame();
 		frmAddDoctor.setTitle("Add doctor");
 		frmAddDoctor.setBounds(100, 100, 450, 730);

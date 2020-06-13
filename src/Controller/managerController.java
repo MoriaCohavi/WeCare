@@ -13,6 +13,10 @@ public class managerController {
 	private Manager clinicManager;
 	private LocalDateTime statsFlag;
 	
+	public managerController()
+	{
+		
+	}
 	
 	public managerController(String id, int phone, String name, String email, String password,String user_type) { //needs to include manger view object
 		
