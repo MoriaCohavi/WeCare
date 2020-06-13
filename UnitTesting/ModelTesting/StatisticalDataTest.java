@@ -17,7 +17,7 @@ import Model.StatisitcalData;
 public class StatisticalDataTest {
 	
 	@Test
-	public void ChekcVisitTime()
+	public void CheckVisitTime()
 	{
 		
 		StatisitcalData stat = new StatisitcalData();
@@ -28,7 +28,7 @@ public class StatisticalDataTest {
 	}
 	
 	@Test
-	public void ChekcDailyPatients()
+	public void CheckDailyPatients()
 	{
 		
 		StatisitcalData stat = new StatisitcalData();
@@ -39,7 +39,7 @@ public class StatisticalDataTest {
 	}
 	
 	@Test
-	public void ChekcDailylabs()
+	public void CheckDailylabs()
 	{
 		
 		StatisitcalData stat = new StatisitcalData();
@@ -50,7 +50,7 @@ public class StatisticalDataTest {
 	}
 	
 	@Test
-	public void ChekcDailySubs()
+	public void CheckDailySubs()
 	{
 		
 		StatisitcalData stat = new StatisitcalData();
