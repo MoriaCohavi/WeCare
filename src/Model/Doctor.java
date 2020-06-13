@@ -10,6 +10,7 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 //import java.time.*;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 
 public class Doctor extends User implements java.io.Serializable, CommandInterface {
@@ -49,6 +50,10 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	
 	public String getDoctorSpecialization() {
 		return this.specialization;
+	}
+	
+	public LinkedHashMap<LocalDate, StatisitcalData> getStats(){
+		return this.stats;
 	}
 	
 	//methods
@@ -95,6 +100,32 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 			else return null;
 			
 		}
+	
+	public LocalDate getFirstRecord () {
+		return stats.entrySet().iterator().next().getKey();
+	}
+	
+	
+	public StatisitcalData getAvgRecords() {
+		
+		StatisitcalData total = new StatisitcalData(), current = new StatisitcalData();
+		int size = stats.size();
+		for (LocalDate Key : stats.keySet()){
+			current = stats.get(Key);
+			total.addtotalDailylabs(current.getTotalDailylabs());
+			total.addtotalDailyPatients(current.getTotalDailyPatients());
+			total.addtotalDailySubs(current.getTotalDailySubs());
+			total.addtotalVisitTime(current.getTotalVisitTime());
+		}
+		
+		total.setTotalDailylabs(total.getTotalDailylabs()/size);
+		total.setTotalDailyPatients(total.getTotalDailyPatients()/size);
+		total.setTotalDailySubs(total.getTotalDailySubs()/size);
+		total.setTotalVisitTime(total.getTotalVisitTime()/size);
+		
+		return total;
+	}
+	
 	
 	
 	public void updatePatientInfo(String patientId, int phone, String email, int weight, int height, String gender, String allergies, String subscriptions) {

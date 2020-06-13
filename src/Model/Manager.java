@@ -6,7 +6,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 
 public class Manager extends User implements java.io.Serializable, CommandInterface {
 	
@@ -15,6 +19,8 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	private double avgDailyPatients;
 	private double avgDailylabs;
 	private double avgDailySubs;
+	private LocalDateTime statsFlag;
+	private StatisitcalData stats;
 
 	public Manager(String id, long phone, String name, String email,String password,String user_type) {
 		super(id,phone,name, email, password, user_type);
@@ -23,6 +29,8 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		setAvgDailyPatients(0);
 		setAvgDailylabs(0);
 		setAvgDailySubs(0);
+		stats = new StatisitcalData();
+		statsFlag = null;
 	}
 	
 	public String getID() {
@@ -82,6 +90,23 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	
 	}
 	
+	public LocalDateTime getStatsFlag() {
+		return statsFlag;
+	}
+
+	public void setStatsFlag(LocalDateTime currnet) {
+		this.statsFlag = currnet;
+	
+	}
+	
+	public StatisitcalData getStats() {
+		return stats;
+	}
+
+	public void setStats(StatisitcalData stats) {
+		this.stats = stats;
+	}
+	
 	public boolean search(String id) {
 		
 		if(doctors.containsKey(id)) 
@@ -113,8 +138,32 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 			
 	}
 	
+	public void deleteOldStats() {
+		for(String Key : this.doctors.keySet()) {
+			if( doctors.get(Key).getFirstRecord().isBefore(LocalDate.now().minusMonths(1)))
+				doctors.remove(Key);
+		}
+	
+	}
+	
 	public void calcStats() {
 		
+		deleteOldStats();
+		int doctorsCount = doctors.size();
+		double tTime = 0, tSub =0, tPatient = 0, tLabs = 0;
+		StatisitcalData current = new StatisitcalData();
+		for (String Key : this.doctors.keySet()) {
+			current = doctors.get(Key).getAvgRecords();
+			tTime += current.getTotalVisitTime();
+			tSub += current.getTotalDailySubs();
+			tPatient += current.getTotalDailyPatients();
+			tLabs += current.getTotalDailylabs();
+		}
+		
+		this.setAvgDailylabs(tLabs/doctorsCount);
+		this.setAvgDailyPatients(tPatient/doctorsCount);
+		this.setAvgDailySubs(tSub/doctorsCount);
+		this.setAvgVisitTime(tTime / doctorsCount);
 		
 	}
 }

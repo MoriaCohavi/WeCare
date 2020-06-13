@@ -10,12 +10,16 @@ import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import Controller.*;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JPasswordField;
 
 public class LoginView {
 
+	authenticationController authController;
 	private JFrame frmLogin;
 	private JTextField txtf_uname;
-	private JTextField txtf_passwd;
+	private JPasswordField passwdfield;
 
 //	/**
 //	 * Launch the application.
@@ -50,44 +54,70 @@ public class LoginView {
 		
 		JPanel panel = new JPanel();
 		frmLogin.getContentPane().add(panel, BorderLayout.CENTER);
-		panel.setLayout(null);
 		
-		JLabel lbl_uname = new JLabel("Username");
-		lbl_uname.setBounds(47, 69, 68, 32);
-		panel.add(lbl_uname);
+		JLabel lbl_uname = new JLabel("ID");
 		
 		JLabel lbl_passwd = new JLabel("Password");
-		lbl_passwd.setBounds(47, 144, 68, 13);
-		panel.add(lbl_passwd);
 		
 		txtf_uname = new JTextField();
-		txtf_uname.setBounds(149, 76, 96, 19);
-		panel.add(txtf_uname);
 		txtf_uname.setColumns(10);
 		
-		txtf_passwd = new JTextField();
-		txtf_passwd.setBounds(149, 141, 96, 19);
-		panel.add(txtf_passwd);
-		txtf_passwd.setColumns(10);
-		
 		JLabel lbl_message = new JLabel("");
-		lbl_message.setBounds(47, 204, 164, 13);
-		panel.add(lbl_message);
 		
 		JButton btn_login = new JButton("Login");
-
-		btn_login.setBounds(47, 232, 85, 21);
-		panel.add(btn_login);
 		
 		JButton btn_forgotpass = new JButton("Forgot Password");
-		btn_forgotpass.setBounds(149, 232, 157, 21);
-		panel.add(btn_forgotpass);
+		
+		passwdfield = new JPasswordField();
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(47)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lbl_message, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(btn_login, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+							.addGap(17)
+							.addComponent(btn_forgotpass, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lbl_uname, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lbl_passwd, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE))
+							.addGap(34)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(passwdfield)
+								.addComponent(txtf_uname))
+							.addGap(61))))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(69)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lbl_uname, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(7)
+							.addComponent(txtf_uname, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addGap(43)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lbl_passwd)
+						.addComponent(passwdfield, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(47)
+					.addComponent(lbl_message, GroupLayout.PREFERRED_SIZE, 13, GroupLayout.PREFERRED_SIZE)
+					.addGap(15)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(btn_login)
+						.addComponent(btn_forgotpass)))
+		);
+		panel.setLayout(gl_panel);
 		frmLogin.setVisible(true);
 		
 		btn_login.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				long returnCode = authenticationController.login(txtf_uname.getText(), txtf_passwd.getText());
+				authController = new authenticationController();
+				long returnCode = authController.login(txtf_uname.getText(), passwdfield.getText());
 				if (returnCode == -1)
 					lbl_message.setText("Wrong username or password");
 				else if (returnCode == -2)
@@ -96,7 +126,7 @@ public class LoginView {
 				}
 				else
 				{
-					String type = authenticationController.fetchUserType(returnCode);
+					String type = authController.fetchUserType(returnCode);
 					if (type.equals("Manager"))
 					{
 						ManagerView managerPanel = new ManagerView();

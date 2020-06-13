@@ -1,17 +1,14 @@
 package Controller;
 
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.*;
 
-import Model.Clinic;
-import Model.Doctor;
-import Model.Manager;
+import Model.*;
 
 public class managerController {
 	public static String serPath = "src\\Model\\files\\manager.ser";
 	private Manager clinicManager;
-	private LocalDateTime statsFlag;
+	
 	
 	public managerController()
 	{
@@ -25,7 +22,6 @@ public class managerController {
 	public managerController(String id, int phone, String name, String email, String password,String user_type) { //needs to include manger view object
 		
 		clinicManager = new Manager(id, phone, name, email,password, user_type);
-		statsFlag = null;
 		
 	}
 	
@@ -44,12 +40,12 @@ public class managerController {
 		return false;
 	}
 	
-	public boolean registerManager() {
-		
-		if(authenticationController.register(this.clinicManager.getID(), this.clinicManager) > 0)
-			return true;
-		return false;
-	}
+//	public boolean registerManager() {
+//		
+//		if(authenticationController.register(this.clinicManager.getID(), this.clinicManager) > 0)
+//			return true;
+//		return false;
+//	}
 	
 	public boolean deleteDoctor(String docID) {
 		
@@ -61,13 +57,22 @@ public class managerController {
 	
 	
 	public void updateStats() {
-		if (statsFlag == null || statsFlag.isBefore(LocalDateTime.now().minusHours(6))) {
-			statsFlag = LocalDateTime.now();
+		if (clinicManager.getStatsFlag() == null || clinicManager.getStatsFlag().isBefore(LocalDateTime.now().minusHours(6))) {
+			clinicManager.setStatsFlag(LocalDateTime.now());
 			clinicManager.calcStats();
 		}
 			
 	}
 	
+	public Manager getManager()
+	{
+		return clinicManager;
+	}
+	
+	public StatisitcalData getStats() {
+		
+		return clinicManager.getStats();
+	}
 	
 	public void serialize(serHandlerController handler)
 	{
