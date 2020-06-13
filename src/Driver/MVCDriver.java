@@ -3,6 +3,10 @@ package Driver;
 import View.*;
 import Controller.*;
 import Model.*;
+import ModelTesting.*;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
 
 public class MVCDriver {
 	
@@ -31,6 +35,10 @@ public class MVCDriver {
 		
 		
 		
+		Result result = JUnitCore.runClasses(AuthenticationTest.class);
+	    for (Failure failure : result.getFailures()) {
+	      System.out.println(failure.toString());
+	    }
 	}
 }
 

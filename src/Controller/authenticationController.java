@@ -40,7 +40,7 @@ public class authenticationController{
             return -2; //ID can contain 9 digits only
     }
     
-    public static long register(String id, User user)
+    public static int register(String id, User user)
     {
         if (isNumeric(id) && id.length() == 9)
             return Authentication.signUp(id,user);
@@ -56,14 +56,14 @@ public class authenticationController{
         return false;
     } */
 
-    public static String changePassword(long token,String cPassword,String nPassword )
+ /*   public static String changePassword(long token,String cPassword,String nPassword )
     {
       if(Authentication.resetPassword(token,cPassword,nPassword))
         return "Password changed successfuly";
       
       else
         return "Wrong current password, password did not changed";
-    }
+    } */
 
     public static String logOut(long token)
     {
