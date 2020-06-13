@@ -91,7 +91,8 @@ public class authenticationController{
 		String type = this.fetchUserType(token);
 		if (type.equals("Manager"))
 		{
-			ManagerView managerPanel = new ManagerView();
+//			ManagerPanelView managerPanel = new ManagerPanelView(token);
+			ManagerPanelView managerPanel = new ManagerPanelView(token);
 		}
 		else if (type.equals("Doctor"))
 		{
