@@ -1,12 +1,18 @@
 package Model;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.util.HashMap;
 
 
-public class Authentication {
+public class Authentication implements java.io.Serializable{
 	
 	private static HashMap<String,User> users = new HashMap<String,User>(); // we need to understand how we create this list. 
+	private static HashMap<Long,User> loggedinusers = new HashMap<Long,User>();
 	
 	public static String SHA1(String password) // this function take a clear password and change it to SHA1 hash.
 	{
@@ -22,51 +28,66 @@ public class Authentication {
 		return sha1;
 	}
 	
+	public static long signUp(String id, User user)
+	{
+		User temp = users.get(id);
+		if  (temp != null && temp.getId() != user.getId())
+			return -1;
+		users.put(id, user);
+		return 1;
+	}
 	
-	public boolean signIn(String id, String password)
+	public static long signIn(String id, String password)
 	{
 	
 		if (!users.isEmpty())
 		{
 			User user = users.get(id);
 			if(user == null)
-				return false;
+				return -1;
 			else
 			{
-				if(user.getPassword() == SHA1(password))
+				if(user.getPassword().equals(SHA1(password)))
 					{
-						generateToken(id);
-						return true;
+						long token = generateToken(id);
+						loggedinusers.put(token, user);
+						return token;
+						
 					}
 			}
 		}
 		
+		return -1;
+	}
+	
+	public static boolean signOut(long token)
+	{
+		if(loggedinusers.get(token) != null)
+		{
+			loggedinusers.get(token).revokeToken();
+			return true;
+		}
 		return false;
 	}
 	
-	public void signOut(String id)
+	public static boolean validateUser(long token,String typeNeed)
 	{
-		users.get(id).revokeToken();
+		if(!(loggedinusers.get(token) == null || typeNeed != loggedinusers.get(token).getUser_type())) // type need has to come from authentication controller.
+			return false;
+		else
+			return true;
 	}
 	
-	public boolean validateUser(String id,String typeNeed)
+	public static boolean resetPassword(long token, String cPassword, String newPassword)
 	{
-		if(users.get(id).getToken() == 0 || typeNeed != users.get(id).getUser_type()) // type need has to come from authentication controller.
+		if(SHA1(cPassword) != loggedinusers.get(token).getPassword())
 			return false;
 		
+		loggedinusers.get(token).setPassword(newPassword);
 		return true;
 	}
 	
-	public boolean resetPassword(String id, String cPassword, String newPassword)
-	{
-		if(SHA1(cPassword) != users.get(id).getPassword())
-			return false;
-		
-		users.get(id).setPassword(newPassword);
-		return true;
-	}
-	
-	public void generateToken(String id) 
+	public static long generateToken(String id) 
 	{
 		long leftLimit = 1000000000L;
 		long rightLimit = 9999999999L;
@@ -76,17 +97,78 @@ public class Authentication {
 				token = leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
 			}
 			users.get(id).SetToken(token);
+			return token;
 	}
 	
-	private boolean checkToken(long token)
+	private static boolean checkToken(long token)
 	{
-		for(String key:users.keySet())
+		for(Long key:loggedinusers.keySet())
 		{
-			if(users.get(key).getToken() == token)
+			if(loggedinusers.get(key).getToken() == token)
 				return false;
 		}
 		
 		return true;
 	}
 	
+	public static String getType(long token)
+	{
+		return loggedinusers.get(token).getUser_type();
+	}
+	
+//	public static boolean serialize()
+//	{
+//		try {
+//		FileOutputStream fileOut = new FileOutputStream("src\\Model\\files\\authentication.ser");
+//		ObjectOutputStream oos = new ObjectOutputStream(fileOut);
+//		oos.writeObject(users);
+//		oos.writeObject(loggedinusers);
+//		oos.close();
+//		fileOut.close();
+//		return true;
+//		}
+//		catch (IOException i)
+//		{
+//			i.printStackTrace();
+//			return false;
+//		}
+//		
+//	}
+//	
+//	public Authentication deserialize()
+//	{
+//		try {
+//			FileInputStream fileIn = new FileInputStream("src\\Model\\files\\authentication.ser");
+//			ObjectInputStream ois = new ObjectInputStream(fileIn);
+//			Authentication auth = new Authentication();
+//			try {
+//					auth.users = (HashMap<String, User>) ois.readObject();
+//				}
+//			catch (ClassNotFoundException e) {
+//				ois.close();
+//				fileIn.close();
+//				e.printStackTrace();
+//				return null;
+//			}
+//			try {
+//				auth.loggedinusers = (HashMap<Long, User>) ois.readObject();
+//				}
+//			catch (ClassNotFoundException e)
+//			{
+//				ois.close();
+//				fileIn.close();
+//				e.printStackTrace();
+//				return null;
+//			}
+//			ois.close();
+//			fileIn.close();
+//			return auth;
+//		}
+//		catch (IOException i)
+//		{
+//			i.printStackTrace();
+//			return null;
+//		}
+//		
+//	}
 }

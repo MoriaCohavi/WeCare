@@ -1,193 +1,157 @@
 package View;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.EventQueue;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+import com.sun.glass.events.WindowEvent;
+
+import Controller.*;
+
+import javax.swing.JButton;
 
 public class AddDoctorView {
-    private JFrame frame;
 
-    private JPanel pnl_btns;
-    private JPanel pnl_tfs;
-    private JPanel pnl_lbls;
+	private managerController managerController;
+	private long token;
+	private JFrame frmAddDoctor;
+	private JTextField txtf_name;
+	private JTextField txtf_id;
+	private JTextField txtf_email;
+	private JTextField txtf_address;
+	private JTextField txtf_phone;
+	private JTextField txtf_specialization;
+	private JTextField txtf_passwd;
 
-    private JTextField tf_name;
-    private JTextField tf_id;
-    private JTextField tf_phone;
-    private JTextField tf_address;
-    private JTextField tf_email;
-    private JTextField tf_daily_pat;
-    private JTextField tf_daily_sub;
-    private JTextField tf_spec;
-    private JTextField tf_daily_visit;
-    private JTextField tf_uname;
-    private JTextField tf_passwd;
-    private JTextField tf_userType;
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					AddDoctorView window = new AddDoctorView();
+//					window.frmAddDoctor.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
-    private JButton btn_save;
+	/**
+	 * Create the application.
+	 */
+	public AddDoctorView(long token) {
+		initialize(token);
+	}
 
-    
-    public AddDoctorView()
-    {
-          // Frame Initialization
-          frame = new JFrame("Add Doctor");
-          frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-          frame.getContentPane().setLayout(new BorderLayout());
-          frame.setSize(500, 500);
-  
-          // Labels pnl initialization
-          String[] labels = {"Name: ", "Id: ", "Email: ", "Address: ", "Phone: ", "Daily patients: ", "Daily subscriptions: ", "Specialization: ", "Daily visit time: ", "Username: ", "Password: ", "User type: "};
-          int numPairs = labels.length;
-          pnl_lbls = new JPanel(new GridLayout(numPairs, 1));
-          pnl_lbls.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-          //Create labels and populate the pnl.
-          for (int i = 0; i < numPairs; i++) {
-              JLabel l = new JLabel(labels[i]);
-              pnl_lbls.add(l);
-          }
-  
-          // Text fiels pnl initialization
-          tf_name = new JTextField(25);
-          tf_id = new JTextField();
-          tf_phone = new JTextField();
-          tf_address = new JTextField();
-          tf_email = new JTextField();
-          tf_daily_pat = new JTextField();
-          tf_daily_sub = new JTextField();
-          tf_spec = new JTextField();
-          tf_daily_visit = new JTextField();
-          tf_uname = new JTextField();
-          tf_passwd = new JTextField();
-          tf_userType = new JTextField();
-          /* -------------- */
-          pnl_tfs = new JPanel(new GridLayout(numPairs, 1));
-          pnl_tfs.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-          pnl_tfs.add(tf_name);
-          pnl_tfs.add(tf_id);
-          pnl_tfs.add(tf_address);
-          pnl_tfs.add(tf_email);
-          pnl_tfs.add(tf_phone);
-          pnl_tfs.add(tf_daily_pat);
-          pnl_tfs.add(tf_daily_sub);
-          pnl_tfs.add(tf_spec);
-          pnl_tfs.add(tf_daily_visit);
-          pnl_tfs.add(tf_uname);
-          pnl_tfs.add(tf_passwd);
-          pnl_tfs.add(tf_userType);
-  
-          // Buttons pnl initialization
-          btn_save = new JButton("Save");
-          pnl_btns = new JPanel(new FlowLayout());
-          pnl_btns.add(btn_save);
-  
-          // Add pnls to frame
-          frame.getContentPane().add(pnl_lbls, BorderLayout.WEST);
-          frame.getContentPane().add(pnl_tfs, BorderLayout.EAST);
-          frame.getContentPane().add(pnl_btns, BorderLayout.SOUTH);
-          frame.setVisible(true);
-    }
-
-    public JTextField getTf_name() {
-    	return this.tf_name;
-    }
-    public void setTf_name(JTextField tf_name) {
-    	this.tf_name = tf_name;
-    }
-
-
-    public JTextField getTf_id() {
-    	return this.tf_id;
-    }
-    public void setTf_id(JTextField tf_id) {
-    	this.tf_id = tf_id;
-    }
-
-
-    public JTextField getTf_phone() {
-    	return this.tf_phone;
-    }
-    public void setTf_phone(JTextField tf_phone) {
-    	this.tf_phone = tf_phone;
-    }
-
-
-    public JTextField getTf_address() {
-    	return this.tf_address;
-    }
-    public void setTf_address(JTextField tf_address) {
-    	this.tf_address = tf_address;
-    }
-
-
-    public JTextField getTf_email() {
-    	return this.tf_email;
-    }
-    public void setTf_email(JTextField tf_email) {
-    	this.tf_email = tf_email;
-    }
-
-
-    public JTextField getTf_daily_pat() {
-    	return this.tf_daily_pat;
-    }
-    public void setTf_daily_pat(JTextField tf_daily_pat) {
-    	this.tf_daily_pat = tf_daily_pat;
-    }
-
-
-    public JTextField getTf_daily_sub() {
-    	return this.tf_daily_sub;
-    }
-    public void setTf_daily_sub(JTextField tf_daily_sub) {
-    	this.tf_daily_sub = tf_daily_sub;
-    }
-
-
-    public JTextField getTf_spec() {
-    	return this.tf_spec;
-    }
-    public void setTf_spec(JTextField tf_spec) {
-    	this.tf_spec = tf_spec;
-    }
-
-
-    public JTextField getTf_daily_visit() {
-    	return this.tf_daily_visit;
-    }
-    public void setTf_daily_visit(JTextField tf_daily_visit) {
-    	this.tf_daily_visit = tf_daily_visit;
-    }
-
-
-    public JTextField getTf_uname() {
-    	return this.tf_uname;
-    }
-    public void setTf_uname(JTextField tf_uname) {
-    	this.tf_uname = tf_uname;
-    }
-
-
-    public JTextField getTf_passwd() {
-    	return this.tf_passwd;
-    }
-    public void setTf_passwd(JTextField tf_passwd) {
-    	this.tf_passwd = tf_passwd;
-    }
-
-
-    public JTextField getTf_userType() {
-    	return this.tf_userType;
-    }
-    public void setTf_userType(JTextField tf_userType) {
-    	this.tf_userType = tf_userType;
-    }
-
-
-    public JButton getBtn_save() {
-    	return this.btn_save;
-    }
-    public void setBtn_edit(JButton btn_edit) {
-    	this.btn_save = btn_edit;
-    }
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize(long token) {
+		frmAddDoctor = new JFrame();
+		frmAddDoctor.setTitle("Add doctor");
+		frmAddDoctor.setBounds(100, 100, 450, 536);
+		frmAddDoctor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmAddDoctor.getContentPane().setLayout(null);
+		
+		frmAddDoctor.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+				
+			}
+		});
+		
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 436, 10);
+		frmAddDoctor.getContentPane().add(panel);
+		
+		JLabel lbl_name = new JLabel("Name:");
+		lbl_name.setBounds(34, 43, 45, 13);
+		frmAddDoctor.getContentPane().add(lbl_name);
+		
+		JLabel lbl_id = new JLabel("Id:");
+		lbl_id.setBounds(34, 88, 45, 13);
+		frmAddDoctor.getContentPane().add(lbl_id);
+		
+		JLabel lbl_email = new JLabel("Email:");
+		lbl_email.setBounds(34, 140, 45, 13);
+		frmAddDoctor.getContentPane().add(lbl_email);
+		
+		JLabel lbl_address = new JLabel("Address:");
+		lbl_address.setBounds(34, 185, 45, 13);
+		frmAddDoctor.getContentPane().add(lbl_address);
+		
+		JLabel lbl_phone = new JLabel("Phone:");
+		lbl_phone.setBounds(34, 229, 45, 13);
+		frmAddDoctor.getContentPane().add(lbl_phone);
+		
+		JLabel lbl_specs = new JLabel("Specialization:");
+		lbl_specs.setBounds(34, 282, 113, 13);
+		frmAddDoctor.getContentPane().add(lbl_specs);
+		
+		JLabel lbl_passwd = new JLabel("Password:");
+		lbl_passwd.setBounds(34, 339, 101, 13);
+		frmAddDoctor.getContentPane().add(lbl_passwd);
+		
+		txtf_name = new JTextField();
+		txtf_name.setBounds(157, 40, 96, 19);
+		frmAddDoctor.getContentPane().add(txtf_name);
+		txtf_name.setColumns(10);
+		
+		txtf_id = new JTextField();
+		txtf_id.setColumns(10);
+		txtf_id.setBounds(157, 85, 96, 19);
+		frmAddDoctor.getContentPane().add(txtf_id);
+		
+		txtf_email = new JTextField();
+		txtf_email.setColumns(10);
+		txtf_email.setBounds(157, 137, 96, 19);
+		frmAddDoctor.getContentPane().add(txtf_email);
+		
+		txtf_address = new JTextField();
+		txtf_address.setColumns(10);
+		txtf_address.setBounds(157, 182, 96, 19);
+		frmAddDoctor.getContentPane().add(txtf_address);
+		
+		txtf_phone = new JTextField();
+		txtf_phone.setColumns(10);
+		txtf_phone.setBounds(157, 226, 96, 19);
+		frmAddDoctor.getContentPane().add(txtf_phone);
+		
+		txtf_specialization = new JTextField();
+		txtf_specialization.setColumns(10);
+		txtf_specialization.setBounds(157, 279, 96, 19);
+		frmAddDoctor.getContentPane().add(txtf_specialization);
+		
+		txtf_passwd = new JTextField();
+		txtf_passwd.setColumns(10);
+		txtf_passwd.setBounds(157, 336, 96, 19);
+		frmAddDoctor.getContentPane().add(txtf_passwd);
+		
+		JButton btn_addDoctor = new JButton("Add Doctor");
+		btn_addDoctor.setBounds(157, 425, 109, 21);
+		frmAddDoctor.getContentPane().add(btn_addDoctor);
+		frmAddDoctor.setVisible(true);
+		
+		btn_addDoctor.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				managerController = new managerController();
+				managerController.addNewDoctor(txtf_id.getText(), Long.parseLong(txtf_phone.getText()), txtf_name.getText(), txtf_email.getText(), txtf_specialization.getText(), txtf_passwd.getText(), "Doctor", token);
+				frmAddDoctor.dispose();
+			}
+		});
+	}
 
 }

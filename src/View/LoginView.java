@@ -1,79 +1,135 @@
 package View;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import Controller.*;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JPasswordField;
 
 public class LoginView {
-    private JFrame frame;
 
-    private JPanel pnl_uname;
-    private JPanel pnl_passwd;
-    private JPanel pnl_buttons;
+	authenticationController authController;
+	private JFrame frmLogin;
+	private JTextField txtf_uname;
+	private JPasswordField passwdfield;
 
-    private JButton btn_forgotPassword;
-    private JButton btn_enter;
+//	/**
+//	 * Launch the application.
+//	 */
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					LoginView window = new LoginView();
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
-    private JTextField tf_uname;
-    private JPasswordField tf_passwd;
+	/**
+	 * Create the application.
+	 */
+	public LoginView() {
+		initialize();
+	}
 
-    public LoginView() {
-
-        // Frame Initialization
-        frame = new JFrame("Login");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(new BorderLayout());
-        frame.setSize(250, 250);
-
-        // pnls Initialization
-        pnl_buttons = new JPanel(new FlowLayout());
-        pnl_buttons.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        pnl_uname = new JPanel(new FlowLayout());
-        pnl_uname.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        pnl_passwd = new JPanel(new FlowLayout());
-        pnl_passwd.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-        // Components Initialization
-        JLabel lbl_passwd = new JLabel("Password");
-        JLabel lbl_uname = new JLabel("Username");
-
-        tf_uname = new JTextField(12);
-        tf_passwd = new JPasswordField(12);
-
-        btn_forgotPassword = new JButton("Forgot Password");
-        btn_enter = new JButton("Login");
-
-        // Add components to pnls
-        pnl_uname.add(lbl_uname);
-        pnl_uname.add(tf_uname);
-
-        pnl_passwd.add(lbl_passwd);
-        pnl_passwd.add(tf_passwd);
-
-        pnl_buttons.add(btn_enter);
-        pnl_buttons.add(btn_forgotPassword);
-
-        // Add pnls to frame
-        frame.getContentPane().add(pnl_uname, BorderLayout.NORTH);
-        frame.getContentPane().add(pnl_passwd, BorderLayout.CENTER);
-        frame.getContentPane().add(pnl_buttons, BorderLayout.SOUTH);
-        frame.setVisible(true);
-    }
-
-    public JTextField getTf_uname() {
-        return this.tf_uname;
-    }
-
-    public void setTf_uname(JTextField tf_uname) {
-        this.tf_uname = tf_uname;
-    }
-
-    public JPasswordField getTf_passwd() {
-        return this.tf_passwd;
-    }
-
-    public void setTf_passwd(JPasswordField tf_passwd) {
-        this.tf_passwd = tf_passwd;
-    }
-
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frmLogin = new JFrame();
+		frmLogin.setTitle("Login");
+		frmLogin.setBounds(100, 100, 367, 395);
+		frmLogin.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		JPanel panel = new JPanel();
+		frmLogin.getContentPane().add(panel, BorderLayout.CENTER);
+		
+		JLabel lbl_uname = new JLabel("ID");
+		
+		JLabel lbl_passwd = new JLabel("Password");
+		
+		txtf_uname = new JTextField();
+		txtf_uname.setColumns(10);
+		
+		JLabel lbl_message = new JLabel("");
+		
+		JButton btn_login = new JButton("Login");
+		
+		JButton btn_forgotpass = new JButton("Forgot Password");
+		
+		passwdfield = new JPasswordField();
+		GroupLayout gl_panel = new GroupLayout(panel);
+		gl_panel.setHorizontalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(47)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lbl_message, GroupLayout.PREFERRED_SIZE, 164, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(btn_login, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+							.addGap(17)
+							.addComponent(btn_forgotpass, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(lbl_uname, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lbl_passwd, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE))
+							.addGap(34)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(passwdfield)
+								.addComponent(txtf_uname))
+							.addGap(61))))
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(69)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lbl_uname, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(7)
+							.addComponent(txtf_uname, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addGap(43)
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lbl_passwd)
+						.addComponent(passwdfield, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addGap(47)
+					.addComponent(lbl_message, GroupLayout.PREFERRED_SIZE, 13, GroupLayout.PREFERRED_SIZE)
+					.addGap(15)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(btn_login)
+						.addComponent(btn_forgotpass)))
+		);
+		panel.setLayout(gl_panel);
+		frmLogin.setVisible(true);
+		
+		btn_login.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				authController = new authenticationController();
+				long returnCode = authController.login(txtf_uname.getText(), passwdfield.getText());
+				if (returnCode == -1)
+					lbl_message.setText("Wrong username or password");
+				else if (returnCode == -2)
+				{
+					lbl_message.setText("Invalid ID");
+				}
+				else
+				{
+					authController.nextPage(returnCode);
+					frmLogin.dispose();
+				}	
+			}
+		});
+	}
 }
