@@ -119,25 +119,22 @@ public class DoctorView {
 		tbl_doctors.setRowMargin(0);
 		tbl_doctors.setRowHeight(25);
 		tbl_doctors.setIntercellSpacing(new Dimension(0, 0));
+		Object[][] listObj = new Object[3][];
+		int rowsIndex = 1;
+		for (String key: patientsList.keySet()) {
+			listObj[rowsIndex][0] = rowsIndex;
+			listObj[rowsIndex][1] = patientsList.get(key).getName();
+			listObj[rowsIndex][1] = patientsList.get(key).getId();
+			rowsIndex++;
+		}
+		
 		tbl_doctors.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"1", "moria", "123"},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-			},
+			listObj,
 			new String[] {
 				"Num.", "Patient", "ID"
 			}
 		));
+
 		tbl_doctors.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 18));
 		tbl_doctors.getTableHeader().setOpaque(false);
 		tbl_doctors.getTableHeader().setBackground(new Color(32, 136, 203));
