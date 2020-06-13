@@ -40,7 +40,7 @@ public class managerController {
 		if(clinicManager.add(newDoctor))
 		{
 			authenticationController.register(newDoctor.getId(), newDoctor);
-			ManagerView panelView = new ManagerView();
+			ManagerPanelView managerPanel = new ManagerPanelView(managerToken);
 			return true;
 			
 		}
@@ -83,13 +83,13 @@ public class managerController {
 		return clinicManager.getStats();
 	}
 	
-	public void serialize(serHandlerController handler)
+	public void serialize()
 	{
-		handler.serialize(clinicManager, serPath);
+		serHandlerController.serialize(clinicManager, serPath);
 	}
 	
-	public void deserialize(serHandlerController handler)
+	public void deserialize()
 	{
-		clinicManager = (Manager)handler.deserialize(serPath);
+		clinicManager = (Manager)serHandlerController.deserialize(serPath);
 	}
 }

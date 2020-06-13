@@ -1,6 +1,7 @@
 package Controller;
 
 import java.time.LocalTime;
+import java.util.HashMap;
 
 import Model.Doctor;
 import Model.MedicalRecord;
@@ -13,6 +14,11 @@ public class doctorController {
 	
 	public Doctor getDetails() {
 		return this.currentModelDoctor;
+	}
+	
+	public doctorController(Doctor doctor)
+	{
+		currentModelDoctor = doctor;
 	}
 	
 	public doctorController(String id, int phone, String name, String email, String special,String password,String user_type) { // needs to include doctorview obj
@@ -75,15 +81,19 @@ public class doctorController {
 		
 	}
  
-	public void serialize(serHandlerController handler)
+	public void serialize()
 	{
 //		handler.WriteObjectToFile(currentModelDoctor, serPath);
 	}
 	
-	public void deserialize(serHandlerController handler)
+	public void deserialize()
 	{
 //		currentModelDoctor = (Doctor)handler.ReadObjectFromFile(serPath);
 	}
 
+	public HashMap <String, Patient> getPatientsList()
+	{
+		return this.currentModelDoctor.getPatients();
+	}
 
 }

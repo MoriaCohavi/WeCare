@@ -9,14 +9,14 @@ public class clinicController {
 		clinic  = Clinic.getInstance(city, cId, mId, phone, mName, email, password, user_type);
 	}
 	
-	public void serialize(serHandlerController handler)
+	public void serialize()
 	{
-		handler.serialize(clinic, serPath);
+		serHandlerController.serialize(clinic, serPath);
 	}
 	
-	public void deserialize(serHandlerController handler)
+	public void deserialize()
 	{
-		clinic = (Clinic)handler.deserialize(serPath);
+		clinic = (Clinic)serHandlerController.deserialize(serPath);
 	}
 	
 	public Clinic getClinic() {
