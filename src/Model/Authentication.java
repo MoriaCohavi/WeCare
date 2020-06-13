@@ -14,6 +14,11 @@ public class Authentication implements java.io.Serializable{
 	private static HashMap<String,User> users = new HashMap<String,User>(); // we need to understand how we create this list. 
 	private static HashMap<Long,User> loggedinusers = new HashMap<Long,User>();
 	
+	public Authentication()
+	{
+		
+	}
+	
 	public static String SHA1(String password) // this function take a clear password and change it to SHA1 hash.
 	{
 		String sha1 = "";
@@ -114,6 +119,22 @@ public class Authentication implements java.io.Serializable{
 	public static String getType(long token)
 	{
 		return loggedinusers.get(token).getUser_type();
+	}
+	
+	public HashMap<Long, User> getLoggedinusers() {
+		return loggedinusers;
+	}
+	
+	public HashMap<String, User> getUsers() {
+		return users;
+	}
+	
+	public void setLoggedinusers(HashMap<Long, User> loggedinusers) {
+		Authentication.loggedinusers = loggedinusers;
+	}
+	
+	public void setUsers(HashMap<String, User> users) {
+		Authentication.users = users;
 	}
 	
 //	public static boolean serialize()

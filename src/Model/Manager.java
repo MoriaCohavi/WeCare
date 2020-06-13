@@ -95,7 +95,7 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	public boolean add(Object obj) {
 		
 		Doctor newDoc = (Doctor)obj;
-		if (!search(newDoc.getName()))
+		if (!search(newDoc.getId()))
 		{
 			doctors.put(newDoc.getDoctorID(), newDoc);
 			return true;

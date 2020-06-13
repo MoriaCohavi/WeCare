@@ -20,6 +20,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Controller.*;
 import Model.Doctor;
+import Model.Patient;
 
 import java.awt.Dimension;
 import javax.swing.DebugGraphics;
@@ -30,6 +31,9 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.JTextPane;
 import java.awt.TextField;
+import java.util.HashMap;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class DoctorView {
 
@@ -53,8 +57,10 @@ public class DoctorView {
 	private JTextField txtAddress;
 	private JTextField txtEmail;
 	private JTextField txtClinicName;
+	private authenticationController authCtrl;
 	private doctorController docCtrl;
 	private Doctor details;
+	private HashMap <String, Patient> patientsList;
 
 //	/**
 //	 * Launch the application.
@@ -75,20 +81,25 @@ public class DoctorView {
 	/**
 	 * Create the application.
 	 */
-	public DoctorView() {
-		initialize();
+	public DoctorView(long doctorToken) {
+		initialize(doctorToken);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
-		details = docCtrl.getDetails();
+	private void initialize(long doctorToken) {
+		authCtrl = new authenticationController();
+		details = (Doctor)authCtrl.getLoggedinUser(doctorToken);
+		docCtrl = new doctorController(details);
+		patientsList = docCtrl.getPatientsList();
+		
 		frmDoctor = new JFrame();
 		frmDoctor.setTitle("Doctor");
 		frmDoctor.setBounds(100, 100, 1058, 571);
 		frmDoctor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDoctor.getContentPane().setLayout(null);
+		frmDoctor.setVisible(true);
 		
 		JLabel lblWelcome = new JLabel("Welcome");
 		lblWelcome.setBounds(80, 58, 282, 20);
@@ -144,11 +155,20 @@ public class DoctorView {
 		txtSearchPatient.setColumns(10);
 		
 		btnNewButton = new JButton("Search");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnNewButton.setBounds(405, 477, 96, 29);
 		frmDoctor.getContentPane().add(btnNewButton);
 		
 		btnAddPatient = new JButton("Add Patient");
+		btnAddPatient.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				docCtrl.openAddPatient(doctorToken);
+			}
+		});
 		btnAddPatient.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnAddPatient.setBounds(516, 477, 139, 29);
 		frmDoctor.getContentPane().add(btnAddPatient);

@@ -1,11 +1,13 @@
 package Controller;
 
+import java.util.HashMap;
+
 import Model.*;
 import View.*;
 
 public class authenticationController{
-	public static String serPath = "src\\Model\\files\\authentication.ser";
-	private Authentication authentication;
+	public static String userSerPath = "src\\Model\\files\\users.ser";
+	private static Authentication authentication;
 	private LoginView login_view;
 	
 	public authenticationController() {
@@ -23,6 +25,11 @@ public class authenticationController{
                 return true;
             
             return false;
+    }
+    
+    public User getLoggedinUser(long token)
+    {
+    	return authentication.getLoggedinusers().get(token);
     }
 
     public long login(String id, String password)
@@ -71,14 +78,20 @@ public class authenticationController{
     	return Authentication.getType(token);
     }
     
-	public void serialize(serHandlerController handler)
+	public void serialize()
 	{
-		handler.serialize(authentication, serPath);
+		HashMap<String,User> tempUsers = authentication.getUsers();
+		serHandlerController.serialize(tempUsers, userSerPath);
+		
 	}
 	
-	public void deserialize(serHandlerController handler)
+	public boolean deserialize()
 	{
-		authentication = (Authentication)handler.deserialize(serPath);
+		HashMap<String,User> usersTemp = (HashMap<String,User>)serHandlerController.deserialize(userSerPath);
+		if (usersTemp == null)
+			return false;
+		this.authentication.setUsers(usersTemp);
+		return true;
 	}
 	
 	public void openLoginForm()
@@ -91,12 +104,11 @@ public class authenticationController{
 		String type = this.fetchUserType(token);
 		if (type.equals("Manager"))
 		{
-//			ManagerPanelView managerPanel = new ManagerPanelView(token);
-			ManagerPanelView managerPanel = new ManagerPanelView(token);
+			new ManagerPanelView(token);
 		}
 		else if (type.equals("Doctor"))
 		{
-			DoctorView doctorPanel = new DoctorView();
+			new DoctorView(token);
 		}
 	}
 	

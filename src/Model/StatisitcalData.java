@@ -1,6 +1,6 @@
 package Model;
 
-public class StatisitcalData {
+public class StatisitcalData implements java.io.Serializable {
 	
 	private double totalVisitTime;
 	private double totalDailyPatients;

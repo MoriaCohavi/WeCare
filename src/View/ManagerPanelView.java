@@ -8,6 +8,9 @@ import java.awt.BorderLayout;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+//import com.sun.glass.events.WindowEvent;
+
+import Controller.authenticationController;
 import Controller.managerController;
 
 import javax.swing.border.BevelBorder;
@@ -17,11 +20,14 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 
 public class ManagerPanelView {
 
 	private managerController mgmtController;
+	private authenticationController authController;
 	private long token;
 	private JFrame frmManager;
 	private JTable tbl_managers;
@@ -63,15 +69,26 @@ public class ManagerPanelView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(long token) {
+		mgmtController = new managerController();
+		authController = new authenticationController();
+		
 		frmManager = new JFrame();
 		frmManager.setTitle("Manager");
 		frmManager.setBounds(100, 100, 593, 495);
-		frmManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frmManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmManager.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 664, 10);
 		frmManager.getContentPane().add(panel);
+	
+		frmManager.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				authController.serialize();
+				System.exit(0);
+			}
+		});
 		
 		tbl_managers = new JTable();
 		tbl_managers.setBorder(null);
@@ -110,7 +127,6 @@ public class ManagerPanelView {
 		btn_statistical.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				mgmtController = new managerController();
 				mgmtController.updateStats();
 			}
 		});
