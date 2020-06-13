@@ -18,7 +18,7 @@ import Model.Lab;
 public class PatientTest {
 
 	@Test
-	public void ChekcVisitTime()
+	public void CheckVisitTime()
 	{
 		
 		Patient patient = new Patient("123456789",26, 0541234567, "moria test", "moria@test.com", 53, 156, "Female", "", "","");
@@ -37,11 +37,26 @@ public class PatientTest {
 	}
 	
 	@Test
-	public void ChekcAddLabs()
+	public void CheckAddLabs()
 	{
 		
 		Patient patient = new Patient("123456789",26, 0541234567, "moria test", "moria@test.com", 53, 156, "Female", "", "","");
 		
+		String type = "test";
+		String result = "Dead";
+		boolean attentionRequired = true;
+		Lab lab = new Lab(type, result, attentionRequired);
+		
+		Assert.assertTrue(patient.addLab(lab));
+	   
+	}
+	
+	@Test
+	public void CheckAddMedicalRecord()
+	{
+		
+		Patient patient = new Patient("123456789",26, 0541234567, "moria test", "moria@test.com", 53, 156, "Female", "", "","");
+		//MedicalRecord med = new MedicalRecord(doctor, numDays, record, purpose, description, summary, sub, diagnose, sT, eT, w, h, hr, t, sysBP, diaBP)
 		String type = "test";
 		String result = "Dead";
 		boolean attentionRequired = true;
