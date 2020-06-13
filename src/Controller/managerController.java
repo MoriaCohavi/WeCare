@@ -22,6 +22,7 @@ public class managerController {
 	public managerController(String id, int phone, String name, String email, String password,String user_type) { //needs to include manger view object
 		
 		clinicManager = new Manager(id, phone, name, email,password, user_type);
+	}
 		
 	public void setClinicManager (Manager clinicM) {
 		this.clinicManager = clinicM;
@@ -39,7 +40,7 @@ public class managerController {
 		if(clinicManager.add(newDoctor))
 		{
 			authenticationController.register(newDoctor.getId(), newDoctor);
-			ManagerPanelView panelView = new ManagerPanelView(managerToken);
+			ManagerView panelView = new ManagerView();
 			return true;
 			
 		}
