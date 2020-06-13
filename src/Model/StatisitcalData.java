@@ -9,10 +9,10 @@ public class StatisitcalData {
 	
 	
 	public StatisitcalData() {
-		this.totalVisitTime = 0;
-		this.totalDailyPatients = 0;
-		this.totalDailylabs = 0;
-		this.totalDailySubs = 0;
+		this.totalVisitTime = 0.0;
+		this.totalDailyPatients = 0.0;
+		this.totalDailylabs = 0.0;
+		this.totalDailySubs = 0.0;
 	}
 	
 	

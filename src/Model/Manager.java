@@ -15,20 +15,12 @@ import java.util.LinkedHashMap;
 public class Manager extends User implements java.io.Serializable, CommandInterface {
 	
 	private HashMap<String, Doctor> doctors;
-	private double avgVisitTime;
-	private double avgDailyPatients;
-	private double avgDailylabs;
-	private double avgDailySubs;
 	private LocalDateTime statsFlag;
 	private StatisitcalData stats;
 
 	public Manager(String id, long phone, String name, String email,String password,String user_type) {
 		super(id,phone,name, email, password, user_type);
 		doctors  = new HashMap <String, Doctor>();
-		setAvgVisitTime(0);
-		setAvgDailyPatients(0);
-		setAvgDailylabs(0);
-		setAvgDailySubs(0);
 		stats = new StatisitcalData();
 		statsFlag = null;
 	}
@@ -58,37 +50,22 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		this.setEmail(newEmail);
 	}
 	public double getAvgVisitTime() {
-		return avgVisitTime;
-	}
-
-	public void setAvgVisitTime(double avgVisitTime) {
-		this.avgVisitTime = avgVisitTime;
+		return stats.getTotalVisitTime();
 	}
 
 	public double getAvgDailyPatients() {
-		return avgDailyPatients;
-	}
-
-	public void setAvgDailyPatients(double avgDailyPatients) {
-		this.avgDailyPatients = avgDailyPatients;
+		return stats.getTotalDailyPatients();
 	}
 
 	public double getAvgDailylabs() {
-		return avgDailylabs;
+		return stats.getTotalDailylabs();
 	}
 
-	public void setAvgDailylabs(double avgDailylabs) {
-		this.avgDailylabs = avgDailylabs;
-	}
 
 	public double getAvgDailySubs() {
-		return avgDailySubs;
+		return stats.getTotalDailySubs();
 	}
 
-	public void setAvgDailySubs(double avgDailySubs) {
-		this.avgDailySubs = avgDailySubs;
-	
-	}
 	
 	public LocalDateTime getStatsFlag() {
 		return statsFlag;
@@ -149,7 +126,10 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	public void calcStats() {
 		
 		deleteOldStats();
-		int doctorsCount = doctors.size();
+		int doctorsCount;
+		if (doctors.size() == 0)
+			doctorsCount =1;
+		else doctorsCount =  doctors.size();
 		double tTime = 0, tSub =0, tPatient = 0, tLabs = 0;
 		StatisitcalData current = new StatisitcalData();
 		for (String Key : this.doctors.keySet()) {
@@ -160,10 +140,10 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 			tLabs += current.getTotalDailylabs();
 		}
 		
-		this.setAvgDailylabs(tLabs/doctorsCount);
-		this.setAvgDailyPatients(tPatient/doctorsCount);
-		this.setAvgDailySubs(tSub/doctorsCount);
-		this.setAvgVisitTime(tTime / doctorsCount);
+		this.stats.setTotalDailylabs(tLabs/doctorsCount);
+		this.stats.setTotalDailyPatients(tPatient/doctorsCount);
+		this.stats.setTotalDailySubs(tSub/doctorsCount);
+		this.stats.setTotalVisitTime(tTime / doctorsCount);
 		
 	}
 }

@@ -5,8 +5,8 @@ public class clinicController {
 	public static String serPath = "src\\Model\\files\\clinic.ser";
 	Clinic clinic;
 	
-	public clinicController(String city, long cId) {
-		clinic  = Clinic.getInstance(city, cId);
+	public clinicController(String city, long cId,String mId, long phone, String mName, String email, String password, String user_type) {
+		clinic  = Clinic.getInstance(city, cId, mId, phone, mName, email, password, user_type);
 	}
 	
 	public void serialize(serHandlerController handler)
@@ -25,5 +25,9 @@ public class clinicController {
 	
 	public void setClinic(Clinic clinic) {
 		this.clinic = clinic;
+	}
+	
+	public Manager getClinicManager() {
+		return clinic.getManager();
 	}
 }
