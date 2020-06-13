@@ -5,12 +5,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 //import java.time.*;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class Doctor extends User implements java.io.Serializable {
 	
-	//private HashMap <LocalDate, StatisticalData> stats = new HashMap<LocalDate, StatisticalData>();
+	private LinkedHashMap <LocalDate, StatisitcalData> stats = new LinkedHashMap<LocalDate, StatisitcalData>();
 	private String specialization;
 	private HashMap <String, Patient> patients;
 	
@@ -19,6 +23,7 @@ public class Doctor extends User implements java.io.Serializable {
 		super(id, phone, name, email, password, user_type);
 		this.specialization = special;
 		this.patients = new HashMap <String, Patient>();
+		this.stats = new LinkedHashMap<LocalDate, StatisitcalData>();
 	}
 	
 	//setters and getters
@@ -96,16 +101,49 @@ public class Doctor extends User implements java.io.Serializable {
 	
 	}
 	 
-	public boolean createMedicalRecord(String patientId, MedicalRecord newRecord) {
+	public boolean createMedicalRecord(String patientId, MedicalRecord newRecord) {		
+		if (this.patients.containsKey(patientId)) {
+			patients.get(patientId).addMedicalRecord(newRecord);
+			
+			//updating stats
+			if (!this.stats.containsKey(LocalDate.now())) 
+				this.stats.put(LocalDate.now(), new StatisitcalData());
+			
+			StatisitcalData editStats = this.stats.get(LocalDate.now());
+			double time = ChronoUnit.MINUTES.between(newRecord.get_ETime(), newRecord.get_STime());
+			editStats.setTotalVisitTime(time);
+			editStats.setTotalDailyPatients(1);
+			
+			if (newRecord.get_subscriptions() != null) { 
+				String[] words = newRecord.get_subscriptions().split(",");
+				editStats.addtotalDailySubs(words.length);
+			}
+			
+			this.stats.put(LocalDate.now(), editStats);
+			return true;
+		}
+		else return false;
+	}
+	
+	public boolean addLabToPatient(String patientId, String labType) {
 		
 		if (this.patients.containsKey(patientId)) {
 			
-			patients.get(patientId).addMedicalRecord(newRecord);
+			Lab newLab = new Lab(labType, null, false);
+			patients.get(patientId).addLab(newLab);
+			
+			//updating stats
+			if (!this.stats.containsKey(LocalDate.now())) 
+				this.stats.put(LocalDate.now(), new StatisitcalData());
+			
+			StatisitcalData editStats = this.stats.get(LocalDate.now());
+			editStats.addtotalDailylabs(1);
+			
+			this.stats.put(LocalDate.now(), editStats);
 			return true;
 		}
-		else
-				return false;
-		}
+		else return false;
+	}
 	
 	public String visitSummary(String patientId, int recordId) {
 		
