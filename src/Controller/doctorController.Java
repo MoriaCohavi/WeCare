@@ -7,7 +7,7 @@ import Model.MedicalRecord;
 import Model.Patient;
 
 public class doctorController {
-	
+	public static String serPath = "src\\Model\\files\\doctor.ser";
 	private Doctor currentModelDoctor;
 	//private doctor view implementation
 	
@@ -71,7 +71,15 @@ public class doctorController {
 		
 	}
  
-
+	public void serialize(serHandlerController handler)
+	{
+		handler.WriteObjectToFile(currentModelDoctor, serPath);
+	}
+	
+	public void deserialize(serHandlerController handler)
+	{
+		currentModelDoctor = (Doctor)handler.ReadObjectFromFile(serPath);
+	}
 
 
 }

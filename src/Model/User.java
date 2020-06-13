@@ -7,7 +7,7 @@ public class User extends Person implements java.io.Serializable {
 	private String user_type;
 	private long token;
 	
-	public User(String id, int phone, String name, String email, String password, String user_type) {
+	public User(String id, long phone, String name, String email, String password, String user_type) {
 		super(id, phone, name, email);
 		this.password = Authentication.SHA1(password);
 		this.user_type = user_type;
@@ -49,7 +49,7 @@ public class User extends Person implements java.io.Serializable {
 	{
 	      try {
 	          FileOutputStream fileOut =
-	          new FileOutputStream("/files/user.ser");
+	          new FileOutputStream("src\\Model\\files\\user.ser");
 	          ObjectOutputStream out = new ObjectOutputStream(fileOut);
 	          out.writeObject(this);
 	          out.close();
@@ -64,7 +64,7 @@ public class User extends Person implements java.io.Serializable {
 	public User deserialize()
 	{
 	      try {
-	          FileInputStream fileIn = new FileInputStream("/files/user.ser");
+	          FileInputStream fileIn = new FileInputStream("src\\Model\\files\\user.ser");
 	          ObjectInputStream in = new ObjectInputStream(fileIn);
 	          User e = (User) in.readObject();
 	          in.close();

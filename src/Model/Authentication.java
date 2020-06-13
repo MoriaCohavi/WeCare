@@ -28,6 +28,14 @@ public class Authentication implements java.io.Serializable{
 		return sha1;
 	}
 	
+	public static long signUp(String id, User user)
+	{
+		User temp = users.get(id);
+		if  (temp != null && temp.getId() != user.getId())
+			return -1;
+		users.put(id, user);
+		return 1;
+	}
 	
 	public static long signIn(String id, String password)
 	{
@@ -39,7 +47,7 @@ public class Authentication implements java.io.Serializable{
 				return -1;
 			else
 			{
-				if(user.getPassword() == SHA1(password))
+				if(user.getPassword().equals(SHA1(password)))
 					{
 						long token = generateToken(id);
 						loggedinusers.put(token, user);
@@ -108,59 +116,59 @@ public class Authentication implements java.io.Serializable{
 		return loggedinusers.get(token).getUser_type();
 	}
 	
-	public static boolean serialize()
-	{
-		try {
-		FileOutputStream fileOut = new FileOutputStream("/files/authentication.ser");
-		ObjectOutputStream oos = new ObjectOutputStream(fileOut);
-		oos.writeObject(users);
-		oos.writeObject(loggedinusers);
-		oos.close();
-		fileOut.close();
-		return true;
-		}
-		catch (IOException i)
-		{
-			i.printStackTrace();
-			return false;
-		}
-		
-	}
-	
-	public Authentication deserialize()
-	{
-		try {
-			FileInputStream fileIn = new FileInputStream("/files/authentication.ser");
-			ObjectInputStream ois = new ObjectInputStream(fileIn);
-			Authentication auth = new Authentication();
-			try {
-					auth.users = (HashMap<String, User>) ois.readObject();
-				}
-			catch (ClassNotFoundException e) {
-				ois.close();
-				fileIn.close();
-				e.printStackTrace();
-				return null;
-			}
-			try {
-				auth.loggedinusers = (HashMap<Long, User>) ois.readObject();
-				}
-			catch (ClassNotFoundException e)
-			{
-				ois.close();
-				fileIn.close();
-				e.printStackTrace();
-				return null;
-			}
-			ois.close();
-			fileIn.close();
-			return auth;
-		}
-		catch (IOException i)
-		{
-			i.printStackTrace();
-			return null;
-		}
-		
-	}
+//	public static boolean serialize()
+//	{
+//		try {
+//		FileOutputStream fileOut = new FileOutputStream("src\\Model\\files\\authentication.ser");
+//		ObjectOutputStream oos = new ObjectOutputStream(fileOut);
+//		oos.writeObject(users);
+//		oos.writeObject(loggedinusers);
+//		oos.close();
+//		fileOut.close();
+//		return true;
+//		}
+//		catch (IOException i)
+//		{
+//			i.printStackTrace();
+//			return false;
+//		}
+//		
+//	}
+//	
+//	public Authentication deserialize()
+//	{
+//		try {
+//			FileInputStream fileIn = new FileInputStream("src\\Model\\files\\authentication.ser");
+//			ObjectInputStream ois = new ObjectInputStream(fileIn);
+//			Authentication auth = new Authentication();
+//			try {
+//					auth.users = (HashMap<String, User>) ois.readObject();
+//				}
+//			catch (ClassNotFoundException e) {
+//				ois.close();
+//				fileIn.close();
+//				e.printStackTrace();
+//				return null;
+//			}
+//			try {
+//				auth.loggedinusers = (HashMap<Long, User>) ois.readObject();
+//				}
+//			catch (ClassNotFoundException e)
+//			{
+//				ois.close();
+//				fileIn.close();
+//				e.printStackTrace();
+//				return null;
+//			}
+//			ois.close();
+//			fileIn.close();
+//			return auth;
+//		}
+//		catch (IOException i)
+//		{
+//			i.printStackTrace();
+//			return null;
+//		}
+//		
+//	}
 }

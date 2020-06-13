@@ -1,9 +1,21 @@
 package Controller;
 
 import Model.Authentication;
+import Model.User;
+import Model.Manager;
+import View.LoginView;
 
 public class authenticationController{
-
+	public static String serPath = "src\\Model\\files\\authentication.ser";
+	private Authentication authentication;
+	
+	public authenticationController() {
+		
+		// init users hashmap
+		// add manager specificly
+		authentication = new Authentication();
+		LoginView login_view = new LoginView();
+	}
 
     private static boolean isNumeric(String strNum) {
         if (strNum == null) {
@@ -15,10 +27,18 @@ public class authenticationController{
             return false;
     }
 
-    public long login(String id, String password)
+    public static long login(String id, String password)
     {
         if (isNumeric(id) && id.length() == 9)
             return Authentication.signIn(id,password);
+        else
+            return -2; //ID can contain 9 digits only
+    }
+    
+    public static long register(String id, User user)
+    {
+        if (isNumeric(id) && id.length() == 9)
+            return Authentication.signUp(id,user);
         else
             return -2; //ID can contain 9 digits only
     }
@@ -31,7 +51,7 @@ public class authenticationController{
         return false;
     } */
 
-    public String changePassword(long token,String cPassword,String nPassword )
+    public static String changePassword(long token,String cPassword,String nPassword )
     {
       if(Authentication.resetPassword(token,cPassword,nPassword))
         return "Password changed successfuly";
@@ -40,7 +60,7 @@ public class authenticationController{
         return "Wrong current password, password did not changed";
     }
 
-    public String logOut(long token)
+    public static String logOut(long token)
     {
         if (Authentication.signOut(token))
             return "Singed out";
@@ -48,8 +68,19 @@ public class authenticationController{
             return "user not found";
     }
 
-    public String fetchUserType(long token)
+    public static String fetchUserType(long token)
     {
     	return Authentication.getType(token);
     }
+    
+	public void serialize(serHandlerController handler)
+	{
+		handler.serialize(authentication, serPath);
+	}
+	
+	public void deserialize(serHandlerController handler)
+	{
+		authentication = (Authentication)handler.deserialize(serPath);
+	}
+	
 }

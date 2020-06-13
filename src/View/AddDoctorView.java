@@ -1,16 +1,22 @@
 package View;
 
 import java.awt.EventQueue;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import Controller.authenticationController;
+
 import javax.swing.JButton;
 
 public class AddDoctorView {
 
+	private long token;
 	private JFrame frmAddDoctor;
 	private JTextField txtf_name;
 	private JTextField txtf_id;
@@ -44,14 +50,14 @@ public class AddDoctorView {
 	/**
 	 * Create the application.
 	 */
-	public AddDoctorView() {
-		initialize();
+	public AddDoctorView(long token) {
+		initialize(token);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(long token) {
 		frmAddDoctor = new JFrame();
 		frmAddDoctor.setTitle("Add doctor");
 		frmAddDoctor.setBounds(100, 100, 450, 730);
@@ -173,6 +179,14 @@ public class AddDoctorView {
 		JButton btn_addDoctor = new JButton("Add Doctor");
 		btn_addDoctor.setBounds(157, 651, 109, 21);
 		frmAddDoctor.getContentPane().add(btn_addDoctor);
+		frmAddDoctor.setVisible(true);
+		
+		btn_addDoctor.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
 	}
 
 }

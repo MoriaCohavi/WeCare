@@ -11,11 +11,18 @@ import java.util.HashMap;
 public class Manager extends User implements java.io.Serializable {
 	
 	private HashMap<String, Doctor> doctors;
+	private double avgVisitTime;
+	private double avgDailyPatients;
+	private double avgDailylabs;
+	private double avgDailySubs;
 
-	public Manager(String id, int phone, String name, String email,String password,String user_type) {
+	public Manager(String id, long phone, String name, String email,String password,String user_type) {
 		super(id,phone,name, email, password, user_type);
-		
 		doctors  = new HashMap <String, Doctor>();
+		setAvgVisitTime(0);
+		setAvgDailyPatients(0);
+		setAvgDailylabs(0);
+		setAvgDailySubs(0);
 	}
 	
 	public String getID() {
@@ -23,7 +30,7 @@ public class Manager extends User implements java.io.Serializable {
 		
 	}
 	
-	public int getPhone() {
+	public long getPhone() {
 		return this.getPhone();
 	}
 	
@@ -42,13 +49,42 @@ public class Manager extends User implements java.io.Serializable {
 	public void updateEmail(String newEmail){
 		this.setEmail(newEmail);
 	}
+	public double getAvgVisitTime() {
+		return avgVisitTime;
+	}
+
+	public void setAvgVisitTime(double avgVisitTime) {
+		this.avgVisitTime = avgVisitTime;
+	}
+
+	public double getAvgDailyPatients() {
+		return avgDailyPatients;
+	}
+
+	public void setAvgDailyPatients(double avgDailyPatients) {
+		this.avgDailyPatients = avgDailyPatients;
+	}
+
+	public double getAvgDailylabs() {
+		return avgDailylabs;
+	}
+
+	public void setAvgDailylabs(double avgDailylabs) {
+		this.avgDailylabs = avgDailylabs;
+	}
+
+	public double getAvgDailySubs() {
+		return avgDailySubs;
+	}
+
+	public void setAvgDailySubs(double avgDailySubs) {
+		this.avgDailySubs = avgDailySubs;
 	
+	}
 	
-	
-	
-	public boolean searchDoctor(String doctodID) {
+	public boolean searchDoctor(String doctorID) {
 		
-		if(doctors.containsKey(doctodID)) return true;
+		if(doctors.containsKey(doctorID)) return true;
 		
 		return false;
 			
@@ -76,38 +112,9 @@ public class Manager extends User implements java.io.Serializable {
 			
 	}
 	
-	public boolean serialize()
-	{
-	      try {
-	          FileOutputStream fileOut =
-	          new FileOutputStream("/files/manager.ser");
-	          ObjectOutputStream out = new ObjectOutputStream(fileOut);
-	          out.writeObject(this);
-	          out.close();
-	          fileOut.close();
-	          return true;
-	       } catch (IOException i) {
-	          i.printStackTrace();
-	          return false;
-	       }
-	}
-	
-	public Manager deserialize()
-	{
-	      try {
-	          FileInputStream fileIn = new FileInputStream("/files/manager.ser");
-	          ObjectInputStream in = new ObjectInputStream(fileIn);
-	          Manager e = (Manager) in.readObject();
-	          in.close();
-	          fileIn.close();
-	          return e;
-	       } catch (IOException i) {
-	          i.printStackTrace();
-	          return null;
-	       } catch (ClassNotFoundException c) {
-	          c.printStackTrace();
-	          return null;
-	       }
+	public void calcStats() {
+		
+		
 	}
 
 }
