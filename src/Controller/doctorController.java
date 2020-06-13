@@ -11,6 +11,10 @@ public class doctorController {
 	private Doctor currentModelDoctor;
 	//private doctor view implementation
 	
+	public Doctor getDetails() {
+		return this.currentModelDoctor;
+	}
+	
 	public doctorController(String id, int phone, String name, String email, String special,String password,String user_type) { // needs to include doctorview obj
 			this.currentModelDoctor = new Doctor (id, phone, name, email, special,password,user_type);
 	}
@@ -73,12 +77,12 @@ public class doctorController {
  
 	public void serialize(serHandlerController handler)
 	{
-		handler.serialize(currentModelDoctor, serPath);
+//		handler.WriteObjectToFile(currentModelDoctor, serPath);
 	}
 	
 	public void deserialize(serHandlerController handler)
 	{
-		currentModelDoctor = (Doctor)handler.deserialize(serPath);
+//		currentModelDoctor = (Doctor)handler.ReadObjectFromFile(serPath);
 	}
 
 

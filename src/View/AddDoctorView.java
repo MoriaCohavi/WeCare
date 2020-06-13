@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import Controller.authenticationController;
-import Controller.doctorController;
+import Controller.*;
 
 import javax.swing.JButton;
 
