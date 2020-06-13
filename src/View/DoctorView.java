@@ -124,7 +124,7 @@ public class DoctorView {
 		for (String key: patientsList.keySet()) {
 			listObj[rowsIndex][0] = rowsIndex;
 			listObj[rowsIndex][1] = patientsList.get(key).getName();
-			listObj[rowsIndex][1] = patientsList.get(key).getId();
+			listObj[rowsIndex][2] = patientsList.get(key).getId();
 			rowsIndex++;
 		}
 		
