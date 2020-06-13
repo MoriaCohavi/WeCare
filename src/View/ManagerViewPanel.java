@@ -1,7 +1,5 @@
 package View;
-
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -18,8 +16,7 @@ import javax.swing.JTextField;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-
-public class ManagerPanelView {
+public class ManagerViewPanel {
 
 	private managerController mgmtController;
 	private long token;
@@ -35,7 +32,6 @@ public class ManagerPanelView {
 	private JTextField txtf_doctor;
 	private JButton btn_find;
 	private JButton btn_addDoctor;
-
 //	/**
 //	 * Launch the application.
 //	 */
@@ -51,14 +47,12 @@ public class ManagerPanelView {
 //			}
 //		});
 //	}
-
 	/**
 	 * Create the application.
 	 */
-	public ManagerPanelView(long token) {
+	public ManagerViewPanel(long token) {
 		initialize(token);
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -80,7 +74,7 @@ public class ManagerPanelView {
 				{"a", "a", "a"},
 			},
 			new String[] {
-				"Doctor name", "Id", "Specialization "
+				"Doctor name", "Id", "Specialization"
 			}
 		));
 		tbl_managers.setBounds(0, 10, 322, 305);
@@ -105,7 +99,7 @@ public class ManagerPanelView {
 		lbl_email = new JLabel("Email:");
 		lbl_email.setBounds(350, 112, 45, 13);
 		frmManager.getContentPane().add(lbl_email);
-		
+
 		btn_statistical = new JButton("View statistical report");
 		btn_statistical.addMouseListener(new MouseAdapter() {
 			@Override
@@ -116,7 +110,7 @@ public class ManagerPanelView {
 		});
 		btn_statistical.setBounds(350, 147, 178, 21);
 		frmManager.getContentPane().add(btn_statistical);
-		
+
 		lbl_search = new JLabel("Search doctor:");
 		lbl_search.setBounds(10, 344, 91, 13);
 		frmManager.getContentPane().add(lbl_search);

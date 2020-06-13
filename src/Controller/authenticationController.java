@@ -91,11 +91,11 @@ public class authenticationController{
 		String type = this.fetchUserType(token);
 		if (type.equals("Manager"))
 		{
-			ManagerView managerPanel = new ManagerView();
+			ManagerViewPanel test = new ManagerViewPanel(token);
 		}
 		else if (type.equals("Doctor"))
 		{
-			DoctorView doctorPanel = new DoctorView();
+			//DoctorView doctorPanel = new DoctorView();
 		}
 	}
 	
