@@ -80,7 +80,7 @@ public class ManagerPanelView {
 				{"a", "a", "a"},
 			},
 			new String[] {
-				"Doctor name", "Id", "Specialization"
+				"Doctor name", "Id", "Specialization "
 			}
 		));
 		tbl_managers.setBounds(0, 10, 322, 305);

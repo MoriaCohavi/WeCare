@@ -3,12 +3,15 @@ package View;
 import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import com.sun.glass.events.WindowEvent;
 
 import Controller.*;
 
@@ -59,6 +62,14 @@ public class AddDoctorView {
 		frmAddDoctor.setBounds(100, 100, 450, 536);
 		frmAddDoctor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAddDoctor.getContentPane().setLayout(null);
+		
+		frmAddDoctor.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+				
+			}
+		});
+		
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 436, 10);
