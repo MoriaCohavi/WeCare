@@ -1,13 +1,9 @@
 package Controller;
 
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.*;
 
-import Model.Clinic;
-import Model.Doctor;
-import Model.Manager;
-import Model.StatisitcalData;
+import Model.*;
 
 public class managerController {
 	public static String serPath = "src\\Model\\files\\manager.ser";
