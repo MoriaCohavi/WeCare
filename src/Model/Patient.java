@@ -15,7 +15,7 @@ public class Patient extends Person implements java.io.Serializable{
 	private HashMap<Integer, MedicalRecord> medicalRecords;
 	private ArrayList<Lab> labs;
 	
-	public Patient(String id,int age, int phone, String name, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases) {
+	public Patient(String id,int age, long phone, String name, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases) {
 		super(id, phone, name, email);
 		this.weight = weight;
 		this.height = height;
@@ -145,45 +145,6 @@ public class Patient extends Person implements java.io.Serializable{
 	public String medicalSummary() { 
 		
 		return null;
-		
-	}
-	
-	public boolean serialize()
-	{
-		try {
-		FileOutputStream fileOut = new FileOutputStream("src\\Model\\files\\patient.ser");
-		ObjectOutputStream oos = new ObjectOutputStream(fileOut);
-		oos.writeObject(this);
-		oos.close();
-		fileOut.close();
-		return true;
-		}
-		catch (IOException i)
-		{
-			i.printStackTrace();
-			return false;
-		}
-		
-	}
-	
-	public Patient deserialize()
-	{
-		try {
-			FileInputStream fileIn = new FileInputStream("src\\Model\\files\\patient.ser");
-			ObjectInputStream ois = new ObjectInputStream(fileIn);
-			Patient patient = (Patient) ois.readObject();
-			ois.close();
-			fileIn.close();
-			return patient;
-		}
-		catch (IOException i)
-		{
-			i.printStackTrace();
-			return null;
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			return null;
-		}
 		
 	}
 }

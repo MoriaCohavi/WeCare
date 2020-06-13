@@ -7,6 +7,7 @@ import Model.Doctor;
 import Model.MedicalRecord;
 import Model.Patient;
 import View.DoctorView;
+import View.ManagerPanelView;
 import View.PatientDetailsView;
 
 public class doctorController {
@@ -27,7 +28,7 @@ public class doctorController {
 			this.currentModelDoctor = new Doctor (id, phone, name, email, special,password,user_type);
 	}
 	
-	public boolean addNewPatient (String id,int age, int phone, String name, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases) {
+	public boolean addNewPatient (String id,int age, long phone, String name, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases) {
 		
 		Patient newPatient = new Patient(id, age, phone, name, email, weight, height, gender, allergies, subscriptions, chronic_diseases);
 		if (currentModelDoctor.add(newPatient))
