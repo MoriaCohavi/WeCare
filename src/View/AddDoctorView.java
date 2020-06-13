@@ -11,11 +11,13 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import Controller.authenticationController;
+import Controller.doctorController;
 
 import javax.swing.JButton;
 
 public class AddDoctorView {
 
+	private doctorController doctorController;
 	private long token;
 	private JFrame frmAddDoctor;
 	private JTextField txtf_name;
@@ -55,7 +57,7 @@ public class AddDoctorView {
 	private void initialize(long token) {
 		frmAddDoctor = new JFrame();
 		frmAddDoctor.setTitle("Add doctor");
-		frmAddDoctor.setBounds(100, 100, 450, 730);
+		frmAddDoctor.setBounds(100, 100, 450, 536);
 		frmAddDoctor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmAddDoctor.getContentPane().setLayout(null);
 		

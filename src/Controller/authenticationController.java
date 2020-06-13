@@ -17,7 +17,7 @@ public class authenticationController{
 		LoginView login_view = new LoginView();
 	}
 
-    private static boolean isNumeric(String strNum) {
+    private boolean isNumeric(String strNum) {
         if (strNum == null) {
             return false;
         }
@@ -27,7 +27,7 @@ public class authenticationController{
             return false;
     }
 
-    public static long login(String id, String password)
+    public long login(String id, String password)
     {
         if (isNumeric(id) && id.length() == 9)
             return Authentication.signIn(id,password);
@@ -35,7 +35,7 @@ public class authenticationController{
             return -2; //ID can contain 9 digits only
     }
     
-    public static long register(String id, User user)
+    public long register(String id, User user)
     {
         if (isNumeric(id) && id.length() == 9)
             return Authentication.signUp(id,user);

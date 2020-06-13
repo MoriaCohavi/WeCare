@@ -16,6 +16,7 @@ import javax.swing.JPasswordField;
 
 public class LoginView {
 
+	authenticationController authController;
 	private JFrame frmLogin;
 	private JTextField txtf_uname;
 	private JPasswordField passwdfield;
@@ -115,7 +116,8 @@ public class LoginView {
 		btn_login.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				long returnCode = authenticationController.login(txtf_uname.getText(), passwdfield.getText());
+				authController = new authenticationController();
+				long returnCode = authController.login(txtf_uname.getText(), passwdfield.getText());
 				if (returnCode == -1)
 					lbl_message.setText("Wrong username or password");
 				else if (returnCode == -2)
@@ -124,7 +126,7 @@ public class LoginView {
 				}
 				else
 				{
-					String type = authenticationController.fetchUserType(returnCode);
+					String type = authController.fetchUserType(returnCode);
 					if (type.equals("Manager"))
 					{
 						ManagerPanelView managerPanel = new ManagerPanelView(returnCode);

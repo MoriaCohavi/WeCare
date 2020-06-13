@@ -34,22 +34,22 @@ public class managerController {
 	{
 		
 		Doctor newDoctor = new Doctor(id, phone, name, email, special, password, user_type);
-		if(clinicManager.addDoctor(newDoctor))
+		if(clinicManager.add(newDoctor))
 			return true;
 		
 		return false;
 	}
 	
-	public boolean registerManager() {
-		
-		if(authenticationController.register(this.clinicManager.getID(), this.clinicManager) > 0)
-			return true;
-		return false;
-	}
+//	public boolean registerManager() {
+//		
+//		if(authenticationController.register(this.clinicManager.getID(), this.clinicManager) > 0)
+//			return true;
+//		return false;
+//	}
 	
 	public boolean deleteDoctor(String docID) {
 		
-		if(clinicManager.removeDoctor(docID))
+		if(clinicManager.remove(docID))
 			return true;
 		
 		return false;
@@ -64,6 +64,10 @@ public class managerController {
 			
 	}
 	
+	public Manager getManager()
+	{
+		return clinicManager;
+	}
 	
 	public void serialize(serHandlerController handler)
 	{
