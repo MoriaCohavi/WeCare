@@ -7,6 +7,7 @@ import Model.Doctor;
 import Model.MedicalRecord;
 import Model.Patient;
 import View.DoctorView;
+import View.ManagerPanelView;
 import View.PatientDetailsView;
 
 public class doctorController {

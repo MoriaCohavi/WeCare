@@ -65,7 +65,7 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	public boolean add(Object obj) {
 		
 		Patient newPatient = (Patient)obj;
-		if (patients.containsValue(newPatient.getName()))
+		if (!search(newPatient.getId()))
 		{
 			patients.put(newPatient.getId(), newPatient);
 			return true;
@@ -73,6 +73,7 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 		return false;
 		
 	}
+	
 	
 	public boolean remove(String id) {
 		

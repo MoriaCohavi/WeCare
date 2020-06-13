@@ -247,7 +247,12 @@ public class PatientDetailsView {
 						gender = "Male";
 					else
 						gender = "Female";
-					
+					try
+					{
+						Long.parseLong(txtf_phone.getText());
+						Integer.parseInt(txtf_age.getText());
+						
+					}
 					if (!(docCtrl.addNewPatient(txtf_id.getText(), Long.parseLong(txtf_phone.getText()), txtf_name.getText(), txtf_email.getText(), Integer.parseInt(txtf_weight.getText()),  Integer.parseInt(txtf_height.getText()), gender, txtf_allergies.getText(), txtf_subscriptions.getText())))
 						lbl_warning.setText("User exists");
 					else
