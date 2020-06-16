@@ -10,9 +10,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import Model.Authentication;
-import Model.User;
-import Model.StatisitcalData;
+import Model.*;
 
 public class StatisticalDataTest {
 	

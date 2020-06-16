@@ -9,7 +9,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import com.sun.glass.events.WindowEvent;
 import Controller.authenticationController;
 import Controller.managerController;
 import Model.Doctor;
@@ -22,6 +21,7 @@ import javax.swing.SwingConstants;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.HashMap;
 
 public class ManagerPanelView {
