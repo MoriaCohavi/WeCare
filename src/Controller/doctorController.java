@@ -3,12 +3,8 @@ package Controller;
 import java.time.LocalTime;
 import java.util.HashMap;
 
-import Model.Doctor;
-import Model.MedicalRecord;
-import Model.Patient;
-import View.DoctorView;
-import View.ManagerPanelView;
-import View.PatientDetailsView;
+import Model.*;
+import View.*;
 
 public class doctorController {
 	public static String serPath = "src\\Model\\files\\doctor.ser";

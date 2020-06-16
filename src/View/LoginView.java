@@ -126,7 +126,16 @@ public class LoginView {
 				}
 				else
 				{
-					authController.nextPage(returnCode);
+					String type = authController.fetchUserType(returnCode);
+					if (type.equals("Manager"))
+					{
+						new ManagerViewPanel(returnCode);
+					}
+					else if (type.equals("Doctor"))
+					{
+						new DoctorView(returnCode);
+					}
+					
 					frmLogin.dispose();
 				}	
 			}

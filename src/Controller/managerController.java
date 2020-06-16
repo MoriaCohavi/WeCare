@@ -40,7 +40,7 @@ public class managerController {
 		if(clinicManager.add(newDoctor))
 		{
 			authenticationController.register(newDoctor.getId(), newDoctor);
-			ManagerPanelView managerPanel = new ManagerPanelView(managerToken);
+			ManagerViewPanel managerPanel = new ManagerViewPanel(managerToken);
 			return true;
 			
 		}
@@ -75,7 +75,7 @@ public class managerController {
 	
 	public void openManagerPanel(long token)
 	{
-		ManagerPanelView managerView = new ManagerPanelView(token);
+		ManagerViewPanel managerView = new ManagerViewPanel(token);
 	}
 	
 	public Manager getManager()
