@@ -234,6 +234,16 @@ public class PatientDetailsView {
 		txtf_email.setColumns(10);
 		txtf_email.setBounds(323, 186, 257, 26);
 		panel.add(txtf_email);
+		
+		JButton btnNewButton = new JButton("Add Medical Record");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				//create&add new window
+			}
+		});
+		btnNewButton.setBounds(746, 182, 222, 29);
+		panel.add(btnNewButton);
 		frmPatientDetails.setVisible(true);
 		
 		btn_save.addMouseListener(new MouseAdapter() {
