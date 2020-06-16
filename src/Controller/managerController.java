@@ -40,7 +40,6 @@ public class managerController {
 		if(clinicManager.add(newDoctor))
 		{
 			authenticationController.register(newDoctor.getId(), newDoctor);
-			ManagerPanelView managerPanel = new ManagerPanelView(managerToken);
 			return true;
 			
 		}
@@ -69,13 +68,12 @@ public class managerController {
 			clinicManager.setStatsFlag(LocalDateTime.now());
 			clinicManager.calcStats();
 		}
-		StatisticalReportView statisticalView = new StatisticalReportView();
 			
 	}
 	
 	public void openManagerPanel(long token)
 	{
-		ManagerPanelView managerView = new ManagerPanelView(token);
+		ManagerViewPanel managerView = new ManagerViewPanel(token);
 	}
 	
 	public Manager getManager()

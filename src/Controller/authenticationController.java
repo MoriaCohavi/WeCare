@@ -8,7 +8,6 @@ import View.*;
 public class authenticationController{
 	public static String userSerPath = "src\\Model\\files\\users.ser";
 	private static Authentication authentication;
-	private LoginView login_view;
 	
 	public authenticationController() {
 		
@@ -94,22 +93,6 @@ public class authenticationController{
 		return true;
 	}
 	
-	public void openLoginForm()
-	{
-		login_view = new LoginView();
-	}
-	
-	public void nextPage(long token)
-	{
-		String type = this.fetchUserType(token);
-		if (type.equals("Manager"))
-		{
-			new ManagerPanelView(token);
-		}
-		else if (type.equals("Doctor"))
-		{
-			new DoctorView(token);
-		}
-	}
+
 	
 }

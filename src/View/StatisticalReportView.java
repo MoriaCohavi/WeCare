@@ -10,6 +10,8 @@ import Controller.managerController;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class StatisticalReportView {
 
@@ -45,9 +47,14 @@ public class StatisticalReportView {
 	 */
 	private void initialize() {
 		frmStatisticalDetails = new JFrame();
+		frmStatisticalDetails.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				frmStatisticalDetails.dispose();
+			}
+		});
 		frmStatisticalDetails.setTitle("Statistical details");
 		frmStatisticalDetails.setBounds(100, 100, 472, 300);
-		frmStatisticalDetails.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JPanel panel = new JPanel();
 		frmStatisticalDetails.getContentPane().add(panel, BorderLayout.CENTER);

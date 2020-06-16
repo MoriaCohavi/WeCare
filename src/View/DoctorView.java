@@ -157,7 +157,7 @@ public class DoctorView {
 		btnAddPatient = new JButton("Add Patient");
 		btnAddPatient.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				docCtrl.openAddPatient(doctorToken);
+				PatientDetailsView patientView = new PatientDetailsView(doctorToken);
 				frmDoctor.dispose();
 			}
 		});
