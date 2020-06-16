@@ -14,6 +14,11 @@ public class Authentication implements java.io.Serializable{
 	private static HashMap<String,User> users = new HashMap<String,User>(); // we need to understand how we create this list. 
 	private static HashMap<Long,User> loggedinusers = new HashMap<Long,User>();
 	
+	public Authentication()
+	{
+		
+	}
+	
 	public static String SHA1(String password) // this function take a clear password and change it to SHA1 hash.
 	{
 		String sha1 = "";
@@ -28,10 +33,9 @@ public class Authentication implements java.io.Serializable{
 		return sha1;
 	}
 	
-	public static long signUp(String id, User user)
+	public static int signUp(String id, User user)
 	{
-		User temp = users.get(id);
-		if  (temp != null && temp.getId() != user.getId())
+		if  (users.containsKey(id))
 			return -1;
 		users.put(id, user);
 		return 1;
@@ -62,9 +66,10 @@ public class Authentication implements java.io.Serializable{
 	
 	public static boolean signOut(long token)
 	{
-		if(loggedinusers.get(token) != null)
+		if(loggedinusers.containsKey(token))
 		{
 			loggedinusers.get(token).revokeToken();
+			loggedinusers.remove(token, loggedinusers.get(token));
 			return true;
 		}
 		return false;
@@ -72,20 +77,20 @@ public class Authentication implements java.io.Serializable{
 	
 	public static boolean validateUser(long token,String typeNeed)
 	{
-		if(!(loggedinusers.get(token) == null || typeNeed != loggedinusers.get(token).getUser_type())) // type need has to come from authentication controller.
+		if(!(loggedinusers.containsKey(token)) || (typeNeed != loggedinusers.get(token).getUser_type()))
 			return false;
 		else
 			return true;
 	}
 	
-	public static boolean resetPassword(long token, String cPassword, String newPassword)
+/*	public static boolean resetPassword(long token, String cPassword, String newPassword)
 	{
 		if(SHA1(cPassword) != loggedinusers.get(token).getPassword())
 			return false;
 		
 		loggedinusers.get(token).setPassword(newPassword);
 		return true;
-	}
+	} */
 	
 	public static long generateToken(String id) 
 	{
@@ -114,6 +119,22 @@ public class Authentication implements java.io.Serializable{
 	public static String getType(long token)
 	{
 		return loggedinusers.get(token).getUser_type();
+	}
+	
+	public HashMap<Long, User> getLoggedinusers() {
+		return loggedinusers;
+	}
+	
+	public HashMap<String, User> getUsers() {
+		return users;
+	}
+	
+	public void setLoggedinusers(HashMap<Long, User> loggedinusers) {
+		Authentication.loggedinusers = loggedinusers;
+	}
+	
+	public void setUsers(HashMap<String, User> users) {
+		Authentication.users = users;
 	}
 	
 //	public static boolean serialize()

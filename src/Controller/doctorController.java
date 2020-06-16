@@ -1,10 +1,14 @@
 package Controller;
 
 import java.time.LocalTime;
+import java.util.HashMap;
 
 import Model.Doctor;
 import Model.MedicalRecord;
 import Model.Patient;
+import View.DoctorView;
+import View.ManagerPanelView;
+import View.PatientDetailsView;
 
 public class doctorController {
 	public static String serPath = "src\\Model\\files\\doctor.ser";
@@ -15,13 +19,18 @@ public class doctorController {
 		return this.currentModelDoctor;
 	}
 	
+	public doctorController(Doctor doctor)
+	{
+		currentModelDoctor = doctor;
+	}
+	
 	public doctorController(String id, int phone, String name, String email, String special,String password,String user_type) { // needs to include doctorview obj
 			this.currentModelDoctor = new Doctor (id, phone, name, email, special,password,user_type);
 	}
 	
-	public boolean addNewPatient (String id, int phone, String name, String email, int weight, int height, String gender, String allergies, String subscriptions) {
+	public boolean addNewPatient (String id,int age, long phone, String name, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases) {
 		
-		Patient newPatient = new Patient(id, phone, name, email, weight, height, gender, allergies, subscriptions);
+		Patient newPatient = new Patient(id, age, phone, name, email, weight, height, gender, allergies, subscriptions, chronic_diseases);
 		if (currentModelDoctor.add(newPatient))
 			return true;
 
@@ -36,7 +45,15 @@ public class doctorController {
 		return false;	
 	}
 	
+	public void openAddPatient(long doctorToken)
+	{
+		PatientDetailsView patientView = new PatientDetailsView(doctorToken);
+	}
 	
+	public void openDoctorView(long doctorToken)
+	{
+		DoctorView doctorView = new DoctorView(doctorToken);
+	}
 	
 	/*public String viewPatientInfo (String patientId) {
 		
@@ -75,15 +92,19 @@ public class doctorController {
 		
 	}
  
-	public void serialize(serHandlerController handler)
+	public void serialize()
 	{
 //		handler.WriteObjectToFile(currentModelDoctor, serPath);
 	}
 	
-	public void deserialize(serHandlerController handler)
+	public void deserialize()
 	{
 //		currentModelDoctor = (Doctor)handler.ReadObjectFromFile(serPath);
 	}
 
+	public HashMap <String, Patient> getPatientsList()
+	{
+		return this.currentModelDoctor.getPatients();
+	}
 
 }

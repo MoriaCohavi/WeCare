@@ -35,7 +35,7 @@ public class Serialization {
 	          return e;
 	       } catch (Exception ex) {
 	            ex.printStackTrace();
-	            return false;
+	            return null;
 	        }
     }
 }

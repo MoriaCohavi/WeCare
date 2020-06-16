@@ -1,11 +1,13 @@
 package Controller;
 
+import java.util.HashMap;
+
 import Model.*;
 import View.*;
 
 public class authenticationController{
-	public static String serPath = "src\\Model\\files\\authentication.ser";
-	private Authentication authentication;
+	public static String userSerPath = "src\\Model\\files\\users.ser";
+	private static Authentication authentication;
 	private LoginView login_view;
 	
 	public authenticationController() {
@@ -24,6 +26,11 @@ public class authenticationController{
             
             return false;
     }
+    
+    public User getLoggedinUser(long token)
+    {
+    	return authentication.getLoggedinusers().get(token);
+    }
 
     public long login(String id, String password)
     {
@@ -33,7 +40,7 @@ public class authenticationController{
             return -2; //ID can contain 9 digits only
     }
     
-    public static long register(String id, User user)
+    public static int register(String id, User user)
     {
         if (isNumeric(id) && id.length() == 9)
             return Authentication.signUp(id,user);
@@ -49,14 +56,14 @@ public class authenticationController{
         return false;
     } */
 
-    public static String changePassword(long token,String cPassword,String nPassword )
+ /*   public static String changePassword(long token,String cPassword,String nPassword )
     {
       if(Authentication.resetPassword(token,cPassword,nPassword))
         return "Password changed successfuly";
       
       else
         return "Wrong current password, password did not changed";
-    }
+    } */
 
     public static String logOut(long token)
     {
@@ -71,14 +78,20 @@ public class authenticationController{
     	return Authentication.getType(token);
     }
     
-	public void serialize(serHandlerController handler)
+	public void serialize()
 	{
-		handler.serialize(authentication, serPath);
+		HashMap<String,User> tempUsers = authentication.getUsers();
+		serHandlerController.serialize(tempUsers, userSerPath);
+		
 	}
 	
-	public void deserialize(serHandlerController handler)
+	public boolean deserialize()
 	{
-		authentication = (Authentication)handler.deserialize(serPath);
+		HashMap<String,User> usersTemp = (HashMap<String,User>)serHandlerController.deserialize(userSerPath);
+		if (usersTemp == null)
+			return false;
+		this.authentication.setUsers(usersTemp);
+		return true;
 	}
 	
 	public void openLoginForm()
@@ -91,12 +104,11 @@ public class authenticationController{
 		String type = this.fetchUserType(token);
 		if (type.equals("Manager"))
 		{
-//			ManagerPanelView managerPanel = new ManagerPanelView(token);
-			ManagerPanelView managerPanel = new ManagerPanelView(token);
+			new ManagerPanelView(token);
 		}
 		else if (type.equals("Doctor"))
 		{
-			//DoctorView doctorPanel = new DoctorView();
+			new DoctorView(token);
 		}
 	}
 	

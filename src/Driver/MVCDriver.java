@@ -3,6 +3,10 @@ package Driver;
 import View.*;
 import Controller.*;
 import Model.*;
+import ModelTesting.*;
+import org.junit.runner.JUnitCore;
+import org.junit.runner.Result;
+import org.junit.runner.notification.Failure;
 
 public class MVCDriver {
 	
@@ -12,6 +16,9 @@ public class MVCDriver {
 		//clinic_controller.deserialize(handler);
 		
 		authenticationController auth_controller = new authenticationController();
+		auth_controller.deserialize();
+		
+		
 		auth_controller.register(clinic_controller.getClinicManager().getID(),clinic_controller.getClinicManager());
 		auth_controller.openLoginForm();
 		
@@ -21,14 +28,13 @@ public class MVCDriver {
 			manager_controller.setClinicManager(clinic_controller.getClinicManager());
 			
 			
-		}
+		} 
 		
-				
-		
-		
-		
-		
-		
+						
+		Result result = JUnitCore.runClasses(StatisticalDataTest.class);
+	    for (Failure failure : result.getFailures()) {
+	      System.out.println(failure.toString());
+	    }
 	}
 }
 
