@@ -122,6 +122,7 @@ public class ManagerViewPanel {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				mgmtController.updateStats();
+				StatisticalReportView statisticalView = new StatisticalReportView();
 			}
 		});
 		btn_statistical.setBounds(350, 147, 178, 21);
