@@ -1,20 +1,11 @@
 package View;
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.BoxLayout;
-import javax.swing.JToolBar;
-import javax.swing.border.MatteBorder;
 import java.awt.Color;
 import javax.swing.JScrollPane;
-import javax.swing.JScrollBar;
-import javax.swing.JPasswordField;
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JList;
-import javax.swing.AbstractListModel;
-import java.awt.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,13 +15,8 @@ import Model.Patient;
 
 import java.awt.Dimension;
 import javax.swing.DebugGraphics;
-import java.awt.Component;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-import javax.swing.JSeparator;
-import javax.swing.SwingConstants;
-import javax.swing.JTextPane;
-import java.awt.TextField;
 import java.util.HashMap;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -49,7 +35,6 @@ public class DoctorView {
 	private JLabel lblName;
 	private JLabel lblPhone;
 	private JLabel lblEmail;
-	private JButton btnGetDailyTestsReports;
 	private JTextField txtName;
 	private JTextField txtId;
 	private JTextField txtPhone;
@@ -94,7 +79,6 @@ public class DoctorView {
 		frmDoctor = new JFrame();
 		frmDoctor.setTitle("Doctor");
 		frmDoctor.setBounds(100, 100, 1058, 571);
-		frmDoctor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDoctor.getContentPane().setLayout(null);
 		frmDoctor.setVisible(true);
 		
@@ -168,8 +152,7 @@ public class DoctorView {
 		btnAddPatient = new JButton("Add Patient");
 		btnAddPatient.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PatientDetailsView patientView = new PatientDetailsView(doctorToken);
-				frmDoctor.dispose();
+				new PatientDetailsView(doctorToken);
 			}
 		});
 		btnAddPatient.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -190,11 +173,6 @@ public class DoctorView {
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblEmail.setBounds(693, 239, 119, 20);
 		frmDoctor.getContentPane().add(lblEmail);
-		
-		btnGetDailyTestsReports = new JButton("Get Daily Tests Reports");
-		btnGetDailyTestsReports.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnGetDailyTestsReports.setBounds(693, 475, 244, 29);
-		frmDoctor.getContentPane().add(btnGetDailyTestsReports);
 		
 		txtName = new JTextField();
 		txtName.setText(details.getDoctorName());

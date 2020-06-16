@@ -3,7 +3,6 @@ package Controller;
 import java.util.HashMap;
 
 import Model.*;
-import View.*;
 
 public class authenticationController{
 	public static String userSerPath = "src\\Model\\files\\users.ser";

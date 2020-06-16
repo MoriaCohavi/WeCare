@@ -2,7 +2,6 @@ package View;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Font;
 import javax.swing.DebugGraphics;
 import javax.swing.JButton;
@@ -15,9 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import Controller.*;
-import Controller.managerController;
-import Model.Doctor;
-import Model.Manager;
+import Model.*;
 
 public class ManagerView {
 

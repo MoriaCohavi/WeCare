@@ -146,7 +146,6 @@ public class ManagerViewPanel {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				AddDoctorView addDoctorView = new AddDoctorView(token);
-				frmManager.dispose();
 			}
 		});
 		btn_addDoctor.setBounds(131, 380, 96, 21);

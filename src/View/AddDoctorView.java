@@ -70,7 +70,7 @@ public class AddDoctorView {
 		frmAddDoctor.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				managerController.openManagerPanel(token);
+				DoctorDetailsView add = new DoctorDetailsView();
 			}
 		});
 		

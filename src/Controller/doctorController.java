@@ -4,12 +4,10 @@ import java.time.LocalTime;
 import java.util.HashMap;
 
 import Model.*;
-import View.*;
 
 public class doctorController {
 	public static String serPath = "src\\Model\\files\\doctor.ser";
 	private Doctor currentModelDoctor;
-	//private doctor view implementation
 	
 	public Doctor getDetails() {
 		return this.currentModelDoctor;
@@ -42,10 +40,6 @@ public class doctorController {
 	}
 	
 	
-	public void openDoctorView(long doctorToken)
-	{
-		DoctorView doctorView = new DoctorView(doctorToken);
-	}
 	
 	/*public String viewPatientInfo (String patientId) {
 		
@@ -86,12 +80,12 @@ public class doctorController {
  
 	public void serialize()
 	{
-//		handler.WriteObjectToFile(currentModelDoctor, serPath);
+		serHandlerController.serialize(currentModelDoctor, serPath);
 	}
 	
 	public void deserialize()
 	{
-//		currentModelDoctor = (Doctor)handler.ReadObjectFromFile(serPath);
+		currentModelDoctor = (Doctor)serHandlerController.deserialize(serPath);
 	}
 
 	public HashMap <String, Patient> getPatientsList()

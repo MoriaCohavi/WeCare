@@ -3,7 +3,6 @@ package Controller;
 
 import java.time.*;
 import Model.*;
-import View.*;
 
 public class managerController {
 	public static String serPath = "src\\Model\\files\\manager.ser";
@@ -69,11 +68,6 @@ public class managerController {
 			clinicManager.calcStats();
 		}
 			
-	}
-	
-	public void openManagerPanel(long token)
-	{
-		ManagerViewPanel managerView = new ManagerViewPanel(token);
 	}
 	
 	public Manager getManager()
