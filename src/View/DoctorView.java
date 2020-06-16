@@ -48,17 +48,12 @@ public class DoctorView {
 	private JLabel lblNewLabel;
 	private JLabel lblName;
 	private JLabel lblPhone;
-	private JLabel lblAddress;
 	private JLabel lblEmail;
-	private JLabel lblClinicName;
-	private JSeparator separator;
 	private JButton btnGetDailyTestsReports;
 	private JTextField txtName;
 	private JTextField txtId;
 	private JTextField txtPhone;
-	private JTextField txtAddress;
 	private JTextField txtEmail;
-	private JTextField txtClinicName;
 	private authenticationController authCtrl;
 	private doctorController docCtrl;
 	private Doctor details;
@@ -174,6 +169,7 @@ public class DoctorView {
 		btnAddPatient.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				docCtrl.openAddPatient(doctorToken);
+				frmDoctor.dispose();
 			}
 		});
 		btnAddPatient.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -190,26 +186,10 @@ public class DoctorView {
 		lblPhone.setBounds(693, 208, 119, 20);
 		frmDoctor.getContentPane().add(lblPhone);
 		
-		lblAddress = new JLabel("Address");
-		lblAddress.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblAddress.setBounds(693, 244, 119, 20);
-		frmDoctor.getContentPane().add(lblAddress);
-		
 		lblEmail = new JLabel("Email");
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblEmail.setBounds(693, 280, 119, 20);
+		lblEmail.setBounds(693, 239, 119, 20);
 		frmDoctor.getContentPane().add(lblEmail);
-		
-		lblClinicName = new JLabel("Clinic Name");
-		lblClinicName.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblClinicName.setBounds(693, 316, 119, 20);
-		frmDoctor.getContentPane().add(lblClinicName);
-		
-		separator = new JSeparator();
-		separator.setOrientation(SwingConstants.VERTICAL);
-		separator.setForeground(Color.BLACK);
-		separator.setBounds(670, 127, 351, 379);
-		frmDoctor.getContentPane().add(separator);
 		
 		btnGetDailyTestsReports = new JButton("Get Daily Tests Reports");
 		btnGetDailyTestsReports.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -231,34 +211,18 @@ public class DoctorView {
 		frmDoctor.getContentPane().add(txtId);
 		
 		txtPhone = new JTextField();
-//		txtPhone.setText(details.getPhone().toString());
+		txtPhone.setText(String.valueOf(details.getDoctorPhone()));
 		txtPhone.setEnabled(false);
 		txtPhone.setColumns(10);
 		txtPhone.setBounds(821, 206, 146, 26);
 		frmDoctor.getContentPane().add(txtPhone);
 		
-		txtAddress = new JTextField();
-//		txtAddress.setText(details.getAddress());
-		txtAddress.setEnabled(false);
-		txtAddress.setColumns(10);
-		txtAddress.setBounds(821, 242, 146, 26);
-		frmDoctor.getContentPane().add(txtAddress);
-		
 		txtEmail = new JTextField();
 		txtEmail.setText(details.getDoctorEmail());
 		txtEmail.setEnabled(false);
 		txtEmail.setColumns(10);
-		txtEmail.setBounds(821, 278, 146, 26);
+		txtEmail.setBounds(821, 239, 146, 26);
 		frmDoctor.getContentPane().add(txtEmail);
-		
-		txtClinicName = new JTextField();
-//		txtClinicName.setText(details.getClinicName());
-		txtClinicName.setEnabled(false);
-		txtClinicName.setColumns(10);
-		txtClinicName.setBounds(821, 314, 146, 26);
-		frmDoctor.getContentPane().add(txtClinicName);
-		
-		lblName = new JLabel("ID");
 		lblName.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblName.setBounds(693, 172, 119, 20);
 		frmDoctor.getContentPane().add(lblName);
