@@ -1,16 +1,8 @@
 package Model;
 
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 
 public class Manager extends User implements java.io.Serializable, CommandInterface {
 	
@@ -89,7 +81,14 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		if(doctors.containsKey(id)) 
 			return true;
 		return false;
-			
+	}
+	
+	public Doctor getItem(String id) {
+		
+		if(search(id)) 
+			return doctors.get(id);
+		else 
+			return null;
 	}
 	
 	public boolean add(Object obj) {
@@ -105,14 +104,11 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	}
 	
 	public boolean remove(String id) {
-			
-			if (search(id)) {
-				doctors.remove(id);
-				return true;
-			}
-			
-			return false;		
-			
+		if (search(id)) {
+			doctors.remove(id);
+			return true;
+		}
+		return false;		
 	}
 	
 	public void deleteOldStats() {

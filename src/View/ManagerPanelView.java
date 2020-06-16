@@ -152,7 +152,7 @@ public class ManagerPanelView {
 		btnSearch = new JButton("Search");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				boolean isExist = details.search("");
+				Doctor isExist = details.getItem("111111111");
 			}
 		});
 		btnSearch.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -211,7 +211,7 @@ public class ManagerPanelView {
 		frmManager.getContentPane().add(btnViewStatisticalReport);
 		
 		txtName = new JTextField();
-		txtName.setText(details.getName());
+//		txtName.setText(details.getName());
 		txtName.setEnabled(false);
 		txtName.setBounds(821, 133, 146, 26);
 		frmManager.getContentPane().add(txtName);

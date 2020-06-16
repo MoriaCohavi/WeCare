@@ -93,19 +93,17 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 			
 	}
 	
-	public Patient getPatient(String patientId) {
+	public Patient getItem(String patientId) {
 			
-			if (search(patientId))
-				return this.patients.get(patientId);
-				
-			else return null;
+		if (search(patientId))
+			return this.patients.get(patientId);
 			
-		}
+		else return null;
+	}
 	
 	public LocalDate getFirstRecord () {
 		return stats.entrySet().iterator().next().getKey();
 	}
-	
 	
 	public StatisitcalData getAvgRecords() {
 		

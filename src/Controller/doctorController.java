@@ -55,28 +55,25 @@ public class doctorController {
 	
 	public MedicalRecord viewMedicalRecord (String patientId, int recordId) {
 		
-		return currentModelDoctor.getPatient(patientId).getMedicalRecord(recordId);
+		return currentModelDoctor.getItem(patientId).getMedicalRecord(recordId);
 		
 	}
 	
 	public Patient openPatientFile (String patientId) {
 		
-		return currentModelDoctor.getPatient(patientId);
+		return currentModelDoctor.getItem(patientId);
 	}
-	
-	
-	
 	
 	public boolean openNewMedicalRecord (String patientId, int days, String purpose, String description, String summary,
 			String sub, String diagnose, LocalTime sT, LocalTime eT, int w, int h, int hr, int t, int sysBP, int diaBP) {
 		
 		if (currentModelDoctor.search(patientId)){
 			
-			int record = currentModelDoctor.getPatient(patientId).getRecordCounter() + 1;
+			int record = currentModelDoctor.getItem(patientId).getRecordCounter() + 1;
 			
 			MedicalRecord newRecord = new MedicalRecord(currentModelDoctor.getDoctorID(), days, record, purpose,description, summary, sub,diagnose, sT, eT, w, h, hr, t, sysBP, diaBP) ;
 			
-			currentModelDoctor.getPatient(patientId).addMedicalRecord(newRecord);
+			currentModelDoctor.getItem(patientId).addMedicalRecord(newRecord);
 			return true;
 		}
 		
