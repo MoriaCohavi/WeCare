@@ -41,10 +41,6 @@ public class doctorController {
 		return false;	
 	}
 	
-	public void openAddPatient(long doctorToken)
-	{
-		PatientDetailsView patientView = new PatientDetailsView(doctorToken);
-	}
 	
 	public void openDoctorView(long doctorToken)
 	{
