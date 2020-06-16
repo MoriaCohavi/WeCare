@@ -71,6 +71,7 @@ public class AddDoctorView {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				managerController.openManagerPanel(token);
+				frmAddDoctor.dispose();
 			}
 		});
 		

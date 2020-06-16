@@ -22,15 +22,6 @@ public class MVCDriver {
 		
 		auth_controller.register(clinic_controller.getClinicManager().getID(),clinic_controller.getClinicManager());
 		LoginView StartLogin = new LoginView();
-		
-		if (true)//manager logged in){
-		{
-			managerController manager_controller = new managerController();
-			manager_controller.setClinicManager(clinic_controller.getClinicManager());
-			
-			
-		} 
-		
 						
 		Result result = JUnitCore.runClasses(StatisticalDataTest.class);
 	    for (Failure failure : result.getFailures()) {

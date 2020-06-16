@@ -11,6 +11,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import com.sun.glass.events.WindowEvent;
 import Controller.authenticationController;
+import Controller.doctorController;
 import Controller.managerController;
 import Model.Doctor;
 import Model.Manager;
@@ -28,9 +29,10 @@ public class ManagerPanelView {
 
 	private managerController managerCtrl;
 	private authenticationController authCtrl;
+	private doctorController docCtrl;
 	private HashMap <String, Doctor> doctorsList;
 	private Manager details;
-	
+		
 	private JFrame frmManager;
 	private JSeparator separator;
 	private JTable tbl_doctors;
@@ -85,11 +87,12 @@ public class ManagerPanelView {
 		frmManager = new JFrame();
 		frmManager.setTitle("Manager");
 		frmManager.setBounds(100, 100, 1058, 571);
-		frmManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		frmManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmManager.getContentPane().setLayout(null);
 		frmManager.setVisible(true);
 	
 		frmManager.addWindowListener(new WindowAdapter() {
+//			@Override
 			public void windowClosing(WindowEvent e) {
 				authCtrl.serialize();
 				System.exit(0);
@@ -152,7 +155,7 @@ public class ManagerPanelView {
 		btnSearch = new JButton("Search");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Doctor isExist = details.getItem("111111111");
+				Doctor isExist = details.getItem("987987987");
 			}
 		});
 		btnSearch.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -162,7 +165,8 @@ public class ManagerPanelView {
 		btnAddDoctor = new JButton("Add Doctor");
 		btnAddDoctor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				managerCtrl.openManagerPanel(managerToken);
+				AddDoctorView add = new AddDoctorView(managerToken);
+				frmManager.dispose();
 			}
 		});
 		btnAddDoctor.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -218,7 +222,7 @@ public class ManagerPanelView {
 		txtName.setColumns(10);
 		
 		txtID = new JTextField();
-		txtID.setText(details.getID());
+//		txtID.setText(details.getID());
 		txtID.setEnabled(false);
 		txtID.setColumns(10);
 		txtID.setBounds(821, 170, 146, 26);
@@ -239,7 +243,7 @@ public class ManagerPanelView {
 		frmManager.getContentPane().add(txtAddress);
 		
 		txtEmail = new JTextField();
-		txtEmail.setText(details.getEmail());
+//		txtEmail.setText(details.getEmail());
 		txtEmail.setEnabled(false);
 		txtEmail.setColumns(10);
 		txtEmail.setBounds(821, 278, 146, 26);
@@ -251,6 +255,6 @@ public class ManagerPanelView {
 		txtClinicName.setColumns(10);
 		txtClinicName.setBounds(821, 314, 146, 26);
 		frmManager.getContentPane().add(txtClinicName);
-		frmManager.setVisible(true);
+//		frmManager.setVisible(true);
 	}
 }
