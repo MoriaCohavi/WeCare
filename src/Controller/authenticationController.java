@@ -9,9 +9,6 @@ public class authenticationController{
 	private static Authentication authentication;
 	
 	public authenticationController() {
-		
-		// init users hashmap
-		// add manager specificly
 		authentication = new Authentication();
 	}
 
