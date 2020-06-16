@@ -24,7 +24,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.util.HashMap;
 
-public class ManagerViewPanel {
+public class ManagerPanelView {
 
 	private managerController managerCtrl;
 	private authenticationController authCtrl;

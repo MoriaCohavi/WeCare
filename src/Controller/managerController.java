@@ -73,7 +73,7 @@ public class managerController {
 	
 	public void openManagerPanel(long token)
 	{
-		ManagerViewPanel managerView = new ManagerViewPanel(token);
+		ManagerPanelView managerView = new ManagerPanelView(token);
 	}
 	
 	public Manager getManager()
