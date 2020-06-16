@@ -19,7 +19,7 @@ import Model.Lab;
 public class PatientTest {
 
 	@Test
-	public void CheckVisitTime()
+	public void CheckUpdatePatient()
 	{
 		
 		Patient patient = new Patient("123456789",26, 0541234567, "moria test", "moria@test.com", 53, 156, "Female", "", "","");
