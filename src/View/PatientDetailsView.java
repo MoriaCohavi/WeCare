@@ -77,7 +77,8 @@ public class PatientDetailsView {
 		frmPatientDetails.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				docCtrl.openDoctorView(doctorToken);
+				frmPatientDetails.dispose();
+				
 			}
 		});
 		

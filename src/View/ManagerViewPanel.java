@@ -1,6 +1,7 @@
 package View;
 
 import java.awt.Font;
+import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -23,8 +24,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.util.HashMap;
 
-
-public class ManagerPanelView {
+public class ManagerViewPanel {
 
 	private managerController managerCtrl;
 	private authenticationController authCtrl;
@@ -66,14 +66,12 @@ public class ManagerPanelView {
 //			}
 //		});
 //	}
-
 	/**
 	 * Create the application.
 	 */
 	public ManagerPanelView(long managerToken) {
 		initialize(managerToken);
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
