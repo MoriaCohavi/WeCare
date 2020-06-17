@@ -32,6 +32,11 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 		this.specialization = newSpecial;
 	}
 	
+	public String getSpecialization () {
+		
+		return specialization;
+	}
+	
 	public String getDoctorID() {
 		
 		return this.getId();
@@ -130,19 +135,28 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 		/*tested*/
 		
 		StatisitcalData total = new StatisitcalData(), current = new StatisitcalData();
-		int size = stats.size();
-		for (LocalDate Key : stats.keySet()){
-			current = stats.get(Key);
-			total.addtotalDailylabs(current.getTotalDailylabs());
-			total.addtotalDailyPatients(current.getTotalDailyPatients());
-			total.addtotalDailySubs(current.getTotalDailySubs());
-			total.addtotalVisitTime(current.getTotalVisitTime());
+		if (stats.size() != 0)
+		{
+			int size = stats.size();
+			for (LocalDate Key : stats.keySet()){
+				current = stats.get(Key);
+				total.addtotalDailylabs(current.getTotalDailylabs());
+				total.addtotalDailyPatients(current.getTotalDailyPatients());
+				total.addtotalDailySubs(current.getTotalDailySubs());
+				total.addtotalVisitTime(current.getTotalVisitTime());
+			}			
+			total.setTotalDailylabs(total.getTotalDailylabs()/size);
+			total.setTotalDailyPatients(total.getTotalDailyPatients()/size);
+			total.setTotalDailySubs(total.getTotalDailySubs()/size);
+			total.setTotalVisitTime(total.getTotalVisitTime()/size);
 		}
-		
-		total.setTotalDailylabs(total.getTotalDailylabs()/size);
-		total.setTotalDailyPatients(total.getTotalDailyPatients()/size);
-		total.setTotalDailySubs(total.getTotalDailySubs()/size);
-		total.setTotalVisitTime(total.getTotalVisitTime()/size);
+		else
+		{
+			total.setTotalDailylabs(0);
+			total.setTotalDailyPatients(0);
+			total.setTotalDailySubs(0);
+			total.setTotalVisitTime(0);
+		}
 		
 		return total;
 	}

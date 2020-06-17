@@ -77,7 +77,7 @@ public class Authentication implements java.io.Serializable{
 	
 	public static boolean validateUser(long token,String typeNeed)
 	{
-		if(!(loggedinusers.containsKey(token)) || (typeNeed != loggedinusers.get(token).getUser_type()))
+		if(!(loggedinusers.containsKey(token)) || !(typeNeed.equals(loggedinusers.get(token).getUser_type())))
 			return false;
 		else
 			return true;

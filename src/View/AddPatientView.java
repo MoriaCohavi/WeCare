@@ -256,7 +256,7 @@ public class AddPatientView {
 					{
 						lbl_warning.setText("Age, phone, weight and height should include digits only !");
 					}
-					if (!(docCtrl.addNewPatient(txtID.getText(), Integer.parseInt(txtAge.getText()), Long.parseLong(txtPhone.getText()), txtName.getText(), txtEmail.getText(), Integer.parseInt(txtWeight.getText()), 
+					if (!(docCtrl.addNewPatient(doctorToken, txtID.getText(), Integer.parseInt(txtAge.getText()), Long.parseLong(txtPhone.getText()), txtName.getText(), txtEmail.getText(), Integer.parseInt(txtWeight.getText()), 
 							Integer.parseInt(txtHeight.getText()), gender, txtAllergies.getText(), txtSubscriptions.getText(), txtChronicDiseases.getText())))
 						lbl_warning.setText("User exists");
 					else

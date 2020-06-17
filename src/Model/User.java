@@ -40,6 +40,7 @@ public class User extends Person implements java.io.Serializable {
 	}
 
 	
+	
 	public void revokeToken()
 	{
 		this.token = 0;

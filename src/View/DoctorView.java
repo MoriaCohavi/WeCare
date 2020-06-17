@@ -74,7 +74,7 @@ public class DoctorView {
 		authCtrl = new authenticationController();
 		details = (Doctor)authCtrl.getLoggedinUser(doctorToken);
 		docCtrl = new doctorController(details);
-		patientsList = docCtrl.getPatientsList();
+		patientsList = docCtrl.getPatientsList(doctorToken);
 		
 		frmDoctor = new JFrame();
 		frmDoctor.setTitle("Doctor");
