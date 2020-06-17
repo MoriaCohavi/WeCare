@@ -16,19 +16,27 @@ public class StatisitcalData implements java.io.Serializable {
 	}
 	
 	
-	public void addtotalVisitTime(double num) {
+	public void addtotalVisitTime(double num) 
+	/*tested*/
+	{
 		this.totalVisitTime +=num;
 	}
 	
-	public void addtotalDailyPatients(double num) {
+	public void addtotalDailyPatients(double num) 
+	/*tested*/
+	{
 		this.totalDailyPatients +=num;
 	}
 	
-	public void addtotalDailylabs(double num) {
+	public void addtotalDailylabs(double num) 
+	/*tested*/
+	{
 		this.totalDailylabs +=num;
 	}
 	
-	public void addtotalDailySubs(double num) {
+	public void addtotalDailySubs(double num) 
+	/*tested*/
+	{
 		this.totalDailySubs +=num;
 	}
 	
