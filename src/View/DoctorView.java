@@ -1,5 +1,9 @@
 package View;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> v1_keren
 import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JScrollPane;
@@ -14,8 +18,11 @@ import java.awt.Dimension;
 import javax.swing.DebugGraphics;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+<<<<<<< HEAD
 import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
+=======
+>>>>>>> v1_keren
 import java.util.HashMap;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -32,20 +39,32 @@ public class DoctorView {
 	private JFrame frmDoctor;
 	private JTable tbl_doctors;
 	private JScrollPane scrollPane;
+<<<<<<< HEAD
 	private JTextField txtSearchPatient;
 	private JButton btnSearch;
+=======
+	private JTextField txtSearch;
+	private JButton btnNewButton;
+>>>>>>> v1_keren
 	private JButton btnAddPatient;
 	private JLabel lblName;
 	private JLabel lblID;
 	private JLabel lblPhone;
 	private JLabel lblEmail;
-	private JButton btnGetDailyTestsReports;
 	private JTextField txtName;
 	private JTextField txtID;
 	private JTextField txtPhone;
 	private JTextField txtEmail;
+<<<<<<< HEAD
 	private JTextField txtClinicName;
 
+=======
+	private authenticationController authCtrl;
+	private doctorController docCtrl;
+	private Doctor details;
+	private HashMap <String, Patient> patientsList;
+	private JLabel lblID;
+>>>>>>> v1_keren
 
 //	/**
 //	 * Launch the application.
@@ -82,7 +101,6 @@ public class DoctorView {
 		frmDoctor = new JFrame();
 		frmDoctor.setTitle("Doctor");
 		frmDoctor.setBounds(100, 100, 1058, 571);
-		frmDoctor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDoctor.getContentPane().setLayout(null);
 		frmDoctor.setVisible(true);
 		
@@ -136,18 +154,29 @@ public class DoctorView {
 		tbl_doctors.getTableHeader().setForeground(new Color(255, 255, 255));
 		scrollPane.setViewportView(tbl_doctors);
 		
-		txtSearchPatient = new JTextField();
-		txtSearchPatient.setForeground(Color.GRAY);
-		txtSearchPatient.setSelectionColor(new Color(192, 192, 192));
-		txtSearchPatient.setText("Search Patient...");
-		txtSearchPatient.setBounds(80, 477, 311, 26);
-		frmDoctor.getContentPane().add(txtSearchPatient);
-		txtSearchPatient.setColumns(10);
+		txtSearch = new JTextField();
+		txtSearch.setForeground(Color.GRAY);
+		txtSearch.setSelectionColor(new Color(192, 192, 192));
+		txtSearch.setText("Search Patient...");
+		txtSearch.setBounds(80, 477, 311, 26);
+		frmDoctor.getContentPane().add(txtSearch);
+		txtSearch.setColumns(10);
 		
+<<<<<<< HEAD
 		btnSearch = new JButton("Search");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 //				docCtrl.
+=======
+		btnNewButton = new JButton("Search");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+//				String searchStr = txtSearch.getText();
+//				if(searchStr != null)
+//				{
+					PatientDetailsView temp = new PatientDetailsView();
+//				}
+>>>>>>> v1_keren
 			}
 		});
 		btnSearch.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -157,8 +186,7 @@ public class DoctorView {
 		btnAddPatient = new JButton("Add Patient");
 		btnAddPatient.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PatientDetailsView patientView = new PatientDetailsView(doctorToken);
-				frmDoctor.dispose();
+				new AddPatientView(doctorToken);
 			}
 		});
 		btnAddPatient.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -169,11 +197,14 @@ public class DoctorView {
 		lblName.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblName.setBounds(693, 136, 119, 20);
 		frmDoctor.getContentPane().add(lblName);
+<<<<<<< HEAD
 		
 		lblID = new JLabel("ID");
 		lblID.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblID.setBounds(693, 172, 119, 20);
 		frmDoctor.getContentPane().add(lblID);
+=======
+>>>>>>> v1_keren
 		
 		lblPhone = new JLabel("Phone");
 		lblPhone.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -184,11 +215,6 @@ public class DoctorView {
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblEmail.setBounds(693, 239, 119, 20);
 		frmDoctor.getContentPane().add(lblEmail);
-		
-		btnGetDailyTestsReports = new JButton("Get Daily Tests Reports");
-		btnGetDailyTestsReports.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnGetDailyTestsReports.setBounds(693, 475, 244, 29);
-		frmDoctor.getContentPane().add(btnGetDailyTestsReports);
 		
 		txtName = new JTextField();
 		txtName.setText(details.getDoctorName());
@@ -218,11 +244,18 @@ public class DoctorView {
 		txtEmail.setBounds(821, 239, 146, 26);
 		frmDoctor.getContentPane().add(txtEmail);
 		
+<<<<<<< HEAD
 		txtClinicName = new JTextField();
 //		txtClinicName.setText(details.getClinicName());
 		txtClinicName.setEnabled(false);
 		txtClinicName.setColumns(10);
 		txtClinicName.setBounds(821, 314, 146, 26);
 		frmDoctor.getContentPane().add(txtClinicName);
+=======
+		lblID = new JLabel("ID");
+		lblID.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblID.setBounds(693, 172, 119, 20);
+		frmDoctor.getContentPane().add(lblID);
+>>>>>>> v1_keren
 	}
 }

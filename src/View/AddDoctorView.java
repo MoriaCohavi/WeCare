@@ -1,19 +1,14 @@
 package View;
 
-import java.awt.EventQueue;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
-
 
 import Controller.*;
 
@@ -22,7 +17,6 @@ import javax.swing.JButton;
 public class AddDoctorView {
 
 	private managerController managerController;
-	private long token;
 	private JFrame frmAddDoctor;
 	private JTextField txtf_name;
 	private JTextField txtf_id;
@@ -32,21 +26,6 @@ public class AddDoctorView {
 	private JTextField txtf_specialization;
 	private JTextField txtf_passwd;
 
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					AddDoctorView window = new AddDoctorView();
-//					window.frmAddDoctor.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
 	/**
 	 * Create the application.
@@ -70,7 +49,7 @@ public class AddDoctorView {
 		frmAddDoctor.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				managerController.openManagerPanel(token);
+//				DoctorDetailsView add = new DoctorDetailsView("");
 			}
 		});
 		
@@ -166,7 +145,11 @@ public class AddDoctorView {
 					if (!(managerController.addNewDoctor(txtf_id.getText(), Long.parseLong(txtf_phone.getText()), txtf_name.getText(), txtf_email.getText(), txtf_specialization.getText(), txtf_passwd.getText(), "Doctor", token)))
 						lbl_warning.setText("User exists");
 					else {
+<<<<<<< HEAD
 						ManagerPanelView managerPanel = new ManagerPanelView(token);
+=======
+						ManagerView managerPanel = new ManagerView(token);
+>>>>>>> v1_keren
 						frmAddDoctor.dispose();
 					}
 						
