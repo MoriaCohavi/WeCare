@@ -17,6 +17,7 @@ import javax.swing.JButton;
 public class AddDoctorView {
 
 	private managerController managerController;
+	private authenticationController authController;
 	private JFrame frmAddDoctor;
 	private JTextField txtf_name;
 	private JTextField txtf_id;
@@ -39,6 +40,7 @@ public class AddDoctorView {
 	 */
 	private void initialize(long token) {
 		managerController = new managerController();
+		authController = new authenticationController();
 		
 		frmAddDoctor = new JFrame();
 		frmAddDoctor.setTitle("Add doctor");
@@ -50,11 +52,12 @@ public class AddDoctorView {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				// ADD SERIALZATION OF MANAGER AND USERS
+				authController.serialize();
 				frmAddDoctor.dispose();
 
 			}
 		});
-		
+
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 436, 10);
@@ -147,6 +150,7 @@ public class AddDoctorView {
 					if (!(managerController.addNewDoctor(txtf_id.getText(), Long.parseLong(txtf_phone.getText()), txtf_name.getText(), txtf_email.getText(), txtf_specialization.getText(), txtf_passwd.getText(), "Doctor", token)))
 						lbl_warning.setText("User exists");
 					else {
+						authController.serialize();
 						frmAddDoctor.dispose();
 					}
 						
