@@ -45,7 +45,7 @@ public class AddDoctorView {
 		frmAddDoctor = new JFrame();
 		frmAddDoctor.setTitle("Add doctor");
 		frmAddDoctor.setBounds(100, 100, 450, 536);
-		frmAddDoctor.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		//frmAddDoctor.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmAddDoctor.getContentPane().setLayout(null);
 		
 		frmAddDoctor.addWindowListener(new WindowAdapter() {

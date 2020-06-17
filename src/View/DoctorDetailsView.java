@@ -8,7 +8,7 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import Controller.doctorController;
+import Controller.*;
 import Model.Doctor;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
@@ -19,6 +19,7 @@ import java.awt.event.WindowEvent;
 public class DoctorDetailsView {
 
 	private doctorController docCtrl;
+	private managerController manCtrl;
 	private JFrame frmDoctorDetails;
 	private JTextField txtName;
 	private JTextField txtID;
@@ -57,10 +58,10 @@ public class DoctorDetailsView {
 	 */
 	private void initialize(Doctor doctor) {
 		docCtrl = new doctorController(doctor);
+		manCtrl = new managerController();
 		frmDoctorDetails = new JFrame();
 		frmDoctorDetails.setTitle("Doctor Details");
 		frmDoctorDetails.setBounds(100, 100, 570, 494);
-		frmDoctorDetails.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDoctorDetails.getContentPane().setLayout(null);
 		
 		frmDoctorDetails.addWindowListener(new WindowAdapter() {
@@ -153,7 +154,8 @@ public class DoctorDetailsView {
 		btnEdit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				//docCtrl.updateDoctor(String id, String name, String email, long phone);
+				manCtrl.updateDoctor(txtID.getText(), txtEmail.getText(), Long.parseLong(txtPhone.getText()));
+				frmDoctorDetails.dispose();
 			}
 		});
 		btnEdit.setBounds(40, 390, 85, 21);

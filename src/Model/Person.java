@@ -38,7 +38,7 @@ public class Person implements java.io.Serializable {
 		return this.email;
 	}
 	
-	public void setPhone(int phone)
+	public void setPhone(long phone)
 	{
 		this.phone = phone;
 	}

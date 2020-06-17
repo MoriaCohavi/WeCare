@@ -143,4 +143,20 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		this.stats.setTotalDailySubs(tSub/doctorsCount);
 		this.stats.setTotalVisitTime(tTime / doctorsCount);	
 	}
+	
+	public boolean updateDoctorInfo(String patientId, String email, long phone) {
+		/*tested*/
+		
+		if (this.doctors.containsKey(patientId) && Authentication.updateDoctorInfo(patientId, email, phone)) 
+		{
+			doctors.get(patientId).setEmail(email);
+			doctors.get(patientId).setPhone(phone);
+			return true;
+		}
+		
+		return false;
+		
+
+		
+	}
 }

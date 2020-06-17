@@ -110,4 +110,12 @@ public class managerController {
 		
 		clinicManager = (Manager)serHandlerController.deserialize(serPath);
 	}
+	
+	public boolean updateDoctor(String id, String email, long phone)
+	{
+		if(clinicManager.updateDoctorInfo(id,email , phone))
+			return true;
+		
+		return false;
+	}
 }

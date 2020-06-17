@@ -137,7 +137,18 @@ public class Authentication implements java.io.Serializable{
 		Authentication.users = users;
 	}
 	
-//	public static boolean serialize()
+	public static boolean updateDoctorInfo(String patientId,  String email, long phone)
+		{
+			if (users.containsKey(patientId))
+			{
+				users.get(patientId).setEmail(email);
+				users.get(patientId).setPhone(phone);
+				return true;
+			}
+			return false;
+		}
+}
+		//	public static boolean serialize()
 //	{
 //		try {
 //		FileOutputStream fileOut = new FileOutputStream("src\\Model\\files\\authentication.ser");
@@ -192,4 +203,4 @@ public class Authentication implements java.io.Serializable{
 //		}
 //		
 //	}
-}
+
