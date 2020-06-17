@@ -72,19 +72,5 @@ public class AuthenticationTest {
 		Authentication.signUp(user1.getId(), user1);
 		Assert.assertTrue(Authentication.generateToken(user1.getId()) != Authentication.generateToken(user1.getId()));
 	}
-	/*@Test
-	public void CheckResetPassword()
-	{
-		User user1 = new User("123456789", 0541234567, "test", "test.gmail.com", "password", "Doctor");
-		Authentication.signUp(user1.getId(), user1);
-		User user2 = new User("987654321", 0541234567, "test", "test.gmail.com", "password", "Manager");
-		Authentication.signUp(user2.getId(), user2);
-		long token1 = Authentication.signIn("123456789", "password");
-		long token2 = Authentication.signIn("987654321", "password");
-		String newPassword = "Password1";
-		Assert.assertTrue(Authentication.resetPassword(token1, "password", newPassword));
-		Assert.assertFalse(Authentication.resetPassword(token1, "testFalse", newPassword));
-		Assert.assertTrue(Authentication.resetPassword(token2, "password", newPassword));
-		Assert.assertFalse(Authentication.resetPassword(token2, user1.getPassword(), newPassword));
-	} */
+	
 }

@@ -145,8 +145,17 @@ public class DoctorTest {
 		Assert.assertTrue(checkDate.equals(Record.get_Date()));
 	}
 	
-	@test
-	public void Check
+	@Test
+	public void CheckAddLabToPatient() {
+		Doctor doctor = new Doctor("123456789", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
+		Patient patient = new Patient("123456788", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des");
+		doctor.add(patient);
+		
+				
+		Assert.assertTrue(doctor.addLabToPatient("123456788", "Blood Labs"));
+		Assert.assertTrue(doctor.addLabToPatient("123456788", "Urin Labs"));
+		Assert.assertTrue(doctor.addLabToPatient("123456788", "Ultrasound"));
+	}
 
 
 }

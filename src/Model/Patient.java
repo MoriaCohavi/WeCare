@@ -99,6 +99,7 @@ public class Patient extends Person implements java.io.Serializable{
 	}
 
 	public void updatePatientInfo(int phone,int age, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases)
+	/*tested*/
 	{
 		if(this.getPhone() != phone)
 			this.setPhone(phone);
@@ -130,13 +131,17 @@ public class Patient extends Person implements java.io.Serializable{
 	}
 		
 
-	public boolean addLab(Lab newLab) {
+	public boolean addLab(Lab newLab) 
+	/*tested*/
+	{
 
 		return this.labs.add(newLab);
 		
 	}
 	
-	public boolean addMedicalRecord (MedicalRecord newRecord) {
+	public boolean addMedicalRecord (MedicalRecord newRecord) 
+	/*tested*/
+	{
 		
 		if (medicalRecords.put(++recordCount, newRecord) == null)
 			return true;
@@ -144,9 +149,5 @@ public class Patient extends Person implements java.io.Serializable{
 		return false;
 	}	
 	
-	public String medicalSummary() { 
-		
-		return null;
-		
-	}
+	 
 }
