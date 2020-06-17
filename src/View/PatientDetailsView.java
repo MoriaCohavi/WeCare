@@ -169,6 +169,12 @@ public class PatientDetailsView {
 		frmPatient.getContentPane().add(btnEdit);
 		
 		JButton btnDelete = new JButton("Delete");
+		btnDelete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			// BAR
+			}
+		});
 		btnDelete.setBounds(139, 441, 85, 21);
 		frmPatient.getContentPane().add(btnDelete);
 		
