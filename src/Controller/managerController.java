@@ -6,15 +6,18 @@ import Model.*;
 public class managerController {
 	public static String serPath = "src\\Model\\files\\manager.ser";
 	private static Manager clinicManager;
-	
+	String typeNeed = "Manager";
 	
 	public managerController(){
 		
 	}
 	
-	public Manager getDetails() {
+	public Manager getDetails(long token) {
 		
-		return clinicManager;
+		if(Authentication.validateUser(token, typeNeed))
+			return clinicManager;
+		
+			return null;
 	}
 	
 	public managerController(String id, int phone, String name, String email, String password,String user_type) { //needs to include manger view object
@@ -32,21 +35,24 @@ public class managerController {
 	
 	}
 	
-	public Doctor getDoctor(String doctorId) {
+	public Doctor getDoctor(long token, String doctorId) {
 		
-		return clinicManager.getItem(doctorId);
+		if(Authentication.validateUser(token, typeNeed))
+			return clinicManager.getItem(doctorId);
+		return null;
 	}
 	
-	public boolean addNewDoctor(String id, long phone, String name, String email, String special, String password,String user_type, long managerToken) {
-		
-		Doctor newDoctor = new Doctor(id, phone, name, email, special, password, user_type);
-		if(clinicManager.add(newDoctor))
+	public boolean addNewDoctor(long token, String id, long phone, String name, String email, String special, String password,String user_type, long managerToken) {
+		if(Authentication.validateUser(token, typeNeed))
 		{
-			authenticationController.register(newDoctor.getId(), newDoctor);
-			return true;
+			Doctor newDoctor = new Doctor(id, phone, name, email, special, password, user_type);
+			if(clinicManager.add(newDoctor))
+			{
+				authenticationController.register(newDoctor.getId(), newDoctor);
+				return true;
 			
+			}
 		}
-		
 		return false;
 	}
 	
@@ -58,22 +64,23 @@ public class managerController {
 //		return false;
 //	}
 	
-	public boolean deleteDoctor(String docID) {
-		
-		if(clinicManager.remove(docID))
-			return true;
-		
+	public boolean deleteDoctor(long token, String docID) {
+		if(Authentication.validateUser(token, typeNeed))
+		{
+			if(clinicManager.remove(docID))
+				return true;
+		}
 		return false;
 	}
 	
-	public void updateStats() {
-		
-		if (clinicManager.getStatsFlag() == null || 
-				clinicManager.getStatsFlag().isBefore(LocalDateTime.now().minusHours(6))) 
-		{
+	public void updateStats(long token) {
+		if(Authentication.validateUser(token, typeNeed)) {
+			if (clinicManager.getStatsFlag() == null || clinicManager.getStatsFlag().isBefore(LocalDateTime.now().minusHours(6))) 
+			{
 			clinicManager.setStatsFlag(LocalDateTime.now());
 			clinicManager.calcStats();
-		}		
+			}		
+		}
 	}
 	
 	public Manager getManager() {
@@ -81,9 +88,11 @@ public class managerController {
 		return clinicManager;
 	}
 	
-	public StatisitcalData getStats() {
+	public StatisitcalData getStats(long token) {
+		if(Authentication.validateUser(token, typeNeed))
+			return clinicManager.getStats();
 		
-		return clinicManager.getStats();
+		return null;
 	}
 	
 	public void serialize() {

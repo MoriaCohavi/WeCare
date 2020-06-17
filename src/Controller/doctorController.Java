@@ -8,6 +8,7 @@ import Model.*;
 public class doctorController {
 	public static String serPath = "src\\Model\\files\\doctor.ser";
 	private Doctor currentModelDoctor;
+	private final String typeNeed = "Doctor";
 	
 	public Doctor getDetails() {
 		
@@ -24,20 +25,22 @@ public class doctorController {
 		currentModelDoctor = new Doctor (id, phone, name, email, special,password,user_type);
 	}
 	
-	public boolean addNewPatient (String id,int age, long phone, String name, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases) {
-		
-		Patient newPatient = new Patient(id, age, phone, name, email, weight, height, gender, allergies, subscriptions, chronic_diseases);
-		if (currentModelDoctor.add(newPatient))
-			return true;
-
+	public boolean addNewPatient (long token, String id,int age, long phone, String name, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases) {
+		if(Authentication.validateUser(token, typeNeed))
+		{
+			Patient newPatient = new Patient(id, age, phone, name, email, weight, height, gender, allergies, subscriptions, chronic_diseases);
+			if (currentModelDoctor.add(newPatient))
+				return true;
+		}
 		return false;	
 	}
 	
-	public boolean deletePatient(String patientId) {
-		
-		if (currentModelDoctor.remove(patientId))
+	public boolean deletePatient(long token, String patientId) {
+		if(Authentication.validateUser(token, typeNeed))
+		{
+			if (currentModelDoctor.remove(patientId))
 			return true;
-		
+		}
 		return false;	
 	}
 	
@@ -46,36 +49,43 @@ public class doctorController {
 		return currentModelDoctor.getPatient(patientId).getPatientInfo();
 	}*/
 	
-	public Patient getPatient(String patientId) {
-		
-		return currentModelDoctor.getItem(patientId);
+	public Patient getPatient(long token, String patientId) {
+		if(Authentication.validateUser(token, typeNeed))
+			return currentModelDoctor.getItem(patientId);
+		return null;
 	}
 	
-	public MedicalRecord viewMedicalRecord(String patientId, int recordId) {
-		
-		return currentModelDoctor.getItem(patientId).getMedicalRecord(recordId);
+	public MedicalRecord viewMedicalRecord(long token, String patientId, int recordId) {
+		if(Authentication.validateUser(token, typeNeed))
+			return currentModelDoctor.getItem(patientId).getMedicalRecord(recordId);
+		return null;
 	}
 	
-	public Patient openPatientFile(String patientId) {
+	public Patient openPatientFile(long token, String patientId) {
+		if(Authentication.validateUser(token, typeNeed))
+			return currentModelDoctor.getItem(patientId);
 		
-		return currentModelDoctor.getItem(patientId);
+		return null;
 	}
 	
-	public boolean openNewMedicalRecord(String patientId, int days, String purpose, String description, String summary,
+	public boolean openNewMedicalRecord(long token, String patientId, int days, String purpose, String description, String summary,
 			String sub, String diagnose, LocalTime sT, LocalTime eT, int w, int h, int hr, int t, int sysBP, int diaBP) {
 		
-		if (currentModelDoctor.search(patientId))
+		if(Authentication.validateUser(token, typeNeed))
 		{
+			if (currentModelDoctor.search(patientId))
+			{
 			
-			int record = currentModelDoctor.getItem(patientId).getRecordCounter() + 1;
+				int record = currentModelDoctor.getItem(patientId).getRecordCounter() + 1;
 			
-			MedicalRecord newRecord = new MedicalRecord(currentModelDoctor.getDoctorID(), days, record, purpose,description, summary, sub,diagnose, sT, eT, w, h, hr, t, sysBP, diaBP) ;
+				MedicalRecord newRecord = new MedicalRecord(currentModelDoctor.getDoctorID(), days, record, purpose,description, summary, sub,diagnose, sT, eT, w, h, hr, t, sysBP, diaBP) ;
 			
-			currentModelDoctor.getItem(patientId).addMedicalRecord(newRecord);
-			return true;
+				currentModelDoctor.getItem(patientId).addMedicalRecord(newRecord);
+				return true;
+			}
 		}
 		
-		else return false;
+		return false;
 	}
  
 	public void serialize() {
@@ -88,9 +98,10 @@ public class doctorController {
 		currentModelDoctor = (Doctor)serHandlerController.deserialize(serPath);
 	}
 
-	public HashMap <String, Patient> getPatientsList() {
-		
-		return this.currentModelDoctor.getPatients();
+	public HashMap <String, Patient> getPatientsList(long token) {
+		if(Authentication.validateUser(token, typeNeed))
+			return this.currentModelDoctor.getPatients();
+		return null;
 	}
 
 }
