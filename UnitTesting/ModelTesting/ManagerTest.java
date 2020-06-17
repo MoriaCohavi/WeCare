@@ -39,13 +39,11 @@ public class ManagerTest{
 		Doctor doctor3 = new Doctor("123456782", 5200000, "Name3", "Email3", "Spetialty3","password", "Doctor");
 		Doctor doctor4 = new Doctor("123456783", 5200000, "Name4", "Email4", "Spetialty4","password", "Doctor");
 		Manager manager = new Manager("123456788", 5200000, "Name", "Email", "password","Manager");
-		doctor1.
 		Assert.assertTrue(manager.getAvgDailylabs() == 0 && manager.getAvgDailyPatients() == 0 && manager.getAvgDailySubs() == 0 && manager.getAvgVisitTime() == 0);
 		manager.add(doctor1);
 		manager.add(doctor2);
 		manager.add(doctor3);
 		manager.add(doctor4);
-		doctor1.
 		//Assert.assertFalse(manager.remove(doctor.getDoctorID()));
 	}
 	
