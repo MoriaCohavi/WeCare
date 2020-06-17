@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public class Manager extends User implements java.io.Serializable, CommandInterface {
 	
-	private HashMap<String, Doctor> doctors;
+	private static HashMap<String, Doctor> doctors;
 	private LocalDateTime statsFlag;
 	private StatisitcalData stats;
 
@@ -18,20 +18,20 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	}
 	
 	public String getID() {
-		return this.getId();
+		return super.getId();
 		
 	}
 	
 	public long getPhone() {
-		return this.getPhone();
+		return super.getPhone();
 	}
 	
 	public String getName() {
-		return this.getName();
+		return super.getName();
 	}
 	
 	public String getEmail() {
-		return this.getEmail();
+		return super.getEmail();
 	}
 	
 	public void updatePhone(int newPhone){
