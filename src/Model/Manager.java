@@ -83,10 +83,11 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		return false;
 	}
 	
-	public Doctor getItem(String id) {
+	public Doctor getItem(String doctorId) {
 		
-		if(search(id)) 
-			return doctors.get(id);
+		if (search(doctorId))
+			return this.doctors.get(doctorId);
+			
 		else 
 			return null;
 	}
@@ -99,15 +100,17 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 			doctors.put(newDoc.getDoctorID(), newDoc);
 			return true;
 		}
-		return false;
 		
+		return false;
 	}
 	
 	public boolean remove(String id) {
+			
 		if (search(id)) {
 			doctors.remove(id);
 			return true;
 		}
+		
 		return false;		
 	}
 	
@@ -116,7 +119,6 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 			if( doctors.get(Key).getFirstRecord().isBefore(LocalDate.now().minusMonths(1)))
 				doctors.remove(Key);
 		}
-	
 	}
 	
 	public void calcStats() {
@@ -139,7 +141,6 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		this.stats.setTotalDailylabs(tLabs/doctorsCount);
 		this.stats.setTotalDailyPatients(tPatient/doctorsCount);
 		this.stats.setTotalDailySubs(tSub/doctorsCount);
-		this.stats.setTotalVisitTime(tTime / doctorsCount);
-		
+		this.stats.setTotalVisitTime(tTime / doctorsCount);	
 	}
 }

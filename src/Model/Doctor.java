@@ -21,6 +21,7 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	
 	//constructor
 	public Doctor(String id, long phone, String name, String email, String special,String password,String user_type) {
+		
 		super(id, phone, name, email, password, user_type);
 		this.specialization = special;
 		this.patients = new HashMap <String, Patient>();
@@ -29,36 +30,44 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	
 	//setters and getters
 	public void setSpecialization (String newSpecial) {
+		
 		this.specialization = newSpecial;
 	}
 	
 	public String getDoctorID() {
+		
 		return this.getId();
 	}
 	
 	public String getDoctorName() {
+		
 		return this.getName();
 	}
 	
 	public long getDoctorPhone() {
+		
 		return this.getPhone();
 	}
 	
 	public String getDoctorEmail() {
+		
 		return this.getEmail();
 	}
 	
 	public String getDoctorSpecialization() {
+		
 		return this.specialization;
 	}
 	
 	public LinkedHashMap<LocalDate, StatisitcalData> getStats(){
+		
 		return this.stats;
 	}
 	
 	//methods
 	
 	public void addSpecialization (String newSpecial) {
+		
 		this.specialization = this.specialization.concat("and" + newSpecial);
 	}
 	
@@ -70,40 +79,44 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 			patients.put(newPatient.getId(), newPatient);
 			return true;
 		}
-		return false;
 		
+		return false;	
 	}
 	
 	
 	public boolean remove(String id) {
 		
-		if (this.patients.containsKey(id)) {
+		if (this.patients.containsKey(id)) 
+		{
 			patients.remove(id);
 			return true;
 		}
+		
 		else
-				return false;
-		}
+			return false;
+	}
 	
 	public boolean search(String id) {
 		
 		if(patients.containsKey(id)) 
 			return true;
 		return false;
-			
 	}
 	
 	public Patient getItem(String patientId) {
-			
+
 		if (search(patientId))
 			return this.patients.get(patientId);
 			
-		else return null;
+		else 
+			return null;
 	}
 	
 	public LocalDate getFirstRecord () {
+		
 		return stats.entrySet().iterator().next().getKey();
 	}
+	
 	
 	public StatisitcalData getAvgRecords() {
 		
@@ -128,13 +141,14 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	
 	
 	public void updatePatientInfo(String patientId, int phone,int age, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases) {
+		
 		if (this.patients.containsKey(patientId)) {
 			patients.get(patientId).updatePatientInfo(phone, age, email, weight, height, gender, allergies, subscriptions, chronic_diseases);
 		}
-	
 	}
 	 
 	public boolean createMedicalRecord(String patientId, MedicalRecord newRecord) {		
+		
 		if (this.patients.containsKey(patientId)) {
 			patients.get(patientId).addMedicalRecord(newRecord);
 			
@@ -155,6 +169,7 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 			this.stats.put(LocalDate.now(), editStats);
 			return true;
 		}
+		
 		else return false;
 	}
 	
@@ -175,6 +190,7 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 			this.stats.put(LocalDate.now(), editStats);
 			return true;
 		}
+		
 		else return false;
 	}
 	
@@ -185,7 +201,6 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 		}
 		
 		return null;
-		
 	}
 	
 	public String PatientMedicalSummary(String patientId) {
