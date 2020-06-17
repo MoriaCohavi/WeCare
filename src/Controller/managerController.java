@@ -6,7 +6,7 @@ import Model.*;
 public class managerController {
 	public static String serPath = "src\\Model\\files\\manager.ser";
 	private static Manager clinicManager;
-	String typeNeed = "Manager";
+	private final String typeNeed = "Manager";
 	
 	public managerController(){
 		
