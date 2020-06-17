@@ -1,16 +1,18 @@
 package ModelTesting;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.time.LocalTime;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import Model.*;
 
+import Model.*;
 public class DoctorTest {
 	
 	@Test
@@ -43,39 +45,88 @@ public class DoctorTest {
 	}
 	
 	@Test
-	public void CheckUpdatePatient()
+	public void CheckAddSpecialization()
 	{
-//		Patient patient = new Patient("123456789",26, 0541234567, "moria test", "moria@test.com", 53, 156, "Female", "", "","");
-//		Doctor doctor = new Doctor("123456789", 5200000, "Name", "Email", "Spetialty",
-//									"password", "Doctor");
-//		String id = "123456789";
-//		int age = 27;
-//		int height = 166;
-//		int weight = 160;
-//		int phone = 0521234567;
-//		String email = "test@test.com";
-//		String gender = "male";
-//		String subscriptions = "test";
-//		String allergies = "alertest";
-//		String chronic_diseases = "shahemet";
-//
-//		doctor.updatePatientInfo(id, phone, age, email, weight, height, gender, allergies, subscriptions, chronic_diseases);
-//	    Assert.assertTrue(doctor.getAge() == age && doctor.getAllergies() == allergies && 
-//	    		doctor.getEmail() == email && doctor.getGender() == gender && 
-//	    		doctor.getHeight() == height && doctor.getPhone() == phone && 
-//	    		doctor.getSubscriptions() == subscriptions && doctor.getWeight() == weight && 
-//	    		doctor.getChronic_diseases() == chronic_diseases);
+		Doctor doctor = new Doctor("123456789", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
+		doctor.addSpecialization("testing");
+		Assert.assertTrue(doctor.getDoctorSpecialization().equals("Spetialty and testing"));
 	}
 	
 	@Test
-	public void CheckAddMedicalRecord()
-	{
-		Doctor doctor = new Doctor("123456789", 5200000, "test", "Email", "Spetialty","password", "Doctor");
+	public void CheckGetItem() {
+		Doctor doctor = new Doctor("123456789", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		Patient patient = new Patient("123456788", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des");
-		//MedicalRecord med - new MedicalRecord("123456789", 5, 1, "test", "test2", "summary test", "sub test", "diagnose", "10:10:10", "11:11:11", 3, 2, 1, 4, 43, 44);
 		doctor.add(patient);
-		Assert.assertTrue(doctor.remove(patient.getId()));
-		Assert.assertFalse(doctor.remove(patient.getId()));
+		MedicalRecord Record = new MedicalRecord("123456789", 3, 1, "testing", "test", "finished testing", "None", "test", LocalTime.now(), LocalTime.now().plusMinutes(10), 60, 180, 90, 37, 60, 100);
+		patient.addMedicalRecord(Record);
+		Patient patient2 = doctor.getItem("123456788");
+		Assert.assertTrue(patient.getAllergies().equals(patient2.getAllergies())&&
+							patient.getAge() == patient2.getAge() &&
+							patient.getChronic_diseases().equals(patient2.getChronic_diseases()) &&
+							patient.getEmail().equals(patient2.getEmail()) &&
+							patient.getGender().equals(patient2.getGender()) &&
+							patient.getHeight() == patient2.getHeight() &&
+							patient.getId().equals(patient2.getId()) &&
+							patient.getMedicalRecord(1) == (patient2.getMedicalRecord(1)) &&
+							patient.getName().equals(patient2.getName()) &&
+							patient.getPhone() == patient2.getPhone() &&
+							patient.getRecordCounter() == patient2.getRecordCounter() &&
+							patient.getSubscriptions().equals(patient2.getSubscriptions()) &&
+							patient.getWeight() == patient2.getWeight()	);	
 	}
+	
+	
+	@Test
+	public void CheckUpdatePatient()
+	{
+		Doctor doctor = new Doctor("123456789", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
+		Patient patient = new Patient("123456788", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des");
+		doctor.add(patient);
+		
+		int age = 27;
+		int height = 166;
+		int weight = 160;
+		int phone = 0521234567;
+		String email = "test@test.com";
+		String gender = "male";
+		String subscriptions = "test";
+		String allergies = "alertest";
+		String chronic_diseases = "shahemet";
+		doctor.updatePatientInfo("123456788", phone, age, email, weight, height, gender, allergies, subscriptions, chronic_diseases);
+		
+		Assert.assertTrue(patient.getAllergies().equals("alertest")&&
+				patient.getAge() == 27 && 
+				patient.getChronic_diseases().equals("shahemet") &&
+				patient.getEmail().equals("test@test.com") && 
+				patient.getGender().equals("male") &&
+				patient.getHeight() == 166 && 
+				patient.getId().equals("123456788") &&
+				patient.getPhone() == phone && 	
+				patient.getSubscriptions().equals("test") &&
+				patient.getWeight() == 160	);	
+	}
+	
+	@Test
+	public void CheckCreateMedicalRecord() {
+		Doctor doctor = new Doctor("123456789", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
+		Patient patient = new Patient("123456788", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des");
+		doctor.add(patient);
+		MedicalRecord Record = new MedicalRecord("123456789", 3, 1, "testing", "test", "finished testing", "None", "test", LocalTime.now(), LocalTime.now().plusMinutes(10), 60, 180, 90, 37, 60, 100);
+		patient.addMedicalRecord(Record);
+		
+		
+		
+	}
+	
+//	@Test
+//	public void CheckAddMedicalRecord()
+//	{
+//		Doctor doctor = new Doctor("123456789", 5200000, "test", "Email", "Spetialty","password", "Doctor");
+//		Patient patient = new Patient("123456788", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des");
+//		//MedicalRecord med - new MedicalRecord("123456789", 5, 1, "test", "test2", "summary test", "sub test", "diagnose", "10:10:10", "11:11:11", 3, 2, 1, 4, 43, 44);
+//		doctor.add(patient);
+//		Assert.assertTrue(doctor.remove(patient.getId()));
+//		Assert.assertFalse(doctor.remove(patient.getId()));
+//	}
 
 }

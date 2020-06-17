@@ -68,7 +68,7 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	
 	public void addSpecialization (String newSpecial) {
 		
-		this.specialization = this.specialization.concat("and" + newSpecial);
+		this.specialization = this.specialization.concat(" and " + newSpecial);
 	}
 	
 	public boolean add(Object obj) {
