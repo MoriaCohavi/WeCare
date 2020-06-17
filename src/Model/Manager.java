@@ -83,7 +83,9 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		return false;
 	}
 	
-	public Doctor getItem(String doctorId) {
+	public Doctor getItem(String doctorId) 
+	/*tested*/
+	{
 		
 		if (search(doctorId))
 			return this.doctors.get(doctorId);

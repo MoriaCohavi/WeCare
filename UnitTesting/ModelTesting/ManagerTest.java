@@ -35,7 +35,7 @@ public class ManagerTest{
 	}
 	
 	@Test
-	public void calcStats() {
+	public void CheckCalcStats() {
 		
 		Manager manager = new Manager("123456789", 5200000, "Name", "Email", "password","Manager");
 
@@ -114,20 +114,25 @@ public class ManagerTest{
 		
 	}
 	
-//	@Test
-//	public void CheckCalcStat()
-//	{
-//		Doctor doctor1 = new Doctor("123456789", 5200000, "Name1", "Email1", "Spetialty1","password", "Doctor");
-//		Doctor doctor2 = new Doctor("123456781", 5200000, "Name2", "Email2", "Spetialty2","password", "Doctor");
-//		Doctor doctor3 = new Doctor("123456782", 5200000, "Name3", "Email3", "Spetialty3","password", "Doctor");
-//		Doctor doctor4 = new Doctor("123456783", 5200000, "Name4", "Email4", "Spetialty4","password", "Doctor");
-//		Manager manager = new Manager("123456788", 5200000, "Name", "Email", "password","Manager");
-//		Assert.assertTrue(manager.getAvgDailylabs() == 0 && manager.getAvgDailyPatients() == 0 && manager.getAvgDailySubs() == 0 && manager.getAvgVisitTime() == 0);
-//		manager.add(doctor1);
-//		manager.add(doctor2);
-//		manager.add(doctor3);
-//		manager.add(doctor4);
-//		Assert.assertFalse(manager.remove(doctor.getDoctorID()));
-//	}
-	
+	@Test
+	public void CheckGetItem() {
+		
+		Manager manager = new Manager("123456789", 5200000, "Name", "Email", "password","Manager");
+
+		Doctor doctor1 = new Doctor("123456789", 5200000, "Name1", "Email1", "Spetialty1","password", "Doctor");
+		Doctor doctor2 = new Doctor("123456781", 5200000, "Name2", "Email2", "Spetialty2","password", "Doctor");
+		Doctor doctor3 = new Doctor("123456788", 5200000, "Name2", "Email2", "Spetialty2","password", "Doctor");
+		
+		manager.add(doctor1);
+		manager.add(doctor2);
+		manager.add(doctor3);		
+		
+		Assert.assertTrue(doctor1 == manager.getItem("123456789"));
+		Assert.assertTrue(doctor2 == manager.getItem("123456781"));
+		Assert.assertTrue(doctor3 == manager.getItem("123456788"));
+		manager.remove("123456789");
+		
+		Assert.assertFalse(manager.getItem("123456789") != null);
+
+	}
 }
