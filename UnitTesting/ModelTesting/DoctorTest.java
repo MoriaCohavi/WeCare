@@ -73,7 +73,7 @@ public class DoctorTest {
 	{
 		Doctor doctor = new Doctor("123456789", 5200000, "test", "Email", "Spetialty","password", "Doctor");
 		Patient patient = new Patient("123456788", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des");
-		MedicalRecord med - new MedicalRecord("123456789", 5, 1, "test", "test2", "summary test", "sub test", "diagnose", "10:10:10", "11:11:11", 3, 2, 1, 4, 43, 44);
+		//MedicalRecord med = new MedicalRecord("123456789", 5, 1, "test", "test2", "summary test", "sub test", "diagnose", "10:10:10", "11:11:11", 3, 2, 1, 4, 43, 44);
 		doctor.add(patient);
 		Assert.assertTrue(doctor.remove(patient.getId()));
 		Assert.assertFalse(doctor.remove(patient.getId()));
