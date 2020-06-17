@@ -137,7 +137,7 @@ public class DoctorDetailsView {
 		btnEdit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+				docCtrl.updateDoctor();
 			}
 		});
 		btnEdit.setBounds(40, 390, 85, 21);

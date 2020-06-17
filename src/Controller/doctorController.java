@@ -83,6 +83,11 @@ public class doctorController {
 		serHandlerController.serialize(currentModelDoctor, serPath);
 	}
 	
+	public void updateDoctor()
+	{
+		
+	}
+	
 	public void deserialize() {
 		
 		currentModelDoctor = (Doctor)serHandlerController.deserialize(serPath);
