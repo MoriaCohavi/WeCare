@@ -7,20 +7,23 @@ import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+
+import Model.Doctor;
+
 import javax.swing.JButton;
 
 public class DoctorDetailsView {
 
 	private JFrame frmDoctorDetails;
-	private JTextField txtf_name;
-	private JTextField txtf_id;
-	private JTextField txtf_email;
-	private JTextField txtf_address;
-	private JTextField txtf_phone;
-	private JTextField txtf_dailyPatients;
-	private JTextField txtf_dailySubscriptions;
-	private JTextField txtf_specialization;
-	private JTextField txtf_visitTime;
+	private JTextField txtName;
+	private JTextField txtID;
+	private JTextField txtEmail;
+	private JTextField txtAddress;
+	private JTextField txtPhone;
+	private JTextField txtDailyPatients;
+	private JTextField txtDailySubscriptions;
+	private JTextField txtSpecialization;
+	private JTextField txtVisitTime;
 
 //	/**
 //	 * Launch the application.
@@ -41,112 +44,108 @@ public class DoctorDetailsView {
 	/**
 	 * Create the application.
 	 */
-	public DoctorDetailsView() {
-		initialize();
+	public DoctorDetailsView(Doctor doctor) {
+		initialize(doctor);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(Doctor doctor) {
 		frmDoctorDetails = new JFrame();
-		frmDoctorDetails.setTitle("Doctor details");
-		frmDoctorDetails.setBounds(100, 100, 408, 665);
+		frmDoctorDetails.setTitle("Doctor Details");
+		frmDoctorDetails.setBounds(100, 100, 570, 494);
 		frmDoctorDetails.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDoctorDetails.getContentPane().setLayout(null);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 528, 10);
-		frmDoctorDetails.getContentPane().add(panel);
+		JLabel lblName = new JLabel("Name");
+		lblName.setBounds(40, 45, 160, 15);
+		frmDoctorDetails.getContentPane().add(lblName);
 		
-		JLabel lbl_name = new JLabel("Name:");
-		lbl_name.setBounds(37, 45, 45, 13);
-		frmDoctorDetails.getContentPane().add(lbl_name);
+		JLabel lblID = new JLabel("ID");
+		lblID.setBounds(40, 80, 160, 15);
+		frmDoctorDetails.getContentPane().add(lblID);
 		
-		JLabel lbl_id = new JLabel("Id:");
-		lbl_id.setBounds(37, 93, 45, 13);
-		frmDoctorDetails.getContentPane().add(lbl_id);
+		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setBounds(40, 115, 160, 15);
+		frmDoctorDetails.getContentPane().add(lblEmail);
 		
-		JLabel lbl_email = new JLabel("Email:");
-		lbl_email.setBounds(37, 142, 45, 13);
-		frmDoctorDetails.getContentPane().add(lbl_email);
+		JLabel lblAddress = new JLabel("Address");
+		lblAddress.setBounds(40, 150, 160, 15);
+		frmDoctorDetails.getContentPane().add(lblAddress);
 		
-		JLabel lbl_address = new JLabel("Address:");
-		lbl_address.setBounds(37, 188, 88, 13);
-		frmDoctorDetails.getContentPane().add(lbl_address);
+		JLabel lblPhone = new JLabel("Phone");
+		lblPhone.setBounds(40, 185, 160, 15);
+		frmDoctorDetails.getContentPane().add(lblPhone);
 		
-		JLabel lbl_phone = new JLabel("Phone:");
-		lbl_phone.setBounds(37, 237, 45, 13);
-		frmDoctorDetails.getContentPane().add(lbl_phone);
+		JLabel lblDailyPatients = new JLabel("Daily patients");
+		lblDailyPatients.setBounds(40, 225, 160, 15);
+		frmDoctorDetails.getContentPane().add(lblDailyPatients);
 		
-		JLabel lbl_dailyPatients = new JLabel("Daily patients:");
-		lbl_dailyPatients.setBounds(37, 287, 103, 13);
-		frmDoctorDetails.getContentPane().add(lbl_dailyPatients);
+		JLabel lblDailySubs = new JLabel("Daily subscriptions");
+		lblDailySubs.setBounds(40, 260, 160, 15);
+		frmDoctorDetails.getContentPane().add(lblDailySubs);
 		
-		JLabel lbl_dailySubs = new JLabel("Daily subscriptions:");
-		lbl_dailySubs.setBounds(37, 337, 119, 13);
-		frmDoctorDetails.getContentPane().add(lbl_dailySubs);
+		JLabel lblSpecialization = new JLabel("Specialization");
+		lblSpecialization.setBounds(40, 295, 160, 15);
+		frmDoctorDetails.getContentPane().add(lblSpecialization);
 		
-		JLabel lbl_specialization = new JLabel("Specialization:");
-		lbl_specialization.setBounds(37, 393, 119, 13);
-		frmDoctorDetails.getContentPane().add(lbl_specialization);
+		JLabel lblVisitTime = new JLabel("Daily visit time");
+		lblVisitTime.setBounds(40, 330, 160, 15);
+		frmDoctorDetails.getContentPane().add(lblVisitTime);
 		
-		JLabel lbl_visitTime = new JLabel("Daily visit time:");
-		lbl_visitTime.setBounds(37, 444, 88, 13);
-		frmDoctorDetails.getContentPane().add(lbl_visitTime);
+		txtName = new JTextField();
+		txtName.setBounds(250, 45, 160, 15);
+		frmDoctorDetails.getContentPane().add(txtName);
+		txtName.setColumns(10);
 		
-		txtf_name = new JTextField();
-		txtf_name.setBounds(179, 42, 146, 19);
-		frmDoctorDetails.getContentPane().add(txtf_name);
-		txtf_name.setColumns(10);
+		txtID = new JTextField();
+		txtID.setColumns(10);
+		txtID.setBounds(250, 80, 160, 15);
+		frmDoctorDetails.getContentPane().add(txtID);
 		
-		txtf_id = new JTextField();
-		txtf_id.setColumns(10);
-		txtf_id.setBounds(179, 90, 146, 19);
-		frmDoctorDetails.getContentPane().add(txtf_id);
+		txtEmail = new JTextField();
+		txtEmail.setColumns(10);
+		txtEmail.setBounds(250, 115, 160, 15);
+		frmDoctorDetails.getContentPane().add(txtEmail);
 		
-		txtf_email = new JTextField();
-		txtf_email.setColumns(10);
-		txtf_email.setBounds(179, 139, 146, 19);
-		frmDoctorDetails.getContentPane().add(txtf_email);
+		txtAddress = new JTextField();
+		txtAddress.setColumns(10);
+		txtAddress.setBounds(250, 150, 160, 15);
+		frmDoctorDetails.getContentPane().add(txtAddress);
 		
-		txtf_address = new JTextField();
-		txtf_address.setColumns(10);
-		txtf_address.setBounds(179, 185, 146, 19);
-		frmDoctorDetails.getContentPane().add(txtf_address);
+		txtPhone = new JTextField();
+		txtPhone.setColumns(10);
+		txtPhone.setBounds(250, 185, 160, 15);
+		frmDoctorDetails.getContentPane().add(txtPhone);
 		
-		txtf_phone = new JTextField();
-		txtf_phone.setColumns(10);
-		txtf_phone.setBounds(179, 234, 146, 19);
-		frmDoctorDetails.getContentPane().add(txtf_phone);
+		txtDailyPatients = new JTextField();
+		txtDailyPatients.setColumns(10);
+		txtDailyPatients.setBounds(250, 220, 160, 15);
+		frmDoctorDetails.getContentPane().add(txtDailyPatients);
 		
-		txtf_dailyPatients = new JTextField();
-		txtf_dailyPatients.setColumns(10);
-		txtf_dailyPatients.setBounds(179, 284, 146, 19);
-		frmDoctorDetails.getContentPane().add(txtf_dailyPatients);
+		txtDailySubscriptions = new JTextField();
+		txtDailySubscriptions.setColumns(10);
+		txtDailySubscriptions.setBounds(250, 255, 160, 15);
+		frmDoctorDetails.getContentPane().add(txtDailySubscriptions);
 		
-		txtf_dailySubscriptions = new JTextField();
-		txtf_dailySubscriptions.setColumns(10);
-		txtf_dailySubscriptions.setBounds(179, 334, 146, 19);
-		frmDoctorDetails.getContentPane().add(txtf_dailySubscriptions);
+		txtSpecialization = new JTextField();
+		txtSpecialization.setColumns(10);
+		txtSpecialization.setBounds(250, 290, 160, 15);
+		frmDoctorDetails.getContentPane().add(txtSpecialization);
 		
-		txtf_specialization = new JTextField();
-		txtf_specialization.setColumns(10);
-		txtf_specialization.setBounds(179, 390, 146, 19);
-		frmDoctorDetails.getContentPane().add(txtf_specialization);
+		txtVisitTime = new JTextField();
+		txtVisitTime.setColumns(10);
+		txtVisitTime.setBounds(250, 325, 160, 15);
+		frmDoctorDetails.getContentPane().add(txtVisitTime);
 		
-		txtf_visitTime = new JTextField();
-		txtf_visitTime.setColumns(10);
-		txtf_visitTime.setBounds(179, 438, 146, 19);
-		frmDoctorDetails.getContentPane().add(txtf_visitTime);
+		JButton btnEdit = new JButton("Edit");
+		btnEdit.setBounds(40, 390, 85, 21);
+		frmDoctorDetails.getContentPane().add(btnEdit);
 		
-		JButton btn_edit = new JButton("Edit");
-		btn_edit.setBounds(109, 534, 85, 21);
-		frmDoctorDetails.getContentPane().add(btn_edit);
-		
-		JButton btn_delete = new JButton("Delete");
-		btn_delete.setBounds(219, 534, 85, 21);
-		frmDoctorDetails.getContentPane().add(btn_delete);
+		JButton btnDelete = new JButton("Delete");
+		btnDelete.setBounds(140, 390, 85, 21);
+		frmDoctorDetails.getContentPane().add(btnDelete);
 	}
 
 }

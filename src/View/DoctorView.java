@@ -28,10 +28,9 @@ public class DoctorView {
 	private JFrame frmDoctor;
 	private JTable tbl_doctors;
 	private JScrollPane scrollPane;
-	private JTextField txtSearchPatient;
+	private JTextField txtSearch;
 	private JButton btnNewButton;
 	private JButton btnAddPatient;
-	private JLabel lblNewLabel;
 	private JLabel lblName;
 	private JLabel lblPhone;
 	private JLabel lblEmail;
@@ -43,6 +42,7 @@ public class DoctorView {
 	private doctorController docCtrl;
 	private Doctor details;
 	private HashMap <String, Patient> patientsList;
+	private JLabel lblID;
 
 //	/**
 //	 * Launch the application.
@@ -132,17 +132,22 @@ public class DoctorView {
 		tbl_doctors.getTableHeader().setForeground(new Color(255, 255, 255));
 		scrollPane.setViewportView(tbl_doctors);
 		
-		txtSearchPatient = new JTextField();
-		txtSearchPatient.setForeground(Color.GRAY);
-		txtSearchPatient.setSelectionColor(new Color(192, 192, 192));
-		txtSearchPatient.setText("Search Patient...");
-		txtSearchPatient.setBounds(80, 477, 311, 26);
-		frmDoctor.getContentPane().add(txtSearchPatient);
-		txtSearchPatient.setColumns(10);
+		txtSearch = new JTextField();
+		txtSearch.setForeground(Color.GRAY);
+		txtSearch.setSelectionColor(new Color(192, 192, 192));
+		txtSearch.setText("Search Patient...");
+		txtSearch.setBounds(80, 477, 311, 26);
+		frmDoctor.getContentPane().add(txtSearch);
+		txtSearch.setColumns(10);
 		
 		btnNewButton = new JButton("Search");
 		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent e) {
+//				String searchStr = txtSearch.getText();
+//				if(searchStr != null)
+//				{
+					PatientDetailsView temp = new PatientDetailsView();
+//				}
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -152,17 +157,17 @@ public class DoctorView {
 		btnAddPatient = new JButton("Add Patient");
 		btnAddPatient.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new PatientDetailsView(doctorToken);
+				new AddPatientView(doctorToken);
 			}
 		});
 		btnAddPatient.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnAddPatient.setBounds(516, 477, 139, 29);
 		frmDoctor.getContentPane().add(btnAddPatient);
 		
-		lblNewLabel = new JLabel("Name");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblNewLabel.setBounds(693, 136, 119, 20);
-		frmDoctor.getContentPane().add(lblNewLabel);
+		lblName = new JLabel("Name");
+		lblName.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblName.setBounds(693, 136, 119, 20);
+		frmDoctor.getContentPane().add(lblName);
 		
 		lblPhone = new JLabel("Phone");
 		lblPhone.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -201,8 +206,10 @@ public class DoctorView {
 		txtEmail.setColumns(10);
 		txtEmail.setBounds(821, 239, 146, 26);
 		frmDoctor.getContentPane().add(txtEmail);
-		lblName.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblName.setBounds(693, 172, 119, 20);
-		frmDoctor.getContentPane().add(lblName);
+		
+		lblID = new JLabel("ID");
+		lblID.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblID.setBounds(693, 172, 119, 20);
+		frmDoctor.getContentPane().add(lblID);
 	}
 }

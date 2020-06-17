@@ -1,16 +1,8 @@
 package Model;
 
-
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 
 public class Manager extends User implements java.io.Serializable, CommandInterface {
 	
@@ -89,7 +81,15 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		if(doctors.containsKey(id)) 
 			return true;
 		return false;
+	}
+	
+	public Doctor getItem(String doctorId) {
+		
+		if (search(doctorId))
+			return this.doctors.get(doctorId);
 			
+		else 
+			return null;
 	}
 	
 	public boolean add(Object obj) {
@@ -100,19 +100,18 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 			doctors.put(newDoc.getDoctorID(), newDoc);
 			return true;
 		}
-		return false;
 		
+		return false;
 	}
 	
 	public boolean remove(String id) {
 			
-			if (search(id)) {
-				doctors.remove(id);
-				return true;
-			}
-			
-			return false;		
-			
+		if (search(id)) {
+			doctors.remove(id);
+			return true;
+		}
+		
+		return false;		
 	}
 	
 	public void deleteOldStats() {
@@ -120,7 +119,6 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 			if( doctors.get(Key).getFirstRecord().isBefore(LocalDate.now().minusMonths(1)))
 				doctors.remove(Key);
 		}
-	
 	}
 	
 	public void calcStats() {
@@ -143,7 +141,6 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		this.stats.setTotalDailylabs(tLabs/doctorsCount);
 		this.stats.setTotalDailyPatients(tPatient/doctorsCount);
 		this.stats.setTotalDailySubs(tSub/doctorsCount);
-		this.stats.setTotalVisitTime(tTime / doctorsCount);
-		
+		this.stats.setTotalVisitTime(tTime / doctorsCount);	
 	}
 }

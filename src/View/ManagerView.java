@@ -1,230 +1,255 @@
 package View;
+import java.awt.EventQueue;
+import java.awt.Font;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
+
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+//import com.sun.glass.events.WindowEvent;
+
+import Controller.authenticationController;
+import Controller.managerController;
+import Model.Doctor;
+import Model.Manager;
+
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
 import javax.swing.DebugGraphics;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableModel;
-import Controller.*;
-import Model.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ManagerView {
 
-	private JFrame frame;
-	private JTable tbl_managers;
+	private managerController managerCtrl;
+	private authenticationController authCtrl;
+	private Manager managerDetails;
+	private JFrame frmManager;
 	private JScrollPane scrollPane;
-	private JTextField txtSearchPatient;
-	private JButton btnNewButton;
-	private JButton btnAddPatient;
-	private JLabel lblNewLabel;
-	private JLabel lblName;
-	private JLabel lblPhone;
-	private JLabel lblAddress;
-	private JLabel lblEmail;
-	private JLabel lblClinicName;
-	private JSeparator separator;
-	private JButton btnNewButton_1;
-	private JTextField txtName;
-	private JTextField txtID;
-	private JTextField txtPhone;
-	private JTextField txtAddress;
-	private JTextField txtEmail;
-	private JTextField txtClinicName;
-	private managerController ManagerCtrl;
-	private Manager details;
-
-	/**
-	 * Launch the application.
-	 */
+	private JTable tblDoctors;
+	private JTextField txtSearch;
+	private JButton btnSearch;
+	private JButton btnAddDoctor;
+//	/**
+//	 * Launch the application.
+//	 */
 //	public static void main(String[] args) {
 //		EventQueue.invokeLater(new Runnable() {
 //			public void run() {
 //				try {
-//					ManagerView window = new ManagerView();
-//					window.frame.setVisible(true);
+//					ManagerPanelView window = new ManagerPanelView();
+//					
 //				} catch (Exception e) {
 //					e.printStackTrace();
 //				}
 //			}
 //		});
 //	}
-
 	/**
 	 * Create the application.
 	 */
-	public ManagerView() {
-		initialize();
+	public ManagerView(long managerToken) {
+		initialize(managerToken);
 	}
-
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
-		details = ManagerCtrl.getDetails();
-		frame = new JFrame();
-		frame.setBounds(100, 100, 1058, 571);
-		frame.setTitle("Manager");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+	private void initialize(long managerToken) {
+		managerCtrl = new managerController();
+		authCtrl = new authenticationController();
+		managerDetails = (Manager)authCtrl.getLoggedinUser(managerToken);
 		
-		JLabel lblWelcome = new JLabel("Welcome");
-		lblWelcome.setBounds(80, 58, 282, 20);
-		lblWelcome.setFont(new Font("Tahoma", Font.BOLD, 20));
-		frame.getContentPane().add(lblWelcome);
+		frmManager = new JFrame();
+		frmManager.setTitle("Manager");
+		frmManager.setBounds(100, 100, 1058, 571);
+		frmManager.getContentPane().setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(0, 0, 664, 10);
+		frmManager.getContentPane().add(panel);
+	
+		frmManager.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				authCtrl.serialize();
+				System.exit(0);
+			}
+		});
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setBackground(new Color(255, 255, 255));
 		scrollPane.setBounds(80, 127, 575, 334);
-		frame.getContentPane().add(scrollPane);
+		frmManager.getContentPane().add(scrollPane);
 		
-		tbl_managers = new JTable();
-		tbl_managers.setDebugGraphicsOptions(DebugGraphics.NONE_OPTION);
-		tbl_managers.setBorder(null);
-		tbl_managers.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		tbl_managers.setFocusable(false);
-		tbl_managers.setShowVerticalLines(false);
-		tbl_managers.setSelectionBackground(new Color(211, 211, 211));
-		tbl_managers.setRowMargin(0);
-		tbl_managers.setRowHeight(25);
-		tbl_managers.setIntercellSpacing(new Dimension(0, 0));
-		tbl_managers.setModel(new DefaultTableModel(
+		JLabel lblWelcome = new JLabel("Welcome");
+		lblWelcome.setBounds(80, 58, 282, 20);
+		lblWelcome.setFont(new Font("Tahoma", Font.BOLD, 20));
+		frmManager.getContentPane().add(lblWelcome);
+		
+		tblDoctors = new JTable();
+		tblDoctors.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"moria", "123"},
 				{null, null},
 				{null, null},
 				{null, null},
 				{null, null},
 				{null, null},
 				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null}
 			},
 			new String[] {
-				"Doctor", "Specialization"
+				"Doctor", "Spetialization"
 			}
 		));
-		tbl_managers.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 18));
-		tbl_managers.getTableHeader().setOpaque(false);
-		tbl_managers.getTableHeader().setBackground(new Color(32, 136, 203));
-		tbl_managers.getTableHeader().setForeground(new Color(255, 255, 255));
-		scrollPane.setViewportView(tbl_managers);
+		tblDoctors.setDebugGraphicsOptions(DebugGraphics.NONE_OPTION);
+		tblDoctors.setBorder(null);
+		tblDoctors.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		tblDoctors.setFocusable(false);
+		tblDoctors.setShowVerticalLines(false);
+		tblDoctors.setSelectionBackground(new Color(211, 211, 211));
+		tblDoctors.setRowMargin(0);
+		tblDoctors.setRowHeight(25);
+		tblDoctors.setIntercellSpacing(new Dimension(0, 0));
+//		Object[][] listObj = new Object[3][];
+//		int rowsIndex = 1;
+//		for (String key: patientsList.keySet()) {
+//			listObj[rowsIndex][0] = rowsIndex;
+//			listObj[rowsIndex][1] = patientsList.get(key).getName();
+//			listObj[rowsIndex][2] = patientsList.get(key).getId();
+//			rowsIndex++;
+//		}
 		
-		txtSearchPatient = new JTextField();
-		txtSearchPatient.setForeground(Color.GRAY);
-		txtSearchPatient.setSelectionColor(new Color(192, 192, 192));
-		txtSearchPatient.setText("Search Doctor...");
-		txtSearchPatient.setBounds(80, 477, 311, 26);
-		frame.getContentPane().add(txtSearchPatient);
-		txtSearchPatient.setColumns(10);
+//		tblPatients.setModel(new DefaultTableModel(
+//			listObj,
+//			new String[] {
+//				"Num.", "Patient", "ID"
+//			}
+//		));
+
+		tblDoctors.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 18));
+		tblDoctors.getTableHeader().setOpaque(false);
+		tblDoctors.getTableHeader().setBackground(new Color(32, 136, 203));
+		tblDoctors.getTableHeader().setForeground(new Color(255, 255, 255));
+		scrollPane.setViewportView(tblDoctors);
 		
-		btnNewButton = new JButton("Search");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnNewButton.setBounds(405, 477, 96, 29);
-		frame.getContentPane().add(btnNewButton);
+		txtSearch = new JTextField();
+		txtSearch.setText("Search Doctor...");
+		txtSearch.setSelectionColor(new Color(192, 192, 192));
+		txtSearch.setForeground(Color.GRAY);
+		txtSearch.setBounds(80, 477, 311, 26);
+		frmManager.getContentPane().add(txtSearch);
+		txtSearch.setColumns(10);
 		
-		btnAddPatient = new JButton("Add Patient");
-		btnAddPatient.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnAddPatient.setBounds(516, 477, 139, 29);
-		frame.getContentPane().add(btnAddPatient);
+		btnSearch = new JButton("Search");
+		btnSearch.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnSearch.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				String searchStr = txtSearch.getText();
+				if(searchStr != null)
+				{
+					Doctor doctor = managerCtrl.getDoctor(searchStr);
+					DoctorDetailsView doctorDetailsView = new DoctorDetailsView(doctor);
+				}
+			}
+		});
+		btnSearch.setBounds(405, 477, 96, 29);
+		btnSearch.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		frmManager.getContentPane().add(btnSearch);
 		
-		lblNewLabel = new JLabel("Name");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblNewLabel.setBounds(693, 136, 119, 20);
-		frame.getContentPane().add(lblNewLabel);
+		btnAddDoctor = new JButton("Add Doctor");
+		btnAddDoctor.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				AddDoctorView addDoctorView = new AddDoctorView(managerToken);
+			}
+		});
+		btnAddDoctor.setBounds(516, 477, 139, 29);
+		btnAddDoctor.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		frmManager.getContentPane().add(btnAddDoctor);
 		
-		lblName = new JLabel("ID");
+		JLabel lblName = new JLabel("Name");
 		lblName.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblName.setBounds(693, 172, 119, 20);
-		frame.getContentPane().add(lblName);
+		lblName.setBounds(693, 136, 119, 20);
+		frmManager.getContentPane().add(lblName);
 		
-		lblPhone = new JLabel("Phone");
+		JLabel lblID = new JLabel("ID");
+		lblID.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblID.setBounds(693, 172, 119, 20);
+		frmManager.getContentPane().add(lblID);
+		
+		JLabel lblPhone = new JLabel("Phone");
 		lblPhone.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblPhone.setBounds(693, 208, 119, 20);
-		frame.getContentPane().add(lblPhone);
+		frmManager.getContentPane().add(lblPhone);
 		
-		lblAddress = new JLabel("Address");
-		lblAddress.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblAddress.setBounds(693, 244, 119, 20);
-		frame.getContentPane().add(lblAddress);
-		
-		lblEmail = new JLabel("Email");
+		JLabel lblEmail = new JLabel("Email");
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblEmail.setBounds(693, 280, 119, 20);
-		frame.getContentPane().add(lblEmail);
+		lblEmail.setBounds(693, 241, 119, 20);
+		frmManager.getContentPane().add(lblEmail);
 		
-		lblClinicName = new JLabel("Clinic Name");
-		lblClinicName.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblClinicName.setBounds(693, 316, 119, 20);
-		frame.getContentPane().add(lblClinicName);
+		JLabel lblAddress = new JLabel("Address");
+		lblAddress.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblAddress.setBounds(693, 277, 119, 20);
+		frmManager.getContentPane().add(lblAddress);
 		
-		separator = new JSeparator();
-		separator.setOrientation(SwingConstants.VERTICAL);
-		separator.setForeground(Color.BLACK);
-		separator.setBounds(670, 127, 351, 379);
-		frame.getContentPane().add(separator);
+		JLabel lnlClinicName = new JLabel("Clinic Name");
+		lnlClinicName.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lnlClinicName.setBounds(693, 310, 119, 20);
+		frmManager.getContentPane().add(lnlClinicName);
 		
-		btnNewButton_1 = new JButton("View Statistical Reports");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnNewButton_1.setBounds(693, 475, 244, 29);
-		frame.getContentPane().add(btnNewButton_1);
-		
-		txtName = new JTextField();
-		txtName.setText(details.getName());
+		JTextPane txtName = new JTextPane();
+		txtName.setText("");
 		txtName.setEnabled(false);
 		txtName.setBounds(821, 133, 146, 26);
-		frame.getContentPane().add(txtName);
-		txtName.setColumns(10);
+		frmManager.getContentPane().add(txtName);
 		
-		txtID = new JTextField();
-		txtID.setText(details.getID());
+		JTextPane txtID = new JTextPane();
+		txtID.setText("Name");
 		txtID.setEnabled(false);
-		txtID.setColumns(10);
 		txtID.setBounds(821, 170, 146, 26);
-		frame.getContentPane().add(txtID);
+		frmManager.getContentPane().add(txtID);
 		
-		txtPhone = new JTextField();
-//		txtPhone.setText(details.getPhone());
+		JTextPane txtPhone = new JTextPane();
+		txtPhone.setText("Name");
 		txtPhone.setEnabled(false);
-		txtPhone.setColumns(10);
 		txtPhone.setBounds(821, 206, 146, 26);
-		frame.getContentPane().add(txtPhone);
+		frmManager.getContentPane().add(txtPhone);
 		
-		txtAddress = new JTextField();
-//		txtAddress.setText(details.getAddress());
-		txtAddress.setEnabled(false);
-		txtAddress.setColumns(10);
-		txtAddress.setBounds(821, 242, 146, 26);
-		frame.getContentPane().add(txtAddress);
-		
-		txtEmail = new JTextField();
-		txtEmail.setText(details.getEmail());
+		JTextPane txtEmail = new JTextPane();
+		txtEmail.setText("Name");
 		txtEmail.setEnabled(false);
-		txtEmail.setColumns(10);
-		txtEmail.setBounds(821, 278, 146, 26);
-		frame.getContentPane().add(txtEmail);
+		txtEmail.setBounds(821, 239, 146, 26);
+		frmManager.getContentPane().add(txtEmail);
 		
-		txtClinicName = new JTextField();
-//		txtEmail.setText(details.getClinic());
+		JTextPane txtAddress = new JTextPane();
+		txtAddress.setText("Name");
+		txtAddress.setEnabled(false);
+		txtAddress.setBounds(821, 272, 146, 26);
+		frmManager.getContentPane().add(txtAddress);
+		
+		JTextPane txtClinicName = new JTextPane();
+		txtClinicName.setText("Name");
 		txtClinicName.setEnabled(false);
-		txtClinicName.setColumns(10);
-		txtClinicName.setBounds(821, 314, 146, 26);
-		frame.getContentPane().add(txtClinicName);
-		frame.setVisible(true);
-		
+		txtClinicName.setBounds(821, 305, 146, 26);
+		frmManager.getContentPane().add(txtClinicName);
+		frmManager.setVisible(true);
 	}
 }
