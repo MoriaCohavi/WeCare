@@ -98,12 +98,6 @@ public class MedicalRecord implements java.io.Serializable {
 	
 	//other methods
 	
-	public String exportVisitSummary() {
-		String export = "";
-		export.concat( get_Date() +"\\" +get_VisitSummary() +"\\" + get_DaysOfIllnessApproval());
-			
-		return export;
-	}
 	
 	
 	public boolean serialize()

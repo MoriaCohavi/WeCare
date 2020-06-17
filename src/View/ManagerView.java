@@ -110,6 +110,12 @@ public class ManagerView {
 				{null, null},
 				{null, null},
 				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
+				{null, null},
 			},
 			new String[] {
 				"Doctor", "Spetialization"
@@ -175,6 +181,7 @@ public class ManagerView {
 					{
 						txtSearch.setText("Doctor not found !");
 					}
+					DoctorDetailsView doctorDetailsView = new DoctorDetailsView(doctor);
 				}
 			}
 		});
@@ -203,6 +210,12 @@ public class ManagerView {
 		lblID.setBounds(693, 172, 119, 20);
 		frmManager.getContentPane().add(lblID);
 		
+		
+		JLabel lblID = new JLabel("ID");
+		lblID.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblID.setBounds(693, 172, 119, 20);
+		frmManager.getContentPane().add(lblID);
+		
 		JLabel lblPhone = new JLabel("Phone");
 		lblPhone.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblPhone.setBounds(693, 208, 119, 20);
@@ -215,18 +228,38 @@ public class ManagerView {
 		
 		JTextPane txtName = new JTextPane();
 		txtName.setText(managerDetails.getName());
+		
+		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblEmail.setBounds(693, 241, 119, 20);
+		frmManager.getContentPane().add(lblEmail);
+		
+		JLabel lblAddress = new JLabel("Address");
+		lblAddress.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblAddress.setBounds(693, 277, 119, 20);
+		frmManager.getContentPane().add(lblAddress);
+		
+		JLabel lnlClinicName = new JLabel("Clinic Name");
+		lnlClinicName.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lnlClinicName.setBounds(693, 310, 119, 20);
+		frmManager.getContentPane().add(lnlClinicName);
+		
+		JTextPane txtName = new JTextPane();
+		txtName.setText("");
 		txtName.setEnabled(false);
 		txtName.setBounds(821, 133, 146, 26);
 		frmManager.getContentPane().add(txtName);
 		
 		JTextPane txtID = new JTextPane();
 		txtID.setText(managerDetails.getID());
+		txtID.setText("Name");
 		txtID.setEnabled(false);
 		txtID.setBounds(821, 170, 146, 26);
 		frmManager.getContentPane().add(txtID);
 		
 		JTextPane txtPhone = new JTextPane();
 		txtPhone.setText(String.valueOf(managerDetails.getPhone()));
+		txtPhone.setText("Name");
 		txtPhone.setEnabled(false);
 		txtPhone.setBounds(821, 206, 146, 26);
 		frmManager.getContentPane().add(txtPhone);
@@ -236,6 +269,22 @@ public class ManagerView {
 		txtEmail.setEnabled(false);
 		txtEmail.setBounds(821, 239, 146, 26);
 		frmManager.getContentPane().add(txtEmail);
+		txtEmail.setText("Name");
+		txtEmail.setEnabled(false);
+		txtEmail.setBounds(821, 239, 146, 26);
+		frmManager.getContentPane().add(txtEmail);
+		
+		JTextPane txtAddress = new JTextPane();
+		txtAddress.setText("Name");
+		txtAddress.setEnabled(false);
+		txtAddress.setBounds(821, 272, 146, 26);
+		frmManager.getContentPane().add(txtAddress);
+		
+		JTextPane txtClinicName = new JTextPane();
+		txtClinicName.setText("Name");
+		txtClinicName.setEnabled(false);
+		txtClinicName.setBounds(821, 305, 146, 26);
+		frmManager.getContentPane().add(txtClinicName);
 		frmManager.setVisible(true);
 	}
 }
