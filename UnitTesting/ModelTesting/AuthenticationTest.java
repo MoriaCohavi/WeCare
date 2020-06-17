@@ -73,4 +73,12 @@ public class AuthenticationTest {
 		Assert.assertTrue(Authentication.generateToken(user1.getId()) != Authentication.generateToken(user1.getId()));
 	}
 	
+	@Test
+	public void CheckUpdateDoctorInfo()
+	{
+		Doctor doctor = new Doctor("123456789", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
+				Authentication.signUp("123456789", doctor);
+		Assert.assertTrue(Authentication.updateDoctorInfo(doctor.getId(), "Email test", 0541234567));
+		Assert.assertFalse(Authentication.updateDoctorInfo("000000000", "Email test", 0541234567));
+	}
 }

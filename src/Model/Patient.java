@@ -12,7 +12,7 @@ public class Patient extends Person implements java.io.Serializable{
 
 	private int age, weight, height, recordCount;
 	private String gender, allergies, chronic_diseases, subscriptions;
-	private HashMap<Integer, MedicalRecord> medicalRecords;
+	private static HashMap<Integer, MedicalRecord> medicalRecords = new HashMap<Integer, MedicalRecord>();
 	private ArrayList<Lab> labs;
 	
 	public Patient(String id,int age, long phone, String name, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases) {
@@ -25,7 +25,6 @@ public class Patient extends Person implements java.io.Serializable{
 		this.subscriptions = subscriptions;
 		this.chronic_diseases = chronic_diseases;
 		this.recordCount = 0;
-		this.medicalRecords = new HashMap<Integer, MedicalRecord>();
 		this.labs = new ArrayList<Lab>();
 	}
 	

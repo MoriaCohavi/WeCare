@@ -16,14 +16,13 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	
 	private LinkedHashMap <LocalDate, StatisitcalData> stats = new LinkedHashMap<LocalDate, StatisitcalData>();
 	private String specialization;
-	private HashMap <String, Patient> patients;
+	private static HashMap <String, Patient> patients = new HashMap <String, Patient>();
 	
 	//constructor
 	public Doctor(String id, long phone, String name, String email, String special,String password,String user_type) {
 		
 		super(id, phone, name, email, password, user_type);
 		this.specialization = special;
-		this.patients = new HashMap <String, Patient>();
 		this.stats = new LinkedHashMap<LocalDate, StatisitcalData>();
 	}
 	
@@ -246,5 +245,57 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 //	}		
 	
 	
+	public HashMap<String, Patient> getPatients() {
+		return patients;
+	}
+	
+	public void setPatients(HashMap<String, Patient> tempPatients) {
+		patients = tempPatients;
+	}
+	
+	public String getPatientName(String patientId)
+	{
+		return this.getItem(patientId).getName();
+	}
+	
+	public String getPatientEmail(String patientId)
+	{
+		return this.getItem(patientId).getEmail();
+	}
+	
+	public long getPatientPhone(String patientId)
+	{
+		return this.getItem(patientId).getPhone();
+	}
+	
+	public int getPatientAge(String patientId)
+	{
+		return this.getItem(patientId).getAge();
+	}
+	
+	public int getPatientHeight(String patientId)
+	{
+		return this.getItem(patientId).getHeight();
+	}
+	
+	public int getPatientWeight(String patientId)
+	{
+		return this.getItem(patientId).getWeight();
+	}
+	
+	public String getPatientAllergic(String patientId)
+	{
+		return this.getItem(patientId).getAllergies();
+	}
+	
+	public String getPatientChronicDiseases(String patientId)
+	{
+		return this.getItem(patientId).getChronic_diseases();
+	}
+	
+	public String getPatientSubscription(String patientId)
+	{
+		return this.getItem(patientId).getSubscriptions();
+	}
 }
 

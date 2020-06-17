@@ -13,11 +13,13 @@ public class doctorController {
 	public Doctor getDetails() {
 		
 		return currentModelDoctor;
+		
 	}
 	
 	public doctorController(Doctor doctor) {
 		
 		currentModelDoctor = doctor;
+		deserialize();
 	}
 	
 	public doctorController(String id, int phone, String name, String email, String special,String password,String user_type) { // needs to include doctorview obj
@@ -89,9 +91,19 @@ public class doctorController {
 	}
  
 	public void serialize() {
-		
-		serHandlerController.serialize(currentModelDoctor, serPath);
+		HashMap<String,Patient> tempPatients = currentModelDoctor.getPatients();
+		serHandlerController.serialize(tempPatients, serPath);
 	}
+	
+	
+	public boolean deserialize() {
+		HashMap<String,Patient> usersTemp = (HashMap<String,Patient>)serHandlerController.deserialize(serPath);
+		if (usersTemp == null)
+			return false;
+		this.currentModelDoctor.setPatients(usersTemp);
+		return true;
+	}
+	
 	
 	public void updateDoctor(String id, String name, String email, long phone)
 	{
@@ -99,10 +111,7 @@ public class doctorController {
 		Doctor doc = mgmtCtrl.getDoctorItem(id);
 	}
 	
-	public void deserialize() {
-		
-		currentModelDoctor = (Doctor)serHandlerController.deserialize(serPath);
-	}
+	
 
 	public HashMap <String, Patient> getPatientsList(long token) {
 		if(Authentication.validateUser(token, typeNeed))
@@ -147,5 +156,50 @@ public class doctorController {
 	public String getDoctorSpecialization()
 	{
 		return currentModelDoctor.getDoctorSpecialization();
+	}
+	
+	public String getPatientName(String patientId)
+	{
+		return currentModelDoctor.getPatientName(patientId);
+	}
+	
+	public String getPatientEmail(String patientId)
+	{
+		return currentModelDoctor.getPatientEmail(patientId);
+	}
+	
+	public long getPatientPhone(String patientId)
+	{
+		return currentModelDoctor.getPatientPhone(patientId);
+	}
+	
+	public int getPatientAge(String patientId)
+	{
+		return currentModelDoctor.getPatientAge(patientId);
+	}
+	
+	public int getPatientHeight(String patientId)
+	{
+		return currentModelDoctor.getPatientHeight(patientId);
+	}
+	
+	public int getPatientWeight(String patientId)
+	{
+		return currentModelDoctor.getPatientWeight(patientId);
+	}
+	
+	public String getPatientAllergic(String patientId)
+	{
+		return currentModelDoctor.getPatientAllergic(patientId);
+	}
+	
+	public String getPatientChronicDiseases(String patientId)
+	{
+		return currentModelDoctor.getPatientChronicDiseases(patientId);
+	}
+	
+	public String getPatientSubscription(String patientId)
+	{
+		return currentModelDoctor.getPatientSubscription(patientId);
 	}
 }

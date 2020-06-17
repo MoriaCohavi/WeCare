@@ -74,6 +74,8 @@ public class ManagerView {
 		authCtrl = new authenticationController();
 		managerDetails = (Manager)authCtrl.getLoggedinUser(managerToken);
 		
+		
+		
 		frmManager = new JFrame();
 		frmManager.setTitle("Manager");
 		frmManager.setBounds(100, 100, 1058, 571);
