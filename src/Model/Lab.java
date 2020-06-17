@@ -46,18 +46,16 @@ public class Lab implements java.io.Serializable {
 	
 	
 	public void updateResults(String result, boolean attention) 
-	/*test*/
+	/*tested*/
 	{
 		this.setResult(result);
 		this.setAttentionRequired(attention);
-		if (this.attentionRequired)
-			this.sendAttentionAlert();
 	}
 	
-	//we need to change this based on what we implement in the UI for attention alerts/table.
-	private void sendAttentionAlert() {
-		//System.out.println("attention!");
-	}
+//	//we need to change this based on what we implement in the UI for attention alerts/table.
+//	private void sendAttentionAlert() {
+//		//System.out.println("attention!");
+//	}
 	
 	public boolean serialize()
 	{
