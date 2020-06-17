@@ -49,14 +49,14 @@ public class DoctorDetailsView {
 	/**
 	 * Create the application.
 	 */
-	public DoctorDetailsView(Doctor doctor) {
-		initialize(doctor);
+	public DoctorDetailsView(long token, Doctor doctor) {
+		initialize(token,doctor);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(Doctor doctor) {
+	private void initialize(long token, Doctor doctor) {
 		docCtrl = new doctorController(doctor);
 		manCtrl = new managerController();
 		frmDoctorDetails = new JFrame();
@@ -154,7 +154,7 @@ public class DoctorDetailsView {
 		btnEdit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				manCtrl.updateDoctor(txtID.getText(), txtEmail.getText(), Long.parseLong(txtPhone.getText()));
+				manCtrl.updateDoctor(token, txtID.getText(), txtEmail.getText(), Long.parseLong(txtPhone.getText()));
 				frmDoctorDetails.dispose();
 			}
 		});

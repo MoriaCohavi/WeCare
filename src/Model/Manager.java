@@ -159,13 +159,13 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		this.stats.setTotalVisitTime(tTime / tRecords);	
 	}
 	
-	public boolean updateDoctorInfo(String patientId, String email, long phone) {
+	public boolean updateDoctorInfo(String docId, String email, long phone) {
 		/*tested*/
 		
-		if (this.doctors.containsKey(patientId) && Authentication.updateDoctorInfo(patientId, email, phone)) 
+		if (this.doctors.containsKey(docId) && Authentication.updateDoctorInfo(docId, email, phone)) 
 		{
-			doctors.get(patientId).setEmail(email);
-			doctors.get(patientId).setPhone(phone);
+			doctors.get(docId).setEmail(email);
+			doctors.get(docId).setPhone(phone);
 			return true;
 		}
 		

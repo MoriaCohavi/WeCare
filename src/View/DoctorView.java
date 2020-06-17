@@ -154,7 +154,7 @@ public class DoctorView {
 					Patient patient = docCtrl.getPatient(doctorToken, searchStr);
 					if (patient != null)
 					{
-						PatientDetailsView patientDetails = new PatientDetailsView(details, searchStr);
+						PatientDetailsView patientDetails = new PatientDetailsView(doctorToken, details, searchStr);
 					}
 					else
 					{
