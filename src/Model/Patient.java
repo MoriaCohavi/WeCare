@@ -12,7 +12,7 @@ public class Patient extends Person implements java.io.Serializable{
 
 	private int age, weight, height, recordCount;
 	private String gender, allergies, chronic_diseases, subscriptions;
-	private static HashMap<String, MedicalRecord> medicalRecords = new HashMap<String, MedicalRecord>();
+	private static HashMap<Integer, MedicalRecord> medicalRecords = new HashMap<Integer, MedicalRecord>();
 	private ArrayList<Lab> labs;
 	
 	public Patient(String id,int age, long phone, String name, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases) {
@@ -98,6 +98,7 @@ public class Patient extends Person implements java.io.Serializable{
 	}
 
 	public void updatePatientInfo(int phone,int age, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases)
+	/*tested*/
 	{
 		if(this.getPhone() != phone)
 			this.setPhone(phone);
@@ -129,13 +130,17 @@ public class Patient extends Person implements java.io.Serializable{
 	}
 		
 
-	public boolean addLab(Lab newLab) {
+	public boolean addLab(Lab newLab) 
+	/*tested*/
+	{
 
 		return this.labs.add(newLab);
 		
 	}
 	
-	public boolean addMedicalRecord (MedicalRecord newRecord) {
+	public boolean addMedicalRecord (MedicalRecord newRecord) 
+	/*tested*/
+	{
 		
 		if (medicalRecords.put(this.getId(), newRecord) == null)
 			return true;
@@ -143,9 +148,5 @@ public class Patient extends Person implements java.io.Serializable{
 		return false;
 	}	
 	
-	public String medicalSummary() { 
-		
-		return null;
-		
-	}
+	 
 }

@@ -34,7 +34,7 @@ public class Lab implements java.io.Serializable {
 	}
 	
 	
-	public String getResult(String resultUpdate){
+	public String getResult(){
 		return this.result;
 		
 	}
@@ -45,7 +45,9 @@ public class Lab implements java.io.Serializable {
 	
 	
 	
-	public void updateResults(String result, boolean attention) {
+	public void updateResults(String result, boolean attention) 
+	/*test*/
+	{
 		this.setResult(result);
 		this.setAttentionRequired(attention);
 		if (this.attentionRequired)
@@ -54,7 +56,7 @@ public class Lab implements java.io.Serializable {
 	
 	//we need to change this based on what we implement in the UI for attention alerts/table.
 	private void sendAttentionAlert() {
-		System.out.println("attention!");
+		//System.out.println("attention!");
 	}
 	
 	public boolean serialize()

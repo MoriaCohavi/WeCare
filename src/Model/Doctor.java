@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
@@ -80,7 +81,7 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 		Patient newPatient = (Patient)obj;
 		if (!search(newPatient.getId()))
 		{
-			patients.put(newPatient.getId(), newPatient);
+			patients.put(newPatient.getId(), newPatient);				
 			return true;
 		}
 		
@@ -117,6 +118,10 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 			
 		else 
 			return null;
+	}
+	
+	public HashMap<String, Patient> getPatients() {
+		return patients;
 	}
 	
 	public LocalDate getFirstRecord() { 
@@ -176,14 +181,15 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 		if (this.patients.containsKey(patientId)) {
 			patients.get(patientId).addMedicalRecord(newRecord);
 			
+
 			//updating stats
 			if (!this.stats.containsKey(LocalDate.now())) 
 				this.stats.put(LocalDate.now(), new StatisitcalData());
 			
 			StatisitcalData editStats = this.stats.get(LocalDate.now());
-			double time = ChronoUnit.MINUTES.between(newRecord.get_ETime(), newRecord.get_STime());
-			editStats.setTotalVisitTime(time);
-			editStats.setTotalDailyPatients(1);
+			double time = ChronoUnit.MINUTES.between(newRecord.get_STime(), newRecord.get_ETime())	;
+			editStats.addtotalVisitTime(time);
+			editStats.addtotalDailyPatients(1);
 			
 			if (newRecord.get_subscriptions() != null) { 
 				String[] words = newRecord.get_subscriptions().split(",");
@@ -198,7 +204,7 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	}
 	
 	public boolean addLabToPatient(String patientId, String labType) {
-		
+		/*tested*/
 		if (this.patients.containsKey(patientId)) {
 			
 			Lab newLab = new Lab(labType, null, false);
@@ -209,8 +215,10 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 				this.stats.put(LocalDate.now(), new StatisitcalData());
 			
 			StatisitcalData editStats = this.stats.get(LocalDate.now());
+			if (editStats == null) {
+				editStats = new StatisitcalData();
+			}
 			editStats.addtotalDailylabs(1);
-			
 			this.stats.put(LocalDate.now(), editStats);
 			return true;
 		}
@@ -218,23 +226,24 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 		else return false;
 	}
 	
-	public String visitSummary(String patientId, int recordId) {
-		
-		if (this.patients.containsKey(patientId)) {
-			return patients.get(patientId).getMedicalRecord(recordId).get_VisitSummary();
-		}
-		
-		return null;
-	}
+//	public String visitSummary(String patientId, int recordId) {
+//		
+//		if (this.patients.containsKey(patientId)) {
+//			return patients.get(patientId).getMedicalRecord(recordId).get_VisitSummary();
+//		}
+//		
+//		return null;
+//	}
+//	
+//	public String PatientMedicalSummary(String patientId) {
+//		
+//		if (this.patients.containsKey(patientId)) {
+//			return patients.get(patientId).medicalSummary();
+//		}
+//		
+//		return null;
+//	}		
 	
-	public String PatientMedicalSummary(String patientId) {
-		
-		if (this.patients.containsKey(patientId)) {
-			return patients.get(patientId).medicalSummary();
-		}
-		
-		return null;
-	}		
 	
 	public HashMap<String, Patient> getPatients() {
 		return patients;

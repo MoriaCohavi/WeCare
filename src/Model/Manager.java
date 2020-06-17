@@ -83,7 +83,9 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		return false;
 	}
 	
-	public Doctor getItem(String doctorId) {
+	public Doctor getItem(String doctorId) 
+	/*tested*/
+	{
 		
 		if (search(doctorId))
 			return this.doctors.get(doctorId);
@@ -92,8 +94,9 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 			return null;
 	}
 	
-	public boolean add(Object obj) {
-		
+	public boolean add(Object obj) 
+	/*tested*/
+	{
 		Doctor newDoc = (Doctor)obj;
 		if (!search(newDoc.getId()))
 		{
@@ -104,7 +107,9 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		return false;
 	}
 	
-	public boolean remove(String id) {
+	public boolean remove(String id) 
+	/*tested*/
+	{
 			
 		if (search(id)) {
 			doctors.remove(id);
@@ -114,21 +119,26 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		return false;		
 	}
 	
-	public void deleteOldStats() {
+	private void deleteOldStats() 
+	
+	{
 		for(String Key : this.doctors.keySet()) {
-			if( doctors.get(Key).getFirstRecord().isBefore(LocalDate.now().minusMonths(1)))
+			if( doctors.get(Key).getFirstRecord()!= null && 
+					doctors.get(Key).getFirstRecord().isBefore(LocalDate.now().minusMonths(1)))
 				doctors.remove(Key);
 		}
 	}
 	
-	public void calcStats() {
+	public void calcStats() 
+	/*tested*/
+	{
 		
 		deleteOldStats();
 		int doctorsCount;
 		if (doctors.size() == 0)
 			doctorsCount =1;
 		else doctorsCount =  doctors.size();
-		double tTime = 0, tSub =0, tPatient = 0, tLabs = 0;
+		double tTime = 0, tSub =0, tPatient = 0, tLabs = 0, tRecords = 0;
 		StatisitcalData current = new StatisitcalData();
 		for (String Key : this.doctors.keySet()) {
 			current = doctors.get(Key).getAvgRecords();
@@ -136,12 +146,17 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 			tSub += current.getTotalDailySubs();
 			tPatient += current.getTotalDailyPatients();
 			tLabs += current.getTotalDailylabs();
+			HashMap <String, Patient> temp = doctors.get(Key).getPatients();
+				for (String PatientKey : temp.keySet())
+					tRecords += temp.get(PatientKey).getRecordCounter();
 		}
 		
 		this.stats.setTotalDailylabs(tLabs/doctorsCount);
 		this.stats.setTotalDailyPatients(tPatient/doctorsCount);
 		this.stats.setTotalDailySubs(tSub/doctorsCount);
-		this.stats.setTotalVisitTime(tTime / doctorsCount);	
+		if (tRecords == 0)
+			tRecords = 1;
+		this.stats.setTotalVisitTime(tTime / tRecords);	
 	}
 	
 	public boolean updateDoctorInfo(String patientId, String email, long phone) {
