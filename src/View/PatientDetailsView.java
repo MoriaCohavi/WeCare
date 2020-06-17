@@ -109,11 +109,13 @@ public class PatientDetailsView {
 		frmPatient.getContentPane().add(lblGender);
 		
 		txtName = new JTextField(docCtrl.getPatientName(patientId));
+		txtName.setEnabled(false);
 		txtName.setBounds(250, 45, 160, 15);
 		frmPatient.getContentPane().add(txtName);
 		txtName.setColumns(10);
 		
 		txtID = new JTextField(patientId);
+		txtID.setEnabled(false);
 		txtID.setColumns(10);
 		txtID.setBounds(250, 80, 160, 15);
 		frmPatient.getContentPane().add(txtID);
@@ -129,16 +131,19 @@ public class PatientDetailsView {
 		frmPatient.getContentPane().add(txtPhone);
 		
 		txtAge = new JTextField(String.valueOf(docCtrl.getPatientAge(patientId)));
+		txtAge.setEnabled(false);
 		txtAge.setColumns(10);
 		txtAge.setBounds(248, 184, 160, 15);
 		frmPatient.getContentPane().add(txtAge);
 		
 		txtHeight = new JTextField(String.valueOf(docCtrl.getPatientHeight(patientId)));
+		txtHeight.setEnabled(false);
 		txtHeight.setColumns(10);
 		txtHeight.setBounds(248, 219, 160, 15);
 		frmPatient.getContentPane().add(txtHeight);
 		
 		txtWeight = new JTextField(String.valueOf(docCtrl.getPatientWeight(patientId)));
+		txtWeight.setEnabled(false);
 		txtWeight.setColumns(10);
 		txtWeight.setBounds(248, 254, 160, 15);
 		frmPatient.getContentPane().add(txtWeight);
