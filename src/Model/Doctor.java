@@ -245,10 +245,6 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 //	}		
 	
 	
-	public HashMap<String, Patient> getPatients() {
-		return patients;
-	}
-	
 	public void setPatients(HashMap<String, Patient> tempPatients) {
 		patients = tempPatients;
 	}

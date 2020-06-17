@@ -144,7 +144,8 @@ public class Authentication implements java.io.Serializable{
 	}
 	
 	public static boolean updateDoctorInfo(String patientId,  String email, long phone)
-		{
+	/*tested*/	
+	{
 			if (users.containsKey(patientId))
 			{
 				users.get(patientId).setEmail(email);
