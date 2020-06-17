@@ -92,5 +92,43 @@ public class doctorController {
 		
 		return this.currentModelDoctor.getPatients();
 	}
-
+	
+	public String getDoctorID()
+	{
+		return currentModelDoctor.getDoctorID();
+	}
+	
+	public String getDoctorName()
+	{
+		return currentModelDoctor.getDoctorName();
+	}
+	public String getDoctorEmail()
+	{
+		return currentModelDoctor.getDoctorEmail();
+	}
+	public long getDoctorPhone()
+	{
+		return currentModelDoctor.getDoctorPhone();
+	}
+	public double getDoctorAveragePatients()
+	{
+		return currentModelDoctor.getAvgRecords().getTotalDailyPatients();
+	}
+	public double getDoctorAverageSubscriptions()
+	{
+		return currentModelDoctor.getAvgRecords().getTotalDailySubs();
+	}
+	public double getDoctorAverageLabs()
+	{
+		return currentModelDoctor.getAvgRecords().getTotalDailylabs();
+	}
+	public double getDoctorAverageVisitTime()
+	{
+		return currentModelDoctor.getAvgRecords().getTotalVisitTime();
+	}
+	
+	public String getDoctorSpecialization()
+	{
+		return currentModelDoctor.getDoctorSpecialization();
+	}
 }

@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 //import com.sun.glass.events.WindowEvent;
 
 import Controller.authenticationController;
+import Controller.clinicController;
 import Controller.managerController;
 import Model.Doctor;
 import Model.Manager;
@@ -166,7 +167,14 @@ public class ManagerView {
 				if(searchStr != null)
 				{
 					Doctor doctor = managerCtrl.getDoctor(searchStr);
-					DoctorDetailsView doctorDetailsView = new DoctorDetailsView(doctor);
+					if (doctor != null)
+					{
+						DoctorDetailsView doctorDetailsView = new DoctorDetailsView(doctor);
+					}
+					else
+					{
+						txtSearch.setText("Doctor not found !");
+					}
 				}
 			}
 		});
@@ -205,51 +213,29 @@ public class ManagerView {
 		lblEmail.setBounds(693, 241, 119, 20);
 		frmManager.getContentPane().add(lblEmail);
 		
-		JLabel lblAddress = new JLabel("Address");
-		lblAddress.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblAddress.setBounds(693, 277, 119, 20);
-		frmManager.getContentPane().add(lblAddress);
-		
-		JLabel lnlClinicName = new JLabel("Clinic Name");
-		lnlClinicName.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lnlClinicName.setBounds(693, 310, 119, 20);
-		frmManager.getContentPane().add(lnlClinicName);
-		
 		JTextPane txtName = new JTextPane();
-		txtName.setText("");
+		txtName.setText(managerDetails.getName());
 		txtName.setEnabled(false);
 		txtName.setBounds(821, 133, 146, 26);
 		frmManager.getContentPane().add(txtName);
 		
 		JTextPane txtID = new JTextPane();
-		txtID.setText("Name");
+		txtID.setText(managerDetails.getID());
 		txtID.setEnabled(false);
 		txtID.setBounds(821, 170, 146, 26);
 		frmManager.getContentPane().add(txtID);
 		
 		JTextPane txtPhone = new JTextPane();
-		txtPhone.setText("Name");
+		txtPhone.setText(String.valueOf(managerDetails.getPhone()));
 		txtPhone.setEnabled(false);
 		txtPhone.setBounds(821, 206, 146, 26);
 		frmManager.getContentPane().add(txtPhone);
 		
 		JTextPane txtEmail = new JTextPane();
-		txtEmail.setText("Name");
+		txtEmail.setText(managerDetails.getEmail());
 		txtEmail.setEnabled(false);
 		txtEmail.setBounds(821, 239, 146, 26);
 		frmManager.getContentPane().add(txtEmail);
-		
-		JTextPane txtAddress = new JTextPane();
-		txtAddress.setText("Name");
-		txtAddress.setEnabled(false);
-		txtAddress.setBounds(821, 272, 146, 26);
-		frmManager.getContentPane().add(txtAddress);
-		
-		JTextPane txtClinicName = new JTextPane();
-		txtClinicName.setText("Name");
-		txtClinicName.setEnabled(false);
-		txtClinicName.setBounds(821, 305, 146, 26);
-		frmManager.getContentPane().add(txtClinicName);
 		frmManager.setVisible(true);
 	}
 }

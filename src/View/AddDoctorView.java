@@ -21,7 +21,6 @@ public class AddDoctorView {
 	private JTextField txtf_name;
 	private JTextField txtf_id;
 	private JTextField txtf_email;
-	private JTextField txtf_address;
 	private JTextField txtf_phone;
 	private JTextField txtf_specialization;
 	private JTextField txtf_passwd;
@@ -42,14 +41,13 @@ public class AddDoctorView {
 		
 		frmAddDoctor = new JFrame();
 		frmAddDoctor.setTitle("Add doctor");
-		frmAddDoctor.setBounds(100, 100, 450, 536);
+		frmAddDoctor.setBounds(100, 100, 450, 461);
 		frmAddDoctor.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmAddDoctor.getContentPane().setLayout(null);
 		
 		frmAddDoctor.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-//				DoctorDetailsView add = new DoctorDetailsView("");
 			}
 		});
 		
@@ -70,20 +68,16 @@ public class AddDoctorView {
 		lbl_email.setBounds(34, 140, 45, 13);
 		frmAddDoctor.getContentPane().add(lbl_email);
 		
-		JLabel lbl_address = new JLabel("Address:");
-		lbl_address.setBounds(34, 185, 45, 13);
-		frmAddDoctor.getContentPane().add(lbl_address);
-		
 		JLabel lbl_phone = new JLabel("Phone:");
-		lbl_phone.setBounds(34, 229, 45, 13);
+		lbl_phone.setBounds(34, 193, 45, 13);
 		frmAddDoctor.getContentPane().add(lbl_phone);
 		
 		JLabel lbl_specs = new JLabel("Specialization:");
-		lbl_specs.setBounds(34, 282, 113, 13);
+		lbl_specs.setBounds(34, 244, 113, 13);
 		frmAddDoctor.getContentPane().add(lbl_specs);
 		
 		JLabel lbl_passwd = new JLabel("Password:");
-		lbl_passwd.setBounds(34, 339, 101, 13);
+		lbl_passwd.setBounds(34, 295, 101, 13);
 		frmAddDoctor.getContentPane().add(lbl_passwd);
 		
 		txtf_name = new JTextField();
@@ -102,32 +96,25 @@ public class AddDoctorView {
 		txtf_email.setText(null);
 		frmAddDoctor.getContentPane().add(txtf_email);
 		
-		
-		txtf_address = new JTextField();
-		txtf_address.setColumns(10);
-		txtf_address.setBounds(157, 182, 96, 19);
-		txtf_address.setText(null);
-		frmAddDoctor.getContentPane().add(txtf_address);
-		
 		txtf_phone = new JTextField();
 		txtf_phone.setColumns(10);
-		txtf_phone.setBounds(157, 226, 96, 19);
+		txtf_phone.setBounds(157, 190, 96, 19);
 		txtf_phone.setText("0");
 		frmAddDoctor.getContentPane().add(txtf_phone);
 		
 		txtf_specialization = new JTextField();
 		txtf_specialization.setColumns(10);
-		txtf_specialization.setBounds(157, 279, 96, 19);
+		txtf_specialization.setBounds(157, 244, 96, 19);
 		txtf_specialization.setText(null);
 		frmAddDoctor.getContentPane().add(txtf_specialization);
 		
 		txtf_passwd = new JTextField();
 		txtf_passwd.setColumns(10);
-		txtf_passwd.setBounds(157, 336, 96, 19);
+		txtf_passwd.setBounds(157, 292, 96, 19);
 		frmAddDoctor.getContentPane().add(txtf_passwd);
 		
 		JButton btn_addDoctor = new JButton("Add Doctor");
-		btn_addDoctor.setBounds(157, 425, 109, 21);
+		btn_addDoctor.setBounds(157, 360, 109, 21);
 		frmAddDoctor.getContentPane().add(btn_addDoctor);
 		
 		JLabel lbl_warning = new JLabel("");
@@ -145,7 +132,7 @@ public class AddDoctorView {
 					if (!(managerController.addNewDoctor(txtf_id.getText(), Long.parseLong(txtf_phone.getText()), txtf_name.getText(), txtf_email.getText(), txtf_specialization.getText(), txtf_passwd.getText(), "Doctor", token)))
 						lbl_warning.setText("User exists");
 					else {
-						ManagerView managerPanel = new ManagerView(token);
+						
 						frmAddDoctor.dispose();
 					}
 						
