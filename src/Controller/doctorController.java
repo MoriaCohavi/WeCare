@@ -93,9 +93,10 @@ public class doctorController {
 		serHandlerController.serialize(currentModelDoctor, serPath);
 	}
 	
-	public void updateDoctor()
+	public void updateDoctor(String id, String name, String email, long phone)
 	{
-		
+		managerController mgmtCtrl = new managerController();
+		Doctor doc = mgmtCtrl.getDoctorItem(id);
 	}
 	
 	public void deserialize() {

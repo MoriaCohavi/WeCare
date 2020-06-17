@@ -13,6 +13,8 @@ import Model.Doctor;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class DoctorDetailsView {
 
@@ -61,6 +63,15 @@ public class DoctorDetailsView {
 		frmDoctorDetails.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmDoctorDetails.getContentPane().setLayout(null);
 		
+		frmDoctorDetails.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				// ADD SERIALZATION OF MANAGER AND USERS
+				frmDoctorDetails.dispose();
+
+			}
+		});
+		
 		JLabel lblName = new JLabel("Name");
 		lblName.setBounds(40, 45, 160, 15);
 		frmDoctorDetails.getContentPane().add(lblName);
@@ -99,6 +110,7 @@ public class DoctorDetailsView {
 		txtName.setColumns(10);
 		
 		txtID = new JTextField(docCtrl.getDoctorID());
+		txtID.setEditable(false);
 		txtID.setColumns(10);
 		txtID.setBounds(250, 80, 160, 21);
 		frmDoctorDetails.getContentPane().add(txtID);
@@ -114,21 +126,25 @@ public class DoctorDetailsView {
 		frmDoctorDetails.getContentPane().add(txtPhone);
 		
 		txtAvgPatients = new JTextField(String.valueOf(docCtrl.getDoctorAveragePatients()));
+		txtAvgPatients.setEditable(false);
 		txtAvgPatients.setColumns(10);
 		txtAvgPatients.setBounds(250, 194, 160, 21);
 		frmDoctorDetails.getContentPane().add(txtAvgPatients);
 		
 		txtAvgSubscriptions = new JTextField(String.valueOf(docCtrl.getDoctorAverageSubscriptions()));
+		txtAvgSubscriptions.setEditable(false);
 		txtAvgSubscriptions.setColumns(10);
 		txtAvgSubscriptions.setBounds(250, 229, 160, 21);
 		frmDoctorDetails.getContentPane().add(txtAvgSubscriptions);
 		
 		txtSpecialization = new JTextField(docCtrl.getDoctorSpecialization());
+		txtSpecialization.setEditable(false);
 		txtSpecialization.setColumns(10);
 		txtSpecialization.setBounds(250, 264, 160, 21);
 		frmDoctorDetails.getContentPane().add(txtSpecialization);
 		
 		txtVisitTime = new JTextField(String.valueOf(docCtrl.getDoctorAverageVisitTime()));
+		txtVisitTime.setEditable(false);
 		txtVisitTime.setColumns(10);
 		txtVisitTime.setBounds(250, 299, 160, 21);
 		frmDoctorDetails.getContentPane().add(txtVisitTime);
@@ -137,7 +153,7 @@ public class DoctorDetailsView {
 		btnEdit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				docCtrl.updateDoctor();
+				//docCtrl.updateDoctor(String id, String name, String email, long phone);
 			}
 		});
 		btnEdit.setBounds(40, 390, 85, 21);

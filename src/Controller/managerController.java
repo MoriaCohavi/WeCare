@@ -42,8 +42,8 @@ public class managerController {
 		return null;
 	}
 	
-	public boolean addNewDoctor(long token, String id, long phone, String name, String email, String special, String password,String user_type, long managerToken) {
-		if(Authentication.validateUser(token, typeNeed))
+	public boolean addNewDoctor(String id, long phone, String name, String email, String special, String password,String user_type, long managerToken) {
+		if(Authentication.validateUser(managerToken, typeNeed))
 		{
 			Doctor newDoctor = new Doctor(id, phone, name, email, special, password, user_type);
 			if(clinicManager.add(newDoctor))
@@ -82,7 +82,7 @@ public class managerController {
 		}		
 			}		
 		}
-	}
+	
 	
 	public Manager getManager() {
 		
@@ -94,6 +94,11 @@ public class managerController {
 			return clinicManager.getStats();
 		
 		return null;
+	}
+	
+	public Doctor getDoctorItem(String id)
+	{
+		return clinicManager.getItem(id);
 	}
 	
 	public void serialize() {

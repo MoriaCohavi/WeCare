@@ -49,6 +49,7 @@ public class AddDoctorView {
 		frmAddDoctor.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
+				// ADD SERIALZATION OF MANAGER AND USERS
 				frmAddDoctor.dispose();
 
 			}
