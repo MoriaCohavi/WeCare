@@ -25,7 +25,6 @@ public class AddPatientView {
 	private JTextField txtName;
 	private JTextField txtID;
 	private JTextField txtPhone;
-	private JTextField txtAddress;
 	private JTextField txtAge;
 	private JTextField txtWeight;
 	private JTextField txtHeight;
@@ -103,44 +102,39 @@ public class AddPatientView {
 		lblPhone.setBounds(98, 152, 69, 20);
 		panel.add(lblPhone);
 		
-		JLabel lblAddress = new JLabel("Address");
-		lblAddress.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblAddress.setBounds(98, 236, 97, 20);
-		panel.add(lblAddress);
-		
 		JLabel lblAge = new JLabel("Age");
 		lblAge.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblAge.setBounds(98, 272, 69, 20);
+		lblAge.setBounds(98, 221, 69, 20);
 		panel.add(lblAge);
 		
 		JLabel lblWeight = new JLabel("Weight");
 		lblWeight.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblWeight.setBounds(98, 305, 69, 20);
+		lblWeight.setBounds(98, 254, 69, 20);
 		panel.add(lblWeight);
 		
 		JLabel lblHeight = new JLabel("Height");
 		lblHeight.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblHeight.setBounds(98, 334, 69, 20);
+		lblHeight.setBounds(98, 283, 69, 20);
 		panel.add(lblHeight);
 		
 		JLabel lblAllergies = new JLabel("Allergies");
 		lblAllergies.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblAllergies.setBounds(98, 363, 97, 20);
+		lblAllergies.setBounds(98, 312, 97, 20);
 		panel.add(lblAllergies);
 		
 		JLabel lblChronicDiseases = new JLabel("Chronic Diseases");
 		lblChronicDiseases.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblChronicDiseases.setBounds(98, 393, 146, 20);
+		lblChronicDiseases.setBounds(98, 342, 146, 20);
 		panel.add(lblChronicDiseases);
 		
 		JLabel lblSubscription = new JLabel("Subscription");
 		lblSubscription.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblSubscription.setBounds(98, 423, 146, 20);
+		lblSubscription.setBounds(98, 372, 146, 20);
 		panel.add(lblSubscription);
 		
 		JLabel lblGender = new JLabel("Gender");
 		lblGender.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblGender.setBounds(98, 459, 146, 20);
+		lblGender.setBounds(98, 408, 146, 20);
 		panel.add(lblGender);
 		
 		JButton btnCancel = new JButton("Cancel");
@@ -169,49 +163,44 @@ public class AddPatientView {
 		txtPhone.setBounds(323, 149, 257, 26);
 		panel.add(txtPhone);
 		
-		txtAddress = new JTextField();
-		txtAddress.setColumns(10);
-		txtAddress.setBounds(323, 233, 257, 26);
-		panel.add(txtAddress);
-		
 		txtAge = new JTextField();
 		txtAge.setColumns(10);
-		txtAge.setBounds(323, 269, 257, 26);
+		txtAge.setBounds(323, 218, 257, 26);
 		panel.add(txtAge);
 		
 		txtWeight = new JTextField();
 		txtWeight.setColumns(10);
-		txtWeight.setBounds(323, 302, 257, 26);
+		txtWeight.setBounds(323, 251, 257, 26);
 		panel.add(txtWeight);
 		
 		txtHeight = new JTextField();
 		txtHeight.setColumns(10);
-		txtHeight.setBounds(323, 331, 257, 26);
+		txtHeight.setBounds(323, 280, 257, 26);
 		panel.add(txtHeight);
 		
 		txtAllergies = new JTextField();
 		txtAllergies.setColumns(10);
-		txtAllergies.setBounds(323, 360, 257, 26);
+		txtAllergies.setBounds(323, 309, 257, 26);
 		panel.add(txtAllergies);
 		
 		txtChronicDiseases = new JTextField();
 		txtChronicDiseases.setColumns(10);
-		txtChronicDiseases.setBounds(323, 390, 257, 26);
+		txtChronicDiseases.setBounds(323, 339, 257, 26);
 		panel.add(txtChronicDiseases);
 		
 		txtSubscriptions = new JTextField();
 		txtSubscriptions.setColumns(10);
-		txtSubscriptions.setBounds(323, 420, 257, 26);
+		txtSubscriptions.setBounds(323, 369, 257, 26);
 		panel.add(txtSubscriptions);
 		
 		JRadioButton radioMale = new JRadioButton("Male");
 		radioMale.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		radioMale.setBounds(323, 455, 155, 29);
+		radioMale.setBounds(323, 404, 155, 29);
 		panel.add(radioMale);
 		
 		JRadioButton radioFemale = new JRadioButton("Female");
 		radioFemale.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		radioFemale.setBounds(488, 455, 155, 29);
+		radioFemale.setBounds(488, 404, 155, 29);
 		panel.add(radioFemale);
 		
 		ButtonGroup btn_group = new ButtonGroup();
@@ -260,6 +249,7 @@ public class AddPatientView {
 							Integer.parseInt(txtHeight.getText()), gender, txtAllergies.getText(), txtSubscriptions.getText(), txtChronicDiseases.getText())))
 						lbl_warning.setText("User exists");
 					else
+						docCtrl.serialize();
 						frmPatientDetails.dispose();
 				}
 			}

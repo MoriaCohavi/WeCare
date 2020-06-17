@@ -20,6 +20,7 @@ public class MVCDriver {
 		authenticationController auth_controller = new authenticationController();
 		auth_controller.deserialize();
 		
+		//doctorController doc_Controller = new doctorController(); // deserialize doctors list
 		
 		auth_controller.register(clinic_controller.getClinicManager().getID(),clinic_controller.getClinicManager());
 		LoginView StartLogin = new LoginView();
@@ -28,8 +29,6 @@ public class MVCDriver {
 		{
 			managerController manager_controller = new managerController();
 			manager_controller.setClinicManager(clinic_controller.getClinicManager());
-			
-			
 		} 
 		
 						

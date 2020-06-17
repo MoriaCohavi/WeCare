@@ -22,6 +22,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class DoctorView {
 
@@ -29,7 +31,7 @@ public class DoctorView {
 	private JTable tbl_doctors;
 	private JScrollPane scrollPane;
 	private JTextField txtSearch;
-	private JButton btnNewButton;
+	private JButton btnSearchButton;
 	private JButton btnAddPatient;
 	private JLabel lblName;
 	private JLabel lblPhone;
@@ -85,7 +87,6 @@ public class DoctorView {
 		frmDoctor.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				authCtrl.serialize();
 				System.exit(0);
 			}
 		});
@@ -111,20 +112,22 @@ public class DoctorView {
 		tbl_doctors.setRowHeight(25);
 		tbl_doctors.setIntercellSpacing(new Dimension(0, 0));
 		Object[][] listObj = new Object[3][];
-		int rowsIndex = 1;
-		for (String key: patientsList.keySet()) {
-			listObj[rowsIndex][0] = rowsIndex;
-			listObj[rowsIndex][1] = patientsList.get(key).getName();
-			listObj[rowsIndex][2] = patientsList.get(key).getId();
-			rowsIndex++;
-		}
+		
+//		int rowsIndex = 1;
+//		for (String key: patientsList.keySet()) {
+//			listObj[rowsIndex][0] = rowsIndex;
+//			listObj[rowsIndex][1] = patientsList.get(key).getName();
+//			listObj[rowsIndex][2] = patientsList.get(key).getId();
+//			rowsIndex++;
+//		}
 		
 		tbl_doctors.setModel(new DefaultTableModel(
-			listObj,
-			new String[] {
-				"Num.", "Patient", "ID"
-			}
-		));
+				listObj,
+				new String[] {
+					"Num.", "Patient", "ID"
+				}
+			));
+
 
 		tbl_doctors.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 18));
 		tbl_doctors.getTableHeader().setOpaque(false);
@@ -140,19 +143,29 @@ public class DoctorView {
 		frmDoctor.getContentPane().add(txtSearch);
 		txtSearch.setColumns(10);
 		
-		btnNewButton = new JButton("Search");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-//				String searchStr = txtSearch.getText();
-//				if(searchStr != null)
-//				{
-					PatientDetailsView temp = new PatientDetailsView();
-//				}
+		btnSearchButton = new JButton("Search");
+		btnSearchButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String searchStr = txtSearch.getText();
+				if(searchStr != null)
+				{
+					Patient patient = docCtrl.getPatient(doctorToken, searchStr);
+					if (patient != null)
+					{
+						PatientDetailsView patientDetails = new PatientDetailsView(details, searchStr);
+					}
+					else
+					{
+						txtSearch.setText("Patient not found !");
+					}
+				}
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnNewButton.setBounds(405, 477, 96, 29);
-		frmDoctor.getContentPane().add(btnNewButton);
+
+		btnSearchButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btnSearchButton.setBounds(405, 477, 96, 29);
+		frmDoctor.getContentPane().add(btnSearchButton);
 		
 		btnAddPatient = new JButton("Add Patient");
 		btnAddPatient.addActionListener(new ActionListener() {
@@ -180,28 +193,28 @@ public class DoctorView {
 		frmDoctor.getContentPane().add(lblEmail);
 		
 		txtName = new JTextField();
-		txtName.setText(details.getDoctorName());
+		txtName.setText(docCtrl.getDoctorName());
 		txtName.setEnabled(false);
 		txtName.setBounds(821, 133, 146, 26);
 		frmDoctor.getContentPane().add(txtName);
 		txtName.setColumns(10);
 		
 		txtId = new JTextField();
-		txtId.setText(details.getDoctorID());
+		txtId.setText(docCtrl.getDoctorID());
 		txtId.setEnabled(false);
 		txtId.setColumns(10);
 		txtId.setBounds(821, 170, 146, 26);
 		frmDoctor.getContentPane().add(txtId);
 		
 		txtPhone = new JTextField();
-		txtPhone.setText(String.valueOf(details.getDoctorPhone()));
+		txtPhone.setText(String.valueOf(docCtrl.getDoctorPhone()));
 		txtPhone.setEnabled(false);
 		txtPhone.setColumns(10);
 		txtPhone.setBounds(821, 206, 146, 26);
 		frmDoctor.getContentPane().add(txtPhone);
 		
 		txtEmail = new JTextField();
-		txtEmail.setText(details.getDoctorEmail());
+		txtEmail.setText(docCtrl.getDoctorEmail());
 		txtEmail.setEnabled(false);
 		txtEmail.setColumns(10);
 		txtEmail.setBounds(821, 239, 146, 26);

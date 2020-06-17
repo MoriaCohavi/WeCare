@@ -52,7 +52,6 @@ public class AddDoctorView {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				// ADD SERIALZATION OF MANAGER AND USERS
-				authController.serialize();
 				frmAddDoctor.dispose();
 
 			}
