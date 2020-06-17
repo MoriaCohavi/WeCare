@@ -33,10 +33,10 @@ public class MVCDriver {
 		
 						
 		//Result result = JUnitCore.runClasses(StatisticalDataTest.class);
-		Result result = JUnitCore.runClasses(StatisticalDataTest.class);
-	    for (Failure failure : result.getFailures()) {
-	      System.out.println(failure.toString());
-	    }
+//		Result result = JUnitCore.runClasses(StatisticalDataTest.class);
+//	    for (Failure failure : result.getFailures()) {
+//	      System.out.println(failure.toString());
+//	    }
 	}
 }
 

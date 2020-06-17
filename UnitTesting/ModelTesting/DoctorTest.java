@@ -145,8 +145,7 @@ public class DoctorTest {
 		Assert.assertTrue(checkDate.equals(Record.get_Date()));
 	}
 	
-	@test
-	public void Check
+
 
 
 }

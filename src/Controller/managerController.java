@@ -6,7 +6,7 @@ import Model.*;
 public class managerController {
 	public static String serPath = "src\\Model\\files\\manager.ser";
 	private static Manager clinicManager;
-	String typeNeed = "Manager";
+	private final String typeNeed = "Manager";
 	
 	public managerController(){
 		
@@ -109,5 +109,13 @@ public class managerController {
 	public void deserialize() {
 		
 		clinicManager = (Manager)serHandlerController.deserialize(serPath);
+	}
+	
+	public boolean updateDoctor(String id, String email, long phone)
+	{
+		if(clinicManager.updateDoctorInfo(id,email , phone))
+			return true;
+		
+		return false;
 	}
 }
