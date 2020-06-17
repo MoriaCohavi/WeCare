@@ -145,11 +145,7 @@ public class AddDoctorView {
 					if (!(managerController.addNewDoctor(txtf_id.getText(), Long.parseLong(txtf_phone.getText()), txtf_name.getText(), txtf_email.getText(), txtf_specialization.getText(), txtf_passwd.getText(), "Doctor", token)))
 						lbl_warning.setText("User exists");
 					else {
-<<<<<<< HEAD
-						ManagerPanelView managerPanel = new ManagerPanelView(token);
-=======
 						ManagerView managerPanel = new ManagerView(token);
->>>>>>> v1_keren
 						frmAddDoctor.dispose();
 					}
 						

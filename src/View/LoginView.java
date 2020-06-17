@@ -129,11 +129,7 @@ public class LoginView {
 					String type = authController.fetchUserType(returnCode);
 					if (type.equals("Manager"))
 					{
-<<<<<<< HEAD
-						new ManagerPanelView(returnCode);
-=======
 						new ManagerView(returnCode);
->>>>>>> v1_keren
 					}
 					else if (type.equals("Doctor"))
 					{

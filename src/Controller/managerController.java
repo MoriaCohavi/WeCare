@@ -76,18 +76,8 @@ public class managerController {
 		}		
 	}
 	
-<<<<<<< HEAD
-	public void openManagerPanel(long token)
-	{
-		ManagerPanelView managerView = new ManagerPanelView(token);
-	}
-	
-	public Manager getManager()
-	{
-=======
 	public Manager getManager() {
 		
->>>>>>> v1_keren
 		return clinicManager;
 	}
 	

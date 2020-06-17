@@ -1,9 +1,6 @@
 package View;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> v1_keren
 import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JScrollPane;
@@ -11,18 +8,15 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
 import Controller.*;
 import Model.Doctor;
 import Model.Patient;
+
 import java.awt.Dimension;
 import javax.swing.DebugGraphics;
 import javax.swing.JTextField;
 import javax.swing.JButton;
-<<<<<<< HEAD
-import javax.swing.JSeparator;
-import javax.swing.SwingConstants;
-=======
->>>>>>> v1_keren
 import java.util.HashMap;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -30,41 +24,25 @@ import java.awt.event.WindowEvent;
 import java.awt.event.ActionEvent;
 
 public class DoctorView {
-	
-	private authenticationController authCtrl;
-	private doctorController docCtrl;
-	private Doctor details;
-	private HashMap <String, Patient> patientsList;
 
 	private JFrame frmDoctor;
 	private JTable tbl_doctors;
 	private JScrollPane scrollPane;
-<<<<<<< HEAD
-	private JTextField txtSearchPatient;
-	private JButton btnSearch;
-=======
 	private JTextField txtSearch;
 	private JButton btnNewButton;
->>>>>>> v1_keren
 	private JButton btnAddPatient;
 	private JLabel lblName;
-	private JLabel lblID;
 	private JLabel lblPhone;
 	private JLabel lblEmail;
 	private JTextField txtName;
-	private JTextField txtID;
+	private JTextField txtId;
 	private JTextField txtPhone;
 	private JTextField txtEmail;
-<<<<<<< HEAD
-	private JTextField txtClinicName;
-
-=======
 	private authenticationController authCtrl;
 	private doctorController docCtrl;
 	private Doctor details;
 	private HashMap <String, Patient> patientsList;
 	private JLabel lblID;
->>>>>>> v1_keren
 
 //	/**
 //	 * Launch the application.
@@ -162,12 +140,6 @@ public class DoctorView {
 		frmDoctor.getContentPane().add(txtSearch);
 		txtSearch.setColumns(10);
 		
-<<<<<<< HEAD
-		btnSearch = new JButton("Search");
-		btnSearch.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-//				docCtrl.
-=======
 		btnNewButton = new JButton("Search");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -176,12 +148,11 @@ public class DoctorView {
 //				{
 					PatientDetailsView temp = new PatientDetailsView();
 //				}
->>>>>>> v1_keren
 			}
 		});
-		btnSearch.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btnSearch.setBounds(405, 477, 96, 29);
-		frmDoctor.getContentPane().add(btnSearch);
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btnNewButton.setBounds(405, 477, 96, 29);
+		frmDoctor.getContentPane().add(btnNewButton);
 		
 		btnAddPatient = new JButton("Add Patient");
 		btnAddPatient.addActionListener(new ActionListener() {
@@ -197,14 +168,6 @@ public class DoctorView {
 		lblName.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblName.setBounds(693, 136, 119, 20);
 		frmDoctor.getContentPane().add(lblName);
-<<<<<<< HEAD
-		
-		lblID = new JLabel("ID");
-		lblID.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblID.setBounds(693, 172, 119, 20);
-		frmDoctor.getContentPane().add(lblID);
-=======
->>>>>>> v1_keren
 		
 		lblPhone = new JLabel("Phone");
 		lblPhone.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -223,12 +186,12 @@ public class DoctorView {
 		frmDoctor.getContentPane().add(txtName);
 		txtName.setColumns(10);
 		
-		txtID = new JTextField();
-		txtID.setText(details.getDoctorID());
-		txtID.setEnabled(false);
-		txtID.setColumns(10);
-		txtID.setBounds(821, 170, 146, 26);
-		frmDoctor.getContentPane().add(txtID);
+		txtId = new JTextField();
+		txtId.setText(details.getDoctorID());
+		txtId.setEnabled(false);
+		txtId.setColumns(10);
+		txtId.setBounds(821, 170, 146, 26);
+		frmDoctor.getContentPane().add(txtId);
 		
 		txtPhone = new JTextField();
 		txtPhone.setText(String.valueOf(details.getDoctorPhone()));
@@ -244,18 +207,9 @@ public class DoctorView {
 		txtEmail.setBounds(821, 239, 146, 26);
 		frmDoctor.getContentPane().add(txtEmail);
 		
-<<<<<<< HEAD
-		txtClinicName = new JTextField();
-//		txtClinicName.setText(details.getClinicName());
-		txtClinicName.setEnabled(false);
-		txtClinicName.setColumns(10);
-		txtClinicName.setBounds(821, 314, 146, 26);
-		frmDoctor.getContentPane().add(txtClinicName);
-=======
 		lblID = new JLabel("ID");
 		lblID.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblID.setBounds(693, 172, 119, 20);
 		frmDoctor.getContentPane().add(lblID);
->>>>>>> v1_keren
 	}
 }
