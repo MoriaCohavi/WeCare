@@ -142,7 +142,7 @@ public class Patient extends Person implements java.io.Serializable{
 	/*tested*/
 	{
 		
-		if (medicalRecords.put(++recordCount, newRecord) == null)
+		if (medicalRecords.put(this.getId(), newRecord) == null)
 			return true;
 		
 		return false;

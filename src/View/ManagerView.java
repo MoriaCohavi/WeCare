@@ -89,6 +89,7 @@ public class ManagerView {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				authCtrl.serialize();
+				managerCtrl.serialize();
 				System.exit(0);
 			}
 		});
