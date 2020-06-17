@@ -45,6 +45,7 @@ public class DoctorView {
 	private Doctor details;
 	private HashMap <String, Patient> patientsList;
 	private JLabel lblID;
+	private JButton btnNewMedical;
 
 //	/**
 //	 * Launch the application.
@@ -224,5 +225,16 @@ public class DoctorView {
 		lblID.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblID.setBounds(693, 172, 119, 20);
 		frmDoctor.getContentPane().add(lblID);
+		
+		btnNewMedical = new JButton("Add Medical Record");
+		btnNewMedical.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				NewMedicalRecordView newMedicalRecord = new NewMedicalRecordView();
+				
+			}
+		});
+		btnNewMedical.setBounds(659, 477, 153, 26);
+		frmDoctor.getContentPane().add(btnNewMedical);
 	}
 }
