@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
 import org.junit.Assert;
@@ -57,7 +58,7 @@ public class DoctorTest {
 		Doctor doctor = new Doctor("123456789", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		Patient patient = new Patient("123456788", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des");
 		doctor.add(patient);
-		MedicalRecord Record = new MedicalRecord("123456789", 3, 1, "testing", "test", "finished testing", "None", "test", LocalTime.now(), LocalTime.now().plusMinutes(10), 60, 180, 90, 37, 60, 100);
+		MedicalRecord Record = new MedicalRecord("123456789", 3, patient.getRecordCounter()+1, "purp_testing", "desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(), LocalTime.now().plusMinutes(10), 60, 180, 90, 37, 60, 100);
 		patient.addMedicalRecord(Record);
 		Patient patient2 = doctor.getItem("123456788");
 		Assert.assertTrue(patient.getAllergies().equals(patient2.getAllergies())&&
@@ -111,22 +112,41 @@ public class DoctorTest {
 		Doctor doctor = new Doctor("123456789", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		Patient patient = new Patient("123456788", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des");
 		doctor.add(patient);
-		MedicalRecord Record = new MedicalRecord("123456789", 3, 1, "testing", "test", "finished testing", "None", "test", LocalTime.now(), LocalTime.now().plusMinutes(10), 60, 180, 90, 37, 60, 100);
+		
+		MedicalRecord Record = new MedicalRecord("123456789", 3, patient.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(),LocalTime.now().plusMinutes(10), 60, 180, 90, 37, 60, 100);
 		patient.addMedicalRecord(Record);
 		
-		
-		
+		MedicalRecord checkRecord = patient.getMedicalRecord(1);
+		Assert.assertTrue(checkRecord.get_DiagnoseDiscription().equals("diag_test") &&
+							checkRecord.get_DaysOfIllnessApproval() == 3 &&
+							checkRecord.get_DoctorId() == "123456789" &&
+							checkRecord.get_pateintIndices().getDiastolicBP() == 100 &&
+							checkRecord.get_pateintIndices().getHeartRate() == 90 &&
+							checkRecord.get_pateintIndices().getHeight() == 180 &&
+							checkRecord.get_pateintIndices().getSystolicBP() == 60 &&
+							checkRecord.get_pateintIndices().getTemperature() == 37 &&
+							checkRecord.get_pateintIndices().getWeight() == 60 &&
+							checkRecord.get_RecordId() == 1 &&
+							checkRecord.get_subscriptions().equals("sub_test") &&
+							checkRecord.get_VisitDescription().equals("desc_testing") &&
+							checkRecord.get_VisitPurpose().equals("purp_testing")); 
 	}
 	
-//	@Test
-//	public void CheckAddMedicalRecord()
-//	{
-//		Doctor doctor = new Doctor("123456789", 5200000, "test", "Email", "Spetialty","password", "Doctor");
-//		Patient patient = new Patient("123456788", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des");
-//		//MedicalRecord med - new MedicalRecord("123456789", 5, 1, "test", "test2", "summary test", "sub test", "diagnose", "10:10:10", "11:11:11", 3, 2, 1, 4, 43, 44);
-//		doctor.add(patient);
-//		Assert.assertTrue(doctor.remove(patient.getId()));
-//		Assert.assertFalse(doctor.remove(patient.getId()));
-//	}
+	@Test
+	public void CheckGetFirstRecord() {
+		Doctor doctor = new Doctor("123456789", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
+		Patient patient = new Patient("123456788", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des");
+		doctor.add(patient);
+		
+		MedicalRecord Record = new MedicalRecord("123456789", 3, patient.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(),LocalTime.now().plusMinutes(10), 60, 180, 90, 37, 60, 100);
+		doctor.createMedicalRecord("123456788", Record);
+		
+		LocalDate checkDate = doctor.getFirstRecord();
+		Assert.assertTrue(checkDate.equals(Record.get_Date()));
+	}
+	
+	@test
+	public void Check
+
 
 }

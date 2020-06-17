@@ -18,8 +18,8 @@ public class MedicalRecord implements java.io.Serializable {
 	private String subscriptions;
 	
 	
-	public MedicalRecord(String doctor,int numDays, int record, String purpose, String description, String summary, String sub,
-			String diagnose, LocalTime sT, LocalTime eT, int w, int h, int hr, int t, int sysBP, int diaBP ) {
+	public MedicalRecord(String doctor,int numDays, int record, String purpose, String description, String summary, String sub,String diagnose, LocalTime sT, 
+			LocalTime eT, int w, int h, int hr, int t, int sysBP, int diaBP ) {
 		
 		this.currentDate = LocalDate.now();
 		this.doctorId = doctor;

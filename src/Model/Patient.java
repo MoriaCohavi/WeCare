@@ -138,11 +138,8 @@ public class Patient extends Person implements java.io.Serializable{
 	
 	public boolean addMedicalRecord (MedicalRecord newRecord) {
 		
-		if (medicalRecords.put(recordCount, newRecord) == null)
-		{
-			recordCount++;
+		if (medicalRecords.put(++recordCount, newRecord) == null)
 			return true;
-		}
 		
 		return false;
 	}	
