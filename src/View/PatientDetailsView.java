@@ -49,19 +49,19 @@ public class PatientDetailsView {
 	/**
 	 * Create the application.
 	 */
-	public PatientDetailsView(Doctor doctor, String patientId) {
-		initialize(doctor, patientId);
+	public PatientDetailsView(long token, Doctor doctor, String patientId) {
+		initialize(token,doctor, patientId);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(Doctor doctor, String patientId) {
+	private void initialize(long token, Doctor doctor, String patientId) {
 		docCtrl = new doctorController(doctor);
 		frmPatient = new JFrame();
 		frmPatient.setTitle("Patient Details");
 		frmPatient.setBounds(100, 100, 570, 600);
-		frmPatient.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frmPatient.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPatient.getContentPane().setLayout(null);
 		
 		JLabel lblName = new JLabel("Name");
@@ -167,7 +167,8 @@ public class PatientDetailsView {
 		btnEdit.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// bar
+				docCtrl.updatePatientInfo(token, patientId, txtEmail.getText(), Long.parseLong(txtPhone.getText()), txtAllergies.getText(), txtCronicDiseases.getText(), txtSubsriptions.getText());
+				frmPatient.dispose();
 			}
 		});
 		btnEdit.setBounds(40, 441, 85, 21);
@@ -177,7 +178,8 @@ public class PatientDetailsView {
 		btnDelete.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-			// BAR
+				docCtrl.deletePatient(token,patientId); 
+				frmPatient.dispose();
 			}
 		});
 		btnDelete.setBounds(139, 441, 85, 21);

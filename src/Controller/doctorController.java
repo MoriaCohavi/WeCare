@@ -202,4 +202,14 @@ public class doctorController {
 	{
 		return currentModelDoctor.getPatientSubscription(patientId);
 	}
+	
+	public boolean updatePatientInfo(long token, String patientId, String email, long phone, String allergies, String chronic_diseases, String subscriptions)
+	{
+		if(Authentication.validateUser(token, typeNeed))
+		{
+			currentModelDoctor.updatePatientInfo(patientId, email, phone, allergies, chronic_diseases, subscriptions);
+				return true;
+		}
+		return false;
+	}
 }

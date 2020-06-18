@@ -178,7 +178,7 @@ public class ManagerView {
 					Doctor doctor = managerCtrl.getDoctor(managerToken, searchStr);
 					if (doctor != null)
 					{
-						DoctorDetailsView doctorDetailsView = new DoctorDetailsView(doctor);
+						DoctorDetailsView doctorDetailsView = new DoctorDetailsView(managerToken,doctor);
 					}
 					else
 					{
