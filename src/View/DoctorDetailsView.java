@@ -67,7 +67,7 @@ public class DoctorDetailsView {
 		frmDoctorDetails.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				// ADD SERIALZATION OF MANAGER AND USERS
+				ManagerView newManagerView = new ManagerView(token);
 				frmDoctorDetails.dispose();
 
 			}
@@ -155,7 +155,10 @@ public class DoctorDetailsView {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				manCtrl.updateDoctor(token, txtID.getText(), txtEmail.getText(), Long.parseLong(txtPhone.getText()));
+				manCtrl.serialize();
+				// modify also in users hashmap and serialize;
 				frmDoctorDetails.dispose();
+				ManagerView newManagerView = new ManagerView(token);
 			}
 		});
 		btnEdit.setBounds(40, 390, 85, 21);

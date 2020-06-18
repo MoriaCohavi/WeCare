@@ -10,9 +10,10 @@ import java.util.HashMap;
 
 public class Patient extends Person implements java.io.Serializable{
 
-	private int age, weight, height, recordCount;
+	private static int recordCount = 0;
+	private int age, weight, height;
 	private String gender, allergies, chronic_diseases, subscriptions;
-	private static HashMap<String, MedicalRecord> medicalRecords = new HashMap<String, MedicalRecord>();
+	private static HashMap<Integer, MedicalRecord> medicalRecords = new HashMap<Integer, MedicalRecord>();
 	private ArrayList<Lab> labs;
 	
 	public Patient(String id,int age, long phone, String name, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases) {
@@ -24,7 +25,6 @@ public class Patient extends Person implements java.io.Serializable{
 		this.allergies = allergies;
 		this.subscriptions = subscriptions;
 		this.chronic_diseases = chronic_diseases;
-		this.recordCount = 0;
 		this.labs = new ArrayList<Lab>();
 	}
 	
@@ -79,6 +79,16 @@ public class Patient extends Person implements java.io.Serializable{
 		
 		return medicalRecords.get(id);
 		
+	}
+	
+	public static HashMap<Integer, MedicalRecord> getMedicalRecords()
+	{
+		return medicalRecords;
+	}
+	
+	public static void setMedicalRecords(HashMap<Integer, MedicalRecord> tempRecords)
+	{
+		medicalRecords = tempRecords;
 	}
 	
 	public int getRecordCounter () {
@@ -142,7 +152,7 @@ public class Patient extends Person implements java.io.Serializable{
 	/*tested*/
 	{
 		
-		if (medicalRecords.put(this.getId(), newRecord) == null)
+		if (medicalRecords.put(++recordCount, newRecord) == null)
 			return true;
 		
 		return false;

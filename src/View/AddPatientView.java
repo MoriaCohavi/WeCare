@@ -74,6 +74,7 @@ public class AddPatientView {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				frmPatientDetails.dispose();
+				DoctorView docView = new DoctorView(doctorToken);
 				
 			}
 		});
@@ -249,8 +250,9 @@ public class AddPatientView {
 							Integer.parseInt(txtHeight.getText()), gender, txtAllergies.getText(), txtSubscriptions.getText(), txtChronicDiseases.getText())))
 						lbl_warning.setText("User exists");
 					else
-						docCtrl.serialize();
+						docCtrl.serializePatients();
 						frmPatientDetails.dispose();
+						DoctorView docView = new DoctorView(doctorToken);
 				}
 			}
 		});

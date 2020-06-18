@@ -174,6 +174,11 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 			patients.get(patientId).updatePatientInfo(phone, age, email, weight, height, gender, allergies, subscriptions, chronic_diseases);
 		}
 	}
+	
+	public HashMap<Integer, MedicalRecord> getPatientsMedicalRecords()
+	{
+		return Patient.getMedicalRecords();
+	}
 	 
 	public boolean createMedicalRecord(String patientId, MedicalRecord newRecord) {		
 		/*tested*/
@@ -202,7 +207,7 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 		
 		else return false;
 	}
-	
+		
 	public boolean addLabToPatient(String patientId, String labType) {
 		/*tested*/
 		if (this.patients.containsKey(patientId)) {

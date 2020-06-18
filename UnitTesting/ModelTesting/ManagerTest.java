@@ -47,13 +47,13 @@ public class ManagerTest{
 		Patient patient3 = new Patient("123456786", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des");
 		Patient patient4 = new Patient("123456785", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des");
 		
-		MedicalRecord Record1 = new MedicalRecord("123456788", 3, patient1.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(),LocalTime.now().plusMinutes(10), 60, 180, 90, 37, 60, 100);
-		MedicalRecord Record2 = new MedicalRecord("123456788", 3, patient1.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(),LocalTime.now().plusMinutes(5), 60, 180, 90, 37, 60, 100);
-		MedicalRecord Record3 = new MedicalRecord("123456787", 3, patient2.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(),LocalTime.now().plusMinutes(15), 75, 190, 90, 37, 60, 100);
-		MedicalRecord Record4 = new MedicalRecord("123456787", 3, patient2.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(),LocalTime.now().plusMinutes(15), 75, 190, 90, 37, 60, 100);
-		MedicalRecord Record5 = new MedicalRecord("123456786", 3, patient3.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(),LocalTime.now().plusMinutes(10), 90, 180, 90, 37, 60, 100);
-		MedicalRecord Record6 = new MedicalRecord("123456786", 3, patient3.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(),LocalTime.now().plusMinutes(10), 55, 165, 90, 37, 60, 100);
-		MedicalRecord Record7 = new MedicalRecord("123456785", 3, patient4.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(),LocalTime.now().plusMinutes(5), 55, 165, 90, 37, 60, 100);
+		MedicalRecord Record1 = new MedicalRecord("123456788", "123456788", 3, patient1.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(),LocalTime.now().plusMinutes(10), 60, 180, 90, 37, 60, 100);
+		MedicalRecord Record2 = new MedicalRecord("123456788", "123456788", 3, patient1.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(),LocalTime.now().plusMinutes(5), 60, 180, 90, 37, 60, 100);
+		MedicalRecord Record3 = new MedicalRecord("123456788", "123456787", 3, patient2.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(),LocalTime.now().plusMinutes(15), 75, 190, 90, 37, 60, 100);
+		MedicalRecord Record4 = new MedicalRecord("123456788", "123456787", 3, patient2.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(),LocalTime.now().plusMinutes(15), 75, 190, 90, 37, 60, 100);
+		MedicalRecord Record5 = new MedicalRecord("123456788", "123456786", 3, patient3.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(),LocalTime.now().plusMinutes(10), 90, 180, 90, 37, 60, 100);
+		MedicalRecord Record6 = new MedicalRecord("123456788", "123456786", 3, patient3.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(),LocalTime.now().plusMinutes(10), 55, 165, 90, 37, 60, 100);
+		MedicalRecord Record7 = new MedicalRecord("123456788", "123456785", 3, patient4.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(),LocalTime.now().plusMinutes(5), 55, 165, 90, 37, 60, 100);
 		
 		manager.calcStats();
 		Assert.assertTrue(manager.getAvgDailylabs() == 0 &&

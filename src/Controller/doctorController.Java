@@ -6,7 +6,8 @@ import java.util.HashMap;
 import Model.*;
 
 public class doctorController {
-	public static String serPath = "src\\Model\\files\\doctor.ser";
+	public static String serPathPatients = "src\\Model\\files\\patients.ser";
+	public static String serPathRecords = "src\\Model\\files\\records.ser";
 	private Doctor currentModelDoctor;
 	private final String typeNeed = "Doctor";
 	
@@ -17,9 +18,9 @@ public class doctorController {
 	}
 	
 	public doctorController(Doctor doctor) {
-		
 		currentModelDoctor = doctor;
-		deserialize();
+		deserializePatients();
+		deserializeRecords();
 	}
 	
 	public doctorController(String id, int phone, String name, String email, String special,String password,String user_type) { // needs to include doctorview obj
@@ -77,12 +78,12 @@ public class doctorController {
 		{
 			if (currentModelDoctor.search(patientId))
 			{
+				Patient currPatient = currentModelDoctor.getItem(patientId);
+				int record = currPatient.getRecordCounter() + 1;
 			
-				int record = currentModelDoctor.getItem(patientId).getRecordCounter() + 1;
+				MedicalRecord newRecord = new MedicalRecord(currPatient.getId(), currentModelDoctor.getDoctorID(), days, record, purpose,description, summary, sub,diagnose, sT, eT, w, h, hr, t, sysBP, diaBP) ;
 			
-				MedicalRecord newRecord = new MedicalRecord(currentModelDoctor.getDoctorID(), days, record, purpose,description, summary, sub,diagnose, sT, eT, w, h, hr, t, sysBP, diaBP) ;
-			
-				currentModelDoctor.getItem(patientId).addMedicalRecord(newRecord);
+				currPatient.addMedicalRecord(newRecord);
 				return true;
 			}
 		}
@@ -90,28 +91,40 @@ public class doctorController {
 		return false;
 	}
  
-	public void serialize() {
+	public void serializeRecords() {
+		HashMap<Integer,MedicalRecord> tempRecords = Patient.getMedicalRecords();
+		serHandlerController.serialize(tempRecords, serPathRecords);
+	}
+	
+	public void serializePatients() {
 		HashMap<String,Patient> tempPatients = currentModelDoctor.getPatients();
-		serHandlerController.serialize(tempPatients, serPath);
+		serHandlerController.serialize(tempPatients, serPathPatients);
+
+		// SERIALIZE ALSO PATIENTS HISTORY !
 	}
 	
 	
-	public boolean deserialize() {
-		HashMap<String,Patient> usersTemp = (HashMap<String,Patient>)serHandlerController.deserialize(serPath);
-		if (usersTemp == null)
+	public boolean deserializePatients() {
+		HashMap<String,Patient> tempPatients = (HashMap<String,Patient>)serHandlerController.deserialize(serPathPatients);
+		if (tempPatients == null)
 			return false;
-		this.currentModelDoctor.setPatients(usersTemp);
+		this.currentModelDoctor.setPatients(tempPatients);
 		return true;
 	}
 	
+	public boolean deserializeRecords() {
+		HashMap<Integer,MedicalRecord> tempRecords = (HashMap<Integer,MedicalRecord>)serHandlerController.deserialize(serPathRecords);
+		if (tempRecords == null)
+			return false;
+		Patient.setMedicalRecords(tempRecords);
+		return true;
+	}
 	
 	public void updateDoctor(String id, String name, String email, long phone)
 	{
 		managerController mgmtCtrl = new managerController();
 		Doctor doc = mgmtCtrl.getDoctorItem(id);
 	}
-	
-	
 
 	public HashMap <String, Patient> getPatientsList(long token) {
 		if(Authentication.validateUser(token, typeNeed))
@@ -211,5 +224,10 @@ public class doctorController {
 				return true;
 		}
 		return false;
+	}
+	
+	public boolean createMedicalRecord(String visitPurpose, String visitDesc, String visitDiagnostic, String visitSummary, String visitSubscription)
+	{
+		return true;
 	}
 }

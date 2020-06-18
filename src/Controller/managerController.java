@@ -9,7 +9,7 @@ public class managerController {
 	private final String typeNeed = "Manager";
 	
 	public managerController(){
-		
+		deserialize();
 	}
 	
 	public Manager getDetails(long managerToken) {

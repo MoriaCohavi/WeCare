@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class PatientDetailsView {
 
@@ -63,6 +65,15 @@ public class PatientDetailsView {
 		frmPatient.setBounds(100, 100, 570, 600);
 		//frmPatient.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmPatient.getContentPane().setLayout(null);
+		
+		frmPatient.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				frmPatient.dispose();
+				DoctorView docView = new DoctorView(token);
+				
+			}
+		});
 		
 		JLabel lblName = new JLabel("Name");
 		lblName.setBounds(40, 45, 160, 15);
@@ -169,6 +180,7 @@ public class PatientDetailsView {
 			public void mouseClicked(MouseEvent e) {
 				docCtrl.updatePatientInfo(token, patientId, txtEmail.getText(), Long.parseLong(txtPhone.getText()), txtAllergies.getText(), txtCronicDiseases.getText(), txtSubsriptions.getText());
 				frmPatient.dispose();
+				DoctorView docView = new DoctorView(token);
 			}
 		});
 		btnEdit.setBounds(40, 441, 85, 21);
@@ -180,6 +192,7 @@ public class PatientDetailsView {
 			public void mouseClicked(MouseEvent e) {
 				docCtrl.deletePatient(token,patientId); 
 				frmPatient.dispose();
+				DoctorView docView = new DoctorView(token);
 			}
 		});
 		btnDelete.setBounds(139, 441, 85, 21);

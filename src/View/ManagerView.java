@@ -88,8 +88,6 @@ public class ManagerView {
 		frmManager.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				authCtrl.serialize();
-				managerCtrl.serialize();
 				System.exit(0);
 			}
 		});
@@ -164,10 +162,6 @@ public class ManagerView {
 		txtSearch.setColumns(10);
 		
 		btnSearch = new JButton("Search");
-		btnSearch.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnSearch.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -179,6 +173,7 @@ public class ManagerView {
 					if (doctor != null)
 					{
 						DoctorDetailsView doctorDetailsView = new DoctorDetailsView(managerToken,doctor);
+						frmManager.dispose();
 					}
 					else
 					{
@@ -196,6 +191,7 @@ public class ManagerView {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				AddDoctorView addDoctorView = new AddDoctorView(managerToken);
+				frmManager.dispose();
 			}
 		});
 		btnAddDoctor.setBounds(516, 477, 139, 29);
