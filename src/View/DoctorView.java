@@ -28,7 +28,7 @@ import java.awt.event.MouseEvent;
 public class DoctorView {
 
 	private JFrame frmDoctor;
-	private JTable tbl_doctors;
+	private JTable tbl_Patients;
 	private JScrollPane scrollPane;
 	private JTextField txtSearch;
 	private JButton btnSearchButton;
@@ -77,7 +77,6 @@ public class DoctorView {
 		authCtrl = new authenticationController();
 		details = (Doctor)authCtrl.getLoggedinUser(doctorToken);
 		docCtrl = new doctorController(details);
-		patientsList = docCtrl.getPatientsList(doctorToken);
 		
 		frmDoctor = new JFrame();
 		frmDoctor.setTitle("Doctor");
@@ -102,32 +101,37 @@ public class DoctorView {
 		scrollPane.setBounds(80, 127, 575, 334);
 		frmDoctor.getContentPane().add(scrollPane);
 		
-		tbl_doctors.setDebugGraphicsOptions(DebugGraphics.NONE_OPTION);
-		tbl_doctors.setBorder(null);
-		tbl_doctors.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		tbl_doctors.setFocusable(false);
-		tbl_doctors.setShowVerticalLines(false);
-		tbl_doctors.setSelectionBackground(new Color(211, 211, 211));
-		tbl_doctors.setRowMargin(0);
-		tbl_doctors.setRowHeight(25);
-		tbl_doctors.setIntercellSpacing(new Dimension(0, 0));
-		
-		tbl_doctors = new JTable();
+		tbl_Patients = new JTable();
 		newPatientsTbl = new DefaultTableModel();
-		tbl_doctors.setModel(newPatientsTbl);
-		
+		tbl_Patients.setModel(newPatientsTbl);
+		newPatientsTbl.addColumn("Serial Num");
 		newPatientsTbl.addColumn("Patient Name");
 		newPatientsTbl.addColumn("Patient ID");
+		int serialNum = 1;
+		
+		for(String Key : docCtrl.getPatientList(doctorToken).keySet())
+			newPatientsTbl.addRow(new Object [] {
+					serialNum++,
+					docCtrl.getPatient(doctorToken, Key).getName(),
+					docCtrl.getPatient(doctorToken, Key).getId(),				
+			});
+		
+		tbl_Patients.setDebugGraphicsOptions(DebugGraphics.NONE_OPTION);
+		tbl_Patients.setBorder(null);
+		tbl_Patients.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		tbl_Patients.setFocusable(false);
+		tbl_Patients.setShowVerticalLines(false);
+		tbl_Patients.setSelectionBackground(new Color(211, 211, 211));
+		tbl_Patients.setRowMargin(0);
+		tbl_Patients.setRowHeight(25);
+		tbl_Patients.setIntercellSpacing(new Dimension(0, 0));
 		
 		
-
-
-
-		tbl_doctors.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 18));
-		tbl_doctors.getTableHeader().setOpaque(false);
-		tbl_doctors.getTableHeader().setBackground(new Color(32, 136, 203));
-		tbl_doctors.getTableHeader().setForeground(new Color(255, 255, 255));
-		scrollPane.setViewportView(tbl_doctors);
+		tbl_Patients.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 18));
+		tbl_Patients.getTableHeader().setOpaque(false);
+		tbl_Patients.getTableHeader().setBackground(new Color(32, 136, 203));
+		tbl_Patients.getTableHeader().setForeground(new Color(255, 255, 255));
+		scrollPane.setViewportView(tbl_Patients);
 		
 		txtSearch = new JTextField();
 		txtSearch.setForeground(Color.GRAY);

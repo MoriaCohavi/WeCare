@@ -58,6 +58,14 @@ public class doctorController {
 		return null;
 	}
 	
+	
+	public  HashMap <String, Patient>  getPatientList( long token) {
+		if(Authentication.validateUser(token, typeNeed))
+			return currentModelDoctor.getPatients();
+		return null;
+	}
+	
+	
 	public MedicalRecord viewMedicalRecord(long token, String patientId, int recordId) {
 		if(Authentication.validateUser(token, typeNeed))
 			return currentModelDoctor.getItem(patientId).getMedicalRecord(recordId);
