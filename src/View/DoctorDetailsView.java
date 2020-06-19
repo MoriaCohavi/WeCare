@@ -130,12 +130,6 @@ public class DoctorDetailsView {
 		txtSpecialization.setBounds(250, 264, 160, 21);
 		frmDoctorDetails.getContentPane().add(txtSpecialization);
 		
-		txtVisitTime = new JTextField(String.valueOf(docCtrl.getDoctorAverageVisitTime()));
-		txtVisitTime.setEditable(false);
-		txtVisitTime.setColumns(10);
-		txtVisitTime.setBounds(250, 299, 160, 21);
-		frmDoctorDetails.getContentPane().add(txtVisitTime);
-		
 		JButton btnEdit = new JButton("Save");
 		btnEdit.addMouseListener(new MouseAdapter() {
 			@Override

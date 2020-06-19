@@ -38,9 +38,7 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	public void updateEmail(String newEmail){
 		this.setEmail(newEmail);
 	}
-	public double getAvgVisitTime() {
-		return stats.getTotalVisitTime();
-	}
+	
 
 	public double getAvgDailyPatients() {
 		return stats.getTotalDailyPatients();
@@ -144,27 +142,22 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		if (doctors.size() == 0)
 			doctorsCount =1;
 		else doctorsCount =  doctors.size();
-		double tTime = 0, tSub =0, tPatient = 0, tLabs = 0, tRecords = 0;
+		double tSub =0, tPatient = 0, tLabs = 0, tRecords = 0;
 		StatisitcalData current = new StatisitcalData();
-		for (String Key : this.doctors.keySet()) {
-			if (this.getId() == this.doctors.get(Key).getManagerID()) {
-				current = doctors.get(Key).getAvgRecords();
-				tTime += current.getTotalVisitTime();
+		for (String doctorKey : doctors.keySet()) {
+			if (this.getId() == doctors.get(doctorKey).getManagerID()) {
+				current = doctors.get(doctorKey).getAvgRecords();
 				tSub += current.getTotalDailySubs();
 				tPatient += current.getTotalDailyPatients();
 				tLabs += current.getTotalDailylabs();
-				HashMap <String, Patient> temp = doctors.get(Key).getPatients();
-					for (String PatientKey : temp.keySet())
-						tRecords += temp.get(PatientKey).getRecordCounter();
+							
 			}
 		}
 		
 		this.stats.setTotalDailylabs(tLabs/doctorsCount);
 		this.stats.setTotalDailyPatients(tPatient/doctorsCount);
 		this.stats.setTotalDailySubs(tSub/doctorsCount);
-		if (tRecords == 0)
-			tRecords = 1;
-		this.stats.setTotalVisitTime(tTime / tRecords);	
+			
 	}
 	
 	public boolean updateDoctorInfo(String docId, String email, long phone) {

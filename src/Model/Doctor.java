@@ -148,19 +148,16 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 				total.addtotalDailylabs(current.getTotalDailylabs());
 				total.addtotalDailyPatients(current.getTotalDailyPatients());
 				total.addtotalDailySubs(current.getTotalDailySubs());
-				total.addtotalVisitTime(current.getTotalVisitTime());
 			}			
 			total.setTotalDailylabs(total.getTotalDailylabs()/size);
 			total.setTotalDailyPatients(total.getTotalDailyPatients()/size);
 			total.setTotalDailySubs(total.getTotalDailySubs()/size);
-			total.setTotalVisitTime(total.getTotalVisitTime()/size);
 		}
 		else
 		{
 			total.setTotalDailylabs(0);
 			total.setTotalDailyPatients(0);
 			total.setTotalDailySubs(0);
-			total.setTotalVisitTime(0);
 		}
 		
 		return total;
@@ -194,7 +191,6 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 			
 			StatisitcalData editStats = this.stats.get(LocalDate.now());
 			double time = ChronoUnit.MINUTES.between(newRecord.get_STime(), newRecord.get_ETime())	;
-			editStats.addtotalVisitTime(time);
 			editStats.addtotalDailyPatients(1);
 			
 			if (newRecord.get_subscriptions() != null) { 

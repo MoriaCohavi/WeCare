@@ -14,16 +14,6 @@ import Model.*;
 
 public class StatisticalDataTest {
 	
-	@Test
-	public void CheckVisitTime()
-	{
-		
-		StatisitcalData stat = new StatisitcalData();
-		double num = 5;
-		double newNum = stat.getTotalVisitTime() + num;
-		stat.addtotalVisitTime(num);
-	    Assert.assertEquals(0,(newNum), stat.getTotalVisitTime());
-	}
 	
 	@Test
 	public void CheckDailyPatients()

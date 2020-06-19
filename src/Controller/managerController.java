@@ -52,10 +52,10 @@ public class managerController {
 	public boolean addNewDoctor(String doctorId, String managerId, long phone, String name, String email, String special, String password,String user_type, long managerToken) {
 		if(Authentication.validateUser(managerToken, typeNeed))
 		{
-			Doctor newDoctor = new Doctor(doctorId, managerId, phone, name, email, special, password, user_type);
-			if (authenticationController.register(newDoctor.getId(), newDoctor) != -1)
+			Doctor newDoc = new Doctor(doctorId, managerId, phone, name, email, special, password, user_type);
+			if (authenticationController.register(newDoc.getId(), newDoc) != -1)
 			{
-				clinicManager.add(newDoctor);
+				clinicManager.add(newDoc);
 				return true;
 			
 			}
@@ -119,7 +119,7 @@ public class managerController {
 //	private static LocalDateTime statsFlag;
 //private static StatisitcalData stats;
 	public void serialize() {
-		HashMap<String, Doctor> tempDoctors = clinicManager.getDoctors();
+		HashMap<String, Doctor> tempDoctors = Manager.getDoctors();
 		LocalDateTime tempStatsFlags = clinicManager.getStatsFlag();
 		StatisitcalData tempStats = clinicManager.getStats();
 		serHandlerController.serialize(tempDoctors, serPathDoctors);

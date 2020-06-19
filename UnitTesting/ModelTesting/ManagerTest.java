@@ -62,13 +62,11 @@ public class ManagerTest{
 		manager.calcStats();
 		Assert.assertTrue(manager.getAvgDailylabs() == 0 &&
 				manager.getAvgDailyPatients() == 0 &&
-				manager.getAvgDailySubs() == 0 &&
-				manager.getAvgVisitTime() == 0);
+				manager.getAvgDailySubs() == 0);
 		
 		Assert.assertFalse(manager.getAvgDailylabs() != 0 ||
 				manager.getAvgDailyPatients() != 0 ||
-				manager.getAvgDailySubs() != 0 ||
-				manager.getAvgVisitTime() != 0);
+				manager.getAvgDailySubs() != 0);
 		
 		manager.add(doctor1);
 		manager.add(doctor2);
@@ -76,13 +74,11 @@ public class ManagerTest{
 		manager.calcStats();
 		Assert.assertTrue(manager.getAvgDailylabs() == 0 &&
 				manager.getAvgDailyPatients() == 0 &&
-				manager.getAvgDailySubs() == 0 &&
-				manager.getAvgVisitTime() == 0);
+				manager.getAvgDailySubs() == 0);
 		
 		Assert.assertFalse(manager.getAvgDailylabs() != 0 ||
 				manager.getAvgDailyPatients() != 0 ||
-				manager.getAvgDailySubs() != 0 ||
-				manager.getAvgVisitTime() != 0);
+				manager.getAvgDailySubs() != 0);
 		
 		doctor1.add(patient1);
 		doctor1.add(patient2);
@@ -99,10 +95,10 @@ public class ManagerTest{
 		
 		manager.calcStats();
 		Assert.assertTrue(manager.getAvgDailyPatients() == 3.5 && manager.getAvgDailylabs() ==0 &&
-							manager.getAvgDailySubs() == 3.5 && manager.getAvgVisitTime() == 10);
+							manager.getAvgDailySubs() == 3.5);
 							
 		Assert.assertFalse(manager.getAvgDailyPatients() != 3.5 || manager.getAvgDailylabs() !=0 ||
-				manager.getAvgDailySubs() != 3.5 || manager.getAvgVisitTime() != 10);
+				manager.getAvgDailySubs() != 3.5);
 		
 		doctor1.addLabToPatient("000000002", "Blood");
 		doctor1.addLabToPatient("000000002", "Urine");
@@ -111,10 +107,10 @@ public class ManagerTest{
 		
 		manager.calcStats();
 		Assert.assertTrue(manager.getAvgDailyPatients() == 3.5 && manager.getAvgDailylabs() ==2 &&
-							manager.getAvgDailySubs() == 3.5 && manager.getAvgVisitTime() == 10);
+							manager.getAvgDailySubs() == 3.5);
 							
 		Assert.assertFalse(manager.getAvgDailyPatients() != 3.5 || manager.getAvgDailylabs() !=2 ||
-				manager.getAvgDailySubs() != 3.5 || manager.getAvgVisitTime() != 10);
+				manager.getAvgDailySubs() != 3.5 );
 		
 		doctor1.remove(patient1.getId());
 		doctor1.remove(patient2.getId());
