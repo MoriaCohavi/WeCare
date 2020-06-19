@@ -12,11 +12,11 @@ public class Patient extends Person implements java.io.Serializable{
 
 	private static int recordCount = 0;
 	private int age, weight, height;
-	private String gender, allergies, chronic_diseases, subscriptions;
+	private String gender, allergies, chronic_diseases, subscriptions, doctorId;
 	private static HashMap<Integer, MedicalRecord> medicalRecords = new HashMap<Integer, MedicalRecord>();
 	private ArrayList<Lab> labs;
 	
-	public Patient(String id,int age, long phone, String name, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases) {
+	public Patient(String id,int age, long phone, String name, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases, String docId) {
 		super(id, phone, name, email);
 		this.weight = weight;
 		this.height = height;
@@ -26,6 +26,7 @@ public class Patient extends Person implements java.io.Serializable{
 		this.subscriptions = subscriptions;
 		this.chronic_diseases = chronic_diseases;
 		this.labs = new ArrayList<Lab>();
+		this.doctorId = docId;
 	}
 	
 
@@ -163,6 +164,16 @@ public class Patient extends Person implements java.io.Serializable{
 			return true;
 		
 		return false;
+	}
+
+
+	public String getDoctorId() {
+		return doctorId;
+	}
+
+
+	public void setDoctorId(String doctorId) {
+		this.doctorId = doctorId;
 	}
 	 
 }

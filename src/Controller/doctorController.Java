@@ -31,7 +31,7 @@ public class doctorController {
 	public boolean addNewPatient (long token, String id,int age, long phone, String name, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases) {
 		if(Authentication.validateUser(token, typeNeed))
 		{
-			Patient newPatient = new Patient(id, age, phone, name, email, weight, height, gender, allergies, subscriptions, chronic_diseases);
+			Patient newPatient = new Patient(id, age, phone, name, email, weight, height, gender, allergies, subscriptions, chronic_diseases, currentModelDoctor.getDoctorID());
 			if (currentModelDoctor.add(newPatient))
 				return true;
 		}
