@@ -43,6 +43,17 @@ public class Authentication implements java.io.Serializable{
 		return 1;
 	}
 	
+	public static boolean deleteSignUp(String id)
+	/*tested*/
+	{
+		if  (users.containsKey(id)) {
+			users.remove(id);
+			return true;
+		}
+		return false;
+	}
+	
+	
 	public static long signIn(String id, String password)
 	/*tested*/
 	{

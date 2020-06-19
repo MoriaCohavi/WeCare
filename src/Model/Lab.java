@@ -11,11 +11,13 @@ public class Lab implements java.io.Serializable {
 	private final String labType;
 	private String result;
 	private boolean attentionRequired = false;
+	private final String patientId;
 	
-	public Lab (String type, String result, boolean attentionRequired) {
+	public Lab (String type, String result, boolean attentionRequired, String patId) {
 		this.labType = type;
 		this.result = result;
 		this.attentionRequired = false;
+		this.patientId = patId;
 	}
 	
 	
@@ -43,6 +45,9 @@ public class Lab implements java.io.Serializable {
 		return this.attentionRequired;
 	}
 	
+	public String getPatientId() {
+		return patientId;
+	}
 	
 	
 	public void updateResults(String result, boolean attention) 
@@ -51,5 +56,7 @@ public class Lab implements java.io.Serializable {
 		this.setResult(result);
 		this.setAttentionRequired(attention);
 	}
+
+
 	
 }

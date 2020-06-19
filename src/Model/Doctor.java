@@ -93,7 +93,7 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	public boolean remove(String id) { 
 		/*tested*/
 		
-		if (this.patients.containsKey(id)) 
+		if (search(id)) 
 		{
 			patients.remove(id);
 			return true;
@@ -106,7 +106,7 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	public boolean search(String id) { 
 		/*tested*/
 		
-		if(patients.containsKey(id)) 
+		if(this.patients.containsKey(id) && this.getId().equals(patients.get(id).getDoctorId())) 
 			return true;
 		return false;
 	}
@@ -168,7 +168,7 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	public void updatePatientInfo(String patientId, int phone,int age, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases) {
 		/*tested*/
 		
-		if (this.patients.containsKey(patientId)) {
+		if (search(patientId)) {
 			patients.get(patientId).updatePatientInfo(phone, age, email, weight, height, gender, allergies, subscriptions, chronic_diseases);
 		}
 	}
@@ -181,7 +181,7 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	public boolean createMedicalRecord(String patientId, MedicalRecord newRecord) {		
 		/*tested*/
 		
-		if (this.patients.containsKey(patientId)) {
+		if (search(patientId)) {
 			patients.get(patientId).addMedicalRecord(newRecord);
 			
 
@@ -206,21 +206,10 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 		
 	public boolean addLabToPatient(String patientId, String labType) {
 		/*tested*/
-		if (this.patients.containsKey(patientId)) {
+		if (search(patientId)) {
 			
-			Lab newLab = new Lab(labType, null, false);
+			Lab newLab = new Lab(labType, null, false, patientId);
 			patients.get(patientId).addLab(newLab);
-			
-			//updating stats
-			if (!this.stats.containsKey(LocalDate.now())) 
-				this.stats.put(LocalDate.now(), new StatisitcalData());
-			
-			StatisitcalData editStats = this.stats.get(LocalDate.now());
-			if (editStats == null) {
-				editStats = new StatisitcalData();
-			}
-			editStats.addtotalDailylabs(1);
-			this.stats.put(LocalDate.now(), editStats);
 			return true;
 		}
 		
@@ -278,9 +267,9 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	
 	
 	public boolean updatePatientInfo(String patientId, String email, long phone, String allergies, String chronic_diseases, String subscriptions)
-	/*tested*/
+	/**tested*/
 	{
-		if(this.patients.containsKey(patientId))
+		if(search(patientId))
 		{
 			patients.get(patientId).setEmail(email);
 			patients.get(patientId).setPhone(phone);

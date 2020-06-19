@@ -79,8 +79,7 @@ public class doctorController {
 		return null;
 	}
 	
-	public boolean openNewMedicalRecord(long token, String patientId, int days, String purpose, String description, String summary,
-			String sub, String diagnose, LocalTime sT, LocalTime eT, int w, int h, int hr, int t, int sysBP, int diaBP) {
+	public boolean openNewMedicalRecord(long token, String patientId, int days, String purpose, String description, String summary,	String sub, String diagnose, int w, int h, int hr, int t, int sysBP, int diaBP) {
 		
 		if(Authentication.validateUser(token, typeNeed))
 		{

@@ -43,7 +43,7 @@ public class PatientTest {
 		String type = "test";
 		String result = "Dead";
 		boolean attentionRequired = true;
-		Lab lab = new Lab(type, result, attentionRequired);
+		Lab lab = new Lab(type, result, attentionRequired, patient.getId());
 		
 		Assert.assertTrue(patient.addLab(lab));
 	   
@@ -62,15 +62,13 @@ public class PatientTest {
 		String summary = "summary test";
 		String sub = "sub test";
 		String diagnose = "dianose test";
-		LocalTime sT = LocalTime.now();
-		LocalTime eT = LocalTime.now();
 		int w = 10;
 		int h = 5;
 		int hr = 3;
 		int t = 6;
 		int sysBP = 36;
 		int diaBP = 40;
-		MedicalRecord med = new MedicalRecord("000000002", doctor, numDays, record, purpose, description, summary, sub, diagnose, sT, eT, w, h, hr, t, sysBP, diaBP);
+		MedicalRecord med = new MedicalRecord("000000002", doctor, numDays, record, purpose, description, summary, sub, diagnose,  w, h, hr, t, sysBP, diaBP);
 		Assert.assertTrue(patient.addMedicalRecord(med)); 
 	}
 }

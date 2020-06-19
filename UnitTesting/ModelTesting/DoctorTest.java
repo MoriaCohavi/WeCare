@@ -30,13 +30,17 @@ public class DoctorTest {
 	@Test
 	public void CheckRemove()
 	{
-		Doctor doctor = new Doctor("000000001", "000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
+		Doctor doctor1 = new Doctor("000000001", "000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		Patient patient = new Patient("000000002", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000001");
-		doctor.add(patient);
-		Assert.assertTrue(doctor.remove(patient.getId()));
-		Assert.assertFalse(doctor.remove(patient.getId()));
+		doctor1.add(patient);
+		Assert.assertTrue(doctor1.remove(patient.getId()));
+		Assert.assertFalse(doctor1.remove(patient.getId()));
 		
-		doctor.remove("000000002");
+		doctor1.add(patient);
+		Doctor doctor3 = new Doctor("000000003", "000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
+		Assert.assertFalse(doctor3.remove(patient.getId()));
+		
+		doctor1.remove("000000002");
 	}
 	
 	@Test
@@ -47,6 +51,9 @@ public class DoctorTest {
 		doctor.add(patient);
 		Assert.assertTrue(doctor.search(patient.getId()));
 		Assert.assertFalse(doctor.search("123456781"));
+		
+		Doctor doctor3 = new Doctor("000000003", "000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
+		Assert.assertFalse(doctor3.search("000000002"));
 		
 		doctor.remove("000000002");
 	}
@@ -64,7 +71,7 @@ public class DoctorTest {
 		Doctor doctor = new Doctor("000000001", "000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		Patient patient = new Patient("000000002", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000001");
 		doctor.add(patient);
-		MedicalRecord Record = new MedicalRecord("000000002", "000000001", 3, patient.getRecordCounter()+1, "purp_testing", "desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(), LocalTime.now().plusMinutes(10), 60, 180, 90, 37, 60, 100);
+		MedicalRecord Record = new MedicalRecord("000000002", "000000001", 3, patient.getRecordCounter()+1, "purp_testing", "desc_testing", "sum_testing", "sub_test", "diag_test", 60, 180, 90, 37, 60, 100);
 		patient.addMedicalRecord(Record);
 		Patient patient2 = doctor.getItem("000000002");
 		Assert.assertTrue(patient.getAllergies().equals(patient2.getAllergies())&&
@@ -125,8 +132,8 @@ public class DoctorTest {
 		Patient patient = new Patient("000000002", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000001");
 		doctor.add(patient);
 		
-		MedicalRecord Record = new MedicalRecord("000000002", "000000001", 3, patient.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(),LocalTime.now().plusMinutes(10), 60, 180, 90, 37, 60, 100);
-		patient.addMedicalRecord(Record);
+		MedicalRecord Record = new MedicalRecord("000000002", "000000001", 3, patient.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test", 60, 180, 90, 37, 60, 100);
+		doctor.createMedicalRecord(patient.getId(), Record);
 		
 		MedicalRecord checkRecord = patient.getMedicalRecord(1, "000000002");
 		Assert.assertTrue(checkRecord.get_DiagnoseDiscription().equals("diag_test") &&
@@ -141,7 +148,10 @@ public class DoctorTest {
 							checkRecord.get_RecordId() == 1 &&
 							checkRecord.get_subscriptions().equals("sub_test") &&
 							checkRecord.get_VisitDescription().equals("desc_testing") &&
-							checkRecord.get_VisitPurpose().equals("purp_testing")); 
+							checkRecord.get_VisitPurpose().equals("purp_testing"));
+		
+		Doctor doctor3 = new Doctor("000000003", "000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
+		Assert.assertFalse(doctor3.createMedicalRecord("000000002", Record));
 		
 		doctor.remove("000000002");
 	}
@@ -152,7 +162,7 @@ public class DoctorTest {
 		Patient patient = new Patient("000000002", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000001");
 		doctor.add(patient);
 		
-		MedicalRecord Record = new MedicalRecord("000000002", "000000001", 3, patient.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(),LocalTime.now().plusMinutes(10), 60, 180, 90, 37, 60, 100);
+		MedicalRecord Record = new MedicalRecord("000000002", "000000001", 3, patient.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test", 60, 180, 90, 37, 60, 100);
 		doctor.createMedicalRecord("000000002", Record);
 		
 		LocalDate checkDate = doctor.getFirstRecord();
@@ -172,6 +182,9 @@ public class DoctorTest {
 		Assert.assertTrue(doctor.addLabToPatient("000000002", "Urin Labs"));
 		Assert.assertTrue(doctor.addLabToPatient("000000002", "Ultrasound"));
 		
+		Doctor doctor3 = new Doctor("000000003", "000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
+		Assert.assertFalse(doctor3.addLabToPatient("000000002", "Ultrasound"));
+		
 		doctor.remove("000000002");
 	}
 	
@@ -189,6 +202,12 @@ public class DoctorTest {
 							doctor.getItem("000000002").getAllergies().equals("allergies") &&
 							doctor.getItem("000000002").getChronic_diseases().equals("chronic_diseases") &&
 							doctor.getItem("000000002").getSubscriptions().equals("subscriptions"));
+		
+		Doctor doctor3 = new Doctor("000000003", "000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
+		
+		Assert.assertFalse(doctor3.updatePatientInfo("000000002", "Test@test", 23, "allergies", "chronic_diseases", "subscriptions"));
+		
+		
 		
 	}
 

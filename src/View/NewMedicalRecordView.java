@@ -174,7 +174,7 @@ public class NewMedicalRecordView {
 		
 		JComboBox combo_purpose = new JComboBox();
 		combo_purpose.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		combo_purpose.setModel(new DefaultComboBoxModel(new String[] {"Select", "High Fiver", "Cuagh", "Ingert"}));
+		combo_purpose.setModel(new DefaultComboBoxModel(new String[] {"Select", "High Fiver", "Cuagh", "Ingert", "Other"}));
 		combo_purpose.setBounds(298, 130, 272, 26);
 		frmMedicalRecord.getContentPane().add(combo_purpose);
 		

@@ -80,9 +80,11 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		return doctors;
 	}
 	
-	public boolean search(String id) {
+	public boolean search(String id) 
+	/*tested*/
+	{
 		
-		if(doctors.containsKey(id)) 
+		if(doctors.containsKey(id) && this.getID().equals(doctors.get(id).getManagerID())) 
 			return true;
 		return false;
 	}
@@ -123,47 +125,47 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		return false;		
 	}
 	
-//	private void deleteOldStats() 
-//	
-//	{
-//		for(String Key : this.doctors.keySet()) {
-//			if( doctors.get(Key).getFirstRecord()!= null && 
-//					doctors.get(Key).getFirstRecord().isBefore(LocalDate.now().minusMonths(1)))
-//				doctors.remove(Key);
-//		}
-//	}
-//	
-//	public void calcStats() 
-//	/*tested*/
-//	{
-//		
-//		deleteOldStats();
-//		int doctorsCount;
-//		if (doctors.size() == 0)
-//			doctorsCount =1;
-//		else doctorsCount =  doctors.size();
-//		double tSub =0, tPatient = 0, tLabs = 0, tRecords = 0;
-//		StatisitcalData current = new StatisitcalData();
-//		for (String doctorKey : doctors.keySet()) {
-//			if (this.getId() == doctors.get(doctorKey).getManagerID()) {
-//				current = doctors.get(doctorKey).getAvgRecords();
-//				tSub += current.getTotalDailySubs();
-//				tPatient += current.getTotalDailyPatients();
-//				tLabs += current.getTotalDailylabs();
-//							
-//			}
-//		}
-//		
-//		this.stats.setTotalDailylabs(tLabs/doctorsCount);
-//		this.stats.setTotalDailyPatients(tPatient/doctorsCount);
-//		this.stats.setTotalDailySubs(tSub/doctorsCount);
-//			
-//	}
+	private void deleteOldStats() 
+	
+	{
+		for(String Key : this.doctors.keySet()) {
+			if( doctors.get(Key).getFirstRecord()!= null && 
+					doctors.get(Key).getFirstRecord().isBefore(LocalDate.now().minusMonths(1)))
+				doctors.remove(Key);
+		}
+	}
+	
+	public void calcStats() 
+	/*tested*/
+	{
+		
+		deleteOldStats();
+		int doctorsCount;
+		if (doctors.size() == 0)
+			doctorsCount =1;
+		else doctorsCount =  doctors.size();
+		double tSub =0, tPatient = 0, tLabs = 0, tRecords = 0;
+		StatisitcalData current = new StatisitcalData();
+		for (String doctorKey : doctors.keySet()) {
+			if (this.getId() == doctors.get(doctorKey).getManagerID()) {
+				current = doctors.get(doctorKey).getAvgRecords();
+				tSub += current.getTotalDailySubs();
+				tPatient += current.getTotalDailyPatients();
+				tLabs += current.getTotalDailylabs();
+							
+			}
+		}
+		
+		this.stats.setTotalDailylabs(tLabs/doctorsCount);
+		this.stats.setTotalDailyPatients(tPatient/doctorsCount);
+		this.stats.setTotalDailySubs(tSub/doctorsCount);
+			
+	}
 	
 	public boolean updateDoctorInfo(String docId, String email, long phone) {
 		/*tested*/
 		
-		if (this.doctors.containsKey(docId) && Authentication.updateDoctorInfo(docId, email, phone)) 
+		if (search(docId) && Authentication.updateDoctorInfo(docId, email, phone)) 
 		{
 			doctors.get(docId).setEmail(email);
 			doctors.get(docId).setPhone(phone);

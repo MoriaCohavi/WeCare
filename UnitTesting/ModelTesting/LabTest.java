@@ -15,8 +15,8 @@ public class LabTest {
 	
 	@Test
 	public void CheckUpdateResults() {		
-		Lab lab1 = new Lab("Blood Test", null, false);
-		Lab lab2 = new Lab("Urin Test", null, false);
+		Lab lab1 = new Lab("Blood Test", null, false, "000000000");
+		Lab lab2 = new Lab("Urin Test", null, false, "000000000");
 		
 		lab1.updateResults("Normal", false);
 		lab2.updateResults("Abnormal", true);
