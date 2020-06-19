@@ -27,7 +27,6 @@ public class AddDoctorView {
 	private JTextField txtf_specialization;
 	private JTextField txtf_passwd;
 
-
 	/**
 	 * Create the application.
 	 */
@@ -146,7 +145,7 @@ public class AddDoctorView {
 				else
 				{
 					
-					if (!(managerController.addNewDoctor(txtf_id.getText(), Long.parseLong(txtf_phone.getText()), txtf_name.getText(), txtf_email.getText(), txtf_specialization.getText(), txtf_passwd.getText(), "Doctor", token)))
+					if (!(managerController.addNewDoctor(txtf_id.getText(), authController.getLoggedinUser(token).getId(), Long.parseLong(txtf_phone.getText()), txtf_name.getText(), txtf_email.getText(), txtf_specialization.getText(), txtf_passwd.getText(), "Doctor", token)))
 						lbl_warning.setText("User exists");
 					else {
 						managerController.serialize();

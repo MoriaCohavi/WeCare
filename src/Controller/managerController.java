@@ -49,10 +49,10 @@ public class managerController {
 		return null;
 	}
 	
-	public boolean addNewDoctor(String id, long phone, String name, String email, String special, String password,String user_type, long managerToken) {
+	public boolean addNewDoctor(String doctorId, String managerId, long phone, String name, String email, String special, String password,String user_type, long managerToken) {
 		if(Authentication.validateUser(managerToken, typeNeed))
 		{
-			Doctor newDoctor = new Doctor(id, phone, name, email, special, password, user_type);
+			Doctor newDoctor = new Doctor(doctorId, managerId, phone, name, email, special, password, user_type);
 			if (authenticationController.register(newDoctor.getId(), newDoctor) != -1)
 			{
 				clinicManager.add(newDoctor);
@@ -141,7 +141,7 @@ public class managerController {
 	
 	public boolean updateDoctor(long managerToken, String id, String email, long phone)
 	{
-		if (Authentication.validateUser(phone, typeNeed))
+		if (Authentication.validateUser(managerToken, typeNeed))
 		{
 			if(clinicManager.updateDoctorInfo(id,email , phone) && Authentication.updateDoctorInfo(id, email, phone))
 			return true;

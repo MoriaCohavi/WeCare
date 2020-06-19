@@ -228,25 +228,6 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 		else return false;
 	}
 	
-//	public String visitSummary(String patientId, int recordId) {
-//		
-//		if (this.patients.containsKey(patientId)) {
-//			return patients.get(patientId).getMedicalRecord(recordId).get_VisitSummary();
-//		}
-//		
-//		return null;
-//	}
-//	
-//	public String PatientMedicalSummary(String patientId) {
-//		
-//		if (this.patients.containsKey(patientId)) {
-//			return patients.get(patientId).medicalSummary();
-//		}
-//		
-//		return null;
-//	}		
-	
-	
 	public void setPatients(HashMap<String, Patient> tempPatients) {
 		patients = tempPatients;
 	}

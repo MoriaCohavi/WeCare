@@ -20,22 +20,7 @@ public class LoginView {
 	private JFrame frmLogin;
 	private JTextField txtf_uname;
 	private JPasswordField passwdfield;
-
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					LoginView window = new LoginView();
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
+	
 	/**
 	 * Create the application.
 	 */

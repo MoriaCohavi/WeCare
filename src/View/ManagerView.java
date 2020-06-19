@@ -45,24 +45,8 @@ public class ManagerView {
 	private JTextField txtSearch;
 	private JButton btnSearch;
 	private JButton btnAddDoctor;
+	private DefaultTableModel newDocTbl;
 	
-	
-	DefaultTableModel newDocTbl;
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					ManagerPanelView window = new ManagerPanelView();
-//					
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 	/**
 	 * Create the application.
 	 */
@@ -223,6 +207,17 @@ public class ManagerView {
 		txtEmail.setBounds(821, 239, 146, 26);
 
 		frmManager.getContentPane().add(txtEmail);
+		
+		JButton btnStats = new JButton("Statistical details");
+		btnStats.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				StatisticalReportView statsView = new StatisticalReportView(managerToken);
+				frmManager.dispose();
+			}
+		});
+		btnStats.setBounds(693, 286, 146, 21);
+		frmManager.getContentPane().add(btnStats);
 		frmManager.setVisible(true);
 	}
 }
