@@ -143,7 +143,7 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		int doctorsCount;
 		if (doctors.size() == 0)
 			doctorsCount =1;
-		else doctorsCount =  doctors.size();s
+		else doctorsCount =  doctors.size();
 		double tTime = 0, tSub =0, tPatient = 0, tLabs = 0, tRecords = 0;
 		StatisitcalData current = new StatisitcalData();
 		for (String Key : this.doctors.keySet()) {

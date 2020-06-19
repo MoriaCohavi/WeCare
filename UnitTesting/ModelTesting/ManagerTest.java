@@ -43,8 +43,8 @@ public class ManagerTest{
 		
 		Manager manager = new Manager("000000003", 5200000, "Name", "Email", "password","Manager");
 
-		Doctor doctor1 = new Doctor("000000001", 5200000, "Name1", "Email1", "Spetialty1","password", "Doctor");
-		Doctor doctor2 = new Doctor("000000004", 5200000, "Name2", "Email2", "Spetialty2","password", "Doctor");
+		Doctor doctor1 = new Doctor("000000001","000000003", 5200000, "Name1", "Email1", "Spetialty1","password", "Doctor");
+		Doctor doctor2 = new Doctor("000000004","000000003", 5200000, "Name2", "Email2", "Spetialty2","password", "Doctor");
 				
 		Patient patient1 = new Patient("000000002", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000001");
 		Patient patient2 = new Patient("000000005", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000001");
@@ -131,9 +131,9 @@ public class ManagerTest{
 		
 		Manager manager = new Manager("000000003", 5200000, "Name", "Email", "password","Manager");
 
-		Doctor doctor1 = new Doctor("000000001", 5200000, "Name1", "Email1", "Spetialty1","password", "Doctor");
-		Doctor doctor2 = new Doctor("000000004", 5200000, "Name2", "Email2", "Spetialty2","password", "Doctor");
-		Doctor doctor3 = new Doctor("000000007", 5200000, "Name3", "Email3", "Spetialty3","password", "Doctor");
+		Doctor doctor1 = new Doctor("000000001", "000000003", 5200000, "Name1", "Email1", "Spetialty1","password", "Doctor");
+		Doctor doctor2 = new Doctor("000000004", "000000003",  5200000, "Name2", "Email2", "Spetialty2","password", "Doctor");
+		Doctor doctor3 = new Doctor("000000007", "000000003", 5200000, "Name3", "Email3", "Spetialty3","password", "Doctor");
 		
 		manager.add(doctor1);
 		manager.add(doctor2);

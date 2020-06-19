@@ -19,7 +19,7 @@ public class DoctorTest {
 	@Test
 	public void CheckAdd()
 	{
-		Doctor doctor = new Doctor("000000001", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
+		Doctor doctor = new Doctor("000000001", "000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		Patient patient = new Patient("000000002", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000001");
 		Assert.assertTrue(doctor.add(patient));
 		Assert.assertFalse(doctor.add(patient));
@@ -30,7 +30,7 @@ public class DoctorTest {
 	@Test
 	public void CheckRemove()
 	{
-		Doctor doctor = new Doctor("000000001", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
+		Doctor doctor = new Doctor("000000001", "000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		Patient patient = new Patient("000000002", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000001");
 		doctor.add(patient);
 		Assert.assertTrue(doctor.remove(patient.getId()));
@@ -42,7 +42,7 @@ public class DoctorTest {
 	@Test
 	public void CheckSearch()
 	{
-		Doctor doctor = new Doctor("000000001", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
+		Doctor doctor = new Doctor("000000001","000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		Patient patient = new Patient("000000002", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000001");
 		doctor.add(patient);
 		Assert.assertTrue(doctor.search(patient.getId()));
@@ -54,14 +54,14 @@ public class DoctorTest {
 	@Test
 	public void CheckAddSpecialization()
 	{
-		Doctor doctor = new Doctor("000000001", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
+		Doctor doctor = new Doctor("000000001", "000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		doctor.addSpecialization("testing");
 		Assert.assertTrue(doctor.getDoctorSpecialization().equals("Spetialty and testing"));
 	}
 	
 	@Test
 	public void CheckGetItem() {
-		Doctor doctor = new Doctor("000000001", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
+		Doctor doctor = new Doctor("000000001", "000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		Patient patient = new Patient("000000002", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000001");
 		doctor.add(patient);
 		MedicalRecord Record = new MedicalRecord("000000002", "000000001", 3, patient.getRecordCounter()+1, "purp_testing", "desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(), LocalTime.now().plusMinutes(10), 60, 180, 90, 37, 60, 100);
@@ -88,7 +88,7 @@ public class DoctorTest {
 	@Test
 	public void CheckUpdatePatient()
 	{
-		Doctor doctor = new Doctor("000000001", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
+		Doctor doctor = new Doctor("000000001", "000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		Patient patient = new Patient("000000002", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000001");
 		doctor.add(patient);
 		
@@ -121,7 +121,7 @@ public class DoctorTest {
 	
 	@Test
 	public void CheckCreateMedicalRecord() {
-		Doctor doctor = new Doctor("000000001", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
+		Doctor doctor = new Doctor("000000001", "000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		Patient patient = new Patient("000000002", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000001");
 		doctor.add(patient);
 		
@@ -148,7 +148,7 @@ public class DoctorTest {
 	
 	@Test
 	public void CheckGetFirstRecord() {
-		Doctor doctor = new Doctor("000000001", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
+		Doctor doctor = new Doctor("000000001","000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		Patient patient = new Patient("000000002", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000001");
 		doctor.add(patient);
 		
@@ -163,7 +163,7 @@ public class DoctorTest {
 	
 	@Test
 	public void CheckAddLabToPatient() {
-		Doctor doctor = new Doctor("000000001", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
+		Doctor doctor = new Doctor("000000001","000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		Patient patient = new Patient("000000002", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000001");
 		doctor.add(patient);
 		
