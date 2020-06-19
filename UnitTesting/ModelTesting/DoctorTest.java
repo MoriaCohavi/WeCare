@@ -68,7 +68,7 @@ public class DoctorTest {
 							patient.getGender().equals(patient2.getGender()) &&
 							patient.getHeight() == patient2.getHeight() &&
 							patient.getId().equals(patient2.getId()) &&
-							patient.getMedicalRecord(1) == (patient2.getMedicalRecord(1)) &&
+							patient.getMedicalRecord(1, "123456788") == (patient2.getMedicalRecord(1, "123456788")) &&
 							patient.getName().equals(patient2.getName()) &&
 							patient.getPhone() == patient2.getPhone() &&
 							patient.getRecordCounter() == patient2.getRecordCounter() &&
@@ -116,7 +116,7 @@ public class DoctorTest {
 		MedicalRecord Record = new MedicalRecord("123456788", "123456789", 3, patient.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(),LocalTime.now().plusMinutes(10), 60, 180, 90, 37, 60, 100);
 		patient.addMedicalRecord(Record);
 		
-		MedicalRecord checkRecord = patient.getMedicalRecord(1);
+		MedicalRecord checkRecord = patient.getMedicalRecord(1, "123456788");
 		Assert.assertTrue(checkRecord.get_DiagnoseDiscription().equals("diag_test") &&
 							checkRecord.get_DaysOfIllnessApproval() == 3 &&
 							checkRecord.get_DoctorId() == "123456789" &&

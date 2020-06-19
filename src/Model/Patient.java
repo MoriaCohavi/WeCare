@@ -57,6 +57,10 @@ public class Patient extends Person implements java.io.Serializable{
 		this.subscriptions = subscriptions;
 	}
 	
+	public static void setRecordsCounter(int counter)
+	{
+		recordCount = counter;
+	}
 
 	public int getAge() {
 		return this.age;
@@ -75,9 +79,12 @@ public class Patient extends Person implements java.io.Serializable{
 		return allergies;
 	}
 
-	public MedicalRecord getMedicalRecord(int id) {
+	public MedicalRecord getMedicalRecord(int id, String patientId) {
 		
-		return medicalRecords.get(id);
+		if (medicalRecords.get(id).get_PatientId().equals(patientId))
+			return medicalRecords.get(id);
+		else 
+			return null;
 		
 	}
 	

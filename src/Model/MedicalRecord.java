@@ -95,7 +95,9 @@ public class MedicalRecord implements java.io.Serializable {
 		return pateintIndices.getMedicalIndices();
 	}
 	
-	
+	public String get_PatientId() {
+		return patientId;
+	}
 	//other methods
 	
 	
