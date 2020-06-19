@@ -80,9 +80,9 @@ public class authenticationController{
 		
 	}
 	
-	public boolean deleteUser(long managerToken, String userId)
+	public static boolean deleteUser(long managerToken, String userId)
 	{
-		if(Authentication.validateUser(managerToken, authentication.getType(managerToken)))
+		if(Authentication.validateUser(managerToken, Authentication.getType(managerToken)))
 		{
 			if(authentication.remove(userId))
 				return true;

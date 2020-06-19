@@ -9,6 +9,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import Controller.authenticationController;
 import Model.*;
 
 public class AuthenticationTest {
@@ -30,8 +32,6 @@ public class AuthenticationTest {
 	    Assert.assertTrue(Authentication.signUp(user.getId(), user) == 1);
 	    Assert.assertTrue(Authentication.signUp(user.getId(), user) == -1);
 	    
-	    Authentication.signOut(user.getToken());
-	    
 	}
 	
 	@Test
@@ -40,9 +40,10 @@ public class AuthenticationTest {
 		User user = new User("000000000", 0541234567, "test", "test.gmail.com", "password", "Doctor");
 		Authentication.signUp("000000000", user);
 	    Assert.assertTrue(Authentication.signIn("000000000", "testFalse") == -1);
-	    Assert.assertTrue(Authentication.signIn("000000000", "password") != -1);
+	    Assert.assertTrue(Authentication.signIn("000000000", "password") != 1);
 	    
-	    Authentication.signOut(user.getToken());
+
+	    
 	}
 	
 	@Test
@@ -71,6 +72,9 @@ public class AuthenticationTest {
 		
 		Authentication.signOut(user1.getToken());
 		Authentication.signOut(user2.getToken());
+		
+		Authentication.signOut(user1.getToken());
+		Authentication.signOut(user2.getToken());
 	}
 	
 	@Test
@@ -90,7 +94,5 @@ public class AuthenticationTest {
 		Authentication.signUp("000000000", doctor);
 		Assert.assertTrue(Authentication.updateDoctorInfo(doctor.getId(), "Email test", 0541234567));
 		Assert.assertFalse(Authentication.updateDoctorInfo("000000000", "Email test", 0541234567));
-		
-		Authentication.signOut(doctor.getToken());
 	}
 }
