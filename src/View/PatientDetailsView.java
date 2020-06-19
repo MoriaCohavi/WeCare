@@ -8,6 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import Controller.doctorController;
+import Controller.managerController;
 import Model.*;
 
 import javax.swing.JLabel;
@@ -20,6 +21,7 @@ import java.awt.event.WindowEvent;
 public class PatientDetailsView {
 
 	private doctorController docCtrl;
+	private managerController manCtrl;
 	private JFrame frmPatient;
 	private JTextField txtName;
 	private JTextField txtID;
@@ -60,6 +62,7 @@ public class PatientDetailsView {
 	 */
 	private void initialize(long token, Doctor doctor, String patientId) {
 		docCtrl = new doctorController(doctor);
+		manCtrl = new managerController();
 		frmPatient = new JFrame();
 		frmPatient.setTitle("Patient Details");
 		frmPatient.setBounds(100, 100, 570, 600);
@@ -179,6 +182,7 @@ public class PatientDetailsView {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				docCtrl.updatePatientInfo(token, patientId, txtEmail.getText(), Long.parseLong(txtPhone.getText()), txtAllergies.getText(), txtCronicDiseases.getText(), txtSubsriptions.getText());
+				docCtrl.serializePatients();
 				frmPatient.dispose();
 				PatientMedicalHistoryView docView = new PatientMedicalHistoryView(token, doctor, patientId);
 			}
@@ -190,9 +194,10 @@ public class PatientDetailsView {
 		btnDelete.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				docCtrl.deletePatient(token,patientId); 
+				docCtrl.deletePatient(token,patientId);
+				docCtrl.serializePatients();
 				frmPatient.dispose();
-				PatientMedicalHistoryView docView = new PatientMedicalHistoryView(token, doctor, patientId);
+				DoctorView docView = new DoctorView(token);
 			}
 		});
 		btnDelete.setBounds(139, 441, 85, 21);
