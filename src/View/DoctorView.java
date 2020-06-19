@@ -45,7 +45,8 @@ public class DoctorView {
 	private Doctor details;
 	private HashMap <String, Patient> patientsList;
 	private JLabel lblID;
-
+	
+	private DefaultTableModel newPatientsTbl;
 //	/**
 //	 * Launch the application.
 //	 */
@@ -101,7 +102,6 @@ public class DoctorView {
 		scrollPane.setBounds(80, 127, 575, 334);
 		frmDoctor.getContentPane().add(scrollPane);
 		
-		tbl_doctors = new JTable();
 		tbl_doctors.setDebugGraphicsOptions(DebugGraphics.NONE_OPTION);
 		tbl_doctors.setBorder(null);
 		tbl_doctors.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -111,22 +111,16 @@ public class DoctorView {
 		tbl_doctors.setRowMargin(0);
 		tbl_doctors.setRowHeight(25);
 		tbl_doctors.setIntercellSpacing(new Dimension(0, 0));
-		Object[][] listObj = new Object[3][];
 		
-//		int rowsIndex = 1;
-//		for (String key: patientsList.keySet()) {
-//			listObj[rowsIndex][0] = rowsIndex;
-//			listObj[rowsIndex][1] = patientsList.get(key).getName();
-//			listObj[rowsIndex][2] = patientsList.get(key).getId();
-//			rowsIndex++;
-//		}
+		tbl_doctors = new JTable();
+		newPatientsTbl = new DefaultTableModel();
+		tbl_doctors.setModel(newPatientsTbl);
 		
-		tbl_doctors.setModel(new DefaultTableModel(
-				listObj,
-				new String[] {
-					"Num.", "Patient", "ID"
-				}
-			));
+		newPatientsTbl.addColumn("Patient Name");
+		newPatientsTbl.addColumn("Patient ID");
+		
+		
+
 
 
 		tbl_doctors.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 18));
