@@ -153,7 +153,7 @@ public class DoctorDetailsView {
 		JButton btnEdit = new JButton("Save");
 		btnEdit.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent e) {
+			public void mouseClicked(MouseEvent e) { //siralize users again
 				manCtrl.updateDoctor(token, txtID.getText(), txtEmail.getText(), Long.parseLong(txtPhone.getText()));
 				manCtrl.serialize();
 				// modify also in users hashmap and serialize;

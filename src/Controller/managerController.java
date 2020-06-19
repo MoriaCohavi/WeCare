@@ -115,7 +115,7 @@ public class managerController {
 	{
 		if (Authentication.validateUser(phone, typeNeed))
 		{
-			if(clinicManager.updateDoctorInfo(id,email , phone))
+			if(clinicManager.updateDoctorInfo(id,email , phone) && Authentication.updateDoctorInfo(id, email, phone))
 			return true;
 		}
 		return false;

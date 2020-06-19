@@ -89,6 +89,4 @@ public class authenticationController{
 		return true;
 	}
 	
-
-	
 }
