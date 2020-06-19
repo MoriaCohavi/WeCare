@@ -79,7 +79,7 @@ public class NewMedicalRecordView {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				frmMedicalRecord.dispose();
-				DoctorView docView = new DoctorView(doctorToken);
+				PatientMedicalHistoryView docView = new PatientMedicalHistoryView(doctorToken, doctor, patientID);
 				
 			}
 		});
@@ -129,7 +129,7 @@ public class NewMedicalRecordView {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				frmMedicalRecord.dispose();
-				DoctorView docView = new DoctorView(doctorToken);
+				PatientMedicalHistoryView docView = new PatientMedicalHistoryView(doctorToken, doctor, patientID);
 				
 			}
 		});
@@ -211,7 +211,7 @@ public class NewMedicalRecordView {
 					docCtrl.openNewMedicalRecord(doctorToken, patientID, Integer.parseInt(txtf_illnesDays.getText()), String.valueOf(combo_purpose.getSelectedItem()), txtf_visistDesc.getText(), txtf_visitSummary.getText(), txtf_subscriptions.getText(), txtf_diagnostic.getText(), LocalTime.now(), LocalTime.now(), medIndices.getWeight(), medIndices.getHeight(), medIndices.getHeartRate(), medIndices.getTemperature(), medIndices.getSystolicBP(), medIndices.getDiastolicBP());
 					docCtrl.serializeRecords();
 					frmMedicalRecord.dispose();
-					DoctorView docView = new DoctorView(doctorToken);
+					PatientMedicalHistoryView docView = new PatientMedicalHistoryView(doctorToken, doctor, patientID);
 				}
 			}
 		});

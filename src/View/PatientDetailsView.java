@@ -70,7 +70,7 @@ public class PatientDetailsView {
 			@Override
 			public void windowClosing(WindowEvent e) {
 				frmPatient.dispose();
-				DoctorView docView = new DoctorView(token);
+				PatientMedicalHistoryView docView = new PatientMedicalHistoryView(token, doctor, patientId);
 				
 			}
 		});
@@ -180,7 +180,7 @@ public class PatientDetailsView {
 			public void mouseClicked(MouseEvent e) {
 				docCtrl.updatePatientInfo(token, patientId, txtEmail.getText(), Long.parseLong(txtPhone.getText()), txtAllergies.getText(), txtCronicDiseases.getText(), txtSubsriptions.getText());
 				frmPatient.dispose();
-				DoctorView docView = new DoctorView(token);
+				PatientMedicalHistoryView docView = new PatientMedicalHistoryView(token, doctor, patientId);
 			}
 		});
 		btnEdit.setBounds(40, 441, 85, 21);
@@ -192,7 +192,7 @@ public class PatientDetailsView {
 			public void mouseClicked(MouseEvent e) {
 				docCtrl.deletePatient(token,patientId); 
 				frmPatient.dispose();
-				DoctorView docView = new DoctorView(token);
+				PatientMedicalHistoryView docView = new PatientMedicalHistoryView(token, doctor, patientId);
 			}
 		});
 		btnDelete.setBounds(139, 441, 85, 21);
