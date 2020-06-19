@@ -28,9 +28,11 @@ public class AuthenticationTest {
 	@Test
 	public void CheckSignUp()
 	{
-		User user = new User("000000000", 0541234567, "test", "test.gmail.com", "password", "Doctor");		
+		User user = new User("000000008", 0541234567, "test", "test.gmail.com", "password", "Doctor");		
 	    Assert.assertTrue(Authentication.signUp(user.getId(), user) == 1);
 	    Assert.assertTrue(Authentication.signUp(user.getId(), user) == -1);
+	    
+	    Authentication.signOut(user.getToken());
 	    
 	}
 	
@@ -41,6 +43,8 @@ public class AuthenticationTest {
 		Authentication.signUp("000000000", user);
 	    Assert.assertTrue(Authentication.signIn("000000000", "testFalse") == -1);
 	    Assert.assertTrue(Authentication.signIn("000000000", "password") != 1);
+	    
+	    Authentication.signOut(user.getToken());
 	    
 
 	    
@@ -72,9 +76,6 @@ public class AuthenticationTest {
 		
 		Authentication.signOut(user1.getToken());
 		Authentication.signOut(user2.getToken());
-		
-		Authentication.signOut(user1.getToken());
-		Authentication.signOut(user2.getToken());
 	}
 	
 	@Test
@@ -93,6 +94,8 @@ public class AuthenticationTest {
 		Doctor doctor = new Doctor("000000000", "000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		Authentication.signUp("000000000", doctor);
 		Assert.assertTrue(Authentication.updateDoctorInfo(doctor.getId(), "Email test", 0541234567));
-		Assert.assertFalse(Authentication.updateDoctorInfo("000000000", "Email test", 0541234567));
+		Assert.assertFalse(Authentication.updateDoctorInfo("000000009", "Email test", 0541234567));
+		
+		Authentication.signOut(doctor.getToken());
 	}
 }

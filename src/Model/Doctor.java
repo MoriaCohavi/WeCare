@@ -277,7 +277,9 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 		return this.getItem(patientId).getSubscriptions();
 	}
 	
+	
 	public boolean updatePatientInfo(String patientId, String email, long phone, String allergies, String chronic_diseases, String subscriptions)
+	/*tested*/
 	{
 		if(this.patients.containsKey(patientId))
 		{

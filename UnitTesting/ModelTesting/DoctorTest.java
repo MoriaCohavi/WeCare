@@ -20,7 +20,7 @@ public class DoctorTest {
 	public void CheckAdd()
 	{
 		Doctor doctor = new Doctor("000000001", "000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
-		Patient patient = new Patient("000000002", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000001");
+		Patient patient = new Patient("000000003", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000001");
 		Assert.assertTrue(doctor.add(patient));
 		Assert.assertFalse(doctor.add(patient));
 		
@@ -173,6 +173,23 @@ public class DoctorTest {
 		Assert.assertTrue(doctor.addLabToPatient("000000002", "Ultrasound"));
 		
 		doctor.remove("000000002");
+	}
+	
+	@Test
+	public void checkUpdateInfo() {
+		
+		Doctor doctor = new Doctor("000000001","000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
+		Patient patient = new Patient("000000002", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000001");
+		
+		doctor.add(patient);
+		doctor.updatePatientInfo("000000002", "Test@test", 23, "allergies", "chronic_diseases", "subscriptions");
+		
+		Assert.assertTrue(doctor.getItem("000000002").getEmail().equals("Test@test") &&
+							doctor.getItem("000000002").getPhone() == 23 &&
+							doctor.getItem("000000002").getAllergies().equals("allergies") &&
+							doctor.getItem("000000002").getChronic_diseases().equals("chronic_diseases") &&
+							doctor.getItem("000000002").getSubscriptions().equals("subscriptions"));
+		
 	}
 
 
