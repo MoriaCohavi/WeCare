@@ -68,7 +68,7 @@ public class doctorController {
 	
 	public MedicalRecord viewMedicalRecord(long token, String patientId, int recordId) {
 		if(Authentication.validateUser(token, typeNeed))
-			return currentModelDoctor.getItem(patientId).getMedicalRecord(recordId);
+			return currentModelDoctor.getItem(patientId).getMedicalRecord(recordId, patientId);
 		return null;
 	}
 	
@@ -123,6 +123,7 @@ public class doctorController {
 		if (tempRecords == null)
 			return false;
 		Patient.setMedicalRecords(tempRecords);
+		Patient.setRecordsCounter(tempRecords.size());
 		return true;
 	}
 	

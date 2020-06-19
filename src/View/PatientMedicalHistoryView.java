@@ -14,6 +14,8 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
+import Controller.authenticationController;
+import Controller.doctorController;
 import Model.Doctor;
 
 import javax.swing.JScrollPane;
@@ -29,6 +31,12 @@ public class PatientMedicalHistoryView {
 
 	private JFrame frmPatientHistory;
 	private JTable tbl_history;
+	
+	private authenticationController authCtrl;
+	private doctorController docCtrl;
+	private Doctor details;
+	
+	private DefaultTableModel newRecordTbl;
 
 //	/**
 //	 * Launch the application.
@@ -57,6 +65,12 @@ public class PatientMedicalHistoryView {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(long token, Doctor doctor, String patientId) {
+		
+		authCtrl = new authenticationController();
+		details = (Doctor)authCtrl.getLoggedinUser(token);
+		docCtrl = new doctorController(details);
+		
+		
 		frmPatientHistory = new JFrame();
 		frmPatientHistory.setTitle("Patient history");
 		frmPatientHistory.getContentPane().setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -108,6 +122,26 @@ public class PatientMedicalHistoryView {
 		frmPatientHistory.getContentPane().add(scrollPane);
 		
 		tbl_history = new JTable();
+		
+		newRecordTbl = new DefaultTableModel();
+		tbl_history .setModel(newRecordTbl);
+		newRecordTbl.addColumn("Date");
+		newRecordTbl.addColumn("Visit Purpose");
+		newRecordTbl.addColumn("Visit Description");
+		
+		for (Integer key : docCtrl.getPatient(token, patientId).getMedicalRecords().keySet())
+		{
+			if (docCtrl.getPatient(token, patientId).getMedicalRecord(key, patientId)!=null) {
+				newRecordTbl.addRow(new Object[] {
+					docCtrl.getPatient(token, patientId).getMedicalRecord(key, patientId).get_Date(),
+					docCtrl.getPatient(token, patientId).getMedicalRecord(key, patientId).get_VisitPurpose(),
+					docCtrl.getPatient(token, patientId).getMedicalRecord(key, patientId).get_VisitDescription()
+					
+				});
+			}
+		}
+		
+		
 		tbl_history.setDebugGraphicsOptions(DebugGraphics.NONE_OPTION);
 		tbl_history.setBorder(null);
 		tbl_history.setFont(new Font("Tahoma", Font.PLAIN, 17));
@@ -117,27 +151,7 @@ public class PatientMedicalHistoryView {
 		tbl_history.setRowMargin(0);
 		tbl_history.setRowHeight(25);
 		tbl_history.setIntercellSpacing(new Dimension(0, 0));
-		tbl_history.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-				{null, null, null},
-			},
-			new String[] {
-				"Record ID.", "Visit Purpose", "Visit Description"
-			}
-		));
+		
 		tbl_history.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 18));
 		tbl_history.getTableHeader().setOpaque(false);
 		tbl_history.getTableHeader().setBackground(new Color(32, 136, 203));
