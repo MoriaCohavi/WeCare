@@ -165,6 +165,16 @@ public class DoctorDetailsView {
 		frmDoctorDetails.getContentPane().add(btnEdit);
 		
 		JButton btnDelete = new JButton("Delete");
+		btnDelete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				manCtrl.deleteDoctor(token, txtID.getText());
+				manCtrl.serialize();
+				// modify also in users hashmap and serialize;
+				frmDoctorDetails.dispose();
+				ManagerView newManagerView = new ManagerView(token);
+			}
+		});
 		btnDelete.setBounds(140, 390, 85, 21);
 		frmDoctorDetails.getContentPane().add(btnDelete);
 		frmDoctorDetails.setVisible(true);
