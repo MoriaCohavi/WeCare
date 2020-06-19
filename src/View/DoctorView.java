@@ -45,8 +45,6 @@ public class DoctorView {
 	private Doctor details;
 	private HashMap <String, Patient> patientsList;
 	private JLabel lblID;
-	private JButton btnNewMedical;
-	private JButton btnRecordsHistory;
 
 //	/**
 //	 * Launch the application.
@@ -155,7 +153,8 @@ public class DoctorView {
 					Patient patient = docCtrl.getPatient(doctorToken, searchStr);
 					if (patient != null)
 					{
-						PatientDetailsView patientDetails = new PatientDetailsView(doctorToken, details, searchStr);
+						//PatientDetailsView patientDetails = new PatientDetailsView(doctorToken, details, searchStr);
+						PatientMedicalHistoryView patientDetails = new PatientMedicalHistoryView(doctorToken, details, searchStr);
 						frmDoctor.dispose();
 					}
 					else
@@ -228,51 +227,5 @@ public class DoctorView {
 		lblID.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		lblID.setBounds(693, 172, 119, 20);
 		frmDoctor.getContentPane().add(lblID);
-		
-		btnNewMedical = new JButton("Add Medical Record");
-		btnNewMedical.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				String searchStr = txtSearch.getText();
-				if(searchStr != null)
-				{
-					Patient patient = docCtrl.getPatient(doctorToken, searchStr);
-					if (patient != null)
-					{
-						NewMedicalRecordView newMedicalRecord = new NewMedicalRecordView(doctorToken, searchStr, details);
-						frmDoctor.dispose();
-					}
-					else
-					{
-						txtSearch.setText("Patient not found !");
-					}
-				}
-			}
-		});
-		btnNewMedical.setBounds(659, 477, 153, 29);
-		frmDoctor.getContentPane().add(btnNewMedical);
-		
-		btnRecordsHistory = new JButton("View medical history");
-		btnRecordsHistory.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				String searchStr = txtSearch.getText();
-				if(searchStr != null)
-				{
-					Patient patient = docCtrl.getPatient(doctorToken, searchStr);
-					if (patient != null)
-					{
-						MedicalRecordHistoryView newMedicalRecord = new MedicalRecordHistoryView(doctorToken, searchStr);
-						frmDoctor.dispose();
-					}
-					else
-					{
-						txtSearch.setText("Patient not found !");
-					}
-				}
-			}
-		});
-		btnRecordsHistory.setBounds(821, 477, 153, 29);
-		frmDoctor.getContentPane().add(btnRecordsHistory);
 	}
 }
