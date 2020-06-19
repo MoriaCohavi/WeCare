@@ -89,7 +89,7 @@ public class doctorController {
 				Patient currPatient = currentModelDoctor.getItem(patientId);
 				int record = currPatient.getRecordCounter() + 1;
 			
-				MedicalRecord newRecord = new MedicalRecord(currPatient.getId(), currentModelDoctor.getDoctorID(), days, record, purpose,description, summary, sub,diagnose, sT, eT, w, h, hr, t, sysBP, diaBP) ;
+				MedicalRecord newRecord = new MedicalRecord(currPatient.getId(), currentModelDoctor.getDoctorID(), days, record, purpose,description, summary, sub,diagnose, w, h, hr, t, sysBP, diaBP) ;
 			
 				currPatient.addMedicalRecord(newRecord);
 				return true;

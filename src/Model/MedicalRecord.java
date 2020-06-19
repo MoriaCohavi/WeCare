@@ -9,8 +9,7 @@ import java.time.*;
 
 public class MedicalRecord implements java.io.Serializable {
 	
-	private final LocalDate currentDate;
-	private final LocalTime sTime, eTime; // when opening page needs to save time & while saving needs to send time 
+	private final LocalDate currentDate; 
 	private final String patientId, doctorId, visitPurpose, visitDescription, diagnoseDiscription, visitSummary;
 	private final int recordId;
 	private final MedicalIndices pateintIndices;
@@ -18,14 +17,12 @@ public class MedicalRecord implements java.io.Serializable {
 	private String subscriptions;
 	
 	
-	public MedicalRecord(String patientId, String doctor,int numDays, int record, String purpose, String description, String summary, String sub,String diagnose, LocalTime sT, 
-			LocalTime eT, int w, int h, int hr, int t, int sysBP, int diaBP ) {
+	public MedicalRecord(String patientId, String doctor,int numDays, int record, String purpose, String description, String summary, String sub,String diagnose,  
+			 int w, int h, int hr, int t, int sysBP, int diaBP ) {
 		this.currentDate = LocalDate.now();
 		this.doctorId = doctor;
 		this.patientId = patientId;
 		this.recordId = record;
-		this.sTime = sT;
-		this.eTime = eT;
 		this.pateintIndices = new MedicalIndices (w,h,hr,t,sysBP, diaBP);
 		this.visitDescription = description;
 		this.visitPurpose= purpose;
@@ -50,14 +47,7 @@ public class MedicalRecord implements java.io.Serializable {
 	public LocalDate get_Date() {
 		return currentDate;
 	}
-	
-	public LocalTime get_STime() {
-		return sTime;
-	}
-	
-	public LocalTime get_ETime() {
-		return eTime;
-	}
+
 	
 	public int get_RecordId() {
 		return recordId;

@@ -190,7 +190,6 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 				this.stats.put(LocalDate.now(), new StatisitcalData());
 			
 			StatisitcalData editStats = this.stats.get(LocalDate.now());
-			double time = ChronoUnit.MINUTES.between(newRecord.get_STime(), newRecord.get_ETime())	;
 			editStats.addtotalDailyPatients(1);
 			
 			if (newRecord.get_subscriptions() != null) { 

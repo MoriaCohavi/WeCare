@@ -194,7 +194,7 @@ public class NewMedicalRecordView {
 				{
 					try
 					{
-						docCtrl.openNewMedicalRecord(doctorToken, patientID, Integer.parseInt(txtf_illnesDays.getText()), String.valueOf(combo_purpose.getSelectedItem()), txtf_visistDesc.getText(), txtf_visitSummary.getText(), txtf_subscriptions.getText(), txtf_diagnostic.getText(), LocalTime.now(), LocalTime.now(), medIndices.getWeight(), medIndices.getHeight(), medIndices.getHeartRate(), medIndices.getTemperature(), medIndices.getSystolicBP(), medIndices.getDiastolicBP());
+						docCtrl.openNewMedicalRecord(doctorToken, patientID, Integer.parseInt(txtf_illnesDays.getText()), String.valueOf(combo_purpose.getSelectedItem()), txtf_visistDesc.getText(), txtf_visitSummary.getText(), txtf_subscriptions.getText(), txtf_diagnostic.getText(), medIndices.getWeight(), medIndices.getHeight(), medIndices.getHeartRate(), medIndices.getTemperature(), medIndices.getSystolicBP(), medIndices.getDiastolicBP());
 						docCtrl.serializeRecords();
 						frmMedicalRecord.dispose();
 						PatientMedicalHistoryView docView = new PatientMedicalHistoryView(doctorToken, doctor, patientID);
