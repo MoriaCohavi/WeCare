@@ -14,7 +14,7 @@ import Model.MedicalIndices;
 
 public class AddMedicalIndices {
 
-	private MedicalIndices medIndices;
+	private static MedicalIndices medIndices = null;
 	private JFrame frmAddMedicalIndices;
 	private JTextField txtf_height;
 	private JTextField txtf_weight;
@@ -30,9 +30,9 @@ public class AddMedicalIndices {
 		initialize();
 	}
 	
-	public MedicalIndices getLastMedicalIndices()
+	public static MedicalIndices getLastMedicalIndices()
 	{
-		return this.medIndices;
+		return medIndices;
 	}
 	
 	/**

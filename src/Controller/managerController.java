@@ -63,14 +63,6 @@ public class managerController {
 		return false;
 	}
 	
-	
-//	public boolean registerManager() {
-//		
-//		if(authenticationController.register(this.clinicManager.getID(), this.clinicManager) > 0)
-//			return true;
-//		return false;
-//	}
-	
 	public boolean deleteDoctor(long managerToken, String docID) {
 		if(Authentication.validateUser(managerToken, typeNeed))
 		{

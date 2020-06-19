@@ -147,7 +147,7 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		double tSub =0, tPatient = 0, tLabs = 0, tRecords = 0;
 		StatisitcalData current = new StatisitcalData();
 		for (String doctorKey : doctors.keySet()) {
-			if (this.getId() == doctors.get(doctorKey).getManagerID()) {
+			if (this.getId().equals(doctors.get(doctorKey).getManagerID())) {
 				current = doctors.get(doctorKey).getAvgRecords();
 				tSub += current.getTotalDailySubs();
 				tPatient += current.getTotalDailyPatients();

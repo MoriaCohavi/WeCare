@@ -14,6 +14,7 @@ import javax.swing.DropMode;
 import javax.swing.SwingConstants;
 
 import Controller.doctorController;
+import Controller.managerController;
 import Model.*;
 
 import javax.swing.JButton;
@@ -33,6 +34,7 @@ public class NewMedicalRecordView {
 	private AddMedicalIndices addIndicesView;
 	private MedicalIndices medIndices;
 	private doctorController docCtrl;
+	private managerController manCtrl;
 	private JFrame frmMedicalRecord;
 	private JTextField txtf_visitSummary;
 	private JTextField txtf_illnesDays;
@@ -53,6 +55,7 @@ public class NewMedicalRecordView {
 	private void initialize(long doctorToken, String patientID, Doctor doctor) {
 		medIndices = null;
 		docCtrl = new doctorController(doctor);
+		manCtrl = new managerController();
 		frmMedicalRecord = new JFrame();
 		frmMedicalRecord.setTitle("Medical record");
 		frmMedicalRecord.setBounds(100, 100, 1058, 571);
@@ -68,9 +71,9 @@ public class NewMedicalRecordView {
 			}
 		});
 		
-		JLabel lbl_doctorId = new JLabel("Patient ID: ");
+		JLabel lbl_doctorId = new JLabel("Patient ID: " + patientID);
 		lbl_doctorId.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lbl_doctorId.setBounds(31, 16, 118, 20);
+		lbl_doctorId.setBounds(31, 49, 219, 20);
 		frmMedicalRecord.getContentPane().add(lbl_doctorId);
 		
 		JLabel label_5 = new JLabel("Visit Purpose");
@@ -196,6 +199,7 @@ public class NewMedicalRecordView {
 					{
 						docCtrl.openNewMedicalRecord(doctorToken, patientID, Integer.parseInt(txtf_illnesDays.getText()), String.valueOf(combo_purpose.getSelectedItem()), txtf_visistDesc.getText(), txtf_visitSummary.getText(), txtf_subscriptions.getText(), txtf_diagnostic.getText(), medIndices.getWeight(), medIndices.getHeight(), medIndices.getHeartRate(), medIndices.getTemperature(), medIndices.getSystolicBP(), medIndices.getDiastolicBP());
 						docCtrl.serializeRecords();
+						manCtrl.serialize();
 						frmMedicalRecord.dispose();
 						PatientMedicalHistoryView docView = new PatientMedicalHistoryView(doctorToken, doctor, patientID);
 					}

@@ -47,11 +47,6 @@ public class doctorController {
 		return false;	
 	}
 	
-	/*public String viewPatientInfo (String patientId) {
-		
-		return currentModelDoctor.getPatient(patientId).getPatientInfo();
-	}*/
-	
 	public Patient getPatient(long token, String patientId) {
 		if(Authentication.validateUser(token, typeNeed))
 			return currentModelDoctor.getItem(patientId);
@@ -88,10 +83,11 @@ public class doctorController {
 				Patient currPatient = currentModelDoctor.getItem(patientId);
 				int record = currPatient.getRecordCounter() + 1;
 			
-				MedicalRecord newRecord = new MedicalRecord(currPatient.getId(), currentModelDoctor.getDoctorID(), days, record, purpose,description, summary, sub,diagnose, w, h, hr, t, sysBP, diaBP) ;
-			
-				currPatient.addMedicalRecord(newRecord);
-				return true;
+				MedicalRecord newRecord = new MedicalRecord(currPatient.getId(), currentModelDoctor.getDoctorID(), days, record, purpose,description, summary, sub,diagnose, sT, eT, w, h, hr, t, sysBP, diaBP) ;
+				if (currentModelDoctor.createMedicalRecord(patientId, newRecord))
+				{
+					return true;
+				}
 			}
 		}
 		
@@ -229,8 +225,8 @@ public class doctorController {
 		return false;
 	}
 	
-	public boolean createMedicalRecord(String visitPurpose, String visitDesc, String visitDiagnostic, String visitSummary, String visitSubscription)
-	{
-		return true;
-	}
+//	public boolean createMedicalRecord(String visitPurpose, String visitDesc, String visitDiagnostic, String visitSummary, String visitSubscription)
+//	{
+//		return true;
+//	}
 }
