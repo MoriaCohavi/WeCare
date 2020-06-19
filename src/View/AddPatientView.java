@@ -18,6 +18,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class AddPatientView {
 
@@ -139,6 +141,14 @@ public class AddPatientView {
 		panel.add(lblGender);
 		
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frmPatientDetails.dispose();
+				DoctorView docView = new DoctorView(doctorToken);
+			}
+		});
+
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btnCancel.setBounds(866, 455, 115, 29);
 		panel.add(btnCancel);
