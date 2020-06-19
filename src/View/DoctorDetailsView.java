@@ -20,6 +20,7 @@ public class DoctorDetailsView {
 
 	private doctorController docCtrl;
 	private managerController manCtrl;
+	private authenticationController authCtrl;
 	private JFrame frmDoctorDetails;
 	private JTextField txtName;
 	private JTextField txtID;
@@ -59,6 +60,7 @@ public class DoctorDetailsView {
 	private void initialize(long token, Doctor doctor) {
 		docCtrl = new doctorController(doctor);
 		manCtrl = new managerController();
+		authCtrl = new authenticationController();
 		frmDoctorDetails = new JFrame();
 		frmDoctorDetails.setTitle("Doctor Details");
 		frmDoctorDetails.setBounds(100, 100, 570, 494);
@@ -165,6 +167,18 @@ public class DoctorDetailsView {
 		frmDoctorDetails.getContentPane().add(btnEdit);
 		
 		JButton btnDelete = new JButton("Delete");
+		btnDelete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				manCtrl.deleteDoctor(token, txtID.getText());
+				authCtrl.deleteUser(token, txtID.getText());
+				manCtrl.serialize();
+				authCtrl.serialize();
+				// modify also in users hashmap and serialize;
+				frmDoctorDetails.dispose();
+				ManagerView newManagerView = new ManagerView(token);
+			}
+		});
 		btnDelete.setBounds(140, 390, 85, 21);
 		frmDoctorDetails.getContentPane().add(btnDelete);
 		frmDoctorDetails.setVisible(true);

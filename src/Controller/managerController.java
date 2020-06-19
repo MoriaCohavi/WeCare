@@ -53,9 +53,9 @@ public class managerController {
 		if(Authentication.validateUser(managerToken, typeNeed))
 		{
 			Doctor newDoctor = new Doctor(id, phone, name, email, special, password, user_type);
-			if(clinicManager.add(newDoctor))
+			if (authenticationController.register(newDoctor.getId(), newDoctor) != -1)
 			{
-				authenticationController.register(newDoctor.getId(), newDoctor);
+				clinicManager.add(newDoctor);
 				return true;
 			
 			}

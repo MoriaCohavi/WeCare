@@ -111,7 +111,7 @@ public class DoctorView {
 		
 		for(String Key : docCtrl.getPatientList(doctorToken).keySet())
 			
-			if (docCtrl.getPatientList(doctorToken).get(Key).getDoctorId() == docCtrl.getDoctorID()) {
+			if (docCtrl.getPatientList(doctorToken).get(Key).getDoctorId().equals(docCtrl.getDoctorID())) {
 			
 				newPatientsTbl.addRow(new Object [] {
 					serialNum++,

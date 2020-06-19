@@ -11,7 +11,7 @@ public class authenticationController{
 	public authenticationController() {
 		authentication = new Authentication();
 	}
-
+	
     private static boolean isNumeric(String strNum) {
         if (strNum == null) {
             return false;
@@ -78,6 +78,16 @@ public class authenticationController{
 		HashMap<String,User> tempUsers = authentication.getUsers();
 		serHandlerController.serialize(tempUsers, userSerPath);
 		
+	}
+	
+	public boolean deleteUser(long managerToken, String userId)
+	{
+		if(Authentication.validateUser(managerToken, authentication.getType(managerToken)))
+		{
+			if(authentication.remove(userId))
+				return true;
+		}
+		return false;
 	}
 	
 	public boolean deserialize()

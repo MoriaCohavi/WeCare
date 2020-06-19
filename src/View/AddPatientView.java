@@ -219,7 +219,7 @@ public class AddPatientView {
 		btn_group.add(radioFemale);
 		
 		JLabel lbl_warning = new JLabel("");
-		lbl_warning.setBounds(732, 398, 282, 15);
+		lbl_warning.setBounds(629, 430, 368, 15);
 		panel.add(lbl_warning);
 		
 		JLabel lblEmail = new JLabel("Email");
@@ -251,18 +251,18 @@ public class AddPatientView {
 						Integer.parseInt(txtAge.getText());
 						Integer.parseInt(txtWeight.getText());
 						Integer.parseInt(txtHeight.getText());
+						if (!(docCtrl.addNewPatient(doctorToken, txtID.getText(), Integer.parseInt(txtAge.getText()), Long.parseLong(txtPhone.getText()), txtName.getText(), txtEmail.getText(), Integer.parseInt(txtWeight.getText()), 
+								Integer.parseInt(txtHeight.getText()), gender, txtAllergies.getText(), txtSubscriptions.getText(), txtChronicDiseases.getText())))
+							lbl_warning.setText("User exists");
+						else
+							docCtrl.serializePatients();
+							frmPatientDetails.dispose();
+							DoctorView docView = new DoctorView(doctorToken);
 					}
 					catch (Exception e)
 					{
 						lbl_warning.setText("Age, phone, weight and height should include digits only !");
 					}
-					if (!(docCtrl.addNewPatient(doctorToken, txtID.getText(), Integer.parseInt(txtAge.getText()), Long.parseLong(txtPhone.getText()), txtName.getText(), txtEmail.getText(), Integer.parseInt(txtWeight.getText()), 
-							Integer.parseInt(txtHeight.getText()), gender, txtAllergies.getText(), txtSubscriptions.getText(), txtChronicDiseases.getText())))
-						lbl_warning.setText("User exists");
-					else
-						docCtrl.serializePatients();
-						frmPatientDetails.dispose();
-						DoctorView docView = new DoctorView(doctorToken);
 				}
 			}
 		});

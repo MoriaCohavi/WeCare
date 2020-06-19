@@ -145,6 +145,7 @@ public class AddDoctorView {
 					lbl_warning.setText("Please! Put valid ID of 9 digits, name and password");
 				else
 				{
+					
 					if (!(managerController.addNewDoctor(txtf_id.getText(), Long.parseLong(txtf_phone.getText()), txtf_name.getText(), txtf_email.getText(), txtf_specialization.getText(), txtf_passwd.getText(), "Doctor", token)))
 						lbl_warning.setText("User exists");
 					else {
