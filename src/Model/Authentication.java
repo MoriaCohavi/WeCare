@@ -143,6 +143,35 @@ public class Authentication implements java.io.Serializable{
 		Authentication.users = users;
 	}
 	
+	public boolean search(String userId) {
+		
+		if(users.containsKey(userId)) 
+			return true;
+		return false;
+	}
+	
+	public User getItem(String userId) 
+	/*tested*/
+	{
+		
+		if (search(userId))
+			return users.get(userId);
+			
+		else 
+			return null;
+	}
+	
+	public boolean remove(String userId) 
+	/*tested*/
+	{
+			
+		if (search(userId)) {
+			users.remove(userId);
+			return true;
+		}
+		
+		return false;		
+	}
 	public static boolean updateDoctorInfo(String docId,  String email, long phone)
 	/*tested*/	
 	{
