@@ -143,18 +143,20 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		int doctorsCount;
 		if (doctors.size() == 0)
 			doctorsCount =1;
-		else doctorsCount =  doctors.size();
+		else doctorsCount =  doctors.size();s
 		double tTime = 0, tSub =0, tPatient = 0, tLabs = 0, tRecords = 0;
 		StatisitcalData current = new StatisitcalData();
 		for (String Key : this.doctors.keySet()) {
-			current = doctors.get(Key).getAvgRecords();
-			tTime += current.getTotalVisitTime();
-			tSub += current.getTotalDailySubs();
-			tPatient += current.getTotalDailyPatients();
-			tLabs += current.getTotalDailylabs();
-			HashMap <String, Patient> temp = doctors.get(Key).getPatients();
-				for (String PatientKey : temp.keySet())
-					tRecords += temp.get(PatientKey).getRecordCounter();
+			if (this.getId() == this.doctors.get(Key).getManagerID()) {
+				current = doctors.get(Key).getAvgRecords();
+				tTime += current.getTotalVisitTime();
+				tSub += current.getTotalDailySubs();
+				tPatient += current.getTotalDailyPatients();
+				tLabs += current.getTotalDailylabs();
+				HashMap <String, Patient> temp = doctors.get(Key).getPatients();
+					for (String PatientKey : temp.keySet())
+						tRecords += temp.get(PatientKey).getRecordCounter();
+			}
 		}
 		
 		this.stats.setTotalDailylabs(tLabs/doctorsCount);

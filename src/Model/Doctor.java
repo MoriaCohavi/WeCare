@@ -15,15 +15,16 @@ import java.util.*;
 public class Doctor extends User implements java.io.Serializable, CommandInterface {
 	
 	private LinkedHashMap <LocalDate, StatisitcalData> stats = new LinkedHashMap<LocalDate, StatisitcalData>();
-	private String specialization;
+	private String specialization, managerID;
 	private static HashMap <String, Patient> patients = new HashMap <String, Patient>();
 	
 	//constructor
-	public Doctor(String id, long phone, String name, String email, String special,String password,String user_type) {
+	public Doctor(String id, String managerId, long phone, String name, String email, String special,String password,String user_type) {
 		
 		super(id, phone, name, email, password, user_type);
 		this.specialization = special;
 		this.stats = new LinkedHashMap<LocalDate, StatisitcalData>();
+		this.managerID =managerId;
 	}
 	
 	//setters and getters
@@ -311,6 +312,14 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 			return true;
 		}
 		else return false;
+	}
+
+	public String getManagerID() {
+		return managerID;
+	}
+
+	public void setManagerID(String managerID) {
+		this.managerID = managerID;
 	}
 }
 
