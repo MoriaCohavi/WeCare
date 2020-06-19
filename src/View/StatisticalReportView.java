@@ -108,21 +108,21 @@ public class StatisticalReportView {
 		lbl_subscribe.setText("Subscription day average: ");
 		
 		txtfPatients = new JTextField(String.valueOf(managerCtrl.getDailyStats(managerToken).getTotalDailyPatients()));
-		txtfPatients.setEnabled(false);
+		txtfPatients.setEnabled(true);
 		txtfPatients.setEditable(false);
 		txtfPatients.setBounds(329, 48, 96, 19);
 		panel.add(txtfPatients);
 		txtfPatients.setColumns(10);
 		
 		txtfLabs = new JTextField(String.valueOf(managerCtrl.getDailyStats(managerToken).getTotalDailylabs()));
-		txtfLabs.setEnabled(false);
+		txtfLabs.setEnabled(true);
 		txtfLabs.setEditable(false);
 		txtfLabs.setColumns(10);
 		txtfLabs.setBounds(329, 94, 96, 19);
 		panel.add(txtfLabs);
 		
 		txtfSubs = new JTextField(String.valueOf(managerCtrl.getDailyStats(managerToken).getTotalDailySubs()));
-		txtfSubs.setEnabled(false);
+		txtfSubs.setEnabled(true);
 		txtfSubs.setEditable(false);
 		txtfSubs.setColumns(10);
 		txtfSubs.setBounds(329, 136, 96, 19);
@@ -130,21 +130,21 @@ public class StatisticalReportView {
 		
 		
 		textfPatientsMonth = new JTextField(String.valueOf(managerCtrl.getMonthlyStats(managerToken).getTotalDailyPatients()));
-		textfPatientsMonth.setEnabled(false);
+		textfPatientsMonth.setEnabled(true);
 		textfPatientsMonth.setEditable(false);
 		textfPatientsMonth.setColumns(10);
 		textfPatientsMonth.setBounds(329, 176, 96, 19);
 		panel.add(textfPatientsMonth);
 		
 		txtfLabMonth = new JTextField(String.valueOf(managerCtrl.getMonthlyStats(managerToken).getTotalDailylabs()));
-		txtfLabMonth.setEnabled(false);
+		txtfLabMonth.setEnabled(true);
 		txtfLabMonth.setEditable(false);
 		txtfLabMonth.setColumns(10);
 		txtfLabMonth.setBounds(329, 222, 96, 19);
 		panel.add(txtfLabMonth);
 		
 		txtfSubsMonth = new JTextField(String.valueOf(managerCtrl.getMonthlyStats(managerToken).getTotalDailySubs()));
-		txtfSubsMonth.setEnabled(false);
+		txtfSubsMonth.setEnabled(true);
 		txtfSubsMonth.setEditable(false);
 		txtfSubsMonth.setColumns(10);
 		txtfSubsMonth.setBounds(329, 264, 96, 19);
