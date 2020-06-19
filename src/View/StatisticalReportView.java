@@ -5,7 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import Controller.authenticationController;
 import Controller.managerController;
+import Model.Manager;
 
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
@@ -24,23 +26,36 @@ public class StatisticalReportView {
 	private JTextField txtfPatients;
 	private JTextField txtfLabs;
 	private JTextField txtfSubs;
+	private JTextField textfPatientsMonth;
+	private JTextField txtfLabMonth;
+	private JTextField txtfSubsMonth;
+	private managerController managerCtrl;
+	private authenticationController authCtrl;
+	private Manager managerDetails;
+	
 	
 	/**
 	 * Create the application.
 	 */
 	public StatisticalReportView(long managerToken) {
 		initialize(managerToken);
+		
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(long managerToken) {
-		mgmtController = new  managerController();
-		mgmtController.getManager().calcStats();
+		managerCtrl = new managerController();
+		authCtrl = new authenticationController();
+		managerDetails = (Manager)authCtrl.getLoggedinUser(managerToken);
+		managerCtrl.setClinicManager(managerDetails);
+		
+		managerCtrl.getManager().calcDailyStats();
+		managerCtrl.getManager().calcMonthlyStats();
 		frmStatisticalDetails = new JFrame();
 		frmStatisticalDetails.setTitle("Statistical details");
-		frmStatisticalDetails.setBounds(100, 100, 472, 300);
+		frmStatisticalDetails.setBounds(100, 100, 618, 399);
 		
 		
 		frmStatisticalDetails.addWindowListener(new WindowAdapter() {
@@ -58,47 +73,82 @@ public class StatisticalReportView {
 		panel.setLayout(null);
 		
 		JLabel lbl_daily = new JLabel("Daily patients:");
-		lbl_daily.setBounds(35, 77, 176, 13);
+		lbl_daily.setBounds(121, 51, 176, 13);
 		panel.add(lbl_daily);
 		
 		JLabel lbl_lblRequests = new JLabel("Lab requests daily average:");
-		lbl_lblRequests.setBounds(35, 123, 219, 13);
+		lbl_lblRequests.setBounds(121, 97, 219, 13);
 		panel.add(lbl_lblRequests);
 		
 		JLabel lbl_subscribe = new JLabel("Subscription day average:");
-		lbl_subscribe.setBounds(35, 165, 198, 13);
+		lbl_subscribe.setBounds(121, 139, 198, 13);
 		panel.add(lbl_subscribe);
 		
+		JLabel lbl_monthly_patients = new JLabel("Monthly patients:");
+		lbl_monthly_patients.setBounds(121, 179, 176, 13);
+		panel.add(lbl_monthly_patients);
+		
+		JLabel lbl_monthly_Requests = new JLabel("Lab requests monthly average: ");
+		lbl_monthly_Requests.setBounds(121, 225, 219, 13);
+		panel.add(lbl_monthly_Requests);
+		
+		JLabel lbl_monthly_subscribe = new JLabel("Subscription monthly average: ");
+		lbl_monthly_subscribe.setBounds(121, 267, 198, 13);
+		panel.add(lbl_monthly_subscribe);
+		
+		
 		JButton btn_export = new JButton("Export to report");
-		btn_export.setBounds(158, 205, 146, 21);
+		btn_export.setBounds(446, 328, 146, 21);
 		panel.add(btn_export);
 		frmStatisticalDetails.setVisible(true);
 		
 		/* Fill the data */
-		mgmtController = new managerController();
+		
 		lbl_lblRequests.setText("Lab requests daily average: ");
 		lbl_subscribe.setText("Subscription day average: ");
 		
-		txtfPatients = new JTextField(String.valueOf(mgmtController.getStats(managerToken).getTotalDailyPatients()));
+		txtfPatients = new JTextField(String.valueOf(managerCtrl.getDailyStats(managerToken).getTotalDailyPatients()));
 		txtfPatients.setEnabled(false);
 		txtfPatients.setEditable(false);
-		txtfPatients.setBounds(243, 74, 96, 19);
+		txtfPatients.setBounds(329, 48, 96, 19);
 		panel.add(txtfPatients);
 		txtfPatients.setColumns(10);
 		
-		txtfLabs = new JTextField(String.valueOf(mgmtController.getStats(managerToken).getTotalDailylabs()));
+		txtfLabs = new JTextField(String.valueOf(managerCtrl.getDailyStats(managerToken).getTotalDailylabs()));
 		txtfLabs.setEnabled(false);
 		txtfLabs.setEditable(false);
 		txtfLabs.setColumns(10);
-		txtfLabs.setBounds(243, 120, 96, 19);
+		txtfLabs.setBounds(329, 94, 96, 19);
 		panel.add(txtfLabs);
 		
-		txtfSubs = new JTextField(String.valueOf( mgmtController.getStats(managerToken).getTotalDailySubs()));
+		txtfSubs = new JTextField(String.valueOf(managerCtrl.getDailyStats(managerToken).getTotalDailySubs()));
 		txtfSubs.setEnabled(false);
 		txtfSubs.setEditable(false);
 		txtfSubs.setColumns(10);
-		txtfSubs.setBounds(243, 162, 96, 19);
+		txtfSubs.setBounds(329, 136, 96, 19);
 		panel.add(txtfSubs);
+		
+		
+		textfPatientsMonth = new JTextField(String.valueOf(managerCtrl.getMonthlyStats(managerToken).getTotalDailyPatients()));
+		textfPatientsMonth.setEnabled(false);
+		textfPatientsMonth.setEditable(false);
+		textfPatientsMonth.setColumns(10);
+		textfPatientsMonth.setBounds(329, 176, 96, 19);
+		panel.add(textfPatientsMonth);
+		
+		txtfLabMonth = new JTextField(String.valueOf(managerCtrl.getMonthlyStats(managerToken).getTotalDailylabs()));
+		txtfLabMonth.setEnabled(false);
+		txtfLabMonth.setEditable(false);
+		txtfLabMonth.setColumns(10);
+		txtfLabMonth.setBounds(329, 222, 96, 19);
+		panel.add(txtfLabMonth);
+		
+		txtfSubsMonth = new JTextField(String.valueOf(managerCtrl.getMonthlyStats(managerToken).getTotalDailySubs()));
+		txtfSubsMonth.setEnabled(false);
+		txtfSubsMonth.setEditable(false);
+		txtfSubsMonth.setColumns(10);
+		txtfSubsMonth.setBounds(329, 264, 96, 19);
+		panel.add(txtfSubsMonth);
 		frmStatisticalDetails.setVisible(true);		
 	}
 }

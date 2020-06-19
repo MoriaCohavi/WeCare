@@ -13,7 +13,7 @@ public class Lab implements java.io.Serializable {
 	private boolean attentionRequired = false;
 	private final String patientId;
 	
-	public Lab (String type, String result, boolean attentionRequired, String patId) {
+	public Lab(String type, String result, boolean attentionRequired, String patId) {
 		this.labType = type;
 		this.result = result;
 		this.attentionRequired = false;

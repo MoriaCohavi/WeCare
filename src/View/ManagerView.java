@@ -60,6 +60,7 @@ public class ManagerView {
 		managerCtrl = new managerController();
 		authCtrl = new authenticationController();
 		managerDetails = (Manager)authCtrl.getLoggedinUser(managerToken);
+		managerCtrl.setClinicManager(managerDetails);
 		
 		frmManager = new JFrame();
 		frmManager.setTitle("Manager");
@@ -184,25 +185,25 @@ public class ManagerView {
 		frmManager.getContentPane().add(lblEmail);
 		
 		JTextPane txtName = new JTextPane();
-		txtName.setText(managerDetails.getName());
+		txtName.setText(managerCtrl.getManager().getName());
 		txtName.setEnabled(false);
 		txtName.setBounds(821, 133, 146, 26);
 		frmManager.getContentPane().add(txtName);
 		
 		JTextPane txtID = new JTextPane();
-		txtID.setText(managerDetails.getID());
+		txtID.setText(managerCtrl.getManager().getID());
 		txtID.setEnabled(false);
 		txtID.setBounds(821, 170, 146, 26);
 		frmManager.getContentPane().add(txtID);
 		
 		JTextPane txtPhone = new JTextPane();
-		txtPhone.setText(String.valueOf(managerDetails.getPhone()));;
+		txtPhone.setText(String.valueOf(managerCtrl.getManager().getPhone()));;
 		txtPhone.setEnabled(false);
 		txtPhone.setBounds(821, 206, 146, 26);
 		frmManager.getContentPane().add(txtPhone);
 		
 		JTextPane txtEmail = new JTextPane();
-		txtEmail.setText(managerDetails.getEmail());
+		txtEmail.setText(managerCtrl.getManager().getEmail());
 		txtEmail.setEnabled(false);
 		txtEmail.setBounds(821, 239, 146, 26);
 

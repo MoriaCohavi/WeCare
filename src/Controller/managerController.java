@@ -10,7 +10,8 @@ import Model.*;
 public class managerController {
 	public static String serPathDoctors = "src\\Model\\files\\doctors.ser";
 	public static String serPathStatsFlag = "src\\Model\\files\\statsFlags.ser";
-	public static String serPathStats = "src\\Model\\files\\stats.ser";
+	public static String serPathMonthlyStats = "src\\Model\\files\\monthlystats.ser";
+	public static String serPathDaillyStats = "src\\Model\\files\\dailystats.ser";
 	private static Manager clinicManager;
 	private final String typeNeed = "Manager";
 	
@@ -18,6 +19,7 @@ public class managerController {
 		clinicManager = MVCDriver.defaultManager;
 		deserialize();
 	}
+	
 	
 	public Manager getDetails(long managerToken) {
 		
@@ -36,12 +38,7 @@ public class managerController {
 		
 		clinicManager = clinicM;
 	}
-	
-	public void viewManagerInfo() { // implement when creating view in UI
 		
-	
-	}
-	
 	public Doctor getDoctor(long managerToken, String doctorId) {
 		
 		if(Authentication.validateUser(managerToken, typeNeed))
@@ -77,7 +74,8 @@ public class managerController {
 			if (clinicManager.getStatsFlag() == null || clinicManager.getStatsFlag().isBefore(LocalDateTime.now().minusHours(6))) 
 			{
 			clinicManager.setStatsFlag(LocalDateTime.now());
-			clinicManager.calcStats();
+			clinicManager.calcDailyStats();
+			clinicManager.calcMonthlyStats();
 		}		
 			}		
 		}
@@ -90,15 +88,15 @@ public class managerController {
 	
 	public HashMap<String, Doctor> getDoctorList(long managerToken) {
 		if(Authentication.validateUser(managerToken, typeNeed)) {
-			return clinicManager.getDoctors();
+			return Manager.getDoctors();
 		}
 		return null;
 	}
 	
 	
-	public StatisitcalData getStats(long managerToken) {
+	public StatisitcalData getDailyStats(long managerToken) {
 		if(Authentication.validateUser(managerToken, typeNeed))
-			return clinicManager.getStats();
+			return clinicManager.getStatsDataDaily(LocalDate.now());
 		
 		return null;
 	}
@@ -113,19 +111,23 @@ public class managerController {
 	public void serialize() {
 		HashMap<String, Doctor> tempDoctors = Manager.getDoctors();
 		LocalDateTime tempStatsFlags = clinicManager.getStatsFlag();
-		StatisitcalData tempStats = clinicManager.getStats();
+		StatisitcalData tempMonthlyStats = clinicManager.getMonthlyData();
+		HashMap <LocalDate, StatisitcalData> tempDailyStats = clinicManager.getStatsDataDaily();
 		serHandlerController.serialize(tempDoctors, serPathDoctors);
 		serHandlerController.serialize(tempStatsFlags, serPathStatsFlag);
-		serHandlerController.serialize(tempStats, serPathStats);
+		serHandlerController.serialize(tempMonthlyStats, serPathMonthlyStats);
+		serHandlerController.serialize(tempDailyStats, serPathDaillyStats);
 	}
 	
 	public boolean deserialize() {
 		HashMap<String, Doctor> tempDoctors = (HashMap<String, Doctor>)serHandlerController.deserialize(serPathDoctors);
 		LocalDateTime tempStatsFlags = (LocalDateTime)serHandlerController.deserialize(serPathStatsFlag);
-		StatisitcalData tempStats = (StatisitcalData)serHandlerController.deserialize(serPathStats);
-		if (tempDoctors == null || tempStats == null)
+		StatisitcalData tempMonthlyStats = (StatisitcalData)serHandlerController.deserialize(serPathMonthlyStats);
+		HashMap <LocalDate, StatisitcalData> tempDailyStats = (HashMap <LocalDate, StatisitcalData>)serHandlerController.deserialize(serPathDaillyStats);
+		if (tempDoctors == null || tempDailyStats == null || tempMonthlyStats == null )
 			return false;
-		clinicManager.setStats(tempStats);
+		clinicManager.setStatsDataDaily(tempDailyStats);
+		clinicManager.setMonthlyData(tempMonthlyStats);
 		clinicManager.setStatsFlag(tempStatsFlags);
 		clinicManager.setDoctors(tempDoctors);
 		return true;
@@ -140,4 +142,11 @@ public class managerController {
 		}
 		return false;
 	}
+	
+	public StatisitcalData getMonthlyStats(long managerToken) {
+		if(Authentication.validateUser(managerToken, typeNeed))
+			return clinicManager.getMonthlyData();
+		
+		return null;
+	} 
 }

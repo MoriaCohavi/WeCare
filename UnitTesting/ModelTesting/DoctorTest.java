@@ -156,20 +156,20 @@ public class DoctorTest {
 		doctor.remove("000000002");
 	}
 	
-	@Test
-	public void CheckGetFirstRecord() {
-		Doctor doctor = new Doctor("000000001","000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
-		Patient patient = new Patient("000000002", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000001");
-		doctor.add(patient);
-		
-		MedicalRecord Record = new MedicalRecord("000000002", "000000001", 3, patient.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test", 60, 180, 90, 37, 60, 100);
-		doctor.createMedicalRecord("000000002", Record);
-		
-		LocalDate checkDate = doctor.getFirstRecord();
-		Assert.assertTrue(checkDate.equals(Record.get_Date()));
-		
-		doctor.remove("000000002");
-	}
+//	@Test
+//	public void CheckGetFirstRecord() {
+//		Doctor doctor = new Doctor("000000001","000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
+//		Patient patient = new Patient("000000002", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000001");
+//		doctor.add(patient);
+//		
+//		MedicalRecord Record = new MedicalRecord("000000002", "000000001", 3, patient.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test", 60, 180, 90, 37, 60, 100);
+//		doctor.createMedicalRecord("000000002", Record);
+//		
+//		LocalDate checkDate = doctor.getFirstRecord();
+//		Assert.assertTrue(checkDate.equals(Record.get_Date()));
+//		
+//		doctor.remove("000000002");
+//	}
 	
 	@Test
 	public void CheckAddLabToPatient() {

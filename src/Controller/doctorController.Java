@@ -1,5 +1,6 @@
 package Controller;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.HashMap;
 
@@ -153,15 +154,15 @@ public class doctorController {
 	}
 	public double getDoctorAveragePatients()
 	{
-		return currentModelDoctor.getAvgRecords().getTotalDailyPatients();
+		return currentModelDoctor.getDailyAvgRecords(LocalDate.now(), this.getDoctorID()).getTotalDailyPatients();
 	}
 	public double getDoctorAverageSubscriptions()
 	{
-		return currentModelDoctor.getAvgRecords().getTotalDailySubs();
+		return currentModelDoctor.getDailyAvgRecords(LocalDate.now(), this.getDoctorID()).getTotalDailySubs();
 	}
 	public double getDoctorAverageLabs()
 	{
-		return currentModelDoctor.getAvgRecords().getTotalDailylabs();
+		return currentModelDoctor.getDailyAvgRecords(LocalDate.now(), this.getDoctorID()).getTotalDailylabs();
 	}
 
 	

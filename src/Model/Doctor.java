@@ -12,9 +12,11 @@ import java.time.temporal.ChronoUnit;
 //import java.time.*;
 import java.util.*;
 
+
 public class Doctor extends User implements java.io.Serializable, CommandInterface {
 	
-	private LinkedHashMap <LocalDate, StatisitcalData> stats = new LinkedHashMap<LocalDate, StatisitcalData>();
+	private static int statsCount = 0;
+	private static HashMap <Integer, StatisitcalData> statsList = new HashMap<Integer, StatisitcalData>();
 	private String specialization, managerID;
 	private static HashMap <String, Patient> patients = new HashMap <String, Patient>();
 	
@@ -23,7 +25,6 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 		
 		super(id, phone, name, email, password, user_type);
 		this.specialization = special;
-		this.stats = new LinkedHashMap<LocalDate, StatisitcalData>();
 		this.managerID =managerId;
 	}
 	
@@ -63,9 +64,9 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 		return this.specialization;
 	}
 	
-	public LinkedHashMap<LocalDate, StatisitcalData> getStats(){
+	public static HashMap<Integer, StatisitcalData> getStatsList(){
 		
-		return this.stats;
+		return statsList;
 	}
 	
 	//methods
@@ -106,7 +107,7 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	public boolean search(String id) { 
 		/*tested*/
 		
-		if(this.patients.containsKey(id) && this.getId().equals(patients.get(id).getDoctorId())) 
+		if(patients.containsKey(id) && this.getId().equals(patients.get(id).getDoctorId())) 
 			return true;
 		return false;
 	}
@@ -115,7 +116,7 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 		/*tested*/
 
 		if (search(patientId))
-			return this.patients.get(patientId);
+			return patients.get(patientId);
 			
 		else 
 			return null;
@@ -125,40 +126,60 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 		return patients;
 	}
 	
-	public LocalDate getFirstRecord() { 
-		/*tested*/
+	public StatisitcalData getFirstRecord() { 
+		/**fix testing*/
 		
-		Set<Map.Entry<LocalDate, StatisitcalData>> entries = stats.entrySet();
-		Iterator<Map.Entry<LocalDate, StatisitcalData>> iterator = entries.iterator();
+		Set<Map.Entry<Integer, StatisitcalData>> entries = statsList.entrySet();
+		Iterator<Map.Entry<Integer, StatisitcalData>> iterator = entries.iterator();
 		if(entries.isEmpty())
 			return null;
-		return iterator.next().getKey();
+		while (iterator.next()!=null) {
+				if (iterator.next().getValue().getDoctorId() == this.getId())
+					return iterator.next().getValue();
+				else iterator.next();
+		}
+		return null;
+	}
+	
+	public boolean removeStatsRecord(StatisitcalData record, int statsNum) 
+	/**fix testing*/
+	{
+		
+		if (statsList.remove(statsNum, record))
+			return true;
+		
+		return false;
+		
 	}
 	
 	
-	public StatisitcalData getAvgRecords() { 
-		/*tested*/
+	public StatisitcalData getDailyAvgRecords(LocalDate date, String docId) { 
+		/**fix testing*/
 		
-		StatisitcalData total = new StatisitcalData(), current = new StatisitcalData();
-		if (stats.size() != 0)
+		StatisitcalData total = new StatisitcalData(this.getManagerID()), current = new StatisitcalData(this.getManagerID());
+		if (statsList.size() != 0)
 		{
-			int size = stats.size();
-			for (LocalDate Key : stats.keySet()){
-				current = stats.get(Key);
-				total.addtotalDailylabs(current.getTotalDailylabs());
-				total.addtotalDailyPatients(current.getTotalDailyPatients());
-				total.addtotalDailySubs(current.getTotalDailySubs());
-			}			
-			total.setTotalDailylabs(total.getTotalDailylabs()/size);
-			total.setTotalDailyPatients(total.getTotalDailyPatients()/size);
-			total.setTotalDailySubs(total.getTotalDailySubs()/size);
+			int size = 0;
+			for (Integer Key : statsList.keySet()){
+				if (statsList.get(Key).getDoctorId() == docId && date.equals(statsList.get(Key).getDate())) {
+					current = statsList.get(Key);
+					total.addtotalDailylabs(current.getTotalDailylabs());
+					total.addtotalDailyPatients(current.getTotalDailyPatients());
+					total.addtotalDailySubs(current.getTotalDailySubs());
+					size++;
+				}
+			}
+			if (size!=0) {
+				total.setTotalDailylabs(total.getTotalDailylabs()/size);
+				total.setTotalDailyPatients(total.getTotalDailyPatients()/size);
+				total.setTotalDailySubs(total.getTotalDailySubs()/size);
+				return total;
+			}
 		}
-		else
-		{
-			total.setTotalDailylabs(0);
-			total.setTotalDailyPatients(0);
-			total.setTotalDailySubs(0);
-		}
+		
+		total.setTotalDailylabs(0);
+		total.setTotalDailyPatients(0);
+		total.setTotalDailySubs(0);
 		
 		return total;
 	}
@@ -179,25 +200,28 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	}
 	 
 	public boolean createMedicalRecord(String patientId, MedicalRecord newRecord) {		
-		/*tested*/
+		/**fix testing*/
 		
 		if (search(patientId)) {
 			patients.get(patientId).addMedicalRecord(newRecord);
 			
-
 			//updating stats
-			if (!this.stats.containsKey(LocalDate.now())) 
-				this.stats.put(LocalDate.now(), new StatisitcalData());
+			StatisitcalData editData;
+			if (statsList.containsKey(statsCount)) 
+				editData = statsList.get(statsCount);
+			else {
+				editData = new StatisitcalData(this.getDoctorID());
+				statsCount++;
+			}
 			
-			StatisitcalData editStats = this.stats.get(LocalDate.now());
-			editStats.addtotalDailyPatients(1);
+			editData.addtotalDailyPatients(1);
 			
 			if (newRecord.get_subscriptions() != null) { 
 				String[] words = newRecord.get_subscriptions().split(",");
-				editStats.addtotalDailySubs(words.length);
+				editData.addtotalDailySubs(words.length);				
 			}
+			statsList.put(statsCount, editData);
 			
-			this.stats.put(LocalDate.now(), editStats);
 			return true;
 		}
 		
@@ -205,11 +229,24 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	}
 		
 	public boolean addLabToPatient(String patientId, String labType) {
-		/*tested*/
+		/**fix testing*/
 		if (search(patientId)) {
 			
-			Lab newLab = new Lab(labType, null, false, patientId);
+			Lab newLab = new Lab(labType, "null", false, patientId);
 			patients.get(patientId).addLab(newLab);
+			
+			StatisitcalData editData;
+			if (statsList.containsKey(statsCount)) 
+				editData = statsList.get(statsCount);
+			else {
+				editData = new StatisitcalData(this.getDoctorID());
+				statsCount++;
+			}
+			
+			editData.addtotalDailylabs(1);
+			
+			statsList.put(statsCount, editData);
+			
 			return true;
 		}
 		
@@ -267,7 +304,7 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	
 	
 	public boolean updatePatientInfo(String patientId, String email, long phone, String allergies, String chronic_diseases, String subscriptions)
-	/**tested*/
+	/*tested*/
 	{
 		if(search(patientId))
 		{
@@ -287,6 +324,14 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 
 	public void setManagerID(String managerID) {
 		this.managerID = managerID;
+	}
+
+	public static int getStatsCount() {
+		return statsCount;
+	}
+
+	public static void setStatsCount(int statsCount) {
+		Doctor.statsCount = statsCount;
 	}
 }
 

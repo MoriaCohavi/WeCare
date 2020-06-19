@@ -4,11 +4,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 
+import Driver.MVCDriver;
+
 public class Manager extends User implements java.io.Serializable, CommandInterface {
 	
 	private static HashMap<String, Doctor> doctors = new HashMap <String, Doctor>();
 	private static LocalDateTime statsFlag = null;
-	private static StatisitcalData stats = new StatisitcalData();
+	private static HashMap<LocalDate, StatisitcalData> statsDataDaily = new HashMap<LocalDate, StatisitcalData>();
+	private static StatisitcalData monthlyData = new StatisitcalData("111111111");
 
 	public Manager(String id, long phone, String name, String email,String password,String user_type) {
 		super(id,phone,name, email, password, user_type);
@@ -40,17 +43,23 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	}
 	
 
-	public double getAvgDailyPatients() {
-		return stats.getTotalDailyPatients();
+	public double getAvgDailyPatients(LocalDate date) {
+		if (statsDataDaily.get(date)!=null)
+			return statsDataDaily.get(date).getTotalDailyPatients();
+		return 0;
 	}
 
-	public double getAvgDailylabs() {
-		return stats.getTotalDailylabs();
+	public double getAvgDailylabs(LocalDate date) {
+		if (statsDataDaily.get(date)!=null)
+			return statsDataDaily.get(date).getTotalDailylabs();
+		return 0;
 	}
 
 
-	public double getAvgDailySubs() {
-		return stats.getTotalDailySubs();
+	public double getAvgDailySubs(LocalDate date) {
+		if (statsDataDaily.get(date)!=null)
+			return statsDataDaily.get(date).getTotalDailySubs();
+		return 0;
 	}
 
 	
@@ -63,12 +72,16 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	
 	}
 	
-	public StatisitcalData getStats() {
-		return stats;
+	public StatisitcalData getStatsDataDaily(LocalDate date) {
+		return statsDataDaily.get(date);
 	}
 
-	public void setStats(StatisitcalData newStats) {
-		stats = newStats;
+	public HashMap<LocalDate, StatisitcalData> getStatsDataDaily() {
+		return statsDataDaily;
+	}
+	
+	public void setStatsDataDaily(HashMap<LocalDate, StatisitcalData> newStats) {
+		statsDataDaily = newStats;
 	}
 	
 
@@ -125,41 +138,72 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		return false;		
 	}
 	
-	private void deleteOldStats() 
+	private void deleteOldStats(String docId) 
 	
 	{
-		for(String Key : this.doctors.keySet()) {
-			if( doctors.get(Key).getFirstRecord()!= null && 
-					doctors.get(Key).getFirstRecord().isBefore(LocalDate.now().minusMonths(1)))
-				doctors.remove(Key);
+		HashMap<Integer, StatisitcalData> temp = Doctor.getStatsList();
+		for (Integer key : temp.keySet()) {
+			if (temp.get(key).getDoctorId().equals(docId) && temp.get(key).getDate().isBefore(LocalDate.now().minusMonths(1))) {
+				Doctor.getStatsList().remove(key);
+			}
+				
 		}
 	}
 	
-	public void calcStats() 
-	/*tested*/
+	public void calcDailyStats() 
+	/**fix testing*/
 	{
+		for(String docKey : doctors.keySet())
+			deleteOldStats(docKey);
 		
-		deleteOldStats();
-		int doctorsCount;
-		if (doctors.size() == 0)
-			doctorsCount =1;
-		else doctorsCount =  doctors.size();
-		double tSub =0, tPatient = 0, tLabs = 0, tRecords = 0;
-		StatisitcalData current = new StatisitcalData();
-		for (String doctorKey : doctors.keySet()) {
-			if (this.getId().equals(doctors.get(doctorKey).getManagerID())) {
-				current = doctors.get(doctorKey).getAvgRecords();
-				tSub += current.getTotalDailySubs();
-				tPatient += current.getTotalDailyPatients();
-				tLabs += current.getTotalDailylabs();
-							
+		int doctorsCount=0;
+		if (doctors.size() != 0)
+		{
+			double tSub =0, tPatient = 0, tLabs = 0;
+			for(String docKey : doctors.keySet())
+				if(doctors.get(docKey).getManagerID().equals(this.getID())) {
+					StatisitcalData current = doctors.get(docKey).getDailyAvgRecords(LocalDate.now(), docKey);
+					tSub += current.getTotalDailySubs();
+					tPatient += current.getTotalDailyPatients();
+					tLabs += current.getTotalDailylabs();		
+					doctorsCount++;
+				}
+			if (doctorsCount !=0) {
+				if (statsDataDaily.get(LocalDate.now()) == null) 
+					statsDataDaily.put(LocalDate.now(), new StatisitcalData(getID()));
+				
+				statsDataDaily.get(LocalDate.now()).setTotalDailylabs(tLabs/doctorsCount);
+				statsDataDaily.get(LocalDate.now()).setTotalDailyPatients(tPatient/doctorsCount);
+				statsDataDaily.get(LocalDate.now()).setTotalDailySubs(tSub/doctorsCount);
+				
+				}
+		}
+			
+	}
+	
+	public void calcMonthlyStats() 
+	/**fix testing*/
+	{
+		int doctorsCount=0;
+		double tSub =0, tPatient = 0, tLabs = 0;
+		if (statsDataDaily.size() != 0) {
+			for (LocalDate key : statsDataDaily.keySet()) {
+				if(this.search(statsDataDaily.get(key).getDoctorId())) {
+					StatisitcalData current = statsDataDaily.get(key);
+					tSub = current.getTotalDailySubs();
+					tPatient = current.getTotalDailyPatients();
+					tLabs = current.getTotalDailylabs();
+					doctorsCount++;
+				}
 			}
+			if (doctorsCount != 0) {
+				monthlyData.setTotalDailylabs(tLabs/doctorsCount);
+				monthlyData.setTotalDailyPatients(tPatient/doctorsCount);
+				monthlyData.setTotalDailySubs(tSub/doctorsCount);
+			}
+				
 		}
 		
-		this.stats.setTotalDailylabs(tLabs/doctorsCount);
-		this.stats.setTotalDailyPatients(tPatient/doctorsCount);
-		this.stats.setTotalDailySubs(tSub/doctorsCount);
-			
 	}
 	
 	public boolean updateDoctorInfo(String docId, String email, long phone) {
@@ -176,5 +220,13 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		
 
 		
+	}
+
+	public static StatisitcalData getMonthlyData() {
+		return monthlyData;
+	}
+
+	public static void setMonthlyData(StatisitcalData monthlyData) {
+		Manager.monthlyData = monthlyData;
 	}
 }
