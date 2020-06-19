@@ -99,8 +99,6 @@ public class doctorController {
 	public void serializePatients() {
 		HashMap<String,Patient> tempPatients = currentModelDoctor.getPatients();
 		serHandlerController.serialize(tempPatients, serPathPatients);
-
-		// SERIALIZE ALSO PATIENTS HISTORY !
 	}
 	
 	

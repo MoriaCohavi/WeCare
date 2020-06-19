@@ -253,6 +253,25 @@ public class DoctorView {
 		frmDoctor.getContentPane().add(btnNewMedical);
 		
 		btnRecordsHistory = new JButton("View medical history");
+		btnRecordsHistory.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String searchStr = txtSearch.getText();
+				if(searchStr != null)
+				{
+					Patient patient = docCtrl.getPatient(doctorToken, searchStr);
+					if (patient != null)
+					{
+						MedicalRecordHistoryView newMedicalRecord = new MedicalRecordHistoryView(doctorToken, searchStr);
+						frmDoctor.dispose();
+					}
+					else
+					{
+						txtSearch.setText("Patient not found !");
+					}
+				}
+			}
+		});
 		btnRecordsHistory.setBounds(821, 477, 153, 29);
 		frmDoctor.getContentPane().add(btnRecordsHistory);
 	}

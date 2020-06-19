@@ -125,6 +125,14 @@ public class NewMedicalRecordView {
 		frmMedicalRecord.getContentPane().add(btn_save);
 		
 		JButton btn_cancel = new JButton("Cancel");
+		btn_cancel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				frmMedicalRecord.dispose();
+				DoctorView docView = new DoctorView(doctorToken);
+				
+			}
+		});
 		btn_cancel.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btn_cancel.setBounds(895, 458, 115, 29);
 		frmMedicalRecord.getContentPane().add(btn_cancel);
