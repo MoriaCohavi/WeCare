@@ -1,14 +1,21 @@
 package Controller;
 
 import java.time.*;
+import java.util.HashMap;
+
+import Driver.MVCDriver;
 import Model.*;
 
+
 public class managerController {
-	public static String serPath = "src\\Model\\files\\manager.ser";
+	public static String serPathDoctors = "src\\Model\\files\\doctors.ser";
+	public static String serPathStatsFlag = "src\\Model\\files\\statsFlags.ser";
+	public static String serPathStats = "src\\Model\\files\\stats.ser";
 	private static Manager clinicManager;
 	private final String typeNeed = "Manager";
 	
 	public managerController(){
+		clinicManager = MVCDriver.defaultManager;
 		deserialize();
 	}
 	
@@ -89,6 +96,14 @@ public class managerController {
 		return clinicManager;
 	}
 	
+	public HashMap<String, Doctor> getDoctorList(long managerToken) {
+		if(Authentication.validateUser(managerToken, typeNeed)) {
+			return clinicManager.getDoctors();
+		}
+		return null;
+	}
+	
+	
 	public StatisitcalData getStats(long managerToken) {
 		if(Authentication.validateUser(managerToken, typeNeed))
 			return clinicManager.getStats();
@@ -100,15 +115,28 @@ public class managerController {
 	{
 		return clinicManager.getItem(id);
 	}
-	
+
+//	private static LocalDateTime statsFlag;
+//private static StatisitcalData stats;
 	public void serialize() {
-		
-		serHandlerController.serialize(clinicManager, serPath);
+		HashMap<String, Doctor> tempDoctors = clinicManager.getDoctors();
+		LocalDateTime tempStatsFlags = clinicManager.getStatsFlag();
+		StatisitcalData tempStats = clinicManager.getStats();
+		serHandlerController.serialize(tempDoctors, serPathDoctors);
+		serHandlerController.serialize(tempStatsFlags, serPathStatsFlag);
+		serHandlerController.serialize(tempStats, serPathStats);
 	}
 	
-	public void deserialize() {
-		
-		clinicManager = (Manager)serHandlerController.deserialize(serPath);
+	public boolean deserialize() {
+		HashMap<String, Doctor> tempDoctors = (HashMap<String, Doctor>)serHandlerController.deserialize(serPathDoctors);
+		LocalDateTime tempStatsFlags = (LocalDateTime)serHandlerController.deserialize(serPathStatsFlag);
+		StatisitcalData tempStats = (StatisitcalData)serHandlerController.deserialize(serPathStats);
+		if (tempDoctors == null || tempStats == null)
+			return false;
+		clinicManager.setStats(tempStats);
+		clinicManager.setStatsFlag(tempStatsFlags);
+		clinicManager.setDoctors(tempDoctors);
+		return true;
 	}
 	
 	public boolean updateDoctor(long managerToken, String id, String email, long phone)

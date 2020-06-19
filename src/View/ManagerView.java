@@ -45,6 +45,9 @@ public class ManagerView {
 	private JTextField txtSearch;
 	private JButton btnSearch;
 	private JButton btnAddDoctor;
+	
+	
+	DefaultTableModel newDocTbl;
 //	/**
 //	 * Launch the application.
 //	 */
@@ -103,25 +106,20 @@ public class ManagerView {
 		frmManager.getContentPane().add(lblWelcome);
 		
 		tblDoctors = new JTable();
-		tblDoctors.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-				{null, null},
-			},
-			new String[] {
-				"Doctor", "Spetialization"
-			}
-		));
+		newDocTbl = new DefaultTableModel();
+		tblDoctors.setModel(newDocTbl);
+		newDocTbl.addColumn("Doctor Name");
+		newDocTbl.addColumn("ID");
+		newDocTbl.addColumn("Specialization");
+		
+		for(String Key : managerCtrl.getDoctorList(managerToken).keySet()) {
+			newDocTbl.addRow(new Object [] {
+					managerCtrl.getDoctor(managerToken, Key).getName(),
+					managerCtrl.getDoctor(managerToken, Key).getDoctorID(),
+					managerCtrl.getDoctor(managerToken, Key).getDoctorSpecialization()				
+			});
+			
+		}
 		tblDoctors.setDebugGraphicsOptions(DebugGraphics.NONE_OPTION);
 		tblDoctors.setBorder(null);
 		tblDoctors.setFont(new Font("Tahoma", Font.PLAIN, 17));

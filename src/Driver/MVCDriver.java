@@ -11,24 +11,29 @@ import org.junit.runner.notification.Failure;
 
 public class MVCDriver {
 	
+	public static Manager defaultManager = new Manager("111111111", 548798888, "Moshe Bar Siman Tov", "moshe@maccabi.org", "admin", "Manager");
+	
 	public static void main(String[] args) {
 		
-		//serHandlerController handler = new serHandlerController();
-		clinicController clinic_controller = new clinicController("", 0, "111111111", 548798888, "Moshe Bar Siman Tov", "moshe@maccabi.org", "admin", "Manager");
+		clinicController clinic_controller = new clinicController("", 0, defaultManager);
+		
 		//clinic_controller.deserialize(handler);
+		
+		managerController manager_controller = new managerController();
+		manager_controller.setClinicManager(clinic_controller.getClinicManager());
 		
 		authenticationController auth_controller = new authenticationController();
 		auth_controller.deserialize();
 		
 		//doctorController doc_Controller = new doctorController(); // deserialize doctors list
 		
-		auth_controller.register(clinic_controller.getClinicManager().getID(),clinic_controller.getClinicManager());
+		auth_controller.register(defaultManager.getID(),defaultManager);
 		LoginView StartLogin = new LoginView();
 		
 		if (true)//manager logged in){
 		{
-			managerController manager_controller = new managerController();
-			manager_controller.setClinicManager(clinic_controller.getClinicManager());
+			
+			
 		} 
 		
 						

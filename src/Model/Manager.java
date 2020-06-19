@@ -6,15 +6,12 @@ import java.util.HashMap;
 
 public class Manager extends User implements java.io.Serializable, CommandInterface {
 	
-	private static HashMap<String, Doctor> doctors;
-	private LocalDateTime statsFlag;
-	private StatisitcalData stats;
+	private static HashMap<String, Doctor> doctors = new HashMap <String, Doctor>();
+	private static LocalDateTime statsFlag = null;
+	private static StatisitcalData stats = new StatisitcalData();
 
 	public Manager(String id, long phone, String name, String email,String password,String user_type) {
 		super(id,phone,name, email, password, user_type);
-		doctors  = new HashMap <String, Doctor>();
-		stats = new StatisitcalData();
-		statsFlag = null;
 	}
 	
 	public String getID() {
@@ -64,7 +61,7 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	}
 
 	public void setStatsFlag(LocalDateTime currnet) {
-		this.statsFlag = currnet;
+		statsFlag = currnet;
 	
 	}
 	
@@ -72,8 +69,17 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		return stats;
 	}
 
-	public void setStats(StatisitcalData stats) {
-		this.stats = stats;
+	public void setStats(StatisitcalData newStats) {
+		stats = newStats;
+	}
+	
+
+	public void setDoctors(HashMap<String, Doctor>  newDoctors) {
+		doctors = newDoctors;
+	}
+	
+	public static HashMap<String, Doctor>  getDoctors() {
+		return doctors;
 	}
 	
 	public boolean search(String id) {
@@ -88,7 +94,7 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	{
 		
 		if (search(doctorId))
-			return this.doctors.get(doctorId);
+			return doctors.get(doctorId);
 			
 		else 
 			return null;

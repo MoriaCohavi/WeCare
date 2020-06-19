@@ -5,8 +5,8 @@ public class clinicController {
 	public static String serPath = "src\\Model\\files\\clinic.ser";
 	private static Clinic clinic;
 	
-	public clinicController(String city, long cId,String mId, long phone, String mName, String email, String password, String user_type) {
-		clinic  = Clinic.getInstance(city, cId, mId, phone, mName, email, password, user_type);
+	public clinicController(String city, long cId, Manager defaultManager ) {
+		clinic  = Clinic.getInstance(city, cId, defaultManager.getId(), defaultManager.getPhone(), defaultManager.getName(), defaultManager.getEmail(), defaultManager.getPassword(), defaultManager.getUser_type());
 	}
 	
 	public void serialize()
