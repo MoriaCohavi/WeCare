@@ -69,6 +69,11 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 		return statsList;
 	}
 	
+	public static void setStatsList(HashMap<Integer, StatisitcalData> newStats){
+		
+		statsList = newStats;
+	}
+	
 	//methods
 	
 	public void addSpecialization (String newSpecial) { 

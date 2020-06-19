@@ -9,6 +9,7 @@ import Model.*;
 public class doctorController {
 	public static String serPathPatients = "src\\Model\\files\\patients.ser";
 	public static String serPathRecords = "src\\Model\\files\\records.ser";
+	public static String serPathDoctorStas = "src\\Model\\files\\doctorstats.ser";
 	private Doctor currentModelDoctor;
 	private final String typeNeed = "Doctor";
 	
@@ -22,6 +23,7 @@ public class doctorController {
 		currentModelDoctor = doctor;
 		deserializePatients();
 		deserializeRecords();
+		deserializeStats();
 	}
 	
 	public doctorController(String doctorId, String manaegerId, int phone, String name, String email, String special,String password,String user_type) { // needs to include doctorview obj
@@ -111,6 +113,15 @@ public class doctorController {
 		if (tempPatients == null)
 			return false;
 		this.currentModelDoctor.setPatients(tempPatients);
+		return true;
+	}
+	
+	public boolean deserializeStats() {
+		HashMap <Integer, StatisitcalData> tempStatsList = (HashMap<Integer, StatisitcalData>)serHandlerController.deserialize(serPathDoctorStas);
+		if (tempStatsList == null)
+			return false;
+		Doctor.setStatsList(tempStatsList);
+		Doctor.setStatsCount(tempStatsList.size());
 		return true;
 	}
 	
