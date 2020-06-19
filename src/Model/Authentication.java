@@ -88,15 +88,6 @@ public class Authentication implements java.io.Serializable{
 			return true;
 	}
 	
-/*	public static boolean resetPassword(long token, String cPassword, String newPassword)
-	{
-		if(SHA1(cPassword) != loggedinusers.get(token).getPassword())
-			return false;
-		
-		loggedinusers.get(token).setPassword(newPassword);
-		return true;
-	} */
-	
 	public static long generateToken(String id) 
 	/*tested*/
 	{

@@ -98,42 +98,5 @@ public class MedicalRecord implements java.io.Serializable {
 	public String get_PatientId() {
 		return patientId;
 	}
-	//other methods
-	
-	
-	
-	public boolean serialize()
-	{
-	      try {
-	          FileOutputStream fileOut =
-	          new FileOutputStream("src\\Model\\files\\medicalRecord.ser");
-	          ObjectOutputStream out = new ObjectOutputStream(fileOut);
-	          out.writeObject(this);
-	          out.close();
-	          fileOut.close();
-	          return true;
-	       } catch (IOException i) {
-	          i.printStackTrace();
-	          return false;
-	       }
-	}
-	
-	public MedicalRecord deserialize()
-	{
-	      try {
-	          FileInputStream fileIn = new FileInputStream("src\\Model\\files\\medicalRecord.ser");
-	          ObjectInputStream in = new ObjectInputStream(fileIn);
-	          MedicalRecord e = (MedicalRecord) in.readObject();
-	          in.close();
-	          fileIn.close();
-	          return e;
-	       } catch (IOException i) {
-	          i.printStackTrace();
-	          return null;
-	       } catch (ClassNotFoundException c) {
-	          c.printStackTrace();
-	          return null;
-	       }
-	}
 }
 

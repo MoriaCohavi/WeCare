@@ -40,22 +40,6 @@ public class NewMedicalRecordView {
 	private JTextField txtf_diagnostic;
 	private JTextField txtf_visistDesc;
 
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					NewMedicalRecordView window = new NewMedicalRecordView();
-//					window.frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
 	/**
 	 * Create the application.
 	 */
@@ -208,10 +192,17 @@ public class NewMedicalRecordView {
 				}
 				else
 				{
-					docCtrl.openNewMedicalRecord(doctorToken, patientID, Integer.parseInt(txtf_illnesDays.getText()), String.valueOf(combo_purpose.getSelectedItem()), txtf_visistDesc.getText(), txtf_visitSummary.getText(), txtf_subscriptions.getText(), txtf_diagnostic.getText(), LocalTime.now(), LocalTime.now(), medIndices.getWeight(), medIndices.getHeight(), medIndices.getHeartRate(), medIndices.getTemperature(), medIndices.getSystolicBP(), medIndices.getDiastolicBP());
-					docCtrl.serializeRecords();
-					frmMedicalRecord.dispose();
-					PatientMedicalHistoryView docView = new PatientMedicalHistoryView(doctorToken, doctor, patientID);
+					try
+					{
+						docCtrl.openNewMedicalRecord(doctorToken, patientID, Integer.parseInt(txtf_illnesDays.getText()), String.valueOf(combo_purpose.getSelectedItem()), txtf_visistDesc.getText(), txtf_visitSummary.getText(), txtf_subscriptions.getText(), txtf_diagnostic.getText(), LocalTime.now(), LocalTime.now(), medIndices.getWeight(), medIndices.getHeight(), medIndices.getHeartRate(), medIndices.getTemperature(), medIndices.getSystolicBP(), medIndices.getDiastolicBP());
+						docCtrl.serializeRecords();
+						frmMedicalRecord.dispose();
+						PatientMedicalHistoryView docView = new PatientMedicalHistoryView(doctorToken, doctor, patientID);
+					}
+					catch (Exception excp)
+					{
+						lblWarning.setText("Insert valid illnes days !");
+					}
 				}
 			}
 		});

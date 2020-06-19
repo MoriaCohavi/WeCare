@@ -23,9 +23,9 @@ public class doctorController {
 		deserializeRecords();
 	}
 	
-	public doctorController(String id, int phone, String name, String email, String special,String password,String user_type) { // needs to include doctorview obj
+	public doctorController(String doctorId, String manaegerId, int phone, String name, String email, String special,String password,String user_type) { // needs to include doctorview obj
 		
-		currentModelDoctor = new Doctor (id, phone, name, email, special,password,user_type);
+		currentModelDoctor = new Doctor (doctorId, manaegerId, phone, name, email, special,password,user_type);
 	}
 	
 	public boolean addNewPatient (long token, String id,int age, long phone, String name, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases) {

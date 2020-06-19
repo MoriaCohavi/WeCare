@@ -45,24 +45,8 @@ public class DoctorView {
 	private Doctor details;
 	private HashMap <String, Patient> patientsList;
 	private JLabel lblID;
-	
 	private DefaultTableModel newPatientsTbl;
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					DoctorView window = new DoctorView();
-//					window.frmDoctor.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
+	
 	/**
 	 * Create the application.
 	 */

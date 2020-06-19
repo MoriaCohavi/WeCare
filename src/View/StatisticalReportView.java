@@ -12,57 +12,43 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class StatisticalReportView {
 
 	private managerController mgmtController;
 	
 	private JFrame frmStatisticalDetails;
-
-//	/**
-//	 * Launch the application.
-//	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					StatisticalReportView window = new StatisticalReportView();
-//					window.frmStatisticalDetails.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
+	
 	/**
 	 * Create the application.
 	 */
-	public StatisticalReportView() {
-		initialize();
+	public StatisticalReportView(long managerToken) {
+		initialize(managerToken);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(long managerToken) {
 		frmStatisticalDetails = new JFrame();
-		frmStatisticalDetails.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent arg0) {
-				frmStatisticalDetails.dispose();
-			}
-		});
 		frmStatisticalDetails.setTitle("Statistical details");
 		frmStatisticalDetails.setBounds(100, 100, 472, 300);
+		
+		
+		frmStatisticalDetails.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				ManagerView newManagerView = new ManagerView(managerToken);
+				frmStatisticalDetails.dispose();
+
+			}
+		});
 		
 		JPanel panel = new JPanel();
 		frmStatisticalDetails.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
-		
-		JLabel lbl_average = new JLabel("Average time for single visit:");
-		lbl_average.setBounds(35, 36, 269, 13);
-		panel.add(lbl_average);
 		
 		JLabel lbl_daily = new JLabel("Daily patients:");
 		lbl_daily.setBounds(35, 77, 176, 13);
@@ -83,12 +69,10 @@ public class StatisticalReportView {
 		
 		/* Fill the data */
 		mgmtController = new managerController();
-		lbl_average.setText(lbl_average.getText() + " " + String.valueOf(mgmtController.getManager().getAvgVisitTime()));
 		lbl_daily.setText(lbl_daily.getText() + " " + String.valueOf(mgmtController.getManager().getAvgDailyPatients()));
 		lbl_lblRequests.setText(lbl_lblRequests.getText() + " " + String.valueOf(mgmtController.getManager().getAvgDailylabs()));
 		lbl_subscribe.setText(lbl_subscribe.getText() + " " + String.valueOf(mgmtController.getManager().getAvgDailySubs()));
-		
-		
+		frmStatisticalDetails.setVisible(true);		
 	}
 
 }

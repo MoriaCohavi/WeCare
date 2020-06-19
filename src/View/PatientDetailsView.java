@@ -35,22 +35,6 @@ public class PatientDetailsView {
 	private JTextField txtSubsriptions;
 
 	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					PatientDetailsView window = new PatientDetailsView();
-//					
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
 	 * Create the application.
 	 */
 	public PatientDetailsView(long token, Doctor doctor, String patientId) {
