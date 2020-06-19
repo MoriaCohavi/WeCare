@@ -143,13 +143,13 @@ public class Authentication implements java.io.Serializable{
 		Authentication.users = users;
 	}
 	
-	public static boolean updateDoctorInfo(String patientId,  String email, long phone)
+	public static boolean updateDoctorInfo(String docId,  String email, long phone)
 	/*tested*/	
 	{
-			if (users.containsKey(patientId))
+			if (users.containsKey(docId))
 			{
-				users.get(patientId).setEmail(email);
-				users.get(patientId).setPhone(phone);
+				users.get(docId).setEmail(email);
+				users.get(docId).setPhone(phone);
 				return true;
 			}
 			return false;

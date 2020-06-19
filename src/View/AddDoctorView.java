@@ -51,9 +51,8 @@ public class AddDoctorView {
 		frmAddDoctor.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				// ADD SERIALZATION OF MANAGER AND USERS
+				ManagerView newManagerView = new ManagerView(token);
 				frmAddDoctor.dispose();
-
 			}
 		});
 
@@ -149,8 +148,10 @@ public class AddDoctorView {
 					if (!(managerController.addNewDoctor(txtf_id.getText(), Long.parseLong(txtf_phone.getText()), txtf_name.getText(), txtf_email.getText(), txtf_specialization.getText(), txtf_passwd.getText(), "Doctor", token)))
 						lbl_warning.setText("User exists");
 					else {
+						managerController.serialize();
 						authController.serialize();
 						frmAddDoctor.dispose();
+						ManagerView newManagerView = new ManagerView(token);
 					}
 						
 				}

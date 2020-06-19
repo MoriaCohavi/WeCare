@@ -12,15 +12,27 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.DropMode;
 import javax.swing.SwingConstants;
+
+import Controller.doctorController;
+import Model.*;
+
 import javax.swing.JButton;
 import java.awt.Choice;
 import javax.swing.JSeparator;
 import java.awt.Scrollbar;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.time.*;
 
 public class NewMedicalRecordView {
 
+	private AddMedicalIndices addIndicesView;
+	private MedicalIndices medIndices;
+	private doctorController docCtrl;
 	private JFrame frmMedicalRecord;
 	private JTextField txtf_visitSummary;
 	private JTextField txtf_illnesDays;
@@ -47,26 +59,32 @@ public class NewMedicalRecordView {
 	/**
 	 * Create the application.
 	 */
-	public NewMedicalRecordView() {
-		initialize();
+	public NewMedicalRecordView(long doctorToken, String patientID, Doctor doctor) {
+		initialize(doctorToken, patientID, doctor);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(long doctorToken, String patientID, Doctor doctor) {
+		medIndices = null;
+		docCtrl = new doctorController(doctor);
 		frmMedicalRecord = new JFrame();
 		frmMedicalRecord.setTitle("Medical record");
 		frmMedicalRecord.setBounds(100, 100, 1058, 571);
-		frmMedicalRecord.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frmMedicalRecord.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmMedicalRecord.getContentPane().setLayout(null);
 		
-		JLabel lbl_medicalRecord = new JLabel("New Medical Record - {Id}");
-		lbl_medicalRecord.setFont(new Font("Tahoma", Font.BOLD, 20));
-		lbl_medicalRecord.setBounds(31, 65, 282, 20);
-		frmMedicalRecord.getContentPane().add(lbl_medicalRecord);
+		frmMedicalRecord.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				frmMedicalRecord.dispose();
+				DoctorView docView = new DoctorView(doctorToken);
+				
+			}
+		});
 		
-		JLabel lbl_doctorId = new JLabel("{Doctor Id}");
+		JLabel lbl_doctorId = new JLabel("Patient ID: ");
 		lbl_doctorId.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lbl_doctorId.setBounds(31, 16, 118, 20);
 		frmMedicalRecord.getContentPane().add(lbl_doctorId);
@@ -147,6 +165,12 @@ public class NewMedicalRecordView {
 		frmMedicalRecord.getContentPane().add(btn_addLabs);
 		
 		JButton btn_addMedicalIndices = new JButton("Add Medical Indices");
+		btn_addMedicalIndices.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				addIndicesView = new AddMedicalIndices();
+			}
+		});
 		btn_addMedicalIndices.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btn_addMedicalIndices.setBounds(765, 368, 245, 29);
 		frmMedicalRecord.getContentPane().add(btn_addMedicalIndices);
@@ -161,5 +185,29 @@ public class NewMedicalRecordView {
 		combo_purpose.setModel(new DefaultComboBoxModel(new String[] {"Select", "High Fiver", "Cuagh", "Ingert"}));
 		combo_purpose.setBounds(298, 130, 272, 26);
 		frmMedicalRecord.getContentPane().add(combo_purpose);
+		
+		JLabel lblWarning = new JLabel("");
+		lblWarning.setBounds(31, 79, 500, 13);
+		frmMedicalRecord.getContentPane().add(lblWarning);
+		
+		btn_save.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				medIndices = addIndicesView.getLastMedicalIndices();
+				if (medIndices == null)
+				{
+					lblWarning.setText("Indices were not set !");
+				}
+				else
+				{
+					docCtrl.openNewMedicalRecord(doctorToken, patientID, Integer.parseInt(txtf_illnesDays.getText()), String.valueOf(combo_purpose.getSelectedItem()), txtf_visistDesc.getText(), txtf_visitSummary.getText(), txtf_subscriptions.getText(), txtf_diagnostic.getText(), LocalTime.now(), LocalTime.now(), medIndices.getWeight(), medIndices.getHeight(), medIndices.getHeartRate(), medIndices.getTemperature(), medIndices.getSystolicBP(), medIndices.getDiastolicBP());
+					docCtrl.serializeRecords();
+					frmMedicalRecord.dispose();
+					DoctorView docView = new DoctorView(doctorToken);
+				}
+			}
+		});
+		
+		frmMedicalRecord.setVisible(true);
 	}
 }

@@ -9,12 +9,12 @@ public class managerController {
 	private final String typeNeed = "Manager";
 	
 	public managerController(){
-		
+		deserialize();
 	}
 	
-	public Manager getDetails(long token) {
+	public Manager getDetails(long managerToken) {
 		
-		if(Authentication.validateUser(token, typeNeed))
+		if(Authentication.validateUser(managerToken, typeNeed))
 			return clinicManager;
 		
 			return null;
@@ -35,9 +35,9 @@ public class managerController {
 	
 	}
 	
-	public Doctor getDoctor(long token, String doctorId) {
+	public Doctor getDoctor(long managerToken, String doctorId) {
 		
-		if(Authentication.validateUser(token, typeNeed))
+		if(Authentication.validateUser(managerToken, typeNeed))
 			return clinicManager.getItem(doctorId);
 		return null;
 	}
@@ -64,8 +64,8 @@ public class managerController {
 //		return false;
 //	}
 	
-	public boolean deleteDoctor(long token, String docID) {
-		if(Authentication.validateUser(token, typeNeed))
+	public boolean deleteDoctor(long managerToken, String docID) {
+		if(Authentication.validateUser(managerToken, typeNeed))
 		{
 			if(clinicManager.remove(docID))
 				return true;
@@ -73,8 +73,8 @@ public class managerController {
 		return false;
 	}
 	
-	public void updateStats(long token) {
-		if(Authentication.validateUser(token, typeNeed)) {
+	public void updateStats(long managerToken) {
+		if(Authentication.validateUser(managerToken, typeNeed)) {
 			if (clinicManager.getStatsFlag() == null || clinicManager.getStatsFlag().isBefore(LocalDateTime.now().minusHours(6))) 
 			{
 			clinicManager.setStatsFlag(LocalDateTime.now());
@@ -89,8 +89,8 @@ public class managerController {
 		return clinicManager;
 	}
 	
-	public StatisitcalData getStats(long token) {
-		if(Authentication.validateUser(token, typeNeed))
+	public StatisitcalData getStats(long managerToken) {
+		if(Authentication.validateUser(managerToken, typeNeed))
 			return clinicManager.getStats();
 		
 		return null;
@@ -111,11 +111,13 @@ public class managerController {
 		clinicManager = (Manager)serHandlerController.deserialize(serPath);
 	}
 	
-	public boolean updateDoctor(String id, String email, long phone)
+	public boolean updateDoctor(long managerToken, String id, String email, long phone)
 	{
-		if(clinicManager.updateDoctorInfo(id,email , phone))
+		if (Authentication.validateUser(phone, typeNeed))
+		{
+			if(clinicManager.updateDoctorInfo(id,email , phone))
 			return true;
-		
+		}
 		return false;
 	}
 }

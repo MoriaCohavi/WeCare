@@ -58,7 +58,7 @@ public class DoctorTest {
 		Doctor doctor = new Doctor("123456789", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		Patient patient = new Patient("123456788", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des");
 		doctor.add(patient);
-		MedicalRecord Record = new MedicalRecord("123456789", 3, patient.getRecordCounter()+1, "purp_testing", "desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(), LocalTime.now().plusMinutes(10), 60, 180, 90, 37, 60, 100);
+		MedicalRecord Record = new MedicalRecord("123456788", "123456789", 3, patient.getRecordCounter()+1, "purp_testing", "desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(), LocalTime.now().plusMinutes(10), 60, 180, 90, 37, 60, 100);
 		patient.addMedicalRecord(Record);
 		Patient patient2 = doctor.getItem("123456788");
 		Assert.assertTrue(patient.getAllergies().equals(patient2.getAllergies())&&
@@ -113,7 +113,7 @@ public class DoctorTest {
 		Patient patient = new Patient("123456788", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des");
 		doctor.add(patient);
 		
-		MedicalRecord Record = new MedicalRecord("123456789", 3, patient.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(),LocalTime.now().plusMinutes(10), 60, 180, 90, 37, 60, 100);
+		MedicalRecord Record = new MedicalRecord("123456788", "123456789", 3, patient.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(),LocalTime.now().plusMinutes(10), 60, 180, 90, 37, 60, 100);
 		patient.addMedicalRecord(Record);
 		
 		MedicalRecord checkRecord = patient.getMedicalRecord(1);
@@ -138,7 +138,7 @@ public class DoctorTest {
 		Patient patient = new Patient("123456788", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des");
 		doctor.add(patient);
 		
-		MedicalRecord Record = new MedicalRecord("123456789", 3, patient.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(),LocalTime.now().plusMinutes(10), 60, 180, 90, 37, 60, 100);
+		MedicalRecord Record = new MedicalRecord("123456788", "123456789", 3, patient.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test",LocalTime.now(),LocalTime.now().plusMinutes(10), 60, 180, 90, 37, 60, 100);
 		doctor.createMedicalRecord("123456788", Record);
 		
 		LocalDate checkDate = doctor.getFirstRecord();

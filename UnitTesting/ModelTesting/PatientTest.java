@@ -70,7 +70,7 @@ public class PatientTest {
 		int t = 6;
 		int sysBP = 36;
 		int diaBP = 40;
-		MedicalRecord med = new MedicalRecord(doctor, numDays, record, purpose, description, summary, sub, diagnose, sT, eT, w, h, hr, t, sysBP, diaBP);
+		MedicalRecord med = new MedicalRecord("123456789", doctor, numDays, record, purpose, description, summary, sub, diagnose, sT, eT, w, h, hr, t, sysBP, diaBP);
 		Assert.assertTrue(patient.addMedicalRecord(med)); 
 	}
 }
