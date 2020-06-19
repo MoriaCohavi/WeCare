@@ -77,8 +77,6 @@ public class ManagerView {
 		authCtrl = new authenticationController();
 		managerDetails = (Manager)authCtrl.getLoggedinUser(managerToken);
 		
-		
-		
 		frmManager = new JFrame();
 		frmManager.setTitle("Manager");
 		frmManager.setBounds(100, 100, 1058, 571);
@@ -129,21 +127,6 @@ public class ManagerView {
 		tblDoctors.setRowMargin(0);
 		tblDoctors.setRowHeight(25);
 		tblDoctors.setIntercellSpacing(new Dimension(0, 0));
-//		Object[][] listObj = new Object[3][];
-//		int rowsIndex = 1;
-//		for (String key: patientsList.keySet()) {
-//			listObj[rowsIndex][0] = rowsIndex;
-//			listObj[rowsIndex][1] = patientsList.get(key).getName();
-//			listObj[rowsIndex][2] = patientsList.get(key).getId();
-//			rowsIndex++;
-//		}
-		
-//		tblPatients.setModel(new DefaultTableModel(
-//			listObj,
-//			new String[] {
-//				"Num.", "Patient", "ID"
-//			}
-//		));
 
 		tblDoctors.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 18));
 		tblDoctors.getTableHeader().setOpaque(false);
