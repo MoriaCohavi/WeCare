@@ -110,11 +110,15 @@ public class DoctorView {
 		int serialNum = 1;
 		
 		for(String Key : docCtrl.getPatientList(doctorToken).keySet())
-			newPatientsTbl.addRow(new Object [] {
+			
+			if (docCtrl.getPatientList(doctorToken).get(Key).getDoctorId() == docCtrl.getDoctorID()) {
+			
+				newPatientsTbl.addRow(new Object [] {
 					serialNum++,
 					docCtrl.getPatient(doctorToken, Key).getName(),
 					docCtrl.getPatient(doctorToken, Key).getId(),				
 			});
+		}
 		
 		tbl_Patients.setDebugGraphicsOptions(DebugGraphics.NONE_OPTION);
 		tbl_Patients.setBorder(null);
