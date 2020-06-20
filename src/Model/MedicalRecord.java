@@ -32,7 +32,7 @@ public class MedicalRecord implements java.io.Serializable {
 		this.visitSummary = summary;
 	}
 	
-	//setters
+	/**getters and setters**/
 	
 	public void set_DaysOfIllnessApproval(int numDays) {
 		this.daysOfIllnessApproval = numDays;

@@ -21,6 +21,7 @@ public class MedicalIndices implements java.io.Serializable {
 		
 	}
 
+	/**getters and setters**/
 	
 	public int getWeight() {
 		return this.weight;

@@ -71,4 +71,34 @@ public class PatientTest {
 		MedicalRecord med = new MedicalRecord("000000002", doctor, numDays, record, purpose, description, summary, sub, diagnose,  w, h, hr, t, sysBP, diaBP);
 		Assert.assertTrue(patient.addMedicalRecord(med)); 
 	}
+	
+	
+	
+	@Test
+	public void CheckgGetMedicalRecord()
+	{
+		
+		Patient patient = new Patient("000000002",26, 0541234567, "moria test", "moria@test.com", 53, 156, "Female", "", "","", "000000001");
+		String doctor = "Moshe Test";
+		int numDays = 10;
+		int record = 15;
+		String purpose = "testing";
+		String description = "test description";
+		String summary = "summary test";
+		String sub = "sub test";
+		String diagnose = "dianose test";
+		int w = 10;
+		int h = 5;
+		int hr = 3;
+		int t = 6;
+		int sysBP = 36;
+		int diaBP = 40;
+		MedicalRecord med = new MedicalRecord("000000002", doctor, numDays, record, purpose, description, summary, sub, diagnose,  w, h, hr, t, sysBP, diaBP);
+		patient.addMedicalRecord(med); 
+		
+		Assert.assertTrue(patient.getMedicalRecord(med.get_RecordId(), "000000002", "000000001")!=null);
+		Assert.assertTrue(patient.getMedicalRecord(med.get_RecordId(), "000000002", "000000011")==null);
+		
+		
+	}
 }

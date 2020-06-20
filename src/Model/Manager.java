@@ -197,8 +197,8 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	}
 	
 	
-	public double getAvgDailyPatients(LocalDate date
-			/*tested*/
+	public double getAvgDailyPatients(LocalDate date)
+	/*tested*/
 	{
 		if (statsDataDaily.get(date)!=null)
 			return statsDataDaily.get(date).getTotalDailyPatients();

@@ -29,6 +29,7 @@ public class Patient extends Person implements java.io.Serializable{
 		this.doctorId = docId;
 	}
 	
+	/**getters and setters**/
 
 	public void setAge(int age) {
 		this.age = age;
@@ -79,16 +80,14 @@ public class Patient extends Person implements java.io.Serializable{
 	public String getAllergies() {
 		return allergies;
 	}
+	
+	public String getDoctorId() {
+		return doctorId;
+	}
 
-	public MedicalRecord getMedicalRecord(int id, String patientId, String docId) 
-	/**fix testing*/
-	{
-		
-		if (medicalRecords.get(id).get_PatientId().equals(patientId) && medicalRecords.get(id).get_DoctorId().equals(docId))
-			return medicalRecords.get(id);
-		else 
-			return null;
-		
+
+	public void setDoctorId(String doctorId) {
+		this.doctorId = doctorId;
 	}
 	
 	public static HashMap<Integer, MedicalRecord> getMedicalRecords()
@@ -116,6 +115,20 @@ public class Patient extends Person implements java.io.Serializable{
 	public String getSubscriptions() {
 		return subscriptions;
 	}
+	
+	/**methods**/
+
+	public MedicalRecord getMedicalRecord(int id, String patientId, String docId) 
+	/**fix testing*/
+	{
+		
+		if (medicalRecords.get(id).get_PatientId().equals(patientId)&& medicalRecords.get(id).get_DoctorId().equals(docId))
+			return medicalRecords.get(id);
+		else 
+			return null;
+		
+	}
+	
 
 	public void updatePatientInfo(int phone,int age, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases)
 	/*tested*/
@@ -169,13 +182,6 @@ public class Patient extends Person implements java.io.Serializable{
 	}
 
 
-	public String getDoctorId() {
-		return doctorId;
-	}
 
-
-	public void setDoctorId(String doctorId) {
-		this.doctorId = doctorId;
-	}
 	 
 }
