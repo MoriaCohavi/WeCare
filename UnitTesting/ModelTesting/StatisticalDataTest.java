@@ -19,30 +19,30 @@ public class StatisticalDataTest {
 	public void CheckAddDailyPatients()
 	{
 		
-		StatisitcalData stat = new StatisitcalData("000000000");
+		StatisitcalData stat1 = new StatisitcalData("000000001");
 		double num = 5;
-		stat.addtotalDailyPatients(num);
-	    Assert.assertTrue(stat.getTotalDailyPatients() == 5);
+		stat1.addtotalDailyPatients(num);
+	    Assert.assertTrue(stat1.getTotalDailyPatients() == 5);
 	}
 	
 	@Test
 	public void CheckDailylabs()
 	{
 		
-		StatisitcalData stat = new StatisitcalData("000000000");
+		StatisitcalData stat2 = new StatisitcalData("000000002");
 		double num = 5;
-		stat.addtotalDailylabs(num);
-		Assert.assertTrue(stat.getTotalDailylabs() == 5);
+		stat2.addtotalDailylabs(num);
+		Assert.assertTrue(stat2.getTotalDailylabs() == 5);
 	}
 	
 	@Test
 	public void CheckDailySubs()
 	{
 		
-		StatisitcalData stat = new StatisitcalData("000000000");
+		StatisitcalData stat3 = new StatisitcalData("000000003");
 		double num = 5;
-		stat.addtotalDailylabs(num);
-		Assert.assertTrue(stat.getTotalDailySubs() == 5);
+		stat3.addtotalDailySubs(num);
+		Assert.assertTrue(stat3.getTotalDailySubs() == 5);
 	}	
 	
 }

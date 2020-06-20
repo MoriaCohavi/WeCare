@@ -19,7 +19,7 @@ public class PatientTest {
 	public void CheckUpdatePatient()
 	{
 		
-		Patient patient = new Patient("000000002",26, 0541234567, "moria test", "moria@test.com", 53, 156, "Female", "", "","", "000000001");
+		Patient patient = new Patient("000000001",26, 0541234567, "moria test", "moria@test.com", 53, 156, "Female", "", "","", "000000002");
 		int age = 27;
 		int height = 166;
 		int weight = 160;
@@ -38,7 +38,7 @@ public class PatientTest {
 	public void CheckAddLabs()
 	{
 		
-		Patient patient = new Patient("000000002",26, 0541234567, "moria test", "moria@test.com", 53, 156, "Female", "", "","", "000000001");
+		Patient patient = new Patient("000000003",26, 0541234567, "moria test", "moria@test.com", 53, 156, "Female", "", "","", "000000004");
 		
 		String type = "test";
 		String result = "Dead";
@@ -53,8 +53,8 @@ public class PatientTest {
 	public void CheckAddMedicalRecord()
 	{
 		
-		Patient patient = new Patient("000000002",26, 0541234567, "moria test", "moria@test.com", 53, 156, "Female", "", "","", "000000001");
-		String doctor = "Moshe Test";
+		Patient patient = new Patient("000000005",26, 0541234567, "moria test", "moria@test.com", 53, 156, "Female", "", "","", "000000006");
+		String doctor = "000000005";
 		int numDays = 10;
 		int record = 15;
 		String purpose = "testing";
@@ -68,7 +68,7 @@ public class PatientTest {
 		int t = 6;
 		int sysBP = 36;
 		int diaBP = 40;
-		MedicalRecord med = new MedicalRecord("000000002", doctor, numDays, record, purpose, description, summary, sub, diagnose,  w, h, hr, t, sysBP, diaBP);
+		MedicalRecord med = new MedicalRecord("000000005", doctor, numDays, record, purpose, description, summary, sub, diagnose,  w, h, hr, t, sysBP, diaBP);
 		Assert.assertTrue(patient.addMedicalRecord(med)); 
 	}
 	
@@ -78,10 +78,10 @@ public class PatientTest {
 	public void CheckgGetMedicalRecord()
 	{
 		
-		Patient patient = new Patient("000000002",26, 0541234567, "moria test", "moria@test.com", 53, 156, "Female", "", "","", "000000001");
-		String doctor = "Moshe Test";
+		Patient patient = new Patient("000000006",26, 0541234567, "moria test", "moria@test.com", 53, 156, "Female", "", "","", "000000007");
+		String doctor = "000000007";
 		int numDays = 10;
-		int record = 15;
+		int record = Patient.getRecordsCounter()+1;
 		String purpose = "testing";
 		String description = "test description";
 		String summary = "summary test";
@@ -93,11 +93,11 @@ public class PatientTest {
 		int t = 6;
 		int sysBP = 36;
 		int diaBP = 40;
-		MedicalRecord med = new MedicalRecord("000000002", doctor, numDays, record, purpose, description, summary, sub, diagnose,  w, h, hr, t, sysBP, diaBP);
+		MedicalRecord med = new MedicalRecord("000000006", doctor, numDays, record, purpose, description, summary, sub, diagnose,  w, h, hr, t, sysBP, diaBP);
 		patient.addMedicalRecord(med); 
 		
-		Assert.assertTrue(patient.getMedicalRecord(med.get_RecordId(), "000000002", "000000001")!=null);
-		Assert.assertTrue(patient.getMedicalRecord(med.get_RecordId(), "000000002", "000000011")==null);
+		Assert.assertTrue(patient.getMedicalRecord(med.get_RecordId(), "000000006", "000000007")!=null);
+		Assert.assertTrue(patient.getMedicalRecord(med.get_RecordId(), "000000006", "000000008")==null);
 		
 		
 	}

@@ -20,6 +20,7 @@ public class Person implements java.io.Serializable {
 		this.email = email;
 	}
 
+	/**getters and setters**/
 
 	public String getId() {
 		return this.id;

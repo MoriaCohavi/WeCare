@@ -19,25 +19,8 @@ public class StatisitcalData implements java.io.Serializable {
 		this.date = LocalDate.now();
 	}
 	
-	
-	public void addtotalDailyPatients(double num) 
-	/*tested*/
-	{
-		this.totalDailyPatients +=num;
-	}
-	
-	public void addtotalDailylabs(double num) 
-	/*tested*/
-	{
-		this.totalDailylabs +=num;
-	}
-	
-	public void addtotalDailySubs(double num) 
-	/*tested*/
-	{
-		this.totalDailySubs +=num;
-	}
-	
+	/**getters and setters**/
+		
 
 	public double getTotalDailyPatients() {
 		return totalDailyPatients;
@@ -76,6 +59,27 @@ public class StatisitcalData implements java.io.Serializable {
 
 	public LocalDate getDate() {
 		return date;
+	}
+	
+	/**methods**/
+	
+
+	public void addtotalDailyPatients(double num) 
+	/*tested*/
+	{
+		this.totalDailyPatients +=num;
+	}
+	
+	public void addtotalDailylabs(double num) 
+	/*tested*/
+	{
+		this.totalDailylabs +=num;
+	}
+	
+	public void addtotalDailySubs(double num) 
+	/*tested*/
+	{
+		this.totalDailySubs +=num;
 	}
 
 

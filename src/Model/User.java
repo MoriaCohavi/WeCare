@@ -14,6 +14,8 @@ public class User extends Person implements java.io.Serializable {
 		this.token = 0;
 		
 	}
+	
+	/**getters and setters**/
 
 	public String getPassword() {
 		return password;

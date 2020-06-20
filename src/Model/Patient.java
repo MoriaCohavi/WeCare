@@ -59,6 +59,11 @@ public class Patient extends Person implements java.io.Serializable{
 		this.subscriptions = subscriptions;
 	}
 	
+	public static int getRecordsCounter()
+	{
+		return recordCount;
+	}
+	
 	public static void setRecordsCounter(int counter)
 	{
 		recordCount = counter;
@@ -119,13 +124,15 @@ public class Patient extends Person implements java.io.Serializable{
 	/**methods**/
 
 	public MedicalRecord getMedicalRecord(int id, String patientId, String docId) 
-	/**fix testing*/
+	/*tested*/
 	{
-		
-		if (medicalRecords.get(id).get_PatientId().equals(patientId)&& medicalRecords.get(id).get_DoctorId().equals(docId))
-			return medicalRecords.get(id);
-		else 
-			return null;
+		for (Integer key : medicalRecords.keySet()) {
+			if (key == id) {
+				if (medicalRecords.get(key).get_PatientId().equals(patientId)&& medicalRecords.get(id).get_DoctorId().equals(docId))
+					return medicalRecords.get(id);
+			} 
+		}
+		return null;
 		
 	}
 	
