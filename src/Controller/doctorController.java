@@ -66,7 +66,7 @@ public class doctorController {
 	
 	public MedicalRecord viewMedicalRecord(long token, String patientId, int recordId) {
 		if(Authentication.validateUser(token, typeNeed))
-			return currentModelDoctor.getItem(patientId).getMedicalRecord(recordId, patientId);
+			return currentModelDoctor.getItem(patientId).getMedicalRecord(recordId, patientId, this.getDoctorID());
 		return null;
 	}
 	

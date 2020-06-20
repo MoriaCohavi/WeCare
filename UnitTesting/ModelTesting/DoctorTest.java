@@ -81,7 +81,7 @@ public class DoctorTest {
 							patient.getGender().equals(patient2.getGender()) &&
 							patient.getHeight() == patient2.getHeight() &&
 							patient.getId().equals(patient2.getId()) &&
-							patient.getMedicalRecord(1, "000000002") == (patient2.getMedicalRecord(1, "000000002")) &&
+							patient.getMedicalRecord(1, "000000002","000000001") == (patient2.getMedicalRecord(1, "000000002","000000001")) &&
 							patient.getName().equals(patient2.getName()) &&
 							patient.getPhone() == patient2.getPhone() &&
 							patient.getRecordCounter() == patient2.getRecordCounter() &&
@@ -135,7 +135,7 @@ public class DoctorTest {
 		MedicalRecord Record = new MedicalRecord("000000002", "000000001", 3, patient.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test", 60, 180, 90, 37, 60, 100);
 		doctor.createMedicalRecord(patient.getId(), Record);
 		
-		MedicalRecord checkRecord = patient.getMedicalRecord(1, "000000002");
+		MedicalRecord checkRecord = patient.getMedicalRecord(Record.get_RecordId(), "000000002", "000000001");
 		Assert.assertTrue(checkRecord.get_DiagnoseDiscription().equals("diag_test") &&
 							checkRecord.get_DaysOfIllnessApproval() == 3 &&
 							checkRecord.get_DoctorId() == "000000001" &&
@@ -145,7 +145,7 @@ public class DoctorTest {
 							checkRecord.get_pateintIndices().getSystolicBP() == 60 &&
 							checkRecord.get_pateintIndices().getTemperature() == 37 &&
 							checkRecord.get_pateintIndices().getWeight() == 60 &&
-							checkRecord.get_RecordId() == 1 &&
+							checkRecord.get_RecordId() == Record.get_RecordId() &&
 							checkRecord.get_subscriptions().equals("sub_test") &&
 							checkRecord.get_VisitDescription().equals("desc_testing") &&
 							checkRecord.get_VisitPurpose().equals("purp_testing"));
@@ -156,20 +156,36 @@ public class DoctorTest {
 		doctor.remove("000000002");
 	}
 	
-//	@Test
-//	public void CheckGetFirstRecord() {
-//		Doctor doctor = new Doctor("000000001","000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
-//		Patient patient = new Patient("000000002", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000001");
-//		doctor.add(patient);
-//		
-//		MedicalRecord Record = new MedicalRecord("000000002", "000000001", 3, patient.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test", 60, 180, 90, 37, 60, 100);
-//		doctor.createMedicalRecord("000000002", Record);
-//		
-//		LocalDate checkDate = doctor.getFirstRecord();
-//		Assert.assertTrue(checkDate.equals(Record.get_Date()));
-//		
-//		doctor.remove("000000002");
-//	}
+	@Test
+	public void CheckGetFirstRecord() {
+		Doctor doctor = new Doctor("000000010","000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
+		Patient patient = new Patient("000000002", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000010");
+		doctor.add(patient);
+		
+		MedicalRecord Record = new MedicalRecord("000000002", "000000010", 3, patient.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub, test", "diag_test", 60, 180, 90, 37, 60, 100);
+		MedicalRecord Record2 = new MedicalRecord("000000002", "000000010", 3, patient.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test", 60, 180, 90, 37, 60, 100);
+		
+		doctor.createMedicalRecord("000000002", Record);
+		StatisitcalData check = new StatisitcalData("000000010");
+		check.setTotalDailylabs(0);
+		check.setTotalDailyPatients(1);
+		check.setTotalDailySubs(2);
+		
+		StatisitcalData returned = doctor.getFirstRecord();
+		Assert.assertTrue(check.getTotalDailylabs() == returned.getTotalDailylabs() &&
+							check.getTotalDailyPatients() == returned.getTotalDailyPatients() &&
+							check.getTotalDailySubs() == returned.getTotalDailySubs()); 
+		doctor.createMedicalRecord("000000002", Record2);
+		
+		Assert.assertFalse(check.getTotalDailylabs() != returned.getTotalDailylabs() &&
+				check.getTotalDailyPatients() != returned.getTotalDailyPatients() &&
+				check.getTotalDailySubs() != returned.getTotalDailySubs());
+		
+		
+		
+		
+		doctor.remove("000000002");
+	}
 	
 	@Test
 	public void CheckAddLabToPatient() {

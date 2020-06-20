@@ -18,6 +18,8 @@ public class Clinic implements java.io.Serializable {
 		this.setManager(new Manager(mId, phone, mName, email, password, user_type));
 	}
 	
+	/**getters and setters**/
+	
 	public String getCity() {
 		return city;
 	}
@@ -26,19 +28,23 @@ public class Clinic implements java.io.Serializable {
 		return id;
 	}
 
-	public static Clinic getInstance(String city, long cId, String mId, long phone, String mName, String email, String password, String user_type) {
-		if(instance == null)
-		{
-			instance = new Clinic(city, cId, mId, phone, mName, email, password, user_type);
-		}
-		return instance;
-	}
-
 	public Manager getManager() {
 		return manager;
 	}
 
 	public void setManager(Manager clinicManager) {
 		this.manager = clinicManager;
+	}
+	
+	
+	/**methods**/
+	
+	
+	public static Clinic getInstance(String city, long cId, String mId, long phone, String mName, String email, String password, String user_type) {
+		if(instance == null)
+		{
+			instance = new Clinic(city, cId, mId, phone, mName, email, password, user_type);
+		}
+		return instance;
 	}
 }

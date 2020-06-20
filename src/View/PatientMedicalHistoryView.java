@@ -119,11 +119,11 @@ public class PatientMedicalHistoryView {
 		
 		for (Integer key : docCtrl.getPatient(token, patientId).getMedicalRecords().keySet())
 		{
-			if (docCtrl.getPatient(token, patientId).getMedicalRecord(key, patientId)!=null) {
+			if (docCtrl.getPatient(token, patientId).getMedicalRecord(key, patientId, docCtrl.getDoctorID())!=null) {
 				newRecordTbl.addRow(new Object[] {
-					docCtrl.getPatient(token, patientId).getMedicalRecord(key, patientId).get_Date(),
-					docCtrl.getPatient(token, patientId).getMedicalRecord(key, patientId).get_VisitPurpose(),
-					docCtrl.getPatient(token, patientId).getMedicalRecord(key, patientId).get_VisitDescription()
+					docCtrl.getPatient(token, patientId).getMedicalRecord(key, patientId,docCtrl.getDoctorID()).get_Date(),
+					docCtrl.getPatient(token, patientId).getMedicalRecord(key, patientId, docCtrl.getDoctorID()).get_VisitPurpose(),
+					docCtrl.getPatient(token, patientId).getMedicalRecord(key, patientId, docCtrl.getDoctorID()).get_VisitDescription()
 					
 				});
 			}

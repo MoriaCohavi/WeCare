@@ -12,6 +12,8 @@ import java.time.temporal.ChronoUnit;
 //import java.time.*;
 import java.util.*;
 
+import com.sun.javafx.scene.EnteredExitedHandler;
+
 
 public class Doctor extends User implements java.io.Serializable, CommandInterface {
 	
@@ -28,7 +30,8 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 		this.managerID =managerId;
 	}
 	
-	//setters and getters
+	/**getters and setters**/
+	
 	public void setSpecialization (String newSpecial) {
 		
 		this.specialization = newSpecial;
@@ -74,7 +77,30 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 		statsList = newStats;
 	}
 	
-	//methods
+	public void setPatients(HashMap<String, Patient> tempPatients) {
+		patients = tempPatients;
+	}
+	
+	
+	public String getManagerID() {
+		return managerID;
+	}
+
+	public void setManagerID(String managerID) {
+		this.managerID = managerID;
+	}
+
+	public static int getStatsCount() {
+		return statsCount;
+	}
+
+	public static void setStatsCount(int statsCount) {
+		Doctor.statsCount = statsCount;
+	}
+	
+	
+	
+	/**methods**/
 	
 	public void addSpecialization (String newSpecial) { 
 		/*tested*/
@@ -127,22 +153,18 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 			return null;
 	}
 	
-	public HashMap<String, Patient> getPatients() {
-		return patients;
-	}
 	
 	public StatisitcalData getFirstRecord() { 
-		/**fix testing*/
+		/*tested*/
 		
-		Set<Map.Entry<Integer, StatisitcalData>> entries = statsList.entrySet();
-		Iterator<Map.Entry<Integer, StatisitcalData>> iterator = entries.iterator();
+		HashMap<Integer, StatisitcalData> entries = statsList;
 		if(entries.isEmpty())
 			return null;
-		while (iterator.next()!=null) {
-				if (iterator.next().getValue().getDoctorId() == this.getId())
-					return iterator.next().getValue();
-				else iterator.next();
+		for (Integer key : entries.keySet() ) {
+				if (entries.get(key).getDoctorId().equals(this.getId()))
+					return entries.get(key);
 		}
+
 		return null;
 	}
 	
@@ -198,23 +220,27 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 			patients.get(patientId).updatePatientInfo(phone, age, email, weight, height, gender, allergies, subscriptions, chronic_diseases);
 		}
 	}
-	
-	public HashMap<Integer, MedicalRecord> getPatientsMedicalRecords()
-	{
-		return Patient.getMedicalRecords();
-	}
+
 	 
 	public boolean createMedicalRecord(String patientId, MedicalRecord newRecord) {		
-		/**fix testing*/
+		/*tested*/
 		
 		if (search(patientId)) {
 			patients.get(patientId).addMedicalRecord(newRecord);
 			
 			//updating stats
 			StatisitcalData editData;
-			if (statsList.containsKey(statsCount)) 
-				editData = statsList.get(statsCount);
-			else {
+			if (statsList.containsKey(statsCount)) {
+				if (statsList.get(statsCount).getDoctorId() == this.getId()) {
+					editData = statsList.get(statsCount);
+				}
+				else {
+					editData = new StatisitcalData(this.getDoctorID());
+					statsCount++;
+				}
+			}
+			else
+				{
 				editData = new StatisitcalData(this.getDoctorID());
 				statsCount++;
 			}
@@ -241,12 +267,21 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 			patients.get(patientId).addLab(newLab);
 			
 			StatisitcalData editData;
-			if (statsList.containsKey(statsCount)) 
-				editData = statsList.get(statsCount);
-			else {
+			if (statsList.containsKey(statsCount)) {
+				if (statsList.get(statsCount).getDoctorId() == this.getId()) {
+					editData = statsList.get(statsCount);
+				}
+				else {
+					editData = new StatisitcalData(this.getDoctorID());
+					statsCount++;
+				}
+			}
+			else
+				{
 				editData = new StatisitcalData(this.getDoctorID());
 				statsCount++;
 			}
+				
 			
 			editData.addtotalDailylabs(1);
 			
@@ -258,9 +293,23 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 		else return false;
 	}
 	
-	public void setPatients(HashMap<String, Patient> tempPatients) {
-		patients = tempPatients;
+	
+	public boolean updatePatientInfo(String patientId, String email, long phone, String allergies, String chronic_diseases, String subscriptions)
+	/*tested*/
+	{
+		if(search(patientId))
+		{
+			patients.get(patientId).setEmail(email);
+			patients.get(patientId).setPhone(phone);
+			patients.get(patientId).setAllergies(allergies);
+			patients.get(patientId).setChronic_diseases(chronic_diseases);
+			patients.get(patientId).setSubscriptions(subscriptions);
+			return true;
+		}
+		else return false;
 	}
+	
+	/**THEY ALL NEED TESTING!*/
 	
 	public String getPatientName(String patientId)
 	{
@@ -307,36 +356,16 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 		return this.getItem(patientId).getSubscriptions();
 	}
 	
+	public HashMap<String, Patient> getPatients() {
+		return patients;
+	}
 	
-	public boolean updatePatientInfo(String patientId, String email, long phone, String allergies, String chronic_diseases, String subscriptions)
-	/*tested*/
+	public HashMap<Integer, MedicalRecord> getPatientsMedicalRecords()
 	{
-		if(search(patientId))
-		{
-			patients.get(patientId).setEmail(email);
-			patients.get(patientId).setPhone(phone);
-			patients.get(patientId).setAllergies(allergies);
-			patients.get(patientId).setChronic_diseases(chronic_diseases);
-			patients.get(patientId).setSubscriptions(subscriptions);
-			return true;
-		}
-		else return false;
+		return Patient.getMedicalRecords();
 	}
+	
 
-	public String getManagerID() {
-		return managerID;
-	}
-
-	public void setManagerID(String managerID) {
-		this.managerID = managerID;
-	}
-
-	public static int getStatsCount() {
-		return statsCount;
-	}
-
-	public static void setStatsCount(int statsCount) {
-		Doctor.statsCount = statsCount;
-	}
+	
 }
 

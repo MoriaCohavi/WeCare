@@ -19,6 +19,34 @@ public class Authentication implements java.io.Serializable{
 		
 	}
 	
+	/**getters and setters**/
+	
+	public static String getType(long token)
+	{
+		return loggedinusers.get(token).getUser_type();
+	}
+	
+	public HashMap<Long, User> getLoggedinusers() {
+		return loggedinusers;
+	}
+	
+	public HashMap<String, User> getUsers() {
+		return users;
+	}
+	
+	public void setLoggedinusers(HashMap<Long, User> loggedinusers) {
+		Authentication.loggedinusers = loggedinusers;
+	}
+	
+	public void setUsers(HashMap<String, User> users) {
+		Authentication.users = users;
+	}
+	
+	
+	
+	/**methods**/
+	
+	
 	public static String SHA1(String password) // this function take a clear password and change it to SHA1 hash.
 	/*tested*/
 	{
@@ -124,28 +152,8 @@ public class Authentication implements java.io.Serializable{
 		return true;
 	}
 	
-	public static String getType(long token)
+	private boolean search(String userId) 
 	{
-		return loggedinusers.get(token).getUser_type();
-	}
-	
-	public HashMap<Long, User> getLoggedinusers() {
-		return loggedinusers;
-	}
-	
-	public HashMap<String, User> getUsers() {
-		return users;
-	}
-	
-	public void setLoggedinusers(HashMap<Long, User> loggedinusers) {
-		Authentication.loggedinusers = loggedinusers;
-	}
-	
-	public void setUsers(HashMap<String, User> users) {
-		Authentication.users = users;
-	}
-	
-	public boolean search(String userId) {
 		
 		if(users.containsKey(userId)) 
 			return true;

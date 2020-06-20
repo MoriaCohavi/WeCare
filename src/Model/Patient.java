@@ -80,9 +80,11 @@ public class Patient extends Person implements java.io.Serializable{
 		return allergies;
 	}
 
-	public MedicalRecord getMedicalRecord(int id, String patientId) {
+	public MedicalRecord getMedicalRecord(int id, String patientId, String docId) 
+	/**fix testing*/
+	{
 		
-		if (medicalRecords.get(id).get_PatientId().equals(patientId))
+		if (medicalRecords.get(id).get_PatientId().equals(patientId) && medicalRecords.get(id).get_DoctorId().equals(docId))
 			return medicalRecords.get(id);
 		else 
 			return null;

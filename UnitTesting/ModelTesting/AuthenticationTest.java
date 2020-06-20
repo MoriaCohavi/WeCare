@@ -105,7 +105,7 @@ public class AuthenticationTest {
 		Assert.assertFalse(Authentication.updateDoctorInfo("000000009", "Email test", 0541234567));
 		
 		Authentication.signOut(doctor.getToken());
-		 Authentication.deleteSignUp("000000000");
+		Authentication.deleteSignUp("000000000");
 	}
 	
 	@Test
@@ -117,4 +117,5 @@ public class AuthenticationTest {
 	    
 		
 	}
+	
 }
