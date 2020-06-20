@@ -52,6 +52,8 @@ public class DoctorView {
 	 */
 	public DoctorView(long doctorToken) {
 		initialize(doctorToken);
+		docCtrl.deserializeRecords();
+		docCtrl.deserializeStatsList();
 	}
 
 	/**
@@ -71,6 +73,8 @@ public class DoctorView {
 		frmDoctor.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
+				docCtrl.serializeRecords();
+				docCtrl.serializeStatsList();
 				System.exit(0);
 			}
 		});

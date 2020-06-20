@@ -23,7 +23,7 @@ public class doctorController {
 		currentModelDoctor = doctor;
 		deserializePatients();
 		deserializeRecords();
-		deserializeStats();
+		deserializeStatsList();
 	}
 	
 	public doctorController(String doctorId, String manaegerId, int phone, String name, String email, String special,String password,String user_type) { // needs to include doctorview obj
@@ -102,6 +102,11 @@ public class doctorController {
 		serHandlerController.serialize(tempRecords, serPathRecords);
 	}
 	
+	public void serializeStatsList() {
+		HashMap <Integer, StatisitcalData> tempStatsLis = Doctor.getStatsList();
+		serHandlerController.serialize(tempStatsLis, serPathDoctorStas);
+	}
+	
 	public void serializePatients() {
 		HashMap<String,Patient> tempPatients = currentModelDoctor.getPatients();
 		serHandlerController.serialize(tempPatients, serPathPatients);
@@ -116,7 +121,7 @@ public class doctorController {
 		return true;
 	}
 	
-	public boolean deserializeStats() {
+	public boolean deserializeStatsList() {
 		HashMap <Integer, StatisitcalData> tempStatsList = (HashMap<Integer, StatisitcalData>)serHandlerController.deserialize(serPathDoctorStas);
 		if (tempStatsList == null)
 			return false;

@@ -39,6 +39,8 @@ public class PatientDetailsView {
 	 */
 	public PatientDetailsView(long token, Doctor doctor, String patientId) {
 		initialize(token,doctor, patientId);
+		docCtrl.deserializeRecords();
+		docCtrl.deserializeStatsList();
 	}
 
 	/**
@@ -56,6 +58,8 @@ public class PatientDetailsView {
 		frmPatient.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
+				docCtrl.serializeRecords();
+				docCtrl.serializeStatsList();
 				frmPatient.dispose();
 				PatientMedicalHistoryView docView = new PatientMedicalHistoryView(token, doctor, patientId);
 				
@@ -166,6 +170,8 @@ public class PatientDetailsView {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				docCtrl.updatePatientInfo(token, patientId, txtEmail.getText(), Long.parseLong(txtPhone.getText()), txtAllergies.getText(), txtCronicDiseases.getText(), txtSubsriptions.getText());
+				docCtrl.serializeRecords();
+				docCtrl.serializeStatsList();
 				docCtrl.serializePatients();
 				frmPatient.dispose();
 				PatientMedicalHistoryView docView = new PatientMedicalHistoryView(token, doctor, patientId);
@@ -180,6 +186,8 @@ public class PatientDetailsView {
 			public void mouseClicked(MouseEvent e) {
 				docCtrl.deletePatient(token,patientId);
 				docCtrl.serializePatients();
+				docCtrl.serializeRecords();
+				docCtrl.serializeStatsList();
 				frmPatient.dispose();
 				DoctorView docView = new DoctorView(token);
 			}

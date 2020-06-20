@@ -52,6 +52,7 @@ public class ManagerView {
 	 */
 	public ManagerView(long managerToken) {
 		initialize(managerToken);
+		managerCtrl.deserialize();
 	}
 	/**
 	 * Initialize the contents of the frame.
@@ -74,6 +75,7 @@ public class ManagerView {
 		frmManager.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
+				managerCtrl.serialize();
 				System.exit(0);
 			}
 		});

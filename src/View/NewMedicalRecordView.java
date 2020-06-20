@@ -47,6 +47,8 @@ public class NewMedicalRecordView {
 	 */
 	public NewMedicalRecordView(long doctorToken, String patientID, Doctor doctor) {
 		initialize(doctorToken, patientID, doctor);
+		docCtrl.deserializeRecords();
+		docCtrl.deserializeStatsList();
 	}
 
 	/**
@@ -65,6 +67,8 @@ public class NewMedicalRecordView {
 		frmMedicalRecord.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
+				docCtrl.serializeRecords();
+				docCtrl.serializeStatsList();
 				frmMedicalRecord.dispose();
 				PatientMedicalHistoryView docView = new PatientMedicalHistoryView(doctorToken, doctor, patientID);
 				
@@ -115,6 +119,8 @@ public class NewMedicalRecordView {
 		btn_cancel.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				docCtrl.serializeRecords();
+				docCtrl.serializeStatsList();
 				frmMedicalRecord.dispose();
 				PatientMedicalHistoryView docView = new PatientMedicalHistoryView(doctorToken, doctor, patientID);
 				
@@ -200,6 +206,8 @@ public class NewMedicalRecordView {
 						docCtrl.openNewMedicalRecord(doctorToken, patientID, Integer.parseInt(txtf_illnesDays.getText()), String.valueOf(combo_purpose.getSelectedItem()), txtf_visistDesc.getText(), txtf_visitSummary.getText(), txtf_subscriptions.getText(), txtf_diagnostic.getText(), medIndices.getWeight(), medIndices.getHeight(), medIndices.getHeartRate(), medIndices.getTemperature(), medIndices.getSystolicBP(), medIndices.getDiastolicBP());
 						docCtrl.serializeRecords();
 						manCtrl.serialize();
+						docCtrl.serializeRecords();
+						docCtrl.serializeStatsList();
 						frmMedicalRecord.dispose();
 						PatientMedicalHistoryView docView = new PatientMedicalHistoryView(doctorToken, doctor, patientID);
 					}

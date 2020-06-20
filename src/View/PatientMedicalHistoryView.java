@@ -43,6 +43,8 @@ public class PatientMedicalHistoryView {
 	 */
 	public PatientMedicalHistoryView(long token, Doctor doctor, String patientId) {
 		initialize(token,doctor, patientId);
+		docCtrl.deserializeRecords();
+		docCtrl.deserializeStatsList();
 	}
 
 	/**
@@ -65,6 +67,8 @@ public class PatientMedicalHistoryView {
 		frmPatientHistory.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
+				docCtrl.serializeRecords();
+				docCtrl.serializeStatsList();
 				frmPatientHistory.dispose();
 				DoctorView docView = new DoctorView(token);
 				
