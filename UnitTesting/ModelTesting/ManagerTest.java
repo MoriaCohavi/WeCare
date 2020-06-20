@@ -47,21 +47,21 @@ public class ManagerTest{
 		
 		Manager manager = new Manager("000000003", 5200000, "Name", "Email", "password","Manager");
 
-		Doctor doctor1 = new Doctor("000000001","000000003", 5200000, "Name1", "Email1", "Spetialty1","password", "Doctor");
-		Doctor doctor2 = new Doctor("000000004","000000003", 5200000, "Name2", "Email2", "Spetialty2","password", "Doctor");
+		Doctor doctor1 = new Doctor("110000000","000000003", 5200000, "Name1", "Email1", "Spetialty1","password", "Doctor");
+		Doctor doctor2 = new Doctor("140000000","000000003", 5200000, "Name2", "Email2", "Spetialty2","password", "Doctor");
 				
-		Patient patient1 = new Patient("000000002", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000001");
-		Patient patient2 = new Patient("000000005", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000001");
-		Patient patient3 = new Patient("000000006", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000004");
-		Patient patient4 = new Patient("000000007", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000004");
+		Patient patient1 = new Patient("000000002", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "110000000");
+		Patient patient2 = new Patient("000000005", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "110000000");
+		Patient patient3 = new Patient("000000006", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "140000000");
+		Patient patient4 = new Patient("000000007", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "140000000");
 		
-		MedicalRecord Record1 = new MedicalRecord("000000002", "000000001", 3, patient1.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test", 60, 180, 90, 37, 60, 100);
-		MedicalRecord Record2 = new MedicalRecord("000000002", "000000001", 3, patient1.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test", 60, 180, 90, 37, 60, 100);
-		MedicalRecord Record3 = new MedicalRecord("000000005", "000000001", 3, patient2.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test", 75, 190, 90, 37, 60, 100);
-		MedicalRecord Record4 = new MedicalRecord("000000005", "000000001", 3, patient2.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test", 75, 190, 90, 37, 60, 100);
-		MedicalRecord Record5 = new MedicalRecord("000000006", "000000004", 3, patient3.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test", 90, 180, 90, 37, 60, 100);
-		MedicalRecord Record6 = new MedicalRecord("000000006", "000000004", 3, patient3.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test", 55, 165, 90, 37, 60, 100);
-		MedicalRecord Record7 = new MedicalRecord("000000007", "000000004", 3, patient4.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test", 55, 165, 90, 37, 60, 100);
+		MedicalRecord Record1 = new MedicalRecord("000000002", "110000000", 3, patient1.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test", 60, 180, 90, 37, 60, 100);
+		MedicalRecord Record2 = new MedicalRecord("000000002", "110000000", 3, patient1.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test", 60, 180, 90, 37, 60, 100);
+		MedicalRecord Record3 = new MedicalRecord("000000005", "110000000", 3, patient2.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test", 75, 190, 90, 37, 60, 100);
+		MedicalRecord Record4 = new MedicalRecord("000000005", "110000000", 3, patient2.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test", 75, 190, 90, 37, 60, 100);
+		MedicalRecord Record5 = new MedicalRecord("000000006", "140000000", 3, patient3.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test", 90, 180, 90, 37, 60, 100);
+		MedicalRecord Record6 = new MedicalRecord("000000006", "140000000", 3, patient3.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test", 55, 165, 90, 37, 60, 100);
+		MedicalRecord Record7 = new MedicalRecord("000000007", "140000000", 3, patient4.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub_test", "diag_test", 55, 165, 90, 37, 60, 100);
 		
 		manager.calcDailyStats();
 		Assert.assertTrue(manager.getAvgDailylabs(LocalDate.now())== 0 &&
@@ -104,25 +104,13 @@ public class ManagerTest{
 		Assert.assertFalse(manager.getAvgDailyPatients(LocalDate.now()) != 3.5 || manager.getAvgDailylabs(LocalDate.now()) !=0 ||
 				manager.getAvgDailySubs(LocalDate.now()) != 3.5);
 		
-		doctor1.addLabToPatient("000000002", "Blood");
-		doctor1.addLabToPatient("000000002", "Urine");
-		doctor1.addLabToPatient("000000005", "Blood");
-		doctor2.addLabToPatient("000000006", "Blood");
-		
-		manager.calcDailyStats();
-		Assert.assertTrue(manager.getAvgDailyPatients(LocalDate.now()) == 3.5 && manager.getAvgDailylabs(LocalDate.now()) ==2 &&
-							manager.getAvgDailySubs(LocalDate.now()) == 3.5);
-							
-		Assert.assertFalse(manager.getAvgDailyPatients(LocalDate.now()) != 3.5 || manager.getAvgDailylabs(LocalDate.now()) !=2 ||
-				manager.getAvgDailySubs(LocalDate.now()) != 3.5 );
-		
 		doctor1.remove(patient1.getId());
 		doctor1.remove(patient2.getId());
 		doctor2.remove(patient3.getId());
 		doctor2.remove(patient4.getId());
 		
-		manager.remove("000000001");
-		manager.remove("000000004");
+		manager.remove("110000000");
+		manager.remove("140000000");
 		
 	}
 	
@@ -185,4 +173,5 @@ public class ManagerTest{
 		manager.remove("000000001");
 		
 	}
+	
 }

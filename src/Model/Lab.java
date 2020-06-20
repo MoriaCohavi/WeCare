@@ -20,6 +20,7 @@ public class Lab implements java.io.Serializable {
 		this.patientId = patId;
 	}
 	
+	/**getters and setters**/
 	
 	private void setResult(String resultUpdate){
 		this.result = resultUpdate;
@@ -35,7 +36,6 @@ public class Lab implements java.io.Serializable {
 		
 	}
 	
-	
 	public String getResult(){
 		return this.result;
 		
@@ -49,6 +49,7 @@ public class Lab implements java.io.Serializable {
 		return patientId;
 	}
 	
+	/**methods**/
 	
 	public void updateResults(String result, boolean attention) 
 	/*tested*/

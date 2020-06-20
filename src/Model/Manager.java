@@ -17,6 +17,7 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		super(id,phone,name, email, password, user_type);
 	}
 	
+	/**getters and setters**/
 	public String getID() {
 		return super.getId();
 		
@@ -40,26 +41,6 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 
 	public void updateEmail(String newEmail){
 		this.setEmail(newEmail);
-	}
-	
-
-	public double getAvgDailyPatients(LocalDate date) {
-		if (statsDataDaily.get(date)!=null)
-			return statsDataDaily.get(date).getTotalDailyPatients();
-		return 0;
-	}
-
-	public double getAvgDailylabs(LocalDate date) {
-		if (statsDataDaily.get(date)!=null)
-			return statsDataDaily.get(date).getTotalDailylabs();
-		return 0;
-	}
-
-
-	public double getAvgDailySubs(LocalDate date) {
-		if (statsDataDaily.get(date)!=null)
-			return statsDataDaily.get(date).getTotalDailySubs();
-		return 0;
 	}
 
 	
@@ -92,6 +73,18 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	public static HashMap<String, Doctor>  getDoctors() {
 		return doctors;
 	}
+	
+
+	public static StatisitcalData getMonthlyData() {
+		return monthlyData;
+	}
+
+	public static void setMonthlyData(StatisitcalData monthlyData) {
+		Manager.monthlyData = monthlyData;
+	}
+	
+	
+	/**methods**/
 	
 	public boolean search(String id) 
 	/*tested*/
@@ -151,7 +144,7 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	}
 	
 	public void calcDailyStats() 
-	/**fix testing*/
+	/*tested*/
 	{
 		for(String docKey : doctors.keySet())
 			deleteOldStats(docKey);
@@ -178,33 +171,12 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 				
 				}
 		}
+		else
+			statsDataDaily.put(LocalDate.now(), new StatisitcalData(getID()));
+		
 			
 	}
 	
-	public void calcMonthlyStats() 
-	/**fix testing*/
-	{
-		int doctorsCount=0;
-		double tSub =0, tPatient = 0, tLabs = 0;
-		if (statsDataDaily.size() != 0) {
-			for (LocalDate key : statsDataDaily.keySet()) {
-				if(this.search(statsDataDaily.get(key).getDoctorId())) {
-					StatisitcalData current = statsDataDaily.get(key);
-					tSub = current.getTotalDailySubs();
-					tPatient = current.getTotalDailyPatients();
-					tLabs = current.getTotalDailylabs();
-					doctorsCount++;
-				}
-			}
-			if (doctorsCount != 0) {
-				monthlyData.setTotalDailylabs(tLabs/doctorsCount);
-				monthlyData.setTotalDailyPatients(tPatient/doctorsCount);
-				monthlyData.setTotalDailySubs(tSub/doctorsCount);
-			}
-				
-		}
-		
-	}
 	
 	public boolean updateDoctorInfo(String docId, String email, long phone) {
 		/*tested*/
@@ -221,12 +193,25 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 
 		
 	}
-
-	public static StatisitcalData getMonthlyData() {
-		return monthlyData;
+	
+	/**fix testing for all*/
+	public double getAvgDailyPatients(LocalDate date) {
+		if (statsDataDaily.get(date)!=null)
+			return statsDataDaily.get(date).getTotalDailyPatients();
+		return 0;
 	}
 
-	public static void setMonthlyData(StatisitcalData monthlyData) {
-		Manager.monthlyData = monthlyData;
+	public double getAvgDailylabs(LocalDate date) {
+		if (statsDataDaily.get(date)!=null)
+			return statsDataDaily.get(date).getTotalDailylabs();
+		return 0;
+	}
+
+
+	public double getAvgDailySubs(LocalDate date) {
+		if (statsDataDaily.get(date)!=null)
+			return statsDataDaily.get(date).getTotalDailySubs();
+		return 0;
 	}
 }
+
