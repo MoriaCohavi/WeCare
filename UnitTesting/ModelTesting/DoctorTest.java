@@ -222,8 +222,31 @@ public class DoctorTest {
 		Doctor doctor3 = new Doctor("000000003", "000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		
 		Assert.assertFalse(doctor3.updatePatientInfo("000000002", "Test@test", 23, "allergies", "chronic_diseases", "subscriptions"));
+	}
+	
+	@Test
+	public void CheckGetDailyAvgRecords() {
 		
+		Doctor doctor = new Doctor("000000011","000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
+		Patient patient = new Patient("000000002", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000011");
+		doctor.add(patient);
 		
+		MedicalRecord Record = new MedicalRecord("000000002", "000000011", 3, patient.getRecordCounter()+1, "purp_testing","desc_testing", "sum_testing", "sub, test", "diag_test", 60, 180, 90, 37, 60, 100);
+		
+		doctor.createMedicalRecord("000000002", Record);
+		StatisitcalData check = new StatisitcalData("000000011");
+		check.setTotalDailylabs(0);
+		check.setTotalDailyPatients(1);
+		check.setTotalDailySubs(2);
+		
+		StatisitcalData returned = doctor.getDailyAvgRecords(LocalDate.now(), "000000011");
+		Assert.assertTrue(check.getTotalDailylabs() == returned.getTotalDailylabs() &&
+							check.getTotalDailyPatients() == returned.getTotalDailyPatients() &&
+							check.getTotalDailySubs() == returned.getTotalDailySubs()); 
+		
+		Assert.assertFalse(check.getTotalDailylabs() != returned.getTotalDailylabs() &&
+				check.getTotalDailyPatients() != returned.getTotalDailyPatients() &&
+				check.getTotalDailySubs() != returned.getTotalDailySubs());
 		
 	}
 

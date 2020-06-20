@@ -98,6 +98,59 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 		Doctor.statsCount = statsCount;
 	}
 	
+	public String getPatientName(String patientId)
+	{
+		return this.getItem(patientId).getName();
+	}
+	
+	public String getPatientEmail(String patientId)
+	{
+		return this.getItem(patientId).getEmail();
+	}
+	
+	public long getPatientPhone(String patientId)
+	{
+		return this.getItem(patientId).getPhone();
+	}
+	
+	public int getPatientAge(String patientId)
+	{
+		return this.getItem(patientId).getAge();
+	}
+	
+	public int getPatientHeight(String patientId)
+	{
+		return this.getItem(patientId).getHeight();
+	}
+	
+	public int getPatientWeight(String patientId)
+	{
+		return this.getItem(patientId).getWeight();
+	}
+	
+	public String getPatientAllergic(String patientId)
+	{
+		return this.getItem(patientId).getAllergies();
+	}
+	
+	public String getPatientChronicDiseases(String patientId)
+	{
+		return this.getItem(patientId).getChronic_diseases();
+	}
+	
+	public String getPatientSubscription(String patientId)
+	{
+		return this.getItem(patientId).getSubscriptions();
+	}
+	
+	public HashMap<String, Patient> getPatients() {
+		return patients;
+	}
+	
+	public HashMap<Integer, MedicalRecord> getPatientsMedicalRecords()
+	{
+		return Patient.getMedicalRecords();
+	}
 	
 	
 	/**methods**/
@@ -168,27 +221,15 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 		return null;
 	}
 	
-	public boolean removeStatsRecord(StatisitcalData record, int statsNum) 
-	/**fix testing*/
-	{
-		
-		if (statsList.remove(statsNum, record))
-			return true;
-		
-		return false;
-		
-	}
-	
-	
 	public StatisitcalData getDailyAvgRecords(LocalDate date, String docId) { 
-		/**fix testing*/
+		/*tested*/
 		
 		StatisitcalData total = new StatisitcalData(this.getManagerID()), current = new StatisitcalData(this.getManagerID());
 		if (statsList.size() != 0)
 		{
 			int size = 0;
 			for (Integer Key : statsList.keySet()){
-				if (statsList.get(Key).getDoctorId() == docId && date.equals(statsList.get(Key).getDate())) {
+				if (statsList.get(Key).getDoctorId().equals(docId) && date.equals(statsList.get(Key).getDate())) {
 					current = statsList.get(Key);
 					total.addtotalDailylabs(current.getTotalDailylabs());
 					total.addtotalDailyPatients(current.getTotalDailyPatients());
@@ -260,7 +301,7 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	}
 		
 	public boolean addLabToPatient(String patientId, String labType) {
-		/**fix testing*/
+		/*tested*/
 		if (search(patientId)) {
 			
 			Lab newLab = new Lab(labType, "null", false, patientId);
@@ -308,63 +349,7 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 		}
 		else return false;
 	}
-	
-	/**THEY ALL NEED TESTING!*/
-	
-	public String getPatientName(String patientId)
-	{
-		return this.getItem(patientId).getName();
-	}
-	
-	public String getPatientEmail(String patientId)
-	{
-		return this.getItem(patientId).getEmail();
-	}
-	
-	public long getPatientPhone(String patientId)
-	{
-		return this.getItem(patientId).getPhone();
-	}
-	
-	public int getPatientAge(String patientId)
-	{
-		return this.getItem(patientId).getAge();
-	}
-	
-	public int getPatientHeight(String patientId)
-	{
-		return this.getItem(patientId).getHeight();
-	}
-	
-	public int getPatientWeight(String patientId)
-	{
-		return this.getItem(patientId).getWeight();
-	}
-	
-	public String getPatientAllergic(String patientId)
-	{
-		return this.getItem(patientId).getAllergies();
-	}
-	
-	public String getPatientChronicDiseases(String patientId)
-	{
-		return this.getItem(patientId).getChronic_diseases();
-	}
-	
-	public String getPatientSubscription(String patientId)
-	{
-		return this.getItem(patientId).getSubscriptions();
-	}
-	
-	public HashMap<String, Patient> getPatients() {
-		return patients;
-	}
-	
-	public HashMap<Integer, MedicalRecord> getPatientsMedicalRecords()
-	{
-		return Patient.getMedicalRecords();
-	}
-	
+
 
 	
 }
