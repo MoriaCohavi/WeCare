@@ -3,6 +3,7 @@ package Controller;
 import java.util.HashMap;
 
 import Model.*;
+import sun.tools.tree.ThisExpression;
 
 public class authenticationController{
 	public static String userSerPath = "src\\Model\\files\\users.ser";
@@ -37,7 +38,7 @@ public class authenticationController{
     
     public static int register(String id, User user)
     {
-        if (isNumeric(id) && id.length() == 9)
+        if (isNumeric(id) && id.length() == 9 && validateTestID(id))
             return Authentication.signUp(id,user);
         else
             return -2; //ID can contain 9 digits only
@@ -82,4 +83,19 @@ public class authenticationController{
 		return true;
 	}
 	
+	private static boolean validateTestID(String userID)
+	{
+		try
+		{
+			/** Test IDs are 000000000-000000030*/
+			int id = Integer.parseInt(userID);
+			if (id < 30)
+				return false;
+		}
+		catch (Exception e)
+		{
+			return false;
+		}
+		return true;
+	}
 }

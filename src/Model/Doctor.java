@@ -12,7 +12,7 @@ import java.time.temporal.ChronoUnit;
 //import java.time.*;
 import java.util.*;
 
-import com.sun.javafx.scene.EnteredExitedHandler;
+//import com.sun.javafx.scene.EnteredExitedHandler;
 
 
 public class Doctor extends User implements java.io.Serializable, CommandInterface {

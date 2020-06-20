@@ -56,6 +56,7 @@ public class StatisticalReportView {
 		frmStatisticalDetails.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
+				managerCtrl.serialize();
 				ManagerView newManagerView = new ManagerView(managerToken);
 				frmStatisticalDetails.dispose();
 
