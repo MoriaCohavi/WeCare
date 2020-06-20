@@ -8,6 +8,7 @@ import Model.*;
 
 public class doctorController {
 	public static String serPathPatients = "src\\Model\\files\\patients.ser";
+	public static String serPathLabs = "src\\Model\\files\\labs.ser";
 	public static String serPathRecords = "src\\Model\\files\\records.ser";
 	public static String serPathDoctorStas = "src\\Model\\files\\doctorstats.ser";
 	private Doctor currentModelDoctor;
@@ -22,6 +23,7 @@ public class doctorController {
 	public doctorController(Doctor doctor) {
 		currentModelDoctor = doctor;
 		deserializePatients();
+		deserializeLabs();
 		deserializeRecords();
 		deserializeStatsList();
 	}
@@ -29,6 +31,17 @@ public class doctorController {
 	public doctorController(String doctorId, String manaegerId, int phone, String name, String email, String special,String password,String user_type) { // needs to include doctorview obj
 		
 		currentModelDoctor = new Doctor(doctorId, manaegerId, phone, name, email, special, password, user_type);
+	}
+	
+	public boolean addNewLab(long token, String patientId, String labType, String labResults, boolean attentionRequired)
+	{
+		if(Authentication.validateUser(token, typeNeed))
+		{
+			Lab lab = new Lab(labType, labResults, attentionRequired, patientId);
+			if (currentModelDoctor.addLabToPatient(patientId, labType))
+				return true;
+		}
+		return false;	
 	}
 	
 	public boolean addNewPatient (long token, String id,int age, long phone, String name, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases) {
@@ -112,6 +125,19 @@ public class doctorController {
 		serHandlerController.serialize(tempPatients, serPathPatients);
 	}
 	
+	public void serializeLabs() {
+		HashMap<Integer,Lab> tempLabs = Patient.getLabs();
+		serHandlerController.serialize(tempLabs, serPathLabs);
+	}
+	
+	public boolean deserializeLabs() {
+		HashMap<Integer,Lab> tempLabs = (HashMap<Integer,Lab>)serHandlerController.deserialize(serPathLabs);
+		if (tempLabs == null)
+			return false;
+		Patient.setLabs(tempLabs);
+		Patient.setLabsCounter(tempLabs.size());
+		return true;
+	}
 	
 	public boolean deserializePatients() {
 		HashMap<String,Patient> tempPatients = (HashMap<String,Patient>)serHandlerController.deserialize(serPathPatients);
@@ -121,7 +147,7 @@ public class doctorController {
 		return true;
 	}
 	
-	public boolean deserializeStatsList() {
+	public static boolean deserializeStatsList() {
 		HashMap <Integer, StatisitcalData> tempStatsList = (HashMap<Integer, StatisitcalData>)serHandlerController.deserialize(serPathDoctorStas);
 		if (tempStatsList == null)
 			return false;

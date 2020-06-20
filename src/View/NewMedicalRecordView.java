@@ -161,6 +161,12 @@ public class NewMedicalRecordView {
 		frmMedicalRecord.getContentPane().add(txtf_visistDesc);
 		
 		JButton btn_addLabs = new JButton("Add Lab Results");
+		btn_addLabs.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				AddLabView labView = new AddLabView(doctorToken, patientID, doctor);
+			}
+		});
 		btn_addLabs.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		btn_addLabs.setBounds(765, 413, 245, 29);
 		frmMedicalRecord.getContentPane().add(btn_addLabs);

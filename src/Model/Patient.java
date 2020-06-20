@@ -11,10 +11,11 @@ import java.util.HashMap;
 public class Patient extends Person implements java.io.Serializable{
 
 	private static int recordCount = 0;
+	private static int labsCount = 0;
 	private int age, weight, height;
 	private String gender, allergies, chronic_diseases, subscriptions, doctorId;
 	private static HashMap<Integer, MedicalRecord> medicalRecords = new HashMap<Integer, MedicalRecord>();
-	private ArrayList<Lab> labs;
+	private static HashMap<Integer, Lab> labs = new HashMap<Integer, Lab>();
 	
 	public Patient(String id,int age, long phone, String name, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases, String docId) {
 		super(id, phone, name, email);
@@ -25,7 +26,6 @@ public class Patient extends Person implements java.io.Serializable{
 		this.allergies = allergies;
 		this.subscriptions = subscriptions;
 		this.chronic_diseases = chronic_diseases;
-		this.labs = new ArrayList<Lab>();
 		this.doctorId = docId;
 	}
 	
@@ -67,6 +67,11 @@ public class Patient extends Person implements java.io.Serializable{
 	public static void setRecordsCounter(int counter)
 	{
 		recordCount = counter;
+	}
+	
+	public static void setLabsCounter(int counter)
+	{
+		labsCount = counter;
 	}
 
 	public int getAge() {
@@ -173,9 +178,21 @@ public class Patient extends Person implements java.io.Serializable{
 	public boolean addLab(Lab newLab) 
 	/*tested*/
 	{
-
-		return this.labs.add(newLab);
-		
+			labs.put(++labsCount ,newLab);				
+			return true;
+	}
+	
+	public static boolean setLabs(HashMap<Integer, Lab> labMap) 
+	/*tested*/
+	{
+			labs = labMap;				
+			return true;
+	}
+	
+	public static HashMap<Integer, Lab>  getLabs() 
+	/*tested*/
+	{
+		return labs;
 	}
 	
 	public boolean addMedicalRecord (MedicalRecord newRecord) 

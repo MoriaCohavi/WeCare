@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Controller.authenticationController;
 import Controller.clinicController;
+import Controller.doctorController;
 import Controller.managerController;
 import Model.Doctor;
 import Model.Manager;
@@ -36,6 +37,7 @@ import java.awt.event.ActionEvent;
 
 public class ManagerView {
 
+	private doctorController docCtrl;
 	private managerController managerCtrl;
 	private authenticationController authCtrl;
 	private Manager managerDetails;
@@ -215,6 +217,8 @@ public class ManagerView {
 		btnStats.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				managerCtrl.deserializeStats();
+				managerCtrl.updateStats(managerToken);
 				StatisticalReportView statsView = new StatisticalReportView(managerToken);
 				frmManager.dispose();
 			}

@@ -78,7 +78,6 @@ public class managerController {
 			}		
 		}
 	
-	
 	public Manager getManager() {
 		
 		return clinicManager;
@@ -126,6 +125,14 @@ public class managerController {
 		clinicManager.setStatsFlag(tempStatsFlags);
 		clinicManager.setDoctors(tempDoctors);
 		return true;
+	}
+	
+	public boolean deserializeStats()
+	{
+		if (doctorController.deserializeStatsList())
+			return true;
+		return false;
+		
 	}
 	
 	public boolean updateDoctor(long managerToken, String id, String email, long phone)

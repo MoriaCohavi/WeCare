@@ -89,7 +89,7 @@ public class PatientMedicalHistoryView {
 			}
 		});
 		btn_addMedicalRecord.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btn_addMedicalRecord.setBounds(80, 470, 214, 29);
+		btn_addMedicalRecord.setBounds(80, 470, 187, 29);
 		frmPatientHistory.getContentPane().add(btn_addMedicalRecord);
 		
 		JButton btn_editPatient = new JButton("View/Edit Patient Info");
@@ -101,7 +101,7 @@ public class PatientMedicalHistoryView {
 			}
 		});
 		btn_editPatient.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		btn_editPatient.setBounds(304, 470, 208, 29);
+		btn_editPatient.setBounds(277, 470, 205, 29);
 		frmPatientHistory.getContentPane().add(btn_editPatient);
 		
 		JScrollPane scrollPane = new JScrollPane();
