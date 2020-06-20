@@ -170,6 +170,8 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 				statsDataDaily.get(LocalDate.now()).setTotalDailySubs(tSub/doctorsCount);
 				
 				}
+			else
+				statsDataDaily.put(LocalDate.now(), new StatisitcalData(getID()));
 		}
 		else
 			statsDataDaily.put(LocalDate.now(), new StatisitcalData(getID()));
@@ -194,21 +196,27 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		
 	}
 	
-	/**fix testing for all*/
-	public double getAvgDailyPatients(LocalDate date) {
+	
+	public double getAvgDailyPatients(LocalDate date
+			/*tested*/
+	{
 		if (statsDataDaily.get(date)!=null)
 			return statsDataDaily.get(date).getTotalDailyPatients();
 		return 0;
 	}
 
-	public double getAvgDailylabs(LocalDate date) {
+	public double getAvgDailylabs(LocalDate date)
+	/*tested*/
+	{
 		if (statsDataDaily.get(date)!=null)
 			return statsDataDaily.get(date).getTotalDailylabs();
 		return 0;
 	}
 
 
-	public double getAvgDailySubs(LocalDate date) {
+	public double getAvgDailySubs(LocalDate date) 
+	/*tested*/
+	{
 		if (statsDataDaily.get(date)!=null)
 			return statsDataDaily.get(date).getTotalDailySubs();
 		return 0;
