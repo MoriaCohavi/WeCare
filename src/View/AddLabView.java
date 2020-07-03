@@ -1,14 +1,23 @@
 package View;
 
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
+import java.awt.Color;
+
 import javax.swing.JLabel;
 import javax.swing.JCheckBox;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 
@@ -25,21 +34,6 @@ public class AddLabView {
 	private JTextField txtfLabType;
 	private JTextField txtfResults;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					AddLabView window = new AddLabView();
-//					window.frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
 
 	/**
 	 * Create the application.
@@ -56,58 +50,88 @@ public class AddLabView {
 		frmAddLabResults.setTitle("Add Lab Results");
 		frmAddLabResults.setBounds(100, 100, 391, 331);
 		frmAddLabResults.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		frmAddLabResults.getContentPane().setLayout(null);
-		
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 572, 10);
-		frmAddLabResults.getContentPane().add(panel);
+		frmAddLabResults.getContentPane().add(panel, BorderLayout.CENTER);
 		
-		JLabel lblType = new JLabel("Lab type:");
-		lblType.setBounds(47, 52, 67, 13);
-		frmAddLabResults.getContentPane().add(lblType);
-		
-		JLabel lblResults = new JLabel("Results:");
-		lblResults.setBounds(47, 97, 67, 13);
-		frmAddLabResults.getContentPane().add(lblResults);
-		
-		JCheckBox chckbxAttention = new JCheckBox("Attention required?");
-		chckbxAttention.setBounds(129, 170, 159, 21);
-		frmAddLabResults.getContentPane().add(chckbxAttention);
-		
-		JLabel lblWarning = new JLabel("");
-		lblWarning.setBounds(47, 148, 45, 13);
-		frmAddLabResults.getContentPane().add(lblWarning);
-		
-		JButton btnAdd = new JButton("Add");
-		btnAdd.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				docCtrl = new doctorController(doctor);
-				if (docCtrl.addNewLab(doctorToken, patientID, txtfLabType.getText(), txtfResults.getText(), chckbxAttention.isSelected()))
-				{
-					docCtrl.serializeLabs();
-					docCtrl.serializeStatsList();
+		try {
+			BufferedImage img = ImageIO.read(new File("src\\view\\DoctorDetailsViewImg.jpg"));
+			Image dimg = img.getScaledInstance(400, 400, Image.SCALE_SMOOTH);
+			ImageIcon icon = new ImageIcon(dimg);
+			JLabel backgroundLabel = new JLabel(icon);
+			backgroundLabel.setBounds(0, 0, 375, 292);
+			
+			BufferedImage img2 = ImageIO.read(new File("src\\view\\logo2Img.jpg"));
+			Image dimg2 = img2.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+			frmAddLabResults.setIconImage(dimg2);
+			
+			JLabel lblType = new JLabel("Lab type:");
+			lblType.setBounds(47, 52, 67, 13);
+			lblType.setForeground(Color.black);
+			lblType.setFont(new Font("Tahoma", Font.BOLD, 14));
+			
+			
+			JLabel lblResults = new JLabel("Results:");
+			lblResults.setBounds(47, 97, 67, 13);
+			lblResults.setForeground(Color.black);
+			lblResults.setFont(new Font("Tahoma", Font.BOLD, 14));
+			
+			
+			JCheckBox chckbxAttention = new JCheckBox("Attention required?");
+			chckbxAttention.setBounds(129, 170, 159, 21);
+			chckbxAttention.setForeground(Color.black);
+			chckbxAttention.setFont(new Font("Tahoma", Font.BOLD, 10));
+			chckbxAttention.setOpaque(false);
+			
+			JLabel lblWarning = new JLabel("");
+			lblWarning.setBounds(47, 148, 45, 13);
+			
+			
+			JButton btnAdd = new JButton("Add");
+			btnAdd.setBounds(140, 207, 85, 21);
+			
+			
+			txtfLabType = new JTextField();
+			txtfLabType.setBounds(129, 49, 96, 19);
+			txtfLabType.setColumns(10);
+			
+			txtfResults = new JTextField();
+			txtfResults.setBounds(129, 94, 96, 19);
+			txtfResults.setColumns(10);
+			
+			panel.setLayout(null);
+			panel.add(lblType);
+			panel.add(lblResults);
+			panel.add(chckbxAttention);
+			panel.add(lblWarning);
+			panel.add(btnAdd);
+			panel.add(txtfLabType);
+			panel.add(txtfResults);
+			panel.add(backgroundLabel);
+			frmAddLabResults.setVisible(true);
+			
+			btnAdd.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					docCtrl = new doctorController(doctor);
+					if (docCtrl.addNewLab(doctorToken, patientID, txtfLabType.getText(), txtfResults.getText(), chckbxAttention.isSelected()))
+					{
+						docCtrl.serializeLabs();
+						docCtrl.serializeStatsList();
+					}
+					else
+						lblWarning.setText("Error! Lab not set - contact administrator");
+						lblWarning.setForeground(Color.black);
+						lblWarning.setFont(new Font("Tahoma", Font.BOLD, 14));
+					frmAddLabResults.dispose();
 				}
-				else
-					lblWarning.setText("Error! Lab not set - contact administrator");
-				frmAddLabResults.dispose();
-			}
-		});
-		btnAdd.setBounds(140, 207, 85, 21);
-		frmAddLabResults.getContentPane().add(btnAdd);
+			});
+			
+			
+		}
 		
-		txtfLabType = new JTextField();
-		txtfLabType.setBounds(129, 49, 96, 19);
-		frmAddLabResults.getContentPane().add(txtfLabType);
-		txtfLabType.setColumns(10);
-		
-		txtfResults = new JTextField();
-		txtfResults.setBounds(129, 94, 96, 19);
-		frmAddLabResults.getContentPane().add(txtfResults);
-		txtfResults.setColumns(10);
-		
-
-		frmAddLabResults.setVisible(true);
+		catch(IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
