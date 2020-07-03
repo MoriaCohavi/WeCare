@@ -81,7 +81,7 @@ public class AddPatientView {
 			
 			panel.setLayout(null);
 			
-			BufferedImage img = ImageIO.read(new File("src\\view\\backgroundImg.jpg"));
+			BufferedImage img = ImageIO.read(new File("src\\view\\background2Img.jpg"));
 			Image dimg = img.getScaledInstance(1100, 808, Image.SCALE_SMOOTH);
 			ImageIcon icon = new ImageIcon(dimg);
 			JLabel backgroundLabel = new JLabel(icon);

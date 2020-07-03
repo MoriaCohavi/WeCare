@@ -59,7 +59,7 @@ public class AddDoctorView {
 		JPanel panel = new JPanel();
 		frmAddDoctor.getContentPane().add(panel, BorderLayout.CENTER);
 		try {
-			BufferedImage img = ImageIO.read(new File("src\\view\\backgroundImg.jpg"));
+			BufferedImage img = ImageIO.read(new File("src\\view\\background2Img.jpg"));
 			Image dimg = img.getScaledInstance(450, 536, Image.SCALE_SMOOTH);
 			ImageIcon icon = new ImageIcon(dimg);
 			JLabel backgroundLabel = new JLabel(icon);

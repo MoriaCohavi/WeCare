@@ -73,7 +73,7 @@ public class NewMedicalRecordView {
 		frmMedicalRecord.getContentPane().add(panel, BorderLayout.CENTER);
 		
 		try {
-			BufferedImage img = ImageIO.read(new File("src\\view\\backgroundImg.jpg"));
+			BufferedImage img = ImageIO.read(new File("src\\view\\background2Img.jpg"));
 			Image dimg = img.getScaledInstance(1200, 800, Image.SCALE_SMOOTH);
 			ImageIcon icon = new ImageIcon(dimg);
 			JLabel backgroundLabel = new JLabel(icon);

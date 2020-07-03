@@ -66,7 +66,7 @@ public class StatisticalReportView {
 		frmStatisticalDetails.getContentPane().add(panel, BorderLayout.CENTER);
 		
 		try {		
-			BufferedImage img2 = ImageIO.read(new File("src\\view\\backgroundImg.jpg"));
+			BufferedImage img2 = ImageIO.read(new File("src\\view\\background2Img.jpg"));
 			Image dimg2 = img2.getScaledInstance(800, 508, Image.SCALE_SMOOTH);
 			ImageIcon icon2 = new ImageIcon(dimg2);
 			JLabel backgroundLabel = new JLabel(icon2);

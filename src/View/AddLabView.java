@@ -55,7 +55,7 @@ public class AddLabView {
 		frmAddLabResults.getContentPane().add(panel, BorderLayout.CENTER);
 		
 		try {
-			BufferedImage img = ImageIO.read(new File("src\\view\\DoctorDetailsViewImg.jpg"));
+			BufferedImage img = ImageIO.read(new File("src\\view\\background3Img.jpg"));
 			Image dimg = img.getScaledInstance(400, 400, Image.SCALE_SMOOTH);
 			ImageIcon icon = new ImageIcon(dimg);
 			JLabel backgroundLabel = new JLabel(icon);
