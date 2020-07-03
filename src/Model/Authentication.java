@@ -48,7 +48,6 @@ public class Authentication implements java.io.Serializable{
 	
 	
 	public static String SHA1(String password) // this function take a clear password and change it to SHA1 hash.
-	/*tested*/
 	{
 		String sha1 = "";
 		try {
@@ -63,7 +62,6 @@ public class Authentication implements java.io.Serializable{
 	}
 	
 	public static int signUp(String id, User user)
-	/*tested*/
 	{
 		if  (users.containsKey(id))
 			return -1;
@@ -72,7 +70,6 @@ public class Authentication implements java.io.Serializable{
 	}
 	
 	public static boolean deleteSignUp(String id)
-	/*tested*/
 	{
 		if  (users.containsKey(id)) {
 			users.remove(id);
@@ -83,7 +80,6 @@ public class Authentication implements java.io.Serializable{
 	
 	
 	public static long signIn(String id, String password)
-	/*tested*/
 	{
 	
 		if (!users.isEmpty())
@@ -107,7 +103,6 @@ public class Authentication implements java.io.Serializable{
 	}
 	
 	public static boolean signOut(long token)
-	/*tested*/
 	{
 		if(loggedinusers.containsKey(token))
 		{
@@ -119,7 +114,6 @@ public class Authentication implements java.io.Serializable{
 	}
 	
 	public static boolean validateUser(long token,String typeNeed)
-	/*tested*/
 	{
 		if(!(loggedinusers.containsKey(token)) || !(typeNeed.equals(loggedinusers.get(token).getUser_type())))
 			return false;
@@ -128,7 +122,6 @@ public class Authentication implements java.io.Serializable{
 	}
 	
 	public static long generateToken(String id) 
-	/*tested*/
 	{
 		long leftLimit = 1000000000L;
 		long rightLimit = 9999999999L;
@@ -161,7 +154,6 @@ public class Authentication implements java.io.Serializable{
 	}
 	
 	public User getItem(String userId) 
-	/*tested*/
 	{
 		
 		if (search(userId))
@@ -172,7 +164,6 @@ public class Authentication implements java.io.Serializable{
 	}
 	
 	public boolean remove(String userId) 
-	/*tested*/
 	{
 			
 		if (search(userId)) {
@@ -183,7 +174,6 @@ public class Authentication implements java.io.Serializable{
 		return false;		
 	}
 	public static boolean updateDoctorInfo(String docId,  String email, long phone)
-	/*tested*/	
 	{
 			if (users.containsKey(docId))
 			{

@@ -151,7 +151,7 @@ public class AddDoctorView {
 			
 			
 			JLabel lbl_warning = new JLabel("");
-			lbl_warning.setBounds(34, 392, 390, 19);
+			lbl_warning.setBounds(10, 390, 414, 19);
 			lbl_warning.setForeground(Color.black);
 			lbl_warning.setFont(new Font("Tahoma", Font.BOLD, 12));
 			
@@ -182,8 +182,8 @@ public class AddDoctorView {
 			btn_addDoctor.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if ((txtf_id.getText() != null && txtf_id.getText().length() != 9) || txtf_name.getText() == null || txtf_passwd.getText() == null)
-						lbl_warning.setText("Please! Put valid ID of 9 digits, name and password");
+					if ((txtf_id.getText() != null && txtf_id.getText().length() != 9) || txtf_name.getText() == null || txtf_passwd.getText() == null || (txtf_passwd.getText() != null && txtf_passwd.getText().length() < 8))
+						lbl_warning.setText("Please! Put valid ID (9 digits), password (8 characters) and name");
 					else
 					{
 						

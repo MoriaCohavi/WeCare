@@ -129,7 +129,6 @@ public class Patient extends Person implements java.io.Serializable{
 	/**methods**/
 
 	public MedicalRecord getMedicalRecord(int id, String patientId, String docId) 
-	/*tested*/
 	{
 		for (Integer key : medicalRecords.keySet()) {
 			if (key == id) {
@@ -143,7 +142,6 @@ public class Patient extends Person implements java.io.Serializable{
 	
 
 	public void updatePatientInfo(int phone,int age, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases)
-	/*tested*/
 	{
 		if(this.getPhone() != phone)
 			this.setPhone(phone);
@@ -176,27 +174,23 @@ public class Patient extends Person implements java.io.Serializable{
 		
 
 	public boolean addLab(Lab newLab) 
-	/*tested*/
 	{
 			labs.put(++labsCount ,newLab);				
 			return true;
 	}
 	
 	public static boolean setLabs(HashMap<Integer, Lab> labMap) 
-	/*tested*/
 	{
 			labs = labMap;				
 			return true;
 	}
 	
 	public static HashMap<Integer, Lab>  getLabs() 
-	/*tested*/
 	{
 		return labs;
 	}
 	
 	public boolean addMedicalRecord (MedicalRecord newRecord) 
-	/*tested*/
 	{
 		
 		if (medicalRecords.put(++recordCount, newRecord) == null)

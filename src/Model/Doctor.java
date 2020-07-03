@@ -156,13 +156,11 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	/**methods**/
 	
 	public void addSpecialization (String newSpecial) { 
-		/*tested*/
 		
 		this.specialization = this.specialization.concat(" and " + newSpecial);
 	}
 	
 	public boolean add(Object obj) {
-		/*tested*/
 		
 		Patient newPatient = (Patient)obj;
 		if (!search(newPatient.getId()))
@@ -176,7 +174,6 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	
 	
 	public boolean remove(String id) { 
-		/*tested*/
 		
 		if (search(id)) 
 		{
@@ -189,7 +186,6 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	}
 	
 	public boolean search(String id) { 
-		/*tested*/
 		
 		if(patients.containsKey(id) && this.getId().equals(patients.get(id).getDoctorId())) 
 			return true;
@@ -197,7 +193,6 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	}
 	
 	public Patient getItem(String patientId) { 
-		/*tested*/
 
 		if (search(patientId))
 			return patients.get(patientId);
@@ -208,7 +203,6 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	
 	
 	public StatisitcalData getFirstRecord() { 
-		/*tested*/
 		
 		HashMap<Integer, StatisitcalData> entries = statsList;
 		if(entries.isEmpty())
@@ -222,7 +216,6 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	}
 	
 	public StatisitcalData getDailyAvgRecords(LocalDate date, String docId) { 
-		/*tested*/
 		
 		StatisitcalData total = new StatisitcalData(this.getManagerID()), current = new StatisitcalData(this.getManagerID());
 		if (statsList.size() != 0)
@@ -255,17 +248,14 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	
 	
 	public void updatePatientInfo(String patientId, int phone,int age, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases) {
-		/*tested*/
-		
+	
 		if (search(patientId)) {
 			patients.get(patientId).updatePatientInfo(phone, age, email, weight, height, gender, allergies, subscriptions, chronic_diseases);
 		}
 	}
 
 	 
-	public boolean createMedicalRecord(String patientId, MedicalRecord newRecord) {		
-		/*tested*/
-		
+	public boolean createMedicalRecord(String patientId, MedicalRecord newRecord) {				
 		if (search(patientId)) {
 			patients.get(patientId).addMedicalRecord(newRecord);
 			
@@ -301,7 +291,6 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	}
 		
 	public boolean addLabToPatient(String patientId, String labType) {
-		/*tested*/
 		if (search(patientId)) {
 			
 			Lab newLab = new Lab(labType, "null", false, patientId);
@@ -336,7 +325,6 @@ public class Doctor extends User implements java.io.Serializable, CommandInterfa
 	
 	
 	public boolean updatePatientInfo(String patientId, String email, long phone, String allergies, String chronic_diseases, String subscriptions)
-	/*tested*/
 	{
 		if(search(patientId))
 		{

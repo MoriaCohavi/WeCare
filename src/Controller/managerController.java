@@ -103,8 +103,6 @@ public class managerController {
 		return clinicManager.getItem(id);
 	}
 
-//	private static LocalDateTime statsFlag;
-//private static StatisitcalData stats;
 	public void serialize() {
 		HashMap<String, Doctor> tempDoctors = Manager.getDoctors();
 		LocalDateTime tempStatsFlags = clinicManager.getStatsFlag();

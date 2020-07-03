@@ -87,7 +87,6 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	/**methods**/
 	
 	public boolean search(String id) 
-	/*tested*/
 	{
 		
 		if(doctors.containsKey(id) && this.getID().equals(doctors.get(id).getManagerID())) 
@@ -96,7 +95,6 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	}
 	
 	public Doctor getItem(String doctorId) 
-	/*tested*/
 	{
 		
 		if (search(doctorId))
@@ -107,7 +105,6 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	}
 	
 	public boolean add(Object obj) 
-	/*tested*/
 	{
 		Doctor newDoc = (Doctor)obj;
 		if (!search(newDoc.getId()))
@@ -120,7 +117,6 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	}
 	
 	public boolean remove(String id) 
-	/*tested*/
 	{
 			
 		if (search(id)) {
@@ -144,7 +140,6 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	}
 	
 	public void calcDailyStats() 
-	/*tested*/
 	{
 		for(String docKey : doctors.keySet())
 			deleteOldStats(docKey);
@@ -181,7 +176,6 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	
 	
 	public boolean updateDoctorInfo(String docId, String email, long phone) {
-		/*tested*/
 		
 		if (search(docId) && Authentication.updateDoctorInfo(docId, email, phone)) 
 		{
@@ -198,7 +192,6 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	
 	
 	public double getAvgDailyPatients(LocalDate date)
-	/*tested*/
 	{
 		if (statsDataDaily.get(date)!=null)
 			return statsDataDaily.get(date).getTotalDailyPatients();
@@ -206,7 +199,6 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	}
 
 	public double getAvgDailylabs(LocalDate date)
-	/*tested*/
 	{
 		if (statsDataDaily.get(date)!=null)
 			return statsDataDaily.get(date).getTotalDailylabs();
@@ -215,7 +207,6 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 
 
 	public double getAvgDailySubs(LocalDate date) 
-	/*tested*/
 	{
 		if (statsDataDaily.get(date)!=null)
 			return statsDataDaily.get(date).getTotalDailySubs();

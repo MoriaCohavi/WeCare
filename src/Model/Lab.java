@@ -52,7 +52,6 @@ public class Lab implements java.io.Serializable {
 	/**methods**/
 	
 	public void updateResults(String result, boolean attention) 
-	/*tested*/
 	{
 		this.setResult(result);
 		this.setAttentionRequired(attention);

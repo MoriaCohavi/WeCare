@@ -267,9 +267,4 @@ public class doctorController {
 		}
 		return false;
 	}
-	
-//	public boolean createMedicalRecord(String visitPurpose, String visitDesc, String visitDiagnostic, String visitSummary, String visitSubscription)
-//	{
-//		return true;
-//	}
 }
