@@ -5,4 +5,3 @@ public interface CommandInterface {
 	public boolean remove(String nameToRemove);
 	public Object getItem(String id);
 }
-

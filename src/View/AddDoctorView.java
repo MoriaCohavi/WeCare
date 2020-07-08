@@ -94,7 +94,7 @@ public class AddDoctorView {
 			lbl_email.setFont(new Font("Tahoma", Font.BOLD, 12));
 			
 			JLabel lbl_address = new JLabel("Address:");
-			lbl_address.setBounds(34, 185, 45, 13);
+			lbl_address.setBounds(34, 185, 62, 13);
 			lbl_address.setForeground(Color.black);
 			lbl_address.setFont(new Font("Tahoma", Font.BOLD, 12));
 			

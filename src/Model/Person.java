@@ -24,7 +24,6 @@ public class Person implements java.io.Serializable {
 
 	public String getId() {
 		return this.id;
-		
 	}
 	
 	public long getPhone() {

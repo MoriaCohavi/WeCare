@@ -16,9 +16,7 @@ import Model.*;
 public class PatientTest {
 
 	@Test
-	public void CheckUpdatePatient()
-	{
-		
+	public void CheckUpdatePatient() {
 		Patient patient = new Patient("000000001",26, 0541234567, "moria test", "moria@test.com", 53, 156, "Female", "", "","", "000000002");
 		int age = 27;
 		int height = 166;
@@ -35,9 +33,7 @@ public class PatientTest {
 	}
 	
 	@Test
-	public void CheckAddLabs()
-	{
-		
+	public void CheckAddLabs() {
 		Patient patient = new Patient("000000003",26, 0541234567, "moria test", "moria@test.com", 53, 156, "Female", "", "","", "000000004");
 		
 		String type = "test";
@@ -46,13 +42,10 @@ public class PatientTest {
 		Lab lab = new Lab(type, result, attentionRequired, patient.getId());
 		
 		Assert.assertTrue(patient.addLab(lab));
-	   
 	}
 	
 	@Test
-	public void CheckAddMedicalRecord()
-	{
-		
+	public void CheckAddMedicalRecord() {
 		Patient patient = new Patient("000000005",26, 0541234567, "moria test", "moria@test.com", 53, 156, "Female", "", "","", "000000006");
 		String doctor = "000000005";
 		int numDays = 10;
@@ -72,12 +65,8 @@ public class PatientTest {
 		Assert.assertTrue(patient.addMedicalRecord(med)); 
 	}
 	
-	
-	
 	@Test
-	public void CheckgGetMedicalRecord()
-	{
-		
+	public void CheckgGetMedicalRecord() {
 		Patient patient = new Patient("000000006",26, 0541234567, "moria test", "moria@test.com", 53, 156, "Female", "", "","", "000000007");
 		String doctor = "000000007";
 		int numDays = 10;
@@ -97,8 +86,6 @@ public class PatientTest {
 		patient.addMedicalRecord(med); 
 		
 		Assert.assertTrue(patient.getMedicalRecord(med.get_RecordId(), "000000006", "000000007")!=null);
-		Assert.assertTrue(patient.getMedicalRecord(med.get_RecordId(), "000000006", "000000008")==null);
-		
-		
+		Assert.assertTrue(patient.getMedicalRecord(med.get_RecordId(), "000000006", "000000008")==null);	
 	}
 }

@@ -1,6 +1,5 @@
 package ModelTesting;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
@@ -16,8 +15,7 @@ import Model.*;
 public class AuthenticationTest {
 	
 	@Test
-	public void CheckSHA1()
-	{
+	public void CheckSHA1() {
 		String first = Authentication.SHA1("admin");
 		String second = Authentication.SHA1("admin");
 		
@@ -26,20 +24,17 @@ public class AuthenticationTest {
 	}
 	
 	@Test
-	public void CheckSignUp()
-	{
+	public void CheckSignUp() {
 		User user = new User("000000001", 0541234567, "test", "test.gmail.com", "password", "Doctor");		
 	    Assert.assertTrue(Authentication.signUp(user.getId(), user) == 1);
 	    Assert.assertTrue(Authentication.signUp(user.getId(), user) == -1);
 	    
 	    Authentication.deleteSignUp("000000001");
 	    Authentication.signOut(user.getToken());
-	    
 	}
 	
 	@Test
-	public void CheckSignIn()
-	{
+	public void CheckSignIn() {
 		User user = new User("000000002", 0541234567, "test", "test.gmail.com", "password", "Doctor");
 		Authentication.signUp("000000002", user);
 	    Assert.assertTrue(Authentication.signIn("000000002", "testFalse") == -1);
@@ -47,26 +42,21 @@ public class AuthenticationTest {
 	    
 	    Authentication.deleteSignUp("000000002");
 	    Authentication.signOut(user.getToken());
-	    
-
-	    
 	}
 	
 	@Test
-	public void CheckSignOut()
-	{
+	public void CheckSignOut() {
 		User user = new User("000000003", 0541234567, "test", "test.gmail.com", "password", "Doctor");
 		Authentication.signUp(user.getId(), user);
 		long token = Authentication.signIn("000000003", "password");
 		Assert.assertTrue(Authentication.signOut(token));
 		Assert.assertFalse(Authentication.signOut(token));
 		
-		 Authentication.deleteSignUp("000000003");
+		Authentication.deleteSignUp("000000003");
 	}
 	
 	@Test
-	public void CheckValidateuser()
-	{
+	public void CheckValidateuser() {
 		User user1 = new User("000000004", 0541234567, "test", "test.gmail.com", "password", "Doctor");
 		Authentication.signUp(user1.getId(), user1);
 		User user2 = new User("000000005", 0541234567, "test", "test.gmail.com", "password", "Manager");
@@ -86,19 +76,17 @@ public class AuthenticationTest {
 	}
 	
 	@Test
-	public void CheckGenerateToken()
-	{
+	public void CheckGenerateToken() {
 		User user1 = new User("000000006", 0541234567, "test", "test.gmail.com", "password", "Doctor");
 		Authentication.signUp(user1.getId(), user1);
 		Assert.assertTrue(Authentication.generateToken(user1.getId()) != Authentication.generateToken(user1.getId()));
 		
 		Authentication.signOut(user1.getToken());
-		 Authentication.deleteSignUp("000000006");
+		Authentication.deleteSignUp("000000006");
 	}
 	
 	@Test
-	public void CheckUpdateDoctorInfo()
-	{
+	public void CheckUpdateDoctorInfo() {
 		Doctor doctor = new Doctor("000000007", "000000008", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		Authentication.signUp("000000007", doctor);
 		Assert.assertTrue(Authentication.updateDoctorInfo(doctor.getId(), "Email test", 0541234567));
@@ -114,8 +102,5 @@ public class AuthenticationTest {
 	    Authentication.signUp(user.getId(), user);
 	    Assert.assertTrue(Authentication.deleteSignUp(user.getId()));
 	    Assert.assertFalse(Authentication.deleteSignUp(user.getId()));
-	    
-		
-	}
-	
+	}	
 }

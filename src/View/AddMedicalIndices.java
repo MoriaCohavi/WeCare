@@ -74,7 +74,7 @@ public class AddMedicalIndices {
 			lblHeight.setFont(new Font("Tahoma", Font.BOLD, 12));
 			
 			JLabel lblWeight = new JLabel("Weight:");
-			lblWeight.setBounds(52, 93, 45, 13);
+			lblWeight.setBounds(52, 93, 63, 13);
 			lblWeight.setForeground(Color.black);
 			lblWeight.setFont(new Font("Tahoma", Font.BOLD, 12));
 			

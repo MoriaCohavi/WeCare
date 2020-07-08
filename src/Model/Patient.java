@@ -8,8 +8,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Patient extends Person implements java.io.Serializable{
-
+public class Patient extends Person implements java.io.Serializable {
 	private static int recordCount = 0;
 	private static int labsCount = 0;
 	private int age, weight, height;
@@ -17,7 +16,8 @@ public class Patient extends Person implements java.io.Serializable{
 	private static HashMap<Integer, MedicalRecord> medicalRecords = new HashMap<Integer, MedicalRecord>();
 	private static HashMap<Integer, Lab> labs = new HashMap<Integer, Lab>();
 	
-	public Patient(String id,int age, long phone, String name, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases, String docId) {
+	public Patient(String id,int age, long phone, String name, String email, int weight, int height, 
+						String gender, String allergies, String subscriptions, String chronic_diseases, String docId) {
 		super(id, phone, name, email);
 		this.weight = weight;
 		this.height = height;
@@ -59,18 +59,15 @@ public class Patient extends Person implements java.io.Serializable{
 		this.subscriptions = subscriptions;
 	}
 	
-	public static int getRecordsCounter()
-	{
+	public static int getRecordsCounter() {
 		return recordCount;
 	}
 	
-	public static void setRecordsCounter(int counter)
-	{
+	public static void setRecordsCounter(int counter) {
 		recordCount = counter;
 	}
 	
-	public static void setLabsCounter(int counter)
-	{
+	public static void setLabsCounter(int counter) {
 		labsCount = counter;
 	}
 
@@ -86,7 +83,6 @@ public class Patient extends Person implements java.io.Serializable{
 		return this.height;
 	}
 
-
 	public String getAllergies() {
 		return allergies;
 	}
@@ -95,18 +91,15 @@ public class Patient extends Person implements java.io.Serializable{
 		return doctorId;
 	}
 
-
 	public void setDoctorId(String doctorId) {
 		this.doctorId = doctorId;
 	}
 	
-	public static HashMap<Integer, MedicalRecord> getMedicalRecords()
-	{
+	public static HashMap<Integer, MedicalRecord> getMedicalRecords() {
 		return medicalRecords;
 	}
 	
-	public static void setMedicalRecords(HashMap<Integer, MedicalRecord> tempRecords)
-	{
+	public static void setMedicalRecords(HashMap<Integer, MedicalRecord> tempRecords) {
 		medicalRecords = tempRecords;
 	}
 	
@@ -128,21 +121,19 @@ public class Patient extends Person implements java.io.Serializable{
 	
 	/**methods**/
 
-	public MedicalRecord getMedicalRecord(int id, String patientId, String docId) 
-	{
+	public MedicalRecord getMedicalRecord(int id, String patientId, String docId) {
 		for (Integer key : medicalRecords.keySet()) {
 			if (key == id) {
 				if (medicalRecords.get(key).get_PatientId().equals(patientId)&& medicalRecords.get(id).get_DoctorId().equals(docId))
 					return medicalRecords.get(id);
 			} 
 		}
-		return null;
 		
+		return null;
 	}
-	
 
-	public void updatePatientInfo(int phone,int age, String email, int weight, int height, String gender, String allergies, String subscriptions, String chronic_diseases)
-	{
+	public void updatePatientInfo(int phone,int age, String email, int weight, int height, String gender, String allergies, 
+										String subscriptions, String chronic_diseases){
 		if(this.getPhone() != phone)
 			this.setPhone(phone);
 		
@@ -169,37 +160,26 @@ public class Patient extends Person implements java.io.Serializable{
 		
 		if(this.chronic_diseases != chronic_diseases)
 			this.chronic_diseases = chronic_diseases;
-				
 	}
-		
 
-	public boolean addLab(Lab newLab) 
-	{
-			labs.put(++labsCount ,newLab);				
-			return true;
+	public boolean addLab(Lab newLab) {
+		labs.put(++labsCount ,newLab);				
+		return true;
 	}
 	
-	public static boolean setLabs(HashMap<Integer, Lab> labMap) 
-	{
-			labs = labMap;				
-			return true;
+	public static boolean setLabs(HashMap<Integer, Lab> labMap) {
+		labs = labMap;				
+		return true;
 	}
 	
-	public static HashMap<Integer, Lab>  getLabs() 
-	{
+	public static HashMap<Integer, Lab>  getLabs() {
 		return labs;
 	}
 	
-	public boolean addMedicalRecord (MedicalRecord newRecord) 
-	{
-		
+	public boolean addMedicalRecord (MedicalRecord newRecord) {
 		if (medicalRecords.put(++recordCount, newRecord) == null)
 			return true;
 		
 		return false;
 	}
-
-
-
-	 
 }

@@ -17,8 +17,7 @@ import Model.*;
 public class DoctorTest {
 	
 	@Test
-	public void CheckAdd()
-	{
+	public void CheckAdd() {
 		Doctor doctor = new Doctor("000000000", "000000002", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		Patient patient = new Patient("000000003", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000000");
 		Assert.assertTrue(doctor.add(patient));
@@ -28,8 +27,7 @@ public class DoctorTest {
 	}
 	
 	@Test
-	public void CheckRemove()
-	{
+	public void CheckRemove() {
 		Doctor doctor1 = new Doctor("000000004", "000000005", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		Patient patient = new Patient("000000006", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000004");
 		doctor1.add(patient);
@@ -44,8 +42,7 @@ public class DoctorTest {
 	}
 	
 	@Test
-	public void CheckSearch()
-	{
+	public void CheckSearch() {
 		Doctor doctor = new Doctor("000000009","000000010", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		Patient patient = new Patient("000000011", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000009");
 		doctor.add(patient);
@@ -59,8 +56,7 @@ public class DoctorTest {
 	}
 	
 	@Test
-	public void CheckAddSpecialization()
-	{
+	public void CheckAddSpecialization() {
 		Doctor doctor = new Doctor("000000013", "000000014", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		doctor.addSpecialization("testing");
 		Assert.assertTrue(doctor.getDoctorSpecialization().equals("Spetialty and testing"));
@@ -91,10 +87,8 @@ public class DoctorTest {
 		doctor.remove("000000017");
 	}
 	
-	
 	@Test
-	public void CheckUpdatePatient()
-	{
+	public void CheckUpdatePatient() {
 		Doctor doctor = new Doctor("000000018", "000000019", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		Patient patient = new Patient("000000020", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000018");
 		doctor.add(patient);
@@ -123,8 +117,6 @@ public class DoctorTest {
 	
 		doctor.remove("000000020");
 	}
-	
-	
 	
 	@Test
 	public void CheckCreateMedicalRecord() {
@@ -181,9 +173,6 @@ public class DoctorTest {
 				check.getTotalDailyPatients() != returned.getTotalDailyPatients() &&
 				check.getTotalDailySubs() != returned.getTotalDailySubs());
 		
-		
-		
-		
 		doctor.remove("000000002");
 	}
 	
@@ -206,7 +195,6 @@ public class DoctorTest {
 	
 	@Test
 	public void checkUpdateInfo() {
-		
 		Doctor doctor = new Doctor("000000001","000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		Patient patient = new Patient("000000002", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000001");
 		
@@ -226,7 +214,6 @@ public class DoctorTest {
 	
 	@Test
 	public void CheckGetDailyAvgRecords() {
-		
 		Doctor doctor = new Doctor("000000011","000000003", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		Patient patient = new Patient("000000002", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000011");
 		doctor.add(patient);
@@ -249,6 +236,4 @@ public class DoctorTest {
 				check.getTotalDailySubs() != returned.getTotalDailySubs());
 		
 	}
-
-
 }

@@ -7,7 +7,6 @@ import java.util.HashMap;
 import Driver.MVCDriver;
 
 public class Manager extends User implements java.io.Serializable, CommandInterface {
-	
 	private static HashMap<String, Doctor> doctors = new HashMap <String, Doctor>();
 	private static LocalDateTime statsFlag = null;
 	private static HashMap<LocalDate, StatisitcalData> statsDataDaily = new HashMap<LocalDate, StatisitcalData>();
@@ -18,9 +17,9 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	}
 	
 	/**getters and setters**/
+	
 	public String getID() {
-		return super.getId();
-		
+		return super.getId();	
 	}
 	
 	public long getPhone() {
@@ -42,7 +41,6 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	public void updateEmail(String newEmail){
 		this.setEmail(newEmail);
 	}
-
 	
 	public LocalDateTime getStatsFlag() {
 		return statsFlag;
@@ -50,7 +48,6 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 
 	public void setStatsFlag(LocalDateTime currnet) {
 		statsFlag = currnet;
-	
 	}
 	
 	public StatisitcalData getStatsDataDaily(LocalDate date) {
@@ -64,7 +61,6 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	public void setStatsDataDaily(HashMap<LocalDate, StatisitcalData> newStats) {
 		statsDataDaily = newStats;
 	}
-	
 
 	public void setDoctors(HashMap<String, Doctor>  newDoctors) {
 		doctors = newDoctors;
@@ -73,7 +69,6 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 	public static HashMap<String, Doctor>  getDoctors() {
 		return doctors;
 	}
-	
 
 	public static StatisitcalData getMonthlyData() {
 		return monthlyData;
@@ -83,20 +78,9 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		Manager.monthlyData = monthlyData;
 	}
 	
-	
 	/**methods**/
-	
-	public boolean search(String id) 
-	{
-		
-		if(doctors.containsKey(id) && this.getID().equals(doctors.get(id).getManagerID())) 
-			return true;
-		return false;
-	}
-	
-	public Doctor getItem(String doctorId) 
-	{
-		
+
+	public Doctor getItem(String doctorId) {
 		if (search(doctorId))
 			return doctors.get(doctorId);
 			
@@ -104,11 +88,9 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 			return null;
 	}
 	
-	public boolean add(Object obj) 
-	{
+	public boolean add(Object obj) {
 		Doctor newDoc = (Doctor)obj;
-		if (!search(newDoc.getId()))
-		{
+		if (!search(newDoc.getId())) {
 			doctors.put(newDoc.getDoctorID(), newDoc);
 			return true;
 		}
@@ -116,9 +98,7 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		return false;
 	}
 	
-	public boolean remove(String id) 
-	{
-			
+	public boolean remove(String id) {
 		if (search(id)) {
 			doctors.remove(id);
 			return true;
@@ -127,26 +107,43 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 		return false;		
 	}
 	
-	private void deleteOldStats(String docId) 
+	public boolean search(String id) {
+		if(doctors.containsKey(id) && this.getID().equals(doctors.get(id).getManagerID())) 
+			return true;
+		return false;
+	}
 	
-	{
+	public boolean updateDoctorInfo(String docId, String email, long phone) {
+		if (search(docId) && Authentication.updateDoctorInfo(docId, email, phone)) {
+			doctors.get(docId).setEmail(email);
+			doctors.get(docId).setPhone(phone);
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public double getAvgDailyPatients(LocalDate date) {
+		if (statsDataDaily.get(date)!=null)
+			return statsDataDaily.get(date).getTotalDailyPatients();
+		return 0;
+	}
+	
+	private void deleteOldStats(String docId) {
 		HashMap<Integer, StatisitcalData> temp = Doctor.getStatsList();
 		for (Integer key : temp.keySet()) {
 			if (temp.get(key).getDoctorId().equals(docId) && temp.get(key).getDate().isBefore(LocalDate.now().minusMonths(1))) {
 				Doctor.getStatsList().remove(key);
-			}
-				
+			}	
 		}
 	}
 	
-	public void calcDailyStats() 
-	{
+	public void calcDailyStats() {
 		for(String docKey : doctors.keySet())
 			deleteOldStats(docKey);
 		
 		int doctorsCount=0;
-		if (doctors.size() != 0)
-		{
+		if (doctors.size() != 0) {
 			double tSub =0, tPatient = 0, tLabs = 0;
 			for(String docKey : doctors.keySet())
 				if(doctors.get(docKey).getManagerID().equals(this.getID())) {
@@ -168,46 +165,18 @@ public class Manager extends User implements java.io.Serializable, CommandInterf
 			else
 				statsDataDaily.put(LocalDate.now(), new StatisitcalData(getID()));
 		}
+		
 		else
 			statsDataDaily.put(LocalDate.now(), new StatisitcalData(getID()));
-		
-			
-	}
-	
-	
-	public boolean updateDoctorInfo(String docId, String email, long phone) {
-		
-		if (search(docId) && Authentication.updateDoctorInfo(docId, email, phone)) 
-		{
-			doctors.get(docId).setEmail(email);
-			doctors.get(docId).setPhone(phone);
-			return true;
-		}
-		
-		return false;
-		
-
-		
-	}
-	
-	
-	public double getAvgDailyPatients(LocalDate date)
-	{
-		if (statsDataDaily.get(date)!=null)
-			return statsDataDaily.get(date).getTotalDailyPatients();
-		return 0;
 	}
 
-	public double getAvgDailylabs(LocalDate date)
-	{
+	public double getAvgDailylabs(LocalDate date) {
 		if (statsDataDaily.get(date)!=null)
 			return statsDataDaily.get(date).getTotalDailylabs();
 		return 0;
 	}
 
-
-	public double getAvgDailySubs(LocalDate date) 
-	{
+	public double getAvgDailySubs(LocalDate date) {
 		if (statsDataDaily.get(date)!=null)
 			return statsDataDaily.get(date).getTotalDailySubs();
 		return 0;

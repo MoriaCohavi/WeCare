@@ -13,12 +13,8 @@ import org.junit.Test;
 import Model.*;
 
 public class StatisticalDataTest {
-	
-	
 	@Test
-	public void CheckAddDailyPatients()
-	{
-		
+	public void CheckAddDailyPatients() {
 		StatisitcalData stat1 = new StatisitcalData("000000001");
 		double num = 5;
 		stat1.addtotalDailyPatients(num);
@@ -26,9 +22,7 @@ public class StatisticalDataTest {
 	}
 	
 	@Test
-	public void CheckDailylabs()
-	{
-		
+	public void CheckDailylabs(){
 		StatisitcalData stat2 = new StatisitcalData("000000002");
 		double num = 5;
 		stat2.addtotalDailylabs(num);
@@ -36,13 +30,10 @@ public class StatisticalDataTest {
 	}
 	
 	@Test
-	public void CheckDailySubs()
-	{
-		
+	public void CheckDailySubs() {
 		StatisitcalData stat3 = new StatisitcalData("000000003");
 		double num = 5;
 		stat3.addtotalDailySubs(num);
 		Assert.assertTrue(stat3.getTotalDailySubs() == 5);
 	}	
-	
 }

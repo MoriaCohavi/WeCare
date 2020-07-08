@@ -36,15 +36,14 @@ public class Clinic implements java.io.Serializable {
 		this.manager = clinicManager;
 	}
 	
-	
 	/**methods**/
 	
-	
-	public static Clinic getInstance(String city, long cId, String mId, long phone, String mName, String email, String password, String user_type) {
-		if(instance == null)
-		{
+	public static Clinic getInstance(String city, long cId, String mId, long phone, String mName, String email, 
+										String password, String user_type) {
+		if(instance == null) {
 			instance = new Clinic(city, cId, mId, phone, mName, email, password, user_type);
 		}
+		
 		return instance;
 	}
 }

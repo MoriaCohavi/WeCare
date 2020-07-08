@@ -14,21 +14,19 @@ import org.junit.Test;
 
 import Model.*;
 
-public class ManagerTest{
+public class ManagerTest {
 	
 	@Test
-	public void CheckAdd()	{
+	public void CheckAdd() {
 		Doctor doctor = new Doctor("000000001", "000000002", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		Manager manager = new Manager("000000002", 5200000, "Name", "Email", "password","Manager");
 		Assert.assertTrue(manager.add(doctor));
 		Assert.assertFalse(manager.add(doctor));
-		manager.remove("000000001");
-		
+		manager.remove("000000001");	
 	}
 	
 	@Test
-	public void CheckRemove()
-	{
+	public void CheckRemove() {
 		Doctor doctor = new Doctor("000000003", "000000004", 5200000, "Name", "Email", "Spetialty","password", "Doctor");
 		Manager manager = new Manager("000000004", 5200000, "Name", "Email", "password","Manager");
 		manager.add(doctor);
@@ -111,7 +109,6 @@ public class ManagerTest{
 		
 		manager1.remove("000000007");
 		manager1.remove("000000008");
-		
 	}
 	
 	@Test
@@ -135,12 +132,10 @@ public class ManagerTest{
 		manager.remove("000000016");
 		
 		Assert.assertFalse(manager.getItem("000000015") != null);
-
 	}
 	
 	@Test
 	public void CheckSearch() {
-		
 		Manager manager = new Manager("000000017", 5200000, "Name", "Email", "password","Manager");
 		Manager manager1 = new Manager("000000018", 5200000, "Name", "Email", "password","Manager");
 		
@@ -152,12 +147,10 @@ public class ManagerTest{
 		Assert.assertFalse(manager1.search(doctor1.getId()));
 		
 		manager.remove("000000019");
-		
 	}
 	
 	@Test
 	public void CheckUpdateDoctorInfo() {
-		
 		Manager manager = new Manager("000000020", 5200000, "Name", "Email", "password","Manager");
 		Manager manager1 = new Manager("000000021", 5200000, "Name", "Email", "password","Manager");
 		
@@ -171,7 +164,6 @@ public class ManagerTest{
 		
 		Authentication.deleteSignUp(doctor1.getId());
 		manager.remove("000000022");
-		
 	}
 	
 	@Test
@@ -197,18 +189,13 @@ public class ManagerTest{
 		
 		doctor1.remove(patient1.getId());
 		manager.remove("000000024");
-		
-		
 	}
 	
 	
 	@Test
 	public void CheckGetAvgDailylabs() {
-		
 		Manager manager = new Manager("000000026", 5200000, "Name", "Email", "password","Manager");
-
 		Doctor doctor1 = new Doctor("000000027","000000026", 5200000, "Name1", "Email1", "Spetialty1","password", "Doctor");
-		
 		Patient patient1 = new Patient("000000028", 13, 01234567, "Name", "Email", 143, 154, "male","test aller", "test sub", "test des", "000000027");
 		
 		manager.add(doctor1);
@@ -218,7 +205,6 @@ public class ManagerTest{
 		manager.calcDailyStats();
 		Assert.assertTrue(manager.getAvgDailylabs(LocalDate.now()) == 1);
 		Assert.assertFalse(manager.getAvgDailylabs(LocalDate.now()) != 1);
-		
 	}
 	
 	@Test
@@ -243,9 +229,5 @@ public class ManagerTest{
 		
 		doctor1.remove(patient1.getId());
 		manager.remove("000000030");
-		
 	}
-	
-	
-	
 }
